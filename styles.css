@@ -1,0 +1,23 @@
+/* 간소화된 푸터 스타일 */
+.simple-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+    margin-top: 40px;
+}
+
+.simple-footer .copyright {
+    color: #666;
+    font-size: 14px;
+}
+
+.simple-footer a {
+    color: #4A89DC;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.simple-footer a:hover {
+    color: #2A69BC;
+    text-decoration: underline;
+} 
