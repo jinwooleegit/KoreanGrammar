@@ -1,22 +1,24 @@
-// 페이지 로드 시 공통 요소 삽입
-document.addEventListener('DOMContentLoaded', function() {
-    // 현재 페이지의 경로를 가져옴
+// 루트 경로 계산
+function calculateRootPath() {
     const path = window.location.pathname;
-    const currentPage = path.split('/').pop();
+    console.log("현재 경로:", path);
     
-    // 루트 경로 설정 (상대 경로 문제 해결)
-    let rootPath = '';
-    
-    // 페이지 경로에 따른 상대 경로 설정
-    if (path.includes('/pages/')) {
-        // 서브 디렉토리에 있는 페이지인 경우 상위로 이동
-        const pathSegments = path.split('/').filter(segment => segment);
-        const depth = pathSegments.length;
-        rootPath = '../'.repeat(depth);
+    // 서브디렉토리에 있는 경우
+    if (path.includes('/pages/topics/') || 
+        path.includes('/pages/activities/') || 
+        path.includes('/pages/grade-learning/')) {
+        return '../../';
+    } else if (path.includes('/pages/')) {
+        return '../';
+    } else {
+        return '';
     }
-    
-    console.log('현재 경로:', path);
-    console.log('계산된 루트 경로:', rootPath);
+}
+
+// 페이지 로드 시 실행
+document.addEventListener('DOMContentLoaded', function() {
+    const rootPath = calculateRootPath();
+    console.log("계산된 루트 경로:", rootPath);
     
     // 헤더 로드
     fetch(rootPath + 'includes/header.html')
@@ -26,33 +28,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return response.text();
         })
-        .then(html => {
-            // 헤더 삽입
-            document.body.insertAdjacentHTML('afterbegin', html);
-            
-            // 상대 경로를 기반으로 링크 경로 수정
-            fixHeaderLinks(rootPath);
-            
-            // 현재 페이지에 해당하는 네비게이션 메뉴 활성화
-            highlightCurrentNav(currentPage, path);
+        .then(data => {
+            document.querySelector('header').innerHTML = data;
+            // 헤더 로드 후 링크 수정 및 현재 메뉴 활성화
+            fixHeaderLinks();
+            highlightCurrentNav();
         })
         .catch(error => {
-            console.error('헤더를 불러오는 중 오류가 발생했습니다:', error);
-            // 오류 발생 시 대체 헤더 표시
-            const fallbackHeader = `
-            <header class="site-header">
-                <div class="header-container">
-                    <div class="logo"><a href="${rootPath}index.html">문법놀이터</a></div>
-                    <nav>
-                        <ul>
-                            <li id="nav-grade"><a href="${rootPath}grade_learning.html">학년별 학습</a></li>
-                            <li id="nav-topics"><a href="${rootPath}topics.html">학습 주제별</a></li>
-                            <li id="nav-activities"><a href="${rootPath}activities.html">학습 활동</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>`;
-            document.body.insertAdjacentHTML('afterbegin', fallbackHeader);
+            console.error('헤더 로드 중 오류 발생:', error);
+            document.querySelector('header').innerHTML = '<div class="header-error">헤더를 로드할 수 없습니다.</div>';
         });
 
     // 푸터 로드
@@ -63,76 +47,122 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return response.text();
         })
-        .then(html => {
-            // 푸터 삽입
-            document.body.insertAdjacentHTML('beforeend', html);
+        .then(data => {
+            document.querySelector('footer').innerHTML = data;
         })
         .catch(error => {
-            console.error('푸터를 불러오는 중 오류가 발생했습니다:', error);
-            // 오류 발생 시 대체 푸터 표시
-            const fallbackFooter = `
-            <footer>
-                <div class="footer-container simple-footer">
-                    <div class="copyright">
-                        <p>&copy; 2025 <a href="mailto:milgae@naver.com">이진우</a> All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>`;
-            document.body.insertAdjacentHTML('beforeend', fallbackFooter);
+            console.error('푸터 로드 중 오류 발생:', error);
+            document.querySelector('footer').innerHTML = '<div class="footer-error">푸터를 로드할 수 없습니다.</div>';
         });
 });
 
-// 헤더 링크의 경로를 수정하는 함수
-function fixHeaderLinks(rootPath) {
-    if (!rootPath) rootPath = '';
+// 현재 활성화된 네비게이션 항목 하이라이트
+function highlightCurrentNav() {
+    console.log("현재 페이지 경로 분석 중...");
+    const currentPage = window.location.pathname;
+    console.log("현재 페이지:", currentPage);
     
-    // 로고 링크 수정
-    const logoLink = document.querySelector('.logo a');
-    if (logoLink) {
-        logoLink.href = rootPath + 'index.html';
-    }
+    const fullPath = window.location.href;
+    console.log("전체 경로:", fullPath);
     
-    // 네비게이션 링크 수정
-    const navLinks = {
-        'nav-grade': rootPath + 'grade_learning.html',
-        'nav-topics': rootPath + 'topics.html',
-        'nav-activities': rootPath + 'activities.html'
-    };
-    
-    Object.keys(navLinks).forEach(id => {
-        const navItem = document.getElementById(id);
-        if (navItem) {
-            const link = navItem.querySelector('a');
-            if (link) {
-                link.href = navLinks[id];
-            }
-        }
-    });
-}
-
-// 현재 페이지에 해당하는 네비게이션 메뉴 활성화
-function highlightCurrentNav(currentPage, fullPath) {
-    // 기본적으로 모든 네비게이션 아이템의 active 클래스 제거
-    const navItems = document.querySelectorAll('nav ul li');
-    navItems.forEach(item => {
+    // 모든 네비게이션 항목에서 active 클래스 제거
+    document.querySelectorAll('.site-header nav ul li').forEach(item => {
         item.classList.remove('active');
     });
     
-    // 현재 페이지에 따라 해당 메뉴 활성화
-    if (currentPage === 'index.html' || currentPage === '') {
-        // 홈페이지는 특별한 처리 없음
-    } else if (fullPath.includes('/grade') || currentPage.includes('grade')) {
-        const gradeNav = document.getElementById('nav-grade');
-        if (gradeNav) gradeNav.classList.add('active');
-    } else if (fullPath.includes('/topic') || currentPage.includes('topic')) {
-        const topicsNav = document.getElementById('nav-topics');
-        if (topicsNav) topicsNav.classList.add('active');
-    } else if (fullPath.includes('/activit') || 
-              ['word_matching_game.html', 'sentence_type_quiz.html', 
-               'parts_of_speech_game.html', 'figurative_expressions.html',
-               'honorific_converter.html', 'idiom_storytelling.html',
-               'sentence_correction.html', 'proverb_puzzle.html'].includes(currentPage)) {
-        const activitiesNav = document.getElementById('nav-activities');
-        if (activitiesNav) activitiesNav.classList.add('active');
+    // 홈페이지인 경우 (index.html 또는 루트)
+    if (currentPage === '/index.html' || currentPage === '/' || currentPage.endsWith('/KoreanGrammar/')) {
+        // 아무 메뉴도 활성화하지 않음 (홈페이지는 특별한 메뉴가 없음)
+    } 
+    // 학년별 학습 페이지인 경우
+    else if (currentPage.includes('/grade-learning/') || currentPage.includes('/grade_')) {
+        document.querySelector('.site-header nav ul li:nth-child(1)').classList.add('active');
+    } 
+    // 학습 주제별 페이지인 경우
+    else if (currentPage.includes('/topics/')) {
+        document.querySelector('.site-header nav ul li:nth-child(2)').classList.add('active');
+    } 
+    // 학습 활동 페이지인 경우
+    else if (currentPage.includes('/activities/')) {
+        document.querySelector('.site-header nav ul li:nth-child(3)').classList.add('active');
+        console.log("활동 페이지 메뉴 활성화됨");
+    }
+    
+    console.log("네비게이션 하이라이트 완료");
+}
+
+// 헤더의 링크 경로 조정
+function fixHeaderLinks() {
+    const currentPath = window.location.pathname;
+    const header = document.querySelector('.site-header');
+    
+    if (!header) return;
+    
+    // 로고 링크 수정
+    const logoLink = header.querySelector('.logo a');
+    if (logoLink) {
+        if (currentPath.includes('/pages/')) {
+            // 서브디렉토리에 있는 경우 (2단계 깊이)
+            if (currentPath.includes('/pages/topics/') || 
+                currentPath.includes('/pages/activities/') || 
+                currentPath.includes('/pages/grade-learning/')) {
+                logoLink.setAttribute('href', '../../index.html');
+            } else {
+                // 1단계 깊이
+                logoLink.setAttribute('href', '../index.html');
+            }
+        } else {
+            // 루트에 있는 경우
+            logoLink.setAttribute('href', 'index.html');
+        }
+    }
+    
+    // 네비게이션 링크 수정
+    const navLinks = header.querySelectorAll('nav ul li a');
+    if (navLinks.length > 0) {
+        // 첫 번째 링크: 학년별 학습
+        if (navLinks[0]) {
+            if (currentPath.includes('/pages/')) {
+                if (currentPath.includes('/pages/topics/') || 
+                    currentPath.includes('/pages/activities/') || 
+                    currentPath.includes('/pages/grade-learning/')) {
+                    navLinks[0].setAttribute('href', '../../pages/grade-learning/index.html');
+                } else {
+                    navLinks[0].setAttribute('href', '../grade-learning/index.html');
+                }
+            } else {
+                navLinks[0].setAttribute('href', 'pages/grade-learning/index.html');
+            }
+        }
+        
+        // 두 번째 링크: 학습 주제별
+        if (navLinks[1]) {
+            if (currentPath.includes('/pages/')) {
+                if (currentPath.includes('/pages/topics/') || 
+                    currentPath.includes('/pages/activities/') || 
+                    currentPath.includes('/pages/grade-learning/')) {
+                    navLinks[1].setAttribute('href', '../../pages/topics/index.html');
+                } else {
+                    navLinks[1].setAttribute('href', '../topics/index.html');
+                }
+            } else {
+                navLinks[1].setAttribute('href', 'pages/topics/index.html');
+            }
+        }
+        
+        // 세 번째 링크: 학습 활동
+        if (navLinks[2]) {
+            if (currentPath.includes('/pages/')) {
+                if (currentPath.includes('/pages/topics/') || 
+                    currentPath.includes('/pages/activities/') || 
+                    currentPath.includes('/pages/grade-learning/')) {
+                    navLinks[2].setAttribute('href', '../../pages/activities/index.html');
+                } else {
+                    navLinks[2].setAttribute('href', '../activities/index.html');
+                }
+            } else {
+                navLinks[2].setAttribute('href', 'pages/activities/index.html');
+            }
+        }
     }
 } 

@@ -28,16 +28,22 @@ function findHtmlFiles(directory, fileList = []) {
 function calculateRelativePath(filePath) {
     // 절대 경로에서 프로젝트 루트까지의 상대 경로 계산
     const normalizedPath = filePath.replace(/\\/g, '/');
-    const pathParts = normalizedPath.split('/');
+    let relativePath = '';
     
-    // 첫 번째 요소가 '.' 인 경우 제외
-    if (pathParts[0] === '.') {
-        pathParts.shift();
+    // 주의: 중첩된 디렉토리 구조에 대해 정확한 상대 경로 계산
+    if (normalizedPath.includes('/pages/topics/') || 
+        normalizedPath.includes('/pages/activities/') || 
+        normalizedPath.includes('/pages/grade-learning/')) {
+        relativePath = '../../'; // 두 단계 위로 (루트로)
+    } else if (normalizedPath.includes('/pages/')) {
+        relativePath = '../'; // 한 단계 위로
+    } else {
+        relativePath = ''; // 루트 경로인 경우
     }
     
-    // 루트 경로에서 서브디렉토리 수준만큼 상위로 이동
-    const depth = pathParts.length - 1;
-    return depth > 1 ? '../'.repeat(depth - 1) : '';
+    console.log(`  - 파일 경로: ${normalizedPath}`);
+    console.log(`  - 계산된 상대 경로: ${relativePath}`);
+    return relativePath;
 }
 
 // HTML 파일에서 헤더와 푸터를 제거하고 공통 JavaScript 파일을 추가하는 함수
@@ -65,11 +71,18 @@ function updateHtmlFile(filePath) {
             console.log(`  - 푸터 제거됨`);
         }
         
-        // 상대 경로 계산
+        // 상대 경로 계산 - 함수 호출
         const relativePath = calculateRelativePath(filePath);
-        console.log(`  - 상대 경로: ${relativePath}`);
         
-        // 공통 JavaScript 파일 추가
+        // 기존 common.js 스크립트 태그 제거
+        const scriptRegex = /<script[^>]*src=["']([^"']*)common\.js["'][^>]*><\/script>/i;
+        if (scriptRegex.test(content)) {
+            content = content.replace(scriptRegex, '');
+            updated = true;
+            console.log(`  - 기존 common.js 스크립트 제거됨`);
+        }
+        
+        // 공통 JavaScript 파일 추가 - 계산된 상대 경로 사용
         if (!content.includes('common.js')) {
             const scriptTag = `<script src="${relativePath}js/common.js"></script>`;
             
@@ -77,7 +90,7 @@ function updateHtmlFile(filePath) {
             if (content.includes('</body>')) {
                 content = content.replace('</body>', `    ${scriptTag}\n</body>`);
                 updated = true;
-                console.log(`  - common.js 추가됨`);
+                console.log(`  - common.js 추가됨 (${relativePath}js/common.js)`);
             } else {
                 console.warn(`  - body 태그를 찾을 수 없습니다: ${filePath}`);
             }
