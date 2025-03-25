@@ -24,53 +24,86 @@ function findHtmlFiles(directory, fileList = []) {
     return fileList;
 }
 
+// HTML 파일의 상대 경로를 계산하는 함수
+function calculateRelativePath(filePath) {
+    // 절대 경로에서 프로젝트 루트까지의 상대 경로 계산
+    const normalizedPath = filePath.replace(/\\/g, '/');
+    const pathParts = normalizedPath.split('/');
+    
+    // 첫 번째 요소가 '.' 인 경우 제외
+    if (pathParts[0] === '.') {
+        pathParts.shift();
+    }
+    
+    // 루트 경로에서 서브디렉토리 수준만큼 상위로 이동
+    const depth = pathParts.length - 1;
+    return depth > 1 ? '../'.repeat(depth - 1) : '';
+}
+
 // HTML 파일에서 헤더와 푸터를 제거하고 공통 JavaScript 파일을 추가하는 함수
 function updateHtmlFile(filePath) {
     console.log(`처리 중: ${filePath}`);
     
     try {
         let content = fs.readFileSync(filePath, 'utf8');
-        
-        // 이미 업데이트된 파일인지 확인
-        if (content.includes('common.js')) {
-            console.log(`이미 업데이트됨: ${filePath}`);
-            return;
-        }
+        let updated = false;
         
         // 헤더와 푸터 코드 패턴
         const headerPattern = /<header[\s\S]*?<\/header>/i;
         const footerPattern = /<footer[\s\S]*?<\/footer>/i;
         
         // 헤더와 푸터 제거
-        content = content.replace(headerPattern, '');
-        content = content.replace(footerPattern, '');
+        if (headerPattern.test(content)) {
+            content = content.replace(headerPattern, '');
+            updated = true;
+            console.log(`  - 헤더 제거됨`);
+        }
+        
+        if (footerPattern.test(content)) {
+            content = content.replace(footerPattern, '');
+            updated = true;
+            console.log(`  - 푸터 제거됨`);
+        }
         
         // 상대 경로 계산
-        let relativePath = '';
-        const depth = filePath.split(path.sep).length - 1;
-        
-        if (depth > 1) {
-            // 루트 디렉토리로부터의 상대 경로 계산
-            relativePath = '../'.repeat(depth - 1);
-        }
+        const relativePath = calculateRelativePath(filePath);
+        console.log(`  - 상대 경로: ${relativePath}`);
         
         // 공통 JavaScript 파일 추가
         if (!content.includes('common.js')) {
             const scriptTag = `<script src="${relativePath}js/common.js"></script>`;
-            content = content.replace('</body>', `    ${scriptTag}\n</body>`);
+            
+            // body 태그 바로 앞에 스크립트 추가
+            if (content.includes('</body>')) {
+                content = content.replace('</body>', `    ${scriptTag}\n</body>`);
+                updated = true;
+                console.log(`  - common.js 추가됨`);
+            } else {
+                console.warn(`  - body 태그를 찾을 수 없습니다: ${filePath}`);
+            }
         }
         
-        // CSS 경로 수정
-        if (content.includes('href="styles.css"')) {
-            content = content.replace('href="styles.css"', `href="${relativePath}assets/css/styles.css"`);
+        // 폰트어썸 CDN이 없는 경우 추가
+        if (!content.includes('font-awesome') && !content.includes('cdnjs.cloudflare.com/ajax/libs/font-awesome')) {
+            const fontAwesomeLink = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">';
+            
+            if (content.includes('</head>')) {
+                content = content.replace('</head>', `    ${fontAwesomeLink}\n</head>`);
+                updated = true;
+                console.log(`  - Font Awesome CDN 추가됨`);
+            }
         }
         
-        // 업데이트된 내용 저장
-        fs.writeFileSync(filePath, content, 'utf8');
-        console.log(`업데이트 완료: ${filePath}`);
+        // 필요한 경우에만 파일 저장
+        if (updated) {
+            fs.writeFileSync(filePath, content, 'utf8');
+            console.log(`✅ 업데이트 완료: ${filePath}`);
+        } else {
+            console.log(`⏩ 변경 사항 없음: ${filePath}`);
+        }
         
     } catch (error) {
-        console.error(`오류 발생: ${filePath}`, error);
+        console.error(`❌ 오류 발생: ${filePath}`, error);
     }
 }
 
@@ -81,8 +114,12 @@ function main() {
     
     console.log(`총 ${htmlFiles.length}개의 HTML 파일을 찾았습니다.`);
     
+    let updatedCount = 0;
     htmlFiles.forEach(file => {
         updateHtmlFile(file);
+        updatedCount++;
+        console.log(`진행률: ${updatedCount}/${htmlFiles.length} (${Math.round(updatedCount/htmlFiles.length*100)}%)`);
+        console.log('------------------------------------------------');
     });
     
     console.log('모든 파일 업데이트가 완료되었습니다.');
