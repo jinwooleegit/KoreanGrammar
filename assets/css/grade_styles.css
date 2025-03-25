@@ -24,6 +24,8 @@
     color: white;
     position: relative;
     overflow: hidden;
+    margin-top: 80px;
+    z-index: 1;
 }
 
 .grade-header::after {
