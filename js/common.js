@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // 페이지 경로에 따른 상대 경로 설정
     if (path.includes('/pages/')) {
         // 서브 디렉토리에 있는 페이지인 경우 상위로 이동
-        const pathParts = path.split('/');
-        const depth = pathParts.filter(part => part.length > 0).length;
+        const pathSegments = path.split('/').filter(segment => segment);
+        const depth = pathSegments.length;
         rootPath = '../'.repeat(depth);
     }
     
@@ -90,7 +90,6 @@ function fixHeaderLinks(rootPath) {
     const logoLink = document.querySelector('.logo a');
     if (logoLink) {
         logoLink.href = rootPath + 'index.html';
-        logoLink.textContent = '문법놀이터';
     }
     
     // 네비게이션 링크 수정
