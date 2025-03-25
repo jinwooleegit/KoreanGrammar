@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>속담 퍼즐 | 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .activity-header {
+            background: linear-gradient(135deg, #FF5722 0%, #FF9800 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .activity-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .activity-header p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .activity-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .activity-info {
+            background-color: #FFF3E0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .activity-info h2 {
+            color: #E65100;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .activity-info p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .activity-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #E65100;
+            margin-bottom: 20px;
+        }
+
+        .level-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .level-button {
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            color: #666;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .level-button.active {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .score-display {
+            background-color: #FFF3E0;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: #E65100;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .puzzle-container {
+            margin-bottom: 30px;
+        }
+
+        .proverb-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .proverb-half {
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #333;
+            text-align: center;
+        }
+
+        .proverb-half:hover {
+            border-color: #FF9800;
+            background-color: #FFF8E1;
+        }
+
+        .proverb-half.selected {
+            background-color: #FFF8E1;
+            border-color: #FF9800;
+        }
+
+        .proverb-half.correct {
+            background-color: #E8F5E9;
+            border-color: #4CAF50;
+        }
+
+        .matched-proverbs {
+            margin-top: 30px;
+        }
+
+        .matched-proverb {
+            background-color: #E8F5E9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .proverb-text {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .proverb-meaning {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .feedback.correct {
+            background-color: #E8F5E9;
+            color: #388E3C;
+        }
+
+        .feedback.incorrect {
+            background-color: #FFEBEE;
+            color: #D32F2F;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action-button {
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-button:hover {
+            background-color: #F57C00;
+        }
+
+        .action-button.secondary {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .action-button.secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .result-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .result-icon {
+            font-size: 60px;
+            color: #FF9800;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .result-score {
+            font-size: 36px;
+            font-weight: bold;
+            color: #FF9800;
+            margin-bottom: 20px;
+        }
+
+        .result-message {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .proverb-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li class="active"><a href="activities.html">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="activity-header">
+        <h1>속담 퍼즐</h1>
+        <p>속담의 앞부분과 뒷부분을 맞추며 우리 속담의 의미를 알아보아요!</p>
+    </div>
+
+    <div class="activity-container">
+        <div class="activity-info">
+            <h2>속담이란?</h2>
+            <p>속담은 오랜 세월 동안 사람들 사이에서 전해 내려오는 짧은 격언이나 이야기입니다. 생활 속의 지혜와 교훈을 담고 있으며, 대부분 비유적인 표현으로 이루어져 있습니다. 이 활동에서는 속담의 앞부분과 뒷부분을 맞추는 퍼즐을 풀어보며 다양한 속담을 배워보세요.</p>
+        </div>
+
+        <div class="activity-section" id="gameSection">
+            <h3 class="section-title">속담 퍼즐 게임</h3>
+
+            <div class="level-selector">
+                <button class="level-button active" data-level="easy">쉬움</button>
+                <button class="level-button" data-level="medium">보통</button>
+                <button class="level-button" data-level="hard">어려움</button>
+            </div>
+
+            <div class="score-display" id="scoreDisplay">
+                점수: 0 | 맞춘 속담: 0/5
+            </div>
+
+            <div class="puzzle-container">
+                <div class="proverb-list" id="firstHalfList">
+                    <!-- 속담 앞부분 목록이 여기에 추가됩니다 -->
+                </div>
+
+                <div class="proverb-list" id="secondHalfList">
+                    <!-- 속담 뒷부분 목록이 여기에 추가됩니다 -->
+                </div>
+            </div>
+
+            <div class="feedback correct" id="correctFeedback">
+                맞았습니다! 속담의 짝을 올바르게 찾았습니다.
+            </div>
+
+            <div class="feedback incorrect" id="incorrectFeedback">
+                틀렸습니다. 다시 시도해보세요.
+            </div>
+
+            <div class="matched-proverbs" id="matchedProverbsContainer">
+                <h4>맞춘 속담</h4>
+                <div id="matchedProverbsList">
+                    <!-- 맞춘 속담들이 여기에 추가됩니다 -->
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="action-button" id="restartButton">
+                    <i class="fas fa-redo-alt"></i> 다시 시작하기
+                </button>
+                <button class="action-button secondary" id="homeButton">
+                    <i class="fas fa-home"></i> 활동 목록으로
+                </button>
+            </div>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <div class="result-icon">
+                <i class="fas fa-award"></i>
+            </div>
+            <h2 class="result-title">게임 완료!</h2>
+            <div class="result-score" id="finalScore">80점</div>
+            <p class="result-message" id="resultMessage">
+                훌륭해요! 많은 속담을 알고 있네요. 이제 다른 난이도에 도전해보세요.
+            </p>
+            <div class="actions">
+                <button class="action-button" id="playAgainButton">
+                    <i class="fas fa-play"></i> 다시 하기
+                </button>
+                <button class="action-button secondary" id="resultsHomeButton">
+                    <i class="fas fa-home"></i> 활동 목록으로
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="activities.html">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 속담 데이터
+            const proverbsData = {
+                easy: [
+                    {
+                        first: "소 잃고",
+                        second: "외양간 고친다",
+                        meaning: "일이 잘못된 뒤에야 후회하며 대책을 세움을 비유적으로 이르는 말"
+                    },
+                    {
+                        first: "가는 말이",
+                        second: "고와야 오는 말이 곱다",
+                        meaning: "내가 남에게 좋게 대하면 남도 나에게 좋게 대한다는 의미"
+                    },
+                    {
+                        first: "뛰는 놈 위에",
+                        second: "나는 놈 있다",
+                        meaning: "아무리 재주가 뛰어난 사람이라도 그보다 더 뛰어난 사람이 있다는 뜻"
+                    },
+                    {
+                        first: "발 없는 말이",
+                        second: "천 리 간다",
+                        meaning: "소문은 빠르게 퍼진다는 의미"
+                    },
+                    {
+                        first: "말 한마디에",
+                        second: "천 냥 빚을 갚는다",
+                        meaning: "적절한 말 한마디가 큰 문제를 해결할 수 있다는 뜻"
+                    }
+                ],
+                medium: [
+                    {
+                        first: "누워서",
+                        second: "침 뱉기",
+                        meaning: "자신에게 해가 돌아오는 어리석은 행동을 비유하는 말"
+                    },
+                    {
+                        first: "우물 안",
+                        second: "개구리",
+                        meaning: "세상을 넓게 보지 못하고 좁은 소견을 가진 사람을 비유하는 말"
+                    },
+                    {
+                        first: "하늘의 별",
+                        second: "따기",
+                        meaning: "매우 어렵거나 불가능한 일을 비유적으로 이르는 말"
+                    },
+                    {
+                        first: "원숭이도",
+                        second: "나무에서 떨어진다",
+                        meaning: "아무리 능숙한 사람이라도 실수할 수 있다는 뜻"
+                    },
+                    {
+                        first: "고양이에게",
+                        second: "생선을 맡긴다",
+                        meaning: "믿을 수 없는 사람에게 중요한 일을 맡겨 실패할 것이 뻔한 상황을 비유하는 말"
+                    }
+                ],
+                hard: [
+                    {
+                        first: "바늘 도둑이",
+                        second: "소 도둑 된다",
+                        meaning: "작은 잘못을 저지르는 것이 나중에는 큰 잘못으로 이어진다는 경계의 뜻"
+                    },
+                    {
+                        first: "오르지 못할 나무는",
+                        second: "쳐다보지도 말라",
+                        meaning: "능력 밖의 일은 처음부터 시도하지 말라는 뜻"
+                    },
+                    {
+                        first: "산 넘어",
+                        second: "산 있다",
+                        meaning: "한 가지 어려움을 해결하고 나면 또 다른 어려움이 기다리고 있다는 뜻"
+                    },
+                    {
+                        first: "티끌 모아",
+                        second: "태산",
+                        meaning: "작은 것이라도 모이면 큰 것이 된다는 의미"
+                    },
+                    {
+                        first: "똥 묻은 개가",
+                        second: "겨 묻은 개 나무란다",
+                        meaning: "자신의 큰 잘못은 모르고 남의 작은 잘못을 탓함을 비꼬는 말"
+                    }
+                ]
+            };
+
+            // 요소 가져오기
+            const levelButtons = document.querySelectorAll('.level-button');
+            const firstHalfList = document.getElementById('firstHalfList');
+            const secondHalfList = document.getElementById('secondHalfList');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const correctFeedback = document.getElementById('correctFeedback');
+            const incorrectFeedback = document.getElementById('incorrectFeedback');
+            const matchedProverbsContainer = document.getElementById('matchedProverbsContainer');
+            const matchedProverbsList = document.getElementById('matchedProverbsList');
+            const restartButton = document.getElementById('restartButton');
+            const homeButton = document.getElementById('homeButton');
+            const gameSection = document.getElementById('gameSection');
+            const resultContainer = document.getElementById('resultContainer');
+            const finalScoreElement = document.getElementById('finalScore');
+            const resultMessageElement = document.getElementById('resultMessage');
+            const playAgainButton = document.getElementById('playAgainButton');
+            const resultsHomeButton = document.getElementById('resultsHomeButton');
+
+            // 게임 상태 변수
+            let currentLevel = 'easy';
+            let score = 0;
+            let matchedCount = 0;
+            let selectedFirst = null;
+            let selectedSecond = null;
+            let currentProverbs = [];
+            let shuffledFirstHalves = [];
+            let shuffledSecondHalves = [];
+
+            // 게임 초기화
+            initGame(currentLevel);
+
+            // 게임 초기화 함수
+            function initGame(level) {
+                // 상태 초기화
+                currentLevel = level;
+                score = 0;
+                matchedCount = 0;
+                selectedFirst = null;
+                selectedSecond = null;
+                
+                // 점수 표시 업데이트
+                updateScoreDisplay();
+                
+                // 피드백 숨기기
+                correctFeedback.style.display = 'none';
+                incorrectFeedback.style.display = 'none';
+                
+                // 매칭된 속담 목록 초기화
+                matchedProverbsList.innerHTML = '';
+                matchedProverbsContainer.style.display = 'none';
+                
+                // 현재 레벨의 속담 가져오기
+                currentProverbs = [...proverbsData[level]];
+                
+                // 속담 섞기
+                shuffledFirstHalves = shuffleArray([...currentProverbs]);
+                shuffledSecondHalves = shuffleArray([...currentProverbs]);
+                
+                // 속담 목록 표시
+                renderProverbLists();
+                
+                // 결과 화면 숨기기
+                gameSection.style.display = 'block';
+                resultContainer.style.display = 'none';
+            }
+
+            // 점수 표시 업데이트
+            function updateScoreDisplay() {
+                scoreDisplay.textContent = `점수: ${score} | 맞춘 속담: ${matchedCount}/${currentProverbs.length}`;
+            }
+
+            // 속담 목록 렌더링
+            function renderProverbLists() {
+                // 첫 번째 부분 목록 렌더링
+                firstHalfList.innerHTML = '';
+                shuffledFirstHalves.forEach((proverb, index) => {
+                    if (!proverb.matched) {
+                        const element = document.createElement('div');
+                        element.className = 'proverb-half';
+                        element.dataset.index = index;
+                        element.textContent = proverb.first;
+                        
+                        element.addEventListener('click', () => selectFirstHalf(index));
+                        
+                        firstHalfList.appendChild(element);
+                    }
+                });
+                
+                // 두 번째 부분 목록 렌더링
+                secondHalfList.innerHTML = '';
+                shuffledSecondHalves.forEach((proverb, index) => {
+                    if (!proverb.matched) {
+                        const element = document.createElement('div');
+                        element.className = 'proverb-half';
+                        element.dataset.index = index;
+                        element.textContent = proverb.second;
+                        
+                        element.addEventListener('click', () => selectSecondHalf(index));
+                        
+                        secondHalfList.appendChild(element);
+                    }
+                });
+            }
+
+            // 첫 번째 부분 선택
+            function selectFirstHalf(index) {
+                // 이미 선택된 것 해제
+                const previousSelected = firstHalfList.querySelector('.selected');
+                if (previousSelected) {
+                    previousSelected.classList.remove('selected');
+                }
+                
+                // 새로 선택
+                const element = firstHalfList.children[index];
+                element.classList.add('selected');
+                selectedFirst = index;
+                
+                // 두 부분 모두 선택되었으면 확인
+                if (selectedFirst !== null && selectedSecond !== null) {
+                    checkMatch();
+                }
+            }
+
+            // 두 번째 부분 선택
+            function selectSecondHalf(index) {
+                // 이미 선택된 것 해제
+                const previousSelected = secondHalfList.querySelector('.selected');
+                if (previousSelected) {
+                    previousSelected.classList.remove('selected');
+                }
+                
+                // 새로 선택
+                const element = secondHalfList.children[index];
+                element.classList.add('selected');
+                selectedSecond = index;
+                
+                // 두 부분 모두 선택되었으면 확인
+                if (selectedFirst !== null && selectedSecond !== null) {
+                    checkMatch();
+                }
+            }
+
+            // 매치 확인
+            function checkMatch() {
+                const first = shuffledFirstHalves[selectedFirst];
+                const second = shuffledSecondHalves[selectedSecond];
+                
+                // 매치 여부 확인
+                const isMatch = first.first === second.first && first.second === second.second;
+                
+                if (isMatch) {
+                    // 정답 처리
+                    correctFeedback.style.display = 'block';
+                    incorrectFeedback.style.display = 'none';
+                    
+                    // 점수 증가
+                    const levelScores = { easy: 10, medium: 20, hard: 30 };
+                    score += levelScores[currentLevel];
+                    matchedCount++;
+                    
+                    // 매칭된 속담 표시
+                    matchedProverbsContainer.style.display = 'block';
+                    const matchedElement = document.createElement('div');
+                    matchedElement.className = 'matched-proverb';
+                    matchedElement.innerHTML = `
+                        <div class="proverb-text">${first.first} ${first.second}</div>
+                        <div class="proverb-meaning">${first.meaning}</div>
+                    `;
+                    matchedProverbsList.appendChild(matchedElement);
+                    
+                    // 매칭된 속담 처리
+                    first.matched = true;
+                    second.matched = true;
+                    
+                    // 점수 업데이트
+                    updateScoreDisplay();
+                    
+                    // 목록 다시 렌더링
+                    setTimeout(() => {
+                        correctFeedback.style.display = 'none';
+                        renderProverbLists();
+                        
+                        // 모든 속담을 맞췄으면 게임 종료
+                        if (matchedCount === currentProverbs.length) {
+                            showResult();
+                        }
+                    }, 1500);
+                } else {
+                    // 오답 처리
+                    correctFeedback.style.display = 'none';
+                    incorrectFeedback.style.display = 'block';
+                    
+                    // 선택 초기화
+                    setTimeout(() => {
+                        incorrectFeedback.style.display = 'none';
+                        
+                        // 선택 해제
+                        const selectedFirstElement = firstHalfList.querySelector('.selected');
+                        const selectedSecondElement = secondHalfList.querySelector('.selected');
+                        
+                        if (selectedFirstElement) selectedFirstElement.classList.remove('selected');
+                        if (selectedSecondElement) selectedSecondElement.classList.remove('selected');
+                        
+                        selectedFirst = null;
+                        selectedSecond = null;
+                    }, 1500);
+                }
+            }
+
+            // 결과 표시
+            function showResult() {
+                gameSection.style.display = 'none';
+                resultContainer.style.display = 'block';
+                
+                finalScoreElement.textContent = `${score}점`;
+                
+                // 점수에 따른 메시지
+                let message = '';
+                const maxScore = currentProverbs.length * (currentLevel === 'easy' ? 10 : (currentLevel === 'medium' ? 20 : 30));
+                const percentage = score / maxScore;
+                
+                if (percentage >= 0.8) {
+                    message = '훌륭해요! 많은 속담을 알고 있네요. 이제 다른 난이도에 도전해보세요.';
+                } else if (percentage >= 0.6) {
+                    message = '잘했어요! 대부분의 속담을 맞추었습니다. 더 많은 연습을 통해 실력을 키워보세요.';
+                } else {
+                    message = '좋은 시작이에요! 속담을 더 배우고 다시 도전해보세요.';
+                }
+                
+                resultMessageElement.textContent = message;
+            }
+
+            // 배열 섞기 함수
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            // 이벤트 리스너
+            levelButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 현재 active 제거
+                    levelButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // 새 버튼 active 추가
+                    this.classList.add('active');
+                    
+                    // 게임 초기화
+                    initGame(this.dataset.level);
+                });
+            });
+            
+            restartButton.addEventListener('click', function() {
+                initGame(currentLevel);
+            });
+            
+            homeButton.addEventListener('click', function() {
+                window.location.href = 'activities.html';
+            });
+            
+            playAgainButton.addEventListener('click', function() {
+                initGame(currentLevel);
+            });
+            
+            resultsHomeButton.addEventListener('click', function() {
+                window.location.href = 'activities.html';
+            });
+        });
+    </script>
+</body>
+</html> 

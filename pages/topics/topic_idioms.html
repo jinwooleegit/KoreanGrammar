@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관용 표현 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #9C27B0;
+            --secondary-color: #BA68C8;
+            --light-color: #F3E5F5;
+        }
+        
+        .topic-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .idiom-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .example-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .idiom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .idiom-table th, .idiom-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .idiom-table th {
+            background-color: var(--light-color);
+            color: #333;
+        }
+
+        .practice-problem {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .answer-reveal {
+            background-color: #F3E5F5;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        .activity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .activity-icon {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li class="active"><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="topic-header">
+        <h1>관용 표현</h1>
+        <p>글의 표현을 풍부하게 만들어주는 관용 표현의 의미와 사용법에 대해 배워봅시다.</p>
+        <div class="breadcrumb">
+            <a href="index.html">홈</a> &gt;
+            <a href="topics.html">주제별 학습</a> &gt;
+            <span>관용 표현</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="section intro-section">
+            <h2>관용 표현이란?</h2>
+            <p><strong>관용 표현</strong>은 둘 이상의 단어가 결합하여 원래의 의미와는 다른 특별한 의미를 가지게 된 표현을 말합니다.</p>
+            <p>관용 표현은 문자 그대로의 의미가 아닌 <strong>비유적이고 함축적인 의미</strong>를 가지며, 오랜 시간 동안 사람들 사이에서 널리 사용되어 온 표현입니다.</p>
+            
+            <div class="example-box">
+                <p><span class="highlight">발이 넓다</span> - 아는 사람이 많다는 의미 (발의 실제 크기와는 관계없음)</p>
+                <p><span class="highlight">손이 크다</span> - 씀씀이가 후하다는 의미 (손의 실제 크기와는 관계없음)</p>
+                <p><span class="highlight">눈이 높다</span> - 안목이 좋다는 의미 (눈의 실제 위치와는 관계없음)</p>
+            </div>
+        </section>
+
+        <section class="section idiom-section">
+            <h2>관용 표현의 종류와 의미</h2>
+            
+            <div class="idiom-card">
+                <h3>신체 관련 관용 표현</h3>
+                <p>우리 몸의 부분과 관련된 관용 표현으로, 가장 많은 비중을 차지합니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">마음이 넓다</span> - 너그러운 성품을 가지고 있다</p>
+                    <p><span class="highlight">귀가 얇다</span> - 남의 말을 쉽게 믿거나 따른다</p>
+                    <p><span class="highlight">눈이 맞다</span> - 서로 마음이 통하다</p>
+                    <p><span class="highlight">입이 무겁다</span> - 비밀을 잘 지킨다</p>
+                    <p><span class="highlight">손에 땀을 쥐다</span> - 긴장되고 떨리는 상황에 처하다</p>
+                </div>
+            </div>
+            
+            <div class="idiom-card">
+                <h3>동물 관련 관용 표현</h3>
+                <p>동물의 특성을 활용한 관용 표현입니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">개미 눈물만큼</span> - 아주 적은 양</p>
+                    <p><span class="highlight">꿀 먹은 벙어리</span> - 말을 하지 않고 속으로만 삭이는 사람</p>
+                    <p><span class="highlight">소 귀에 경 읽기</span> - 알아듣지 못하는 사람에게 하는 말</p>
+                    <p><span class="highlight">닭 볶는 소동</span> - 매우 시끄럽고 혼란스러운 상황</p>
+                </div>
+            </div>
+            
+            <div class="idiom-card">
+                <h3>자연 관련 관용 표현</h3>
+                <p>자연 현상이나 사물과 관련된 관용 표현입니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">가랑비에 옷 젖는 줄 모른다</span> - 작은 일이 모여 큰 결과를 가져옴을 모른다</p>
+                    <p><span class="highlight">구름 잡는 소리</span> - 실현 가능성이 없는 허황된 말</p>
+                    <p><span class="highlight">바늘 도둑이 소 도둑 된다</span> - 작은 잘못이 큰 잘못으로 이어진다</p>
+                </div>
+            </div>
+            
+            <div class="idiom-card">
+                <h3>생활 관련 관용 표현</h3>
+                <p>일상 생활과 관련된 관용 표현입니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">발등에 불이 떨어지다</span> - 급하고 위급한 일이 닥치다</p>
+                    <p><span class="highlight">밑 빠진 독에 물 붓기</span> - 아무리 노력해도 효과가 없는 일</p>
+                    <p><span class="highlight">바가지를 긁다</span> - 잔소리를 심하게 하다</p>
+                </div>
+            </div>
+            
+            <h3>관용 표현 정리</h3>
+            <table class="idiom-table">
+                <thead>
+                    <tr>
+                        <th>분류</th>
+                        <th>관용 표현</th>
+                        <th>의미</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3">신체 관련</td>
+                        <td>코가 높다</td>
+                        <td>자존심이 강하다</td>
+                    </tr>
+                    <tr>
+                        <td>배가 아프다</td>
+                        <td>질투하다</td>
+                    </tr>
+                    <tr>
+                        <td>가슴이 떨리다</td>
+                        <td>설레거나 긴장하다</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">동물 관련</td>
+                        <td>호랑이 굴에 들어가야 호랑이를 잡는다</td>
+                        <td>위험을 무릅써야 성공할 수 있다</td>
+                    </tr>
+                    <tr>
+                        <td>개미 힘도 모아지면 쏠쏠하다</td>
+                        <td>작은 것이라도 모이면 큰 힘이 된다</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">자연 관련</td>
+                        <td>티끌 모아 태산</td>
+                        <td>작은 것이 모여 큰 것이 된다</td>
+                    </tr>
+                    <tr>
+                        <td>비 온 뒤에 땅이 굳어진다</td>
+                        <td>어려움을 겪고 나면 더 강해진다</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">생활 관련</td>
+                        <td>꿩 대신 닭</td>
+                        <td>원하는 것이 없을 때 비슷한 것으로 대체함</td>
+                    </tr>
+                    <tr>
+                        <td>김치국부터 마시다</td>
+                        <td>일이 되기도 전에 미리 기대하다</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section special-section">
+            <h2>관용 표현의 특징</h2>
+            
+            <div class="idiom-card">
+                <h3>의미의 고정성</h3>
+                <p>관용 표현은 각 단어의 의미를 합한 것과는 다른 독특한 의미를 가집니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">발이 넓다</span>는 실제 발의 크기가 아닌 '아는 사람이 많다'는 특별한 의미를 가집니다.</p>
+                </div>
+            </div>
+            
+            <div class="idiom-card">
+                <h3>형태의 고정성</h3>
+                <p>관용 표현은 구성 요소의 어순이나 단어를 쉽게 바꿀 수 없습니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">바늘 도둑이 소 도둑 된다</span>는 '소 도둑이 바늘 도둑 된다'로 바꿀 수 없습니다.</p>
+                </div>
+            </div>
+            
+            <div class="idiom-card">
+                <h3>문화적 배경</h3>
+                <p>관용 표현은 그 나라의 문화와 역사적 배경을 반영합니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">식은 죽 먹기</span>와 같은 표현은 한국의 식문화와 관련이 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section practice-section">
+            <h2>연습 문제</h2>
+            <p>다음 문제를 풀어보며 관용 표현의 의미와 사용법을 익혀 봅시다.</p>
+            
+            <div class="practice-problem">
+                <h3>문제 1</h3>
+                <p>다음 관용 표현의 의미로 알맞은 것을 고르세요.</p>
+                <p>"그는 <span class="highlight">손이 크다</span>."</p>
+                <ol type="a">
+                    <li>손의 크기가 크다.</li>
+                    <li>씀씀이가 후하다.</li>
+                    <li>힘이 세다.</li>
+                    <li>성격이 급하다.</li>
+                </ol>
+                <button class="btn" onclick="toggleAnswer('answer1')">정답 보기</button>
+                <div id="answer1" class="answer-reveal">
+                    <p><strong>정답:</strong> b. 씀씀이가 후하다.</p>
+                    <p>'손이 크다'는 돈을 쓰는 데 인색하지 않고 후하게 쓴다는 의미입니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 2</h3>
+                <p>다음 상황을 표현하는 데 적절한 관용 표현은 무엇인가요?</p>
+                <p>"시험 결과가 나오기도 전에 이미 합격했다고 자랑하는 친구를 보고 선생님이 말씀하셨다."</p>
+                <button class="btn" onclick="toggleAnswer('answer2')">정답 보기</button>
+                <div id="answer2" class="answer-reveal">
+                    <p><strong>정답:</strong> "김치국부터 마시다" 또는 "뛰기 전에 넘었다고 하다"</p>
+                    <p>일이 실제로 이루어지기도 전에 미리 기대하거나 자신하는 상황을 표현하는 관용 표현입니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 3</h3>
+                <p>다음 문장의 괄호 안에 알맞은 관용 표현을 넣으세요.</p>
+                <p>"그는 비밀을 잘 지키는 사람이라 (          )."</p>
+                <button class="btn" onclick="toggleAnswer('answer3')">정답 보기</button>
+                <div id="answer3" class="answer-reveal">
+                    <p><strong>정답:</strong> "입이 무겁다"</p>
+                    <p>'입이 무겁다'는 비밀을 잘 지키고 다른 사람에게 말하지 않는 성격을 의미합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section activity-section">
+            <h2>관용 표현 학습 활동</h2>
+            <p>다양한 활동을 통해 관용 표현을 재미있게 학습해 봅시다.</p>
+            
+            <div class="activity-list">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>관용 표현 카드 게임</h3>
+                    <p>관용 표현과 그 의미를 매칭시키는 카드 게임입니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>관용 표현 만화 그리기</h3>
+                    <p>관용 표현의 문자 그대로의 의미와 실제 의미를 대조하는 만화를 그려봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-theater-masks"></i>
+                    </div>
+                    <h3>관용 표현 역할극</h3>
+                    <p>관용 표현이 사용된 상황을 역할극으로 표현해 봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                    <h3>관용 표현 이야기 만들기</h3>
+                    <p>주어진 관용 표현을 활용하여 짧은 이야기를 만들어 봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAnswer(id) {
+            const answerElement = document.getElementById(id);
+            if (answerElement.style.display === 'block') {
+                answerElement.style.display = 'none';
+            } else {
+                answerElement.style.display = 'block';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 활동 버튼 이벤트
+            const activityButtons = document.querySelectorAll('.btn');
+            activityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 정답 버튼이 아닌 경우에만 알림 표시
+                    if (!this.getAttribute('onclick') || !this.getAttribute('onclick').includes('toggleAnswer')) {
+                        alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>낱말의 의미 관계 | 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 페이지 특정 스타일 */
+        .topic-header {
+            background: linear-gradient(135deg, #FF7675 0%, #FF9F9E 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .topic-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .topic-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .intro-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .intro-section h2 {
+            color: #FF7675;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .intro-section p {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .relation-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .relation-section h2 {
+            color: #FF7675;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .relation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .relation-card {
+            background-color: #FFF5F5;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .relation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .relation-header {
+            background-color: #FF7675;
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .relation-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .relation-content {
+            padding: 20px;
+        }
+
+        .relation-content p {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .word-pairs {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 15px;
+        }
+
+        .word-pair {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .word-pair:last-child {
+            border-bottom: none;
+        }
+
+        .word-pair span {
+            font-size: 15px;
+            color: #333;
+        }
+
+        .word-pair i {
+            color: #FF7675;
+            font-size: 16px;
+        }
+
+        .example-box {
+            background-color: #FFF5F5;
+            border: 1px solid #FFDFDF;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .example-box h3 {
+            color: #FF7675;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .example-sentence {
+            background-color: white;
+            border-left: 3px solid #FF7675;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .word-tree {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin: 20px 0;
+        }
+
+        .tree-node {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tree-parent {
+            background-color: #FFE8E8;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #333;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .tree-children {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .tree-child {
+            background-color: #FFF5F5;
+            border: 1px dashed #FFCDCD;
+            border-radius: 6px;
+            padding: 8px 12px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .activities-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .activities-section h2 {
+            color: #FF7675;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .activity-card:hover {
+            border-color: #FF7675;
+            box-shadow: 0 5px 15px rgba(255, 118, 117, 0.1);
+        }
+
+        .activity-icon {
+            background-color: #FFF5F5;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: #FF7675;
+            font-size: 20px;
+        }
+
+        .activity-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .activity-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .activity-button {
+            margin-top: 15px;
+            background-color: #FF7675;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .activity-button:hover {
+            background-color: #FF5E5D;
+        }
+
+        /* 반응형 설정 */
+        @media (max-width: 768px) {
+            .relation-grid, .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li class="active"><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="topic-header">
+        <h1>낱말의 의미 관계</h1>
+        <p>비슷한 말(유의어)과 반의어, 상위어와 하위어 등 낱말 간의 의미 관계를 배웁니다.</p>
+        <div class="breadcrumb">
+            <a href="index.html">홈</a> &gt;
+            <a href="topics.html">주제별 학습</a> &gt;
+            <span>낱말의 의미 관계</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="intro-section">
+            <h2>낱말 사이의 다양한 관계</h2>
+            <p>우리가 사용하는 낱말들은 서로 다양한 의미적 관계를 맺고 있습니다. 어떤 낱말들은 비슷한 뜻을 가지고 있기도 하고, 어떤 낱말들은 서로 반대되는 의미를 가지고 있기도 해요. 또한 낱말들 사이에는 범위가 넓은 말과 좁은 말의 관계가 있기도 합니다.</p>
+            <p>낱말의 의미 관계를 이해하면 더 정확하고 다양한 표현을 사용할 수 있게 되고, 글과 말의 의미를 더 깊게 이해할 수 있게 됩니다.</p>
+            <p>오늘은 다음과 같은 낱말 관계에 대해 배워볼 거예요:</p>
+            <ul>
+                <li>유의 관계 (비슷한 말)</li>
+                <li>반의 관계 (반대말)</li>
+                <li>상하 관계 (상위어와 하위어)</li>
+                <li>부분-전체 관계</li>
+            </ul>
+        </section>
+
+        <section class="relation-section">
+            <h2>유의 관계 (비슷한 말)</h2>
+            <p>유의 관계는 의미가 비슷한 낱말들 사이의 관계를 말합니다. 완전히 같은 의미를 가진 낱말은 많지 않지만, 비슷한 의미를 가진 낱말들은 많이 있어요.</p>
+            
+            <div class="relation-grid">
+                <div class="relation-card">
+                    <div class="relation-header">
+                        <span class="relation-icon"><i class="fas fa-equals"></i></span>
+                        유의어 예시
+                    </div>
+                    <div class="relation-content">
+                        <p>다음 낱말들은 의미가 비슷한 유의어 관계입니다.</p>
+                        <div class="word-pairs">
+                            <div class="word-pair">
+                                <span>기쁘다</span>
+                                <i class="fas fa-exchange-alt"></i>
+                                <span>즐겁다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>아름답다</span>
+                                <i class="fas fa-exchange-alt"></i>
+                                <span>예쁘다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>커다랗다</span>
+                                <i class="fas fa-exchange-alt"></i>
+                                <span>크다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>바라보다</span>
+                                <i class="fas fa-exchange-alt"></i>
+                                <span>쳐다보다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>빨리</span>
+                                <i class="fas fa-exchange-alt"></i>
+                                <span>재빨리</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relation-card">
+                    <div class="relation-header">
+                        <span class="relation-icon"><i class="fas fa-lightbulb"></i></span>
+                        유의어 활용하기
+                    </div>
+                    <div class="relation-content">
+                        <p>유의어를 잘 활용하면 같은 낱말을 반복하지 않고 다양한 표현을 할 수 있어요.</p>
+                        <div class="example-sentence">
+                            원래 문장: 그 책은 <strong>작다</strong>. 그런데 그 가방도 <strong>작다</strong>.
+                        </div>
+                        <div class="example-sentence">
+                            유의어 활용: 그 책은 <strong>작다</strong>. 그런데 그 가방도 <strong>작은 편이다</strong>.
+                        </div>
+                        <p>이처럼 비슷한 뜻을 가진 다양한 낱말을 사용하면 더 풍부한 표현이 가능합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="relation-section">
+            <h2>반의 관계 (반대말)</h2>
+            <p>반의 관계는 의미가 서로 반대되는 낱말들 사이의 관계를 말합니다. 반의어는 서로 상대적인 개념을 나타내는 경우가 많습니다.</p>
+            
+            <div class="relation-grid">
+                <div class="relation-card">
+                    <div class="relation-header">
+                        <span class="relation-icon"><i class="fas fa-not-equal"></i></span>
+                        반의어 예시
+                    </div>
+                    <div class="relation-content">
+                        <p>다음 낱말들은 의미가 서로 반대되는 반의어 관계입니다.</p>
+                        <div class="word-pairs">
+                            <div class="word-pair">
+                                <span>크다</span>
+                                <i class="fas fa-arrows-alt-h"></i>
+                                <span>작다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>높다</span>
+                                <i class="fas fa-arrows-alt-h"></i>
+                                <span>낮다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>길다</span>
+                                <i class="fas fa-arrows-alt-h"></i>
+                                <span>짧다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>많다</span>
+                                <i class="fas fa-arrows-alt-h"></i>
+                                <span>적다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>기쁘다</span>
+                                <i class="fas fa-arrows-alt-h"></i>
+                                <span>슬프다</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relation-card">
+                    <div class="relation-header">
+                        <span class="relation-icon"><i class="fas fa-laptop"></i></span>
+                        반의어 종류
+                    </div>
+                    <div class="relation-content">
+                        <p><strong>상보 반의어</strong>: 둘 중 하나만 참이 되는 반의어</p>
+                        <div class="word-pairs">
+                            <div class="word-pair">
+                                <span>살아있다</span>
+                                <i class="fas fa-arrows-alt-h"></i>
+                                <span>죽었다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>참</span>
+                                <i class="fas fa-arrows-alt-h"></i>
+                                <span>거짓</span>
+                            </div>
+                        </div>
+                        
+                        <p><strong>등급 반의어</strong>: 정도의 차이가 있는 반의어</p>
+                        <div class="word-pairs">
+                            <div class="word-pair">
+                                <span>뜨겁다</span>
+                                <i class="fas fa-arrows-alt-h"></i>
+                                <span>차갑다</span>
+                            </div>
+                            <div class="word-pair">
+                                <span>빠르다</span>
+                                <i class="fas fa-arrows-alt-h"></i>
+                                <span>느리다</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="relation-section">
+            <h2>상하 관계 (상위어와 하위어)</h2>
+            <p>상하 관계는 의미가 포함하는 범위에 따라 더 넓은 개념(상위어)과 더 좁은 개념(하위어)의 관계를 말합니다.</p>
+            
+            <div class="relation-grid">
+                <div class="relation-card">
+                    <div class="relation-header">
+                        <span class="relation-icon"><i class="fas fa-sitemap"></i></span>
+                        상하 관계 예시
+                    </div>
+                    <div class="relation-content">
+                        <p>상위어는 여러 하위어를 포함하는 더 넓은 개념의 낱말입니다.</p>
+                        
+                        <div class="word-tree">
+                            <div class="tree-node">
+                                <div class="tree-parent">과일</div>
+                                <div class="tree-children">
+                                    <div class="tree-child">사과</div>
+                                    <div class="tree-child">바나나</div>
+                                    <div class="tree-child">오렌지</div>
+                                    <div class="tree-child">포도</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="word-tree">
+                            <div class="tree-node">
+                                <div class="tree-parent">가구</div>
+                                <div class="tree-children">
+                                    <div class="tree-child">책상</div>
+                                    <div class="tree-child">의자</div>
+                                    <div class="tree-child">침대</div>
+                                    <div class="tree-child">소파</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relation-card">
+                    <div class="relation-header">
+                        <span class="relation-icon"><i class="fas fa-pencil-alt"></i></span>
+                        상하 관계 활용하기
+                    </div>
+                    <div class="relation-content">
+                        <p>상하 관계를 이용하면 표현을 더 구체적으로 하거나 반대로 일반화할 수 있습니다.</p>
+                        <div class="example-sentence">
+                            일반적 표현: 나는 <strong>과일</strong>을 좋아합니다.
+                        </div>
+                        <div class="example-sentence">
+                            구체적 표현: 나는 <strong>사과</strong>를 좋아합니다.
+                        </div>
+                        <p>또한 글을 쓸 때 같은 낱말을 반복하지 않고 상위어나 하위어를 활용하여 다양하게 표현할 수 있습니다.</p>
+                        <div class="example-sentence">
+                            내 방에는 <strong>책상</strong>이 있다. 그 <strong>가구</strong>는 오래되었지만 튼튼하다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="relation-section">
+            <h2>부분-전체 관계</h2>
+            <p>부분-전체 관계는 어떤 대상(전체)과 그것을 구성하는 요소(부분) 사이의 관계를 말합니다.</p>
+            
+            <div class="example-box">
+                <h3>부분-전체 관계의 예</h3>
+                <ul>
+                    <li><strong>자동차</strong>와 그 부분인 <strong>바퀴, 엔진, 핸들</strong> 등</li>
+                    <li><strong>얼굴</strong>과 그 부분인 <strong>눈, 코, 입</strong> 등</li>
+                    <li><strong>학교</strong>와 그 부분인 <strong>교실, 운동장, 도서관</strong> 등</li>
+                    <li><strong>1년</strong>과 그 부분인 <strong>봄, 여름, 가을, 겨울</strong></li>
+                </ul>
+            </div>
+
+            <p>부분-전체 관계는 상하 관계와 비슷해 보이지만 다릅니다. 상하 관계는 의미의 포함 관계이고, 부분-전체 관계는 실제적인 구성 요소의 관계입니다.</p>
+        </section>
+
+        <section class="activities-section">
+            <h2>학습 활동</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>낱말 관계 짝 맞추기</h3>
+                    <p>여러 낱말 카드 중에서 유의 관계, 반의 관계에 있는 낱말들을 짝지어 보는 게임입니다.</p>
+                    <button class="activity-button">게임 시작하기</button>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>낱말 관계 나무 만들기</h3>
+                    <p>주어진 상위어에 맞는 하위어를 찾아 낱말 관계 나무를 완성해 보세요.</p>
+                    <button class="activity-button">활동 시작하기</button>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>문장 바꿔 쓰기</h3>
+                    <p>주어진 문장의 낱말을 유의어나 상위어, 하위어로 바꿔서 다양한 표현을 연습해 보세요.</p>
+                    <button class="activity-button">연습 시작하기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 페이지 로딩 애니메이션
+            const cards = document.querySelectorAll('.relation-card, .activity-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+            
+            // 학습 활동 버튼 이벤트
+            const activityButtons = document.querySelectorAll('.activity-button');
+            activityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

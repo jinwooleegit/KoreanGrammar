@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문장 고치기 | 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .activity-header {
+            background: linear-gradient(135deg, #673AB7 0%, #9575CD 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .activity-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .activity-header p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .activity-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .activity-info {
+            background-color: #EDE7F6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .activity-info h2 {
+            color: #512DA8;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .activity-info p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .correction-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .type-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+        }
+
+        .type-title {
+            font-weight: bold;
+            color: #673AB7;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .type-title i {
+            margin-right: 8px;
+        }
+
+        .type-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .type-example {
+            font-size: 13px;
+            color: #673AB7;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #D1C4E9;
+        }
+
+        .activity-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #512DA8;
+            margin-bottom: 20px;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .quiz-progress {
+            display: flex;
+            align-items: center;
+        }
+
+        .quiz-number {
+            font-size: 14px;
+            color: #666;
+            margin-right: 10px;
+        }
+
+        .score-display {
+            background-color: #EDE7F6;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 14px;
+            color: #512DA8;
+            font-weight: bold;
+        }
+
+        .sentence-card {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sentence {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .sentence-error {
+            color: #F44336;
+            font-style: italic;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .correction-input {
+            margin-top: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background-color: #E8F5E9;
+            border-left: 4px solid #4CAF50;
+            color: #388E3C;
+        }
+
+        .feedback.incorrect {
+            background-color: #FFEBEE;
+            border-left: 4px solid #F44336;
+            color: #D32F2F;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action-button {
+            background-color: #673AB7;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-button:hover {
+            background-color: #512DA8;
+        }
+
+        .action-button.disabled {
+            background-color: #BDBDBD;
+            cursor: not-allowed;
+        }
+
+        .action-button.secondary {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .action-button.secondary:hover:not(.disabled) {
+            background-color: #e0e0e0;
+        }
+
+        .model-answer {
+            background-color: #E8F5E9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .model-title {
+            font-weight: bold;
+            color: #388E3C;
+            margin-bottom: 8px;
+        }
+
+        .result-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .result-icon {
+            font-size: 60px;
+            color: #673AB7;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .result-score {
+            font-size: 36px;
+            font-weight: bold;
+            color: #673AB7;
+            margin-bottom: 20px;
+        }
+
+        .result-message {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .correction-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li class="active"><a href="activities.html">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="activity-header">
+        <h1>문장 고치기</h1>
+        <p>문법적 오류가 있는 문장을 찾아 올바르게 고치는 활동입니다. 주어와 서술어 호응, 시제, 높임 등을 바르게 고쳐보세요.</p>
+    </div>
+
+    <div class="activity-container">
+        <div class="activity-info">
+            <h2>문장 고치기란?</h2>
+            <p>문장 고치기는 잘못된 문법, 어색한 표현 등을 바로잡아 정확하고 자연스러운 문장으로 고치는 활동입니다. 주어와 서술어의 호응 관계, 시제의 일치, 높임 표현의 일관성 등을 확인하며 우리말을 더 정확하게 사용하는 능력을 키울 수 있습니다.</p>
+        </div>
+
+        <div class="correction-types">
+            <div class="type-card">
+                <div class="type-title"><i class="fas fa-handshake"></i> 호응 관계</div>
+                <div class="type-desc">주어와 서술어, 목적어와 서술어 등이 문법적으로 서로 어울려야 합니다.</div>
+                <div class="type-example">
+                    <span style="color: #F44336;">잘못된 예: 학생들이 책을 읽는다.</span><br>
+                    <span style="color: #4CAF50;">바른 예: 학생들이 책을 읽는다.</span>
+                </div>
+            </div>
+            <div class="type-card">
+                <div class="type-title"><i class="fas fa-clock"></i> 시제 일치</div>
+                <div class="type-desc">문장 안에서 시제(시간)를 일관되게 사용해야 합니다.</div>
+                <div class="type-example">
+                    <span style="color: #F44336;">잘못된 예: 어제 영화를 보고 집에 간다.</span><br>
+                    <span style="color: #4CAF50;">바른 예: 어제 영화를 보고 집에 갔다.</span>
+                </div>
+            </div>
+            <div class="type-card">
+                <div class="type-title"><i class="fas fa-user-tie"></i> 높임 표현</div>
+                <div class="type-desc">높임 표현을 사용할 때는 일관성 있게 적절한 표현을 사용해야 합니다.</div>
+                <div class="type-example">
+                    <span style="color: #F44336;">잘못된 예: 할아버지가 밥을 먹어요.</span><br>
+                    <span style="color: #4CAF50;">바른 예: 할아버지께서 밥을 드세요.</span>
+                </div>
+            </div>
+            <div class="type-card">
+                <div class="type-title"><i class="fas fa-sort-numeric-down"></i> 조사 사용</div>
+                <div class="type-desc">문맥에 맞게 적절한 조사를 사용해야 합니다.</div>
+                <div class="type-example">
+                    <span style="color: #F44336;">잘못된 예: 학교에 공부한다.</span><br>
+                    <span style="color: #4CAF50;">바른 예: 학교에서 공부한다.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-section" id="quizSection">
+            <h3 class="section-title">문장 고치기 연습</h3>
+            
+            <div class="quiz-info">
+                <div class="quiz-progress">
+                    <div class="quiz-number" id="quizNumber">문제 1/5</div>
+                </div>
+                <div class="score-display" id="scoreDisplay">점수: 0</div>
+            </div>
+
+            <div class="sentence-card">
+                <div class="sentence" id="currentSentence">학생들이 운동장에서 놀고 있어서 선생님은 창문을 본다.</div>
+                <div class="sentence-error" id="errorHint">* 문장의 시제가 일치하지 않습니다.</div>
+            </div>
+
+            <div class="correction-input">
+                <div class="input-group">
+                    <label for="correctedSentence">올바른 문장으로 고쳐 쓰세요:</label>
+                    <textarea id="correctedSentence" placeholder="문법 오류를 바로잡아 올바른 문장을 작성해보세요."></textarea>
+                </div>
+            </div>
+
+            <div class="feedback correct" id="correctFeedback">
+                <div class="feedback-title">정답입니다!</div>
+                <p>문법 오류를 올바르게 수정했습니다.</p>
+            </div>
+
+            <div class="feedback incorrect" id="incorrectFeedback">
+                <div class="feedback-title">다시 시도해보세요.</div>
+                <p>문장에 아직 오류가 있습니다.</p>
+            </div>
+
+            <div class="model-answer" id="modelAnswer">
+                <div class="model-title">모범 답안:</div>
+                <p id="modelSentence">학생들이 운동장에서 놀고 있어서 선생님은 창문을 보았다.</p>
+            </div>
+
+            <div class="actions">
+                <button class="action-button" id="checkButton">
+                    <i class="fas fa-check"></i> 정답 확인하기
+                </button>
+                <button class="action-button secondary disabled" id="nextButton">
+                    <i class="fas fa-arrow-right"></i> 다음 문제
+                </button>
+            </div>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <div class="result-icon">
+                <i class="fas fa-award"></i>
+            </div>
+            <h2 class="result-title">모든 문제 완료!</h2>
+            <div class="result-score" id="finalScore">4/5</div>
+            <p class="result-message" id="resultMessage">
+                잘했어요! 문장 고치기 능력이 뛰어납니다. 계속해서 다양한 문장을 분석하고 고쳐보세요.
+            </p>
+            <div class="actions">
+                <button class="action-button" id="restartButton">
+                    <i class="fas fa-redo-alt"></i> 다시 시작하기
+                </button>
+                <button class="action-button secondary" id="homeButton">
+                    <i class="fas fa-home"></i> 활동 목록으로
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="activities.html">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 퀴즈 데이터
+            const quizData = [
+                {
+                    sentence: "학생들이 운동장에서 놀고 있어서 선생님은 창문을 본다.",
+                    errorHint: "* 문장의 시제가 일치하지 않습니다.",
+                    correctAnswer: "학생들이 운동장에서 놀고 있어서 선생님은 창문을 보았다.",
+                    alternativeAnswers: [
+                        "학생들이 운동장에서 놀고 있어서 선생님은 창문을 바라보았다.",
+                        "학생들이 운동장에서 놀고 있어 선생님은 창문을 보았다."
+                    ]
+                },
+                {
+                    sentence: "할아버지가 지금 식사를 해요.",
+                    errorHint: "* 높임 표현이 적절하지 않습니다.",
+                    correctAnswer: "할아버지께서 지금 식사를 하세요.",
+                    alternativeAnswers: [
+                        "할아버지께서 지금 식사를 하십니다.",
+                        "할아버지께서 지금 드세요."
+                    ]
+                },
+                {
+                    sentence: "민지는 도서관을 공부했다.",
+                    errorHint: "* 조사 사용이 적절하지 않습니다.",
+                    correctAnswer: "민지는 도서관에서 공부했다.",
+                    alternativeAnswers: [
+                        "민지는 도서관에 가서 공부했다.",
+                        "민지는 도서관에서 공부를 했다."
+                    ]
+                },
+                {
+                    sentence: "나는 어제 학교에 갑니다.",
+                    errorHint: "* 시제 표현이 일관되지 않습니다.",
+                    correctAnswer: "나는 어제 학교에 갔습니다.",
+                    alternativeAnswers: [
+                        "나는 어제 학교에 갔어요.",
+                        "나는 어제 학교에 갔다."
+                    ]
+                },
+                {
+                    sentence: "친구들과 같이 영화 봤어요.",
+                    errorHint: "* 주어가 생략되었습니다.",
+                    correctAnswer: "저는 친구들과 같이 영화 봤어요.",
+                    alternativeAnswers: [
+                        "나는 친구들과 같이 영화 봤어요.",
+                        "우리는 친구들과 같이 영화 봤어요."
+                    ]
+                }
+            ];
+
+            // 요소 가져오기
+            const quizNumberElement = document.getElementById('quizNumber');
+            const scoreDisplayElement = document.getElementById('scoreDisplay');
+            const currentSentenceElement = document.getElementById('currentSentence');
+            const errorHintElement = document.getElementById('errorHint');
+            const correctedSentenceInput = document.getElementById('correctedSentence');
+            const correctFeedbackElement = document.getElementById('correctFeedback');
+            const incorrectFeedbackElement = document.getElementById('incorrectFeedback');
+            const modelAnswerElement = document.getElementById('modelAnswer');
+            const modelSentenceElement = document.getElementById('modelSentence');
+            const checkButton = document.getElementById('checkButton');
+            const nextButton = document.getElementById('nextButton');
+            const quizSection = document.getElementById('quizSection');
+            const resultContainer = document.getElementById('resultContainer');
+            const finalScoreElement = document.getElementById('finalScore');
+            const resultMessageElement = document.getElementById('resultMessage');
+            const restartButton = document.getElementById('restartButton');
+            const homeButton = document.getElementById('homeButton');
+
+            // 변수 선언
+            let currentQuizIndex = 0;
+            let score = 0;
+            let isAnswered = false;
+
+            // 퀴즈 시작
+            initQuiz();
+
+            // 퀴즈 초기화 함수
+            function initQuiz() {
+                currentQuizIndex = 0;
+                score = 0;
+                updateScoreDisplay();
+                quizSection.style.display = 'block';
+                resultContainer.style.display = 'none';
+                
+                // 첫 번째 퀴즈 보여주기
+                showQuiz(currentQuizIndex);
+            }
+
+            // 점수 표시 업데이트
+            function updateScoreDisplay() {
+                scoreDisplayElement.textContent = `점수: ${score}`;
+            }
+
+            // 퀴즈 표시 함수
+            function showQuiz(index) {
+                // 진행 상태 업데이트
+                quizNumberElement.textContent = `문제 ${index + 1}/${quizData.length}`;
+                
+                // 퀴즈 내용 업데이트
+                const quiz = quizData[index];
+                currentSentenceElement.textContent = quiz.sentence;
+                errorHintElement.textContent = quiz.errorHint;
+                
+                // 입력 필드 및 피드백 초기화
+                correctedSentenceInput.value = '';
+                correctFeedbackElement.style.display = 'none';
+                incorrectFeedbackElement.style.display = 'none';
+                modelAnswerElement.style.display = 'none';
+                
+                // 버튼 상태 초기화
+                checkButton.style.display = 'flex';
+                nextButton.classList.add('disabled');
+                
+                // 답변 상태 초기화
+                isAnswered = false;
+            }
+
+            // 답변 확인 함수
+            function checkAnswer() {
+                if (isAnswered) return;
+                isAnswered = true;
+                
+                const userAnswer = correctedSentenceInput.value.trim();
+                if (!userAnswer) {
+                    alert('답변을 입력해주세요.');
+                    isAnswered = false;
+                    return;
+                }
+                
+                const currentQuiz = quizData[currentQuizIndex];
+                
+                // 정답 확인 (주 정답 또는 대체 정답 중 하나와 일치하는지)
+                const isCorrect = 
+                    userAnswer === currentQuiz.correctAnswer || 
+                    currentQuiz.alternativeAnswers.some(answer => userAnswer === answer);
+                
+                // 피드백 표시
+                if (isCorrect) {
+                    correctFeedbackElement.style.display = 'block';
+                    incorrectFeedbackElement.style.display = 'none';
+                    score += 20;
+                    updateScoreDisplay();
+                } else {
+                    correctFeedbackElement.style.display = 'none';
+                    incorrectFeedbackElement.style.display = 'block';
+                }
+                
+                // 모범 답안 표시
+                modelSentenceElement.textContent = currentQuiz.correctAnswer;
+                modelAnswerElement.style.display = 'block';
+                
+                // 버튼 상태 업데이트
+                checkButton.style.display = 'none';
+                nextButton.classList.remove('disabled');
+            }
+
+            // 다음 퀴즈로 이동 함수
+            function goToNextQuiz() {
+                currentQuizIndex++;
+                
+                if (currentQuizIndex < quizData.length) {
+                    showQuiz(currentQuizIndex);
+                } else {
+                    showResult();
+                }
+            }
+
+            // 결과 표시 함수
+            function showResult() {
+                quizSection.style.display = 'none';
+                resultContainer.style.display = 'block';
+                
+                const totalPossibleScore = quizData.length * 20;
+                finalScoreElement.textContent = `${score}/${totalPossibleScore}`;
+                
+                // 점수에 따른 메시지
+                let message = '';
+                const percentage = score / totalPossibleScore;
+                
+                if (percentage >= 0.8) {
+                    message = '훌륭해요! 문장 고치기 능력이 뛰어납니다. 계속해서 다양한 문장을 분석하고 고쳐보세요.';
+                } else if (percentage >= 0.6) {
+                    message = '잘했어요! 대부분의 문법 오류를 바르게 고칠 수 있네요. 더 많은 연습을 통해 실력을 키워보세요.';
+                } else if (percentage >= 0.4) {
+                    message = '기본적인 문법 지식을 갖추고 있네요. 더 다양한 유형의 문장을 연습해보세요.';
+                } else {
+                    message = '문법에 대한 이해를 더 키울 필요가 있어요. 기본 문법 규칙을 복습하고 다시 도전해보세요!';
+                }
+                
+                resultMessageElement.textContent = message;
+            }
+
+            // 이벤트 리스너
+            checkButton.addEventListener('click', checkAnswer);
+            
+            nextButton.addEventListener('click', function() {
+                if (!this.classList.contains('disabled')) {
+                    goToNextQuiz();
+                }
+            });
+            
+            restartButton.addEventListener('click', initQuiz);
+            
+            homeButton.addEventListener('click', function() {
+                window.location.href = 'activities.html';
+            });
+        });
+    </script>
+</body>
+</html> 

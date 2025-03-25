@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5학년 비유적 표현 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 페이지 특정 스타일 */
+        :root {
+            --grade5-color: #9C27B0;
+            --grade-light-color: #F3E5F5;
+        }
+        
+        .grade-header {
+            background: linear-gradient(135deg, var(--grade5-color) 0%, #BA68C8 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .grade-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .grade-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .intro-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .intro-section h2 {
+            color: var(--grade5-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .intro-section p {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .figurative-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .figurative-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .figurative-header {
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .simile .figurative-header {
+            background-color: #2196F3;
+        }
+
+        .metaphor .figurative-header {
+            background-color: var(--grade5-color);
+        }
+
+        .personification .figurative-header {
+            background-color: #4CAF50;
+        }
+
+        .figurative-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .figurative-content {
+            padding: 20px;
+        }
+
+        .figurative-definition {
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--grade5-color);
+        }
+
+        .figurative-definition h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .figurative-definition p {
+            color: #555;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        .example-list {
+            margin: 20px 0;
+        }
+
+        .example-item {
+            background-color: var(--grade-light-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .example-sentence {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--grade5-color);
+            padding: 0 2px;
+        }
+
+        .example-explanation {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .comparison-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .comparison-section h2 {
+            color: var(--grade5-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .comparison-table th, 
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background-color: var(--grade-light-color);
+            color: #333;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        .activities-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .activities-section h2 {
+            color: var(--grade5-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .activity-card:hover {
+            border-color: var(--grade5-color);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.1);
+        }
+
+        .activity-icon {
+            background-color: var(--grade-light-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: var(--grade5-color);
+            font-size: 20px;
+        }
+
+        .activity-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .activity-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .activity-button {
+            margin-top: 15px;
+            background-color: var(--grade5-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .activity-button:hover {
+            opacity: 0.9;
+        }
+
+        .poem-box {
+            background-color: var(--grade-light-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid var(--grade5-color);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .poem-box h3 {
+            color: var(--grade5-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-style: normal;
+        }
+
+        .poem-box p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .poem-box .author {
+            text-align: right;
+            font-style: normal;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        /* 반응형 설정 */
+        @media (max-width: 768px) {
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
+            
+            .comparison-table th, 
+            .comparison-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="../../index.html">
+                <div class="placeholder-img logo-img"></div>
+                <span>문법놀이터</span>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../../index.html">홈</a></li>
+                <li><a href="index.html" class="active">학년별 학습</a></li>
+                <li><a href="../topics/index.html">학습 주제별</a></li>
+                <li><a href="../activities/index.html">학습 활동</a></li>
+                <li><a href="../progress/index.html">학습 진도 관리</a></li>
+            </ul>
+        </nav>
+        <div class="header-utils">
+            <div class="search-box">
+                <input type="text" placeholder="배우고 싶은 내용을 검색해보세요">
+                <button class="search-btn">검색</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="grade-header">
+        <h1>5학년 비유적 표현</h1>
+        <p>직유, 은유, 의인화 등 다양한 비유적 표현을 배워봅시다.</p>
+        <div class="breadcrumb">
+            <a href="index.html">홈</a> &gt;
+            <a href="grade_learning.html">학년별 학습</a> &gt;
+            <a href="grade5.html">5학년</a> &gt;
+            <span>비유적 표현</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="intro-section">
+            <h2>비유적 표현이란 무엇일까요?</h2>
+            <p>비유적 표현은 어떤 대상이나 상황을 <strong>다른 것에 빗대어</strong> 표현하는 방법입니다. 비유적 표현을 사용하면 글이 더욱 생생하고 풍부해지며, 독자나 청자에게 더 강한 인상을 줄 수 있어요.</p>
+            <p>비유적 표현에는 직유, 은유, 의인화 등이 있습니다. 이런 표현을 이해하고 사용하면 더 창의적이고 아름다운 글을 쓸 수 있답니다. 함께 비유적 표현의 세계를 알아볼까요?</p>
+        </section>
+
+        <div class="poem-box">
+            <h3>봄비</h3>
+            <p>봄비는 <span class="highlight">실로 내리고</span></p>
+            <p>봄바람은 <span class="highlight">입김으로 분다</span></p>
+            <p>나무들은 <span class="highlight">팔을 벌려</span> 비를 맞고</p>
+            <p>꽃들은 <span class="highlight">방긋 웃으며</span> 고개를 내민다</p>
+            <div class="author">- 비유적 표현이 사용된 시 예시 -</div>
+        </div>
+
+        <section class="figurative-card simile">
+            <div class="figurative-header">
+                <span class="figurative-icon"><i class="fas fa-equals"></i></span>
+                직유법
+            </div>
+            <div class="figurative-content">
+                <div class="figurative-definition">
+                    <h3>직유법이란?</h3>
+                    <p>직유법은 '~같이', '~처럼', '~듯이', '~인양' 등의 <strong>비유 표현을 직접적으로 사용</strong>하여 두 대상을 비교하는 표현 방법입니다.</p>
+                </div>
+                
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="example-sentence">
+                            그의 목소리는 <span class="highlight">종소리처럼</span> 맑았다.
+                        </div>
+                        <div class="example-explanation">
+                            '종소리처럼'이라는 표현을 통해 목소리의 맑은 특성을 종소리에 직접 비유했습니다.
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-sentence">
+                            그녀는 <span class="highlight">나비같이</span> 가볍게 춤을 추었다.
+                        </div>
+                        <div class="example-explanation">
+                            '나비같이'라는 표현을 통해 춤추는 모습의 가벼움을 나비에 직접 비유했습니다.
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-sentence">
+                            아이들은 <span class="highlight">새싹처럼</span> 쑥쑥 자라고 있다.
+                        </div>
+                        <div class="example-explanation">
+                            '새싹처럼'이라는 표현을 통해 아이들이 자라는 모습을 새싹에 직접 비유했습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="figurative-card metaphor">
+            <div class="figurative-header">
+                <span class="figurative-icon"><i class="fas fa-exchange-alt"></i></span>
+                은유법
+            </div>
+            <div class="figurative-content">
+                <div class="figurative-definition">
+                    <h3>은유법이란?</h3>
+                    <p>은유법은 '~이다', '~다' 등의 <strong>직접적인 비유 표현 없이</strong> 두 대상을 동일시하여 표현하는 방법입니다.</p>
+                </div>
+                
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="example-sentence">
+                            그의 말은 <span class="highlight">가시</span>였다.
+                        </div>
+                        <div class="example-explanation">
+                            '가시'라는 표현을 통해 상처를 주는 말을 가시에 간접적으로 비유했습니다.
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-sentence">
+                            시간은 <span class="highlight">강물</span>이다.
+                        </div>
+                        <div class="example-explanation">
+                            '강물'이라는 표현을 통해 흐르는 시간을 강물에 간접적으로 비유했습니다.
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-sentence">
+                            지식은 <span class="highlight">빛</span>이다.
+                        </div>
+                        <div class="example-explanation">
+                            '빛'이라는 표현을 통해 어둠을 밝히는 지식을 빛에 간접적으로 비유했습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="figurative-card personification">
+            <div class="figurative-header">
+                <span class="figurative-icon"><i class="fas fa-user"></i></span>
+                의인화
+            </div>
+            <div class="figurative-content">
+                <div class="figurative-definition">
+                    <h3>의인화란?</h3>
+                    <p>의인화는 <strong>사람이 아닌 대상</strong>에게 사람의 특성이나 행동을 부여하여 표현하는 방법입니다.</p>
+                </div>
+                
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="example-sentence">
+                            바람이 <span class="highlight">노래를 부르며</span> 지나갔다.
+                        </div>
+                        <div class="example-explanation">
+                            '노래를 부르며'라는 표현을 통해 바람에게 사람처럼 노래를 부를 수 있는 특성을 부여했습니다.
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-sentence">
+                            꽃들이 <span class="highlight">고개를 끄덕이며</span> 인사했다.
+                        </div>
+                        <div class="example-explanation">
+                            '고개를 끄덕이며 인사했다'라는 표현을 통해 꽃에게 사람처럼 인사할 수 있는 행동을 부여했습니다.
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-sentence">
+                            나무들이 <span class="highlight">속삭이는</span> 소리가 들렸다.
+                        </div>
+                        <div class="example-explanation">
+                            '속삭이는'이라는 표현을 통해 나무에게 사람처럼 이야기를 나눌 수 있는 특성을 부여했습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="comparison-section">
+            <h2>비유적 표현 비교하기</h2>
+            <p>같은 내용을 다양한 비유법으로 표현해 보면 어떻게 달라질까요?</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>대상</th>
+                        <th>직유법</th>
+                        <th>은유법</th>
+                        <th>의인화</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>해</td>
+                        <td>해는 공처럼 둥글다.</td>
+                        <td>해는 하늘의 금화다.</td>
+                        <td>해가 웃으며 떠올랐다.</td>
+                    </tr>
+                    <tr>
+                        <td>바다</td>
+                        <td>바다는 거울처럼 빛난다.</td>
+                        <td>바다는 지구의 눈물이다.</td>
+                        <td>바다가 노래하며 춤을 춘다.</td>
+                    </tr>
+                    <tr>
+                        <td>눈</td>
+                        <td>눈은 솜사탕같이 포근하다.</td>
+                        <td>눈은 하늘의 선물이다.</td>
+                        <td>눈이 살금살금 땅을 덮는다.</td>
+                    </tr>
+                    <tr>
+                        <td>마음</td>
+                        <td>마음은 유리처럼 깨지기 쉽다.</td>
+                        <td>마음은 바다다.</td>
+                        <td>마음이 속삭이는 소리에 귀 기울였다.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="activities-section">
+            <h2>비유적 표현 학습 활동</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3>시 쓰기</h3>
+                    <p>다양한 비유적 표현을 활용하여 짧은 시를 작성해보는 활동입니다.</p>
+                    <button class="activity-button">활동 시작하기</button>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>비유법 바꾸기</h3>
+                    <p>주어진 문장을 다른 비유법으로 바꿔보는 활동입니다.</p>
+                    <button class="activity-button">활동 시작하기</button>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>비유적 표현 찾기</h3>
+                    <p>동화나 시 속에서 비유적 표현을 찾고 분류해보는 활동입니다.</p>
+                    <button class="activity-button">활동 시작하기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                    <a href="../../index.html">
+                        <div class="placeholder-img logo-img"></div>
+                        <span>문법놀이터</span>
+                    </a>
+                </div>
+                <p class="footer-description">즐겁게 배우는 한국어 문법</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-links-column">
+                    <h4 class="footer-title">학습하기</h4>
+                    <ul>
+                        <li><a href="index.html">학년별 학습</a></li>
+                        <li><a href="../topics/index.html">학습 주제별</a></li>
+                        <li><a href="../activities/index.html">학습 활동</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-title">소개</h4>
+                    <ul>
+                        <li><a href="../../about.html">사이트 소개</a></li>
+                        <li><a href="../../contact.html">문의하기</a></li>
+                        <li><a href="../../faq.html">자주 묻는 질문</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4 class="footer-title">소식 받기</h4>
+                <p>최신 학습 자료와 업데이트 소식을 받아보세요</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="이메일 주소">
+                    <button>구독</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 문법놀이터. 모든 권리 보유.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 페이지 로딩 애니메이션
+            const cards = document.querySelectorAll('.figurative-card, .activity-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+            
+            // 학습 활동 버튼 이벤트
+            const activityButtons = document.querySelectorAll('.activity-button');
+            activityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

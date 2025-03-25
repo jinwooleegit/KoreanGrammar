@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문장 종류 맞추기 퀴즈 | 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .quiz-header {
+            background: linear-gradient(135deg, #2196F3 0%, #64B5F6 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .quiz-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .quiz-info {
+            background-color: #E3F2FD;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .quiz-info h2 {
+            color: #0D47A1;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .quiz-info p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .sentence-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .type-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .type-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1976D2;
+        }
+
+        .type-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .progress-label span {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #E0E0E0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #2196F3;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .score-display {
+            background-color: white;
+            border-radius: 6px;
+            padding: 8px 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .score-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2196F3;
+        }
+
+        .question-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .question-sentence {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            text-align: center;
+            min-height: 60px;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .answer-option {
+            background-color: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .answer-option:hover {
+            background-color: #e3f2fd;
+            border-color: #bbdefb;
+        }
+
+        .answer-option.selected {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+        }
+
+        .answer-option.correct {
+            background-color: #E8F5E9;
+            border-color: #4CAF50;
+        }
+
+        .answer-option.incorrect {
+            background-color: #FFEBEE;
+            border-color: #F44336;
+        }
+
+        .feedback-message {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            min-height: 24px;
+        }
+
+        .feedback-correct {
+            color: #4CAF50;
+        }
+
+        .feedback-incorrect {
+            color: #F44336;
+        }
+
+        .explanation {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .quiz-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .quiz-button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quiz-button:hover {
+            background-color: #1976D2;
+        }
+
+        .quiz-button.disabled {
+            background-color: #bdbdbd;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
+            display: none;
+        }
+
+        .result-icon {
+            font-size: 50px;
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .result-score {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+
+        .result-message {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .sentence-types {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .answer-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li class="active"><a href="activities.html">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="quiz-header">
+        <h1>문장 종류 맞추기 퀴즈</h1>
+        <p>다양한 문장을 보고 평서문, 의문문, 명령문, 청유문, 감탄문 중 어떤 종류의 문장인지 맞춰보세요!</p>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-info">
+            <h2>문장의 종류</h2>
+            <p>우리말의 문장은 그 쓰임과 끝맺음에 따라 다음과 같이 다섯 가지 종류로 나눌 수 있습니다.</p>
+        </div>
+
+        <div class="sentence-types">
+            <div class="type-card">
+                <div class="type-title">평서문</div>
+                <div class="type-description">사실이나 의견을 진술하는 문장 (-다, -요, -어요)</div>
+            </div>
+            <div class="type-card">
+                <div class="type-title">의문문</div>
+                <div class="type-description">질문이나 의문을 나타내는 문장 (-까, -니, -어요?)</div>
+            </div>
+            <div class="type-card">
+                <div class="type-title">명령문</div>
+                <div class="type-description">명령이나 요청을 나타내는 문장 (-아라, -세요)</div>
+            </div>
+            <div class="type-card">
+                <div class="type-title">청유문</div>
+                <div class="type-description">함께 행동할 것을 제안하는 문장 (-자, -읍시다)</div>
+            </div>
+            <div class="type-card">
+                <div class="type-title">감탄문</div>
+                <div class="type-description">감탄이나 강한 감정을 나타내는 문장 (-구나, -군요)</div>
+            </div>
+        </div>
+
+        <div class="quiz-controls">
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span id="questionNumber">문제 1/10</span>
+                    <span id="timeLeft">남은 시간: 20초</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <div class="score-display">
+                <div class="score-label">점수</div>
+                <div class="score-value" id="scoreValue">0</div>
+            </div>
+        </div>
+
+        <div class="question-card" id="questionCard">
+            <div class="question-number" id="currentQuestion">문제 1</div>
+            <div class="question-sentence" id="sentenceDisplay">오늘 날씨가 참 좋다.</div>
+            <div class="answer-options">
+                <div class="answer-option" data-type="statement">평서문</div>
+                <div class="answer-option" data-type="question">의문문</div>
+                <div class="answer-option" data-type="command">명령문</div>
+                <div class="answer-option" data-type="suggestion">청유문</div>
+                <div class="answer-option" data-type="exclamation">감탄문</div>
+            </div>
+            <div class="feedback-message" id="feedback"></div>
+            <div class="explanation" id="explanation">
+                평서문은 사실이나 의견을 진술하는 문장입니다. 이 문장은 '-다'로 끝나며 날씨 상태를 진술하고 있습니다.
+            </div>
+        </div>
+
+        <div class="quiz-actions">
+            <button class="quiz-button disabled" id="nextButton">
+                <i class="fas fa-arrow-right"></i> 다음 문제
+            </button>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <div class="result-icon">
+                <i class="fas fa-award"></i>
+            </div>
+            <h2 class="result-title">퀴즈 완료!</h2>
+            <div class="result-score" id="finalScore">8/10</div>
+            <p class="result-message" id="resultMessage">훌륭해요! 문장의 종류를 잘 구분할 수 있네요.</p>
+            <div class="quiz-actions">
+                <button class="quiz-button" id="restartButton">
+                    <i class="fas fa-redo-alt"></i> 다시 풀기
+                </button>
+                <button class="quiz-button" id="homeButton">
+                    <i class="fas fa-home"></i> 활동 목록으로
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="activities.html">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 퀴즈 질문 데이터
+            const quizData = [
+                {
+                    sentence: "오늘 날씨가 참 좋다.",
+                    correctType: "statement",
+                    explanation: "평서문은 사실이나 의견을 진술하는 문장입니다. 이 문장은 '-다'로 끝나며 날씨 상태를 진술하고 있습니다."
+                },
+                {
+                    sentence: "너는 어제 어디에 갔니?",
+                    correctType: "question",
+                    explanation: "의문문은 질문이나 의문을 나타내는 문장입니다. 이 문장은 '-니'로 끝나며 상대방에게 질문을 던지고 있습니다."
+                },
+                {
+                    sentence: "빨리 숙제를 하세요.",
+                    correctType: "command",
+                    explanation: "명령문은 명령이나 요청을 나타내는 문장입니다. 이 문장은 '-세요'로 끝나며 상대방에게 숙제를 하라고 지시하고 있습니다."
+                },
+                {
+                    sentence: "우리 같이 공원에 가자.",
+                    correctType: "suggestion",
+                    explanation: "청유문은 함께 행동할 것을 제안하는 문장입니다. 이 문장은 '-자'로 끝나며 함께 공원에 가자고 제안하고 있습니다."
+                },
+                {
+                    sentence: "와, 이 꽃이 정말 아름답구나!",
+                    correctType: "exclamation",
+                    explanation: "감탄문은 감탄이나 강한 감정을 나타내는 문장입니다. 이 문장은 '-구나'로 끝나며 꽃의 아름다움에 감탄하고 있습니다."
+                },
+                {
+                    sentence: "선생님은 내일 어디로 가실 예정인가요?",
+                    correctType: "question",
+                    explanation: "의문문은 질문이나 의문을 나타내는 문장입니다. 이 문장은 '-가요'로 끝나며 상대방에게 질문을 던지고 있습니다."
+                },
+                {
+                    sentence: "나는 토요일에 영화를 볼 거예요.",
+                    correctType: "statement",
+                    explanation: "평서문은 사실이나 의견을 진술하는 문장입니다. 이 문장은 '-예요'로 끝나며 자신의 계획을 진술하고 있습니다."
+                },
+                {
+                    sentence: "조용히 해주세요.",
+                    correctType: "command",
+                    explanation: "명령문은 명령이나 요청을 나타내는 문장입니다. 이 문장은 '-세요'로 끝나며 상대방에게 조용히 하라고 요청하고 있습니다."
+                },
+                {
+                    sentence: "이번 주말에 등산을 갑시다.",
+                    correctType: "suggestion",
+                    explanation: "청유문은 함께 행동할 것을 제안하는 문장입니다. 이 문장은 '-ㅂ시다'로 끝나며 함께 등산을 가자고 제안하고 있습니다."
+                },
+                {
+                    sentence: "아이고, 정말 더워라!",
+                    correctType: "exclamation",
+                    explanation: "감탄문은 감탄이나 강한 감정을 나타내는 문장입니다. 이 문장은 '-라'로 끝나며 더위에 대한 강한 감정을 표현하고 있습니다."
+                }
+            ];
+
+            // 퀴즈 요소
+            const sentenceDisplay = document.getElementById('sentenceDisplay');
+            const answerOptions = document.querySelectorAll('.answer-option');
+            const feedbackElement = document.getElementById('feedback');
+            const explanationElement = document.getElementById('explanation');
+            const nextButton = document.getElementById('nextButton');
+            const questionNumberElement = document.getElementById('questionNumber');
+            const currentQuestionElement = document.getElementById('currentQuestion');
+            const progressFill = document.getElementById('progressFill');
+            const scoreValue = document.getElementById('scoreValue');
+            const timeLeftElement = document.getElementById('timeLeft');
+            const questionCard = document.getElementById('questionCard');
+            const resultContainer = document.getElementById('resultContainer');
+            const finalScoreElement = document.getElementById('finalScore');
+            const resultMessageElement = document.getElementById('resultMessage');
+            const restartButton = document.getElementById('restartButton');
+            const homeButton = document.getElementById('homeButton');
+
+            // 퀴즈 상태 변수
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let timer;
+            let timeRemaining = 20;
+            let isAnswered = false;
+            let quizQuestions = [];
+
+            // 퀴즈 초기화
+            function initQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                scoreValue.textContent = score;
+                
+                // 문제 랜덤 섞기
+                quizQuestions = [...quizData].sort(() => 0.5 - Math.random());
+                
+                // 첫 문제 표시
+                showQuestion();
+                
+                // 결과창 숨기기, 문제 카드 보이기
+                resultContainer.style.display = 'none';
+                questionCard.style.display = 'block';
+            }
+
+            // 문제 표시 함수
+            function showQuestion() {
+                const currentQuestion = quizQuestions[currentQuestionIndex];
+                
+                // 타이머 초기화
+                clearInterval(timer);
+                timeRemaining = 20;
+                updateTimer();
+                startTimer();
+                
+                // 문제 내용 업데이트
+                sentenceDisplay.textContent = currentQuestion.sentence;
+                questionNumberElement.textContent = `문제 ${currentQuestionIndex + 1}/${quizQuestions.length}`;
+                currentQuestionElement.textContent = `문제 ${currentQuestionIndex + 1}`;
+                
+                // 프로그레스 바 업데이트
+                progressFill.style.width = `${(currentQuestionIndex / quizQuestions.length) * 100}%`;
+                
+                // 선택지 초기화
+                answerOptions.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // 피드백 및 설명 초기화
+                feedbackElement.textContent = '';
+                feedbackElement.className = 'feedback-message';
+                explanationElement.style.display = 'none';
+                
+                // 다음 버튼 비활성화
+                nextButton.classList.add('disabled');
+                
+                // 선택 가능 상태로 변경
+                isAnswered = false;
+            }
+            
+            // 타이머 시작 함수
+            function startTimer() {
+                timer = setInterval(() => {
+                    timeRemaining--;
+                    updateTimer();
+                    
+                    if (timeRemaining <= 0) {
+                        clearInterval(timer);
+                        if (!isAnswered) {
+                            handleTimeout();
+                        }
+                    }
+                }, 1000);
+            }
+            
+            // 타이머 업데이트 함수
+            function updateTimer() {
+                timeLeftElement.textContent = `남은 시간: ${timeRemaining}초`;
+                if (timeRemaining <= 5) {
+                    timeLeftElement.style.color = '#F44336';
+                } else {
+                    timeLeftElement.style.color = '';
+                }
+            }
+            
+            // 시간 초과 처리 함수
+            function handleTimeout() {
+                isAnswered = true;
+                
+                const currentQuestion = quizQuestions[currentQuestionIndex];
+                const correctOption = document.querySelector(`.answer-option[data-type="${currentQuestion.correctType}"]`);
+                
+                // 정답 표시
+                correctOption.classList.add('correct');
+                
+                // 피드백 표시
+                feedbackElement.textContent = '시간 초과! 다음 문제로 넘어가세요.';
+                feedbackElement.className = 'feedback-message feedback-incorrect';
+                
+                // 설명 표시
+                explanationElement.textContent = currentQuestion.explanation;
+                explanationElement.style.display = 'block';
+                
+                // 다음 버튼 활성화
+                nextButton.classList.remove('disabled');
+            }
+            
+            // 답 선택 처리 함수
+            function selectAnswer(selectedOption) {
+                if (isAnswered) return;
+                isAnswered = true;
+                clearInterval(timer);
+                
+                const selectedType = selectedOption.dataset.type;
+                const currentQuestion = quizQuestions[currentQuestionIndex];
+                const isCorrect = selectedType === currentQuestion.correctType;
+                
+                // 선택한 옵션 표시
+                selectedOption.classList.add('selected');
+                
+                // 정답/오답 표시
+                if (isCorrect) {
+                    selectedOption.classList.add('correct');
+                    feedbackElement.textContent = '정답입니다!';
+                    feedbackElement.className = 'feedback-message feedback-correct';
+                    score += 10;
+                    scoreValue.textContent = score;
+                } else {
+                    selectedOption.classList.add('incorrect');
+                    const correctOption = document.querySelector(`.answer-option[data-type="${currentQuestion.correctType}"]`);
+                    correctOption.classList.add('correct');
+                    feedbackElement.textContent = '틀렸습니다!';
+                    feedbackElement.className = 'feedback-message feedback-incorrect';
+                }
+                
+                // 설명 표시
+                explanationElement.textContent = currentQuestion.explanation;
+                explanationElement.style.display = 'block';
+                
+                // 다음 버튼 활성화
+                nextButton.classList.remove('disabled');
+            }
+            
+            // 다음 문제로 이동
+            function goToNextQuestion() {
+                currentQuestionIndex++;
+                
+                if (currentQuestionIndex < quizQuestions.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }
+            
+            // 결과 표시
+            function showResult() {
+                questionCard.style.display = 'none';
+                resultContainer.style.display = 'block';
+                
+                finalScoreElement.textContent = `${score}/${quizQuestions.length * 10}`;
+                
+                // 점수에 따른 메시지
+                let message = '';
+                const percentage = score / (quizQuestions.length * 10);
+                
+                if (percentage >= 0.9) {
+                    message = '훌륭해요! 문장의 종류를 완벽하게 이해하고 있네요.';
+                } else if (percentage >= 0.7) {
+                    message = '잘했어요! 문장의 종류에 대한 이해가 좋습니다.';
+                } else if (percentage >= 0.5) {
+                    message = '괜찮아요. 조금 더 연습하면 더 잘할 수 있을 거예요.';
+                } else {
+                    message = '문장의 종류를 더 공부하고 다시 도전해보세요!';
+                }
+                
+                resultMessageElement.textContent = message;
+            }
+            
+            // 이벤트 리스너 등록
+            answerOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectAnswer(this);
+                });
+            });
+            
+            nextButton.addEventListener('click', function() {
+                if (!this.classList.contains('disabled')) {
+                    goToNextQuestion();
+                }
+            });
+            
+            restartButton.addEventListener('click', initQuiz);
+            
+            homeButton.addEventListener('click', function() {
+                window.location.href = 'activities.html';
+            });
+            
+            // 퀴즈 시작
+            initQuiz();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비유적 표현 만들기 | 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .activity-header {
+            background: linear-gradient(135deg, #9C27B0 0%, #BA68C8 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .activity-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .activity-header p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .activity-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .activity-info {
+            background-color: #F3E5F5;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .activity-info h2 {
+            color: #7B1FA2;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .activity-info p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .figurative-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .type-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+        }
+
+        .type-title {
+            font-weight: bold;
+            color: #9C27B0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .type-title i {
+            margin-right: 8px;
+        }
+
+        .type-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .type-example {
+            font-size: 13px;
+            font-style: italic;
+            color: #9C27B0;
+            margin-top: 5px;
+            padding-top: 5px;
+            border-top: 1px dashed #E1BEE7;
+        }
+
+        .activity-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .activity-title {
+            font-size: 20px;
+            color: #7B1FA2;
+            margin-bottom: 20px;
+        }
+
+        .image-prompts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .image-prompt {
+            background-color: white;
+            border: 1px solid #E1BEE7;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .image-prompt:hover {
+            border-color: #9C27B0;
+            transform: translateY(-3px);
+        }
+
+        .image-prompt img {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .image-prompt-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .expression-input {
+            margin-top: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .input-group select, .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .examples-container {
+            margin-top: 30px;
+        }
+
+        .example-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .example-tab {
+            padding: 10px 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+            margin-right: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .example-tab.active {
+            background-color: white;
+            color: #9C27B0;
+            border-color: #ddd;
+        }
+
+        .example-content {
+            display: none;
+            background-color: white;
+            padding: 15px;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .example-content.active {
+            display: block;
+        }
+
+        .example-item {
+            margin-bottom: 10px;
+            border-left: 3px solid #9C27B0;
+            padding-left: 10px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action-button {
+            background-color: #9C27B0;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-button:hover {
+            background-color: #7B1FA2;
+        }
+
+        .action-button.secondary {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .action-button.secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .created-expressions {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .expression-card {
+            background-color: #F3E5F5;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .expression-type {
+            font-size: 14px;
+            font-weight: bold;
+            color: #9C27B0;
+            margin-bottom: 5px;
+        }
+
+        .expression-text {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .expression-target {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+            text-align: right;
+            font-style: italic;
+        }
+
+        .feedback-msg {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .feedback-msg.success {
+            background-color: #E8F5E9;
+            color: #388E3C;
+        }
+
+        .feedback-msg.error {
+            background-color: #FFEBEE;
+            color: #D32F2F;
+        }
+
+        @media (max-width: 600px) {
+            .figurative-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-prompts {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li class="active"><a href="activities.html">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="activity-header">
+        <h1>비유적 표현 만들기</h1>
+        <p>직유법, 은유법, 의인법 등 다양한 비유법을 활용하여 생각을 창의적으로 표현해 보세요!</p>
+    </div>
+
+    <div class="activity-container">
+        <div class="activity-info">
+            <h2>비유적 표현이란?</h2>
+            <p>비유적 표현은 어떤 대상이나 상황을 다른 것에 빗대어 표현하는 방법입니다. 문학 작품이나 일상 대화에서 자주 사용되며, 표현을 더 생생하고 인상적으로 만들 수 있어요.</p>
+        </div>
+
+        <div class="figurative-types">
+            <div class="type-card">
+                <div class="type-title"><i class="fas fa-equals"></i> 직유법</div>
+                <div class="type-desc">비교 대상과 'A는 B같다', 'B처럼', 'B만큼'과 같은 비교 표현을 사용하여 직접적으로 비교하는 방법</div>
+                <div class="type-example">예) 그녀의 미소는 봄 햇살처럼 따뜻했다.</div>
+            </div>
+            <div class="type-card">
+                <div class="type-title"><i class="fas fa-exchange-alt"></i> 은유법</div>
+                <div class="type-desc">비교 표현 없이 A를 B로 표현하거나 A는 B이다와 같이 직접 대입하는 방법</div>
+                <div class="type-example">예) 그녀는 우리 교실의 햇살이다.</div>
+            </div>
+            <div class="type-card">
+                <div class="type-title"><i class="fas fa-user"></i> 의인법</div>
+                <div class="type-desc">사람이 아닌 것에 사람의 특성이나 행동을 부여하는 표현 방법</div>
+                <div class="type-example">예) 봄바람이 소곤소곤 귓가에 속삭인다.</div>
+            </div>
+            <div class="type-card">
+                <div class="type-title"><i class="fas fa-theater-masks"></i> 활유법</div>
+                <div class="type-desc">무생물을 생물처럼 표현하는 방법(의인법의 일종)</div>
+                <div class="type-example">예) 꽃들이 고개를 끄덕이며 춤을 춘다.</div>
+            </div>
+        </div>
+
+        <div class="activity-section">
+            <h3 class="activity-title">비유할 대상 선택하기</h3>
+            <p>아래 이미지 중 하나를 선택하고, 그것을 창의적으로 비유해 보세요.</p>
+
+            <div class="image-prompts">
+                <div class="image-prompt" data-target="달">
+                    <img src="https://placehold.co/200x200/e3f2fd/1565c0?text=달" alt="달">
+                    <div class="image-prompt-title">달</div>
+                </div>
+                <div class="image-prompt" data-target="바다">
+                    <img src="https://placehold.co/200x200/e3f2fd/1565c0?text=바다" alt="바다">
+                    <div class="image-prompt-title">바다</div>
+                </div>
+                <div class="image-prompt" data-target="나무">
+                    <img src="https://placehold.co/200x200/e3f2fd/1565c0?text=나무" alt="나무">
+                    <div class="image-prompt-title">나무</div>
+                </div>
+                <div class="image-prompt" data-target="바람">
+                    <img src="https://placehold.co/200x200/e3f2fd/1565c0?text=바람" alt="바람">
+                    <div class="image-prompt-title">바람</div>
+                </div>
+            </div>
+
+            <div class="expression-input">
+                <div class="input-group">
+                    <label for="target">비유할 대상:</label>
+                    <input type="text" id="target" placeholder="대상을 직접 입력하거나 위 이미지를 클릭하세요." readonly>
+                </div>
+
+                <div class="input-group">
+                    <label for="expressionType">비유법 선택:</label>
+                    <select id="expressionType">
+                        <option value="simile">직유법 (A는 B같다/처럼)</option>
+                        <option value="metaphor">은유법 (A는 B이다)</option>
+                        <option value="personification">의인법 (사람이 아닌 것에 사람의 특성 부여)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="expression">비유적 표현 작성:</label>
+                    <textarea id="expression" placeholder="선택한 대상과 비유법으로 창의적인 표현을 만들어보세요."></textarea>
+                </div>
+
+                <div class="actions">
+                    <button class="action-button" id="saveButton">
+                        <i class="fas fa-save"></i> 표현 저장하기
+                    </button>
+                    <button class="action-button secondary" id="resetButton">
+                        <i class="fas fa-redo-alt"></i> 다시 작성하기
+                    </button>
+                </div>
+
+                <div class="feedback-msg success" id="feedbackSuccess" style="display: none;">
+                    비유적 표현이 성공적으로 저장되었습니다!
+                </div>
+            </div>
+        </div>
+
+        <div class="created-expressions" id="createdExpressions">
+            <h3 class="activity-title">내가 만든 비유적 표현</h3>
+            <div id="expressionsList">
+                <!-- 저장된 표현들이 여기에 추가됩니다 -->
+            </div>
+        </div>
+
+        <div class="activity-section examples-container">
+            <h3 class="activity-title">비유적 표현 예시</h3>
+            
+            <div class="example-tabs">
+                <div class="example-tab active" data-tab="tab1">직유법</div>
+                <div class="example-tab" data-tab="tab2">은유법</div>
+                <div class="example-tab" data-tab="tab3">의인법</div>
+            </div>
+            
+            <div class="example-content active" id="tab1">
+                <div class="example-item">그의 목소리는 밤하늘의 별처럼 반짝였다.</div>
+                <div class="example-item">그 소식을 들은 아이는 폭풍우가 지나간 것처럼 조용해졌다.</div>
+                <div class="example-item">할아버지의 수염은 눈 덮인 산 같았다.</div>
+                <div class="example-item">작은 강아지는 솜뭉치처럼 부드럽고 하얬다.</div>
+                <div class="example-item">그 책은 보물상자처럼 재미있는 이야기로 가득 차 있었다.</div>
+            </div>
+            
+            <div class="example-content" id="tab2">
+                <div class="example-item">그녀의 눈동자는 깊은 호수였다.</div>
+                <div class="example-item">시간은 빠르게 흐르는 강물이다.</div>
+                <div class="example-item">가을은 자연의 황금시대이다.</div>
+                <div class="example-item">내 마음은 방황하는 구름이었다.</div>
+                <div class="example-item">그의 말은 날카로운 화살이었다.</div>
+            </div>
+            
+            <div class="example-content" id="tab3">
+                <div class="example-item">꽃들이 고개를 내밀고 봄을 반긴다.</div>
+                <div class="example-item">노을이 조용히 하늘을 감싸 안았다.</div>
+                <div class="example-item">가을바람이 창문을 두드리며 놀자고 한다.</div>
+                <div class="example-item">연필이 종이 위에서 열심히 달려갔다.</div>
+                <div class="example-item">바다가 넓은 품을 벌려 우리를 맞이했다.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="activities.html">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 이미지 선택 이벤트
+            const imagePrompts = document.querySelectorAll('.image-prompt');
+            const targetInput = document.getElementById('target');
+            
+            imagePrompts.forEach(prompt => {
+                prompt.addEventListener('click', function() {
+                    targetInput.value = this.dataset.target;
+                    
+                    // 선택된 이미지 스타일 적용
+                    imagePrompts.forEach(p => p.style.border = '1px solid #E1BEE7');
+                    this.style.border = '2px solid #9C27B0';
+                });
+            });
+            
+            // 탭 전환 이벤트
+            const exampleTabs = document.querySelectorAll('.example-tab');
+            
+            exampleTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 모든 탭 비활성화
+                    exampleTabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.example-content').forEach(c => c.classList.remove('active'));
+                    
+                    // 클릭한 탭 활성화
+                    this.classList.add('active');
+                    document.getElementById(this.dataset.tab).classList.add('active');
+                });
+            });
+            
+            // 표현 저장 이벤트
+            const saveButton = document.getElementById('saveButton');
+            const expressionInput = document.getElementById('expression');
+            const expressionTypeSelect = document.getElementById('expressionType');
+            const expressionsList = document.getElementById('expressionsList');
+            const createdExpressions = document.getElementById('createdExpressions');
+            const feedbackSuccess = document.getElementById('feedbackSuccess');
+            
+            saveButton.addEventListener('click', function() {
+                const target = targetInput.value;
+                const expression = expressionInput.value.trim();
+                const expressionType = expressionTypeSelect.options[expressionTypeSelect.selectedIndex].text;
+                
+                if (!target) {
+                    alert('비유할 대상을 선택해주세요.');
+                    return;
+                }
+                
+                if (!expression) {
+                    alert('비유적 표현을 작성해주세요.');
+                    return;
+                }
+                
+                // 표현 카드 생성
+                const expressionCard = document.createElement('div');
+                expressionCard.className = 'expression-card';
+                expressionCard.innerHTML = `
+                    <div class="expression-type">${expressionType}</div>
+                    <div class="expression-text">${expression}</div>
+                    <div class="expression-target">대상: ${target}</div>
+                `;
+                
+                // 표현 목록에 추가
+                expressionsList.appendChild(expressionCard);
+                createdExpressions.style.display = 'block';
+                
+                // 피드백 표시
+                feedbackSuccess.style.display = 'block';
+                setTimeout(() => {
+                    feedbackSuccess.style.display = 'none';
+                }, 3000);
+                
+                // 입력 필드 초기화
+                expressionInput.value = '';
+            });
+            
+            // 리셋 버튼 이벤트
+            const resetButton = document.getElementById('resetButton');
+            
+            resetButton.addEventListener('click', function() {
+                targetInput.value = '';
+                expressionInput.value = '';
+                imagePrompts.forEach(p => p.style.border = '1px solid #E1BEE7');
+            });
+        });
+    </script>
+</body>
+</html> 

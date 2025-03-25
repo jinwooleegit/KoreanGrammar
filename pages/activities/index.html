@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학습 활동 | 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 페이지 특정 스타일 */
+        .activities-header {
+            background: linear-gradient(135deg, #FF9800 0%, #FFC107 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .activities-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .activities-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .filter-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-weight: bold;
+            color: #333;
+            margin-right: 5px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-button {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button:hover, .filter-button.active {
+            background-color: #FF9800;
+            color: white;
+            border-color: #FF9800;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .activity-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .activity-image {
+            height: 160px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999;
+            border-bottom: 3px solid;
+        }
+
+        .activity-content {
+            padding: 20px;
+        }
+
+        .activity-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .activity-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tag-type {
+            background-color: #e1f5fe;
+            color: #0288d1;
+        }
+
+        .tag-grade {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .tag-topic {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .activity-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .activity-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            height: 63px;
+            overflow: hidden;
+        }
+
+        .activity-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 12px;
+        }
+
+        .activity-button {
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .activity-button:hover {
+            background-color: #F57C00;
+        }
+
+        /* 활동 타입별 색상 */
+        .type-game .activity-image {
+            border-color: #FF9800;
+        }
+
+        .type-quiz .activity-image {
+            border-color: #2196F3;
+        }
+
+        .type-writing .activity-image {
+            border-color: #4CAF50;
+        }
+
+        .type-conversation .activity-image {
+            border-color: #9C27B0;
+        }
+
+        /* 페이지네이션 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 8px;
+        }
+
+        .page-button {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .page-button.active {
+            background-color: #FF9800;
+            color: white;
+            border-color: #FF9800;
+        }
+
+        .page-button:hover:not(.active) {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li class="active"><a href="activities.html">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="activities-header">
+        <h1>학습 활동</h1>
+        <p>게임, 퀴즈, 창작 활동 등 다양한 방법으로 문법을 재미있게 학습할 수 있는 활동들을 찾아보세요.</p>
+    </div>
+
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-label">활동 유형:</div>
+            <div class="filter-group">
+                <button class="filter-button active">전체</button>
+                <button class="filter-button">게임</button>
+                <button class="filter-button">퀴즈</button>
+                <button class="filter-button">글쓰기</button>
+                <button class="filter-button">대화</button>
+            </div>
+
+            <div class="filter-label">학년:</div>
+            <div class="filter-group">
+                <button class="filter-button active">전체</button>
+                <button class="filter-button">1-2학년</button>
+                <button class="filter-button">3-4학년</button>
+                <button class="filter-button">5-6학년</button>
+            </div>
+
+            <div class="filter-label">학습 주제:</div>
+            <div class="filter-group">
+                <button class="filter-button active">전체</button>
+                <button class="filter-button">낱말</button>
+                <button class="filter-button">문장</button>
+                <button class="filter-button">문법</button>
+                <button class="filter-button">표현</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="activities-grid">
+            <!-- 낱말 카드 매칭 게임 -->
+            <div class="activity-card type-game">
+                <div class="activity-image">
+                    <i class="fas fa-gamepad fa-3x"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-tags">
+                        <span class="activity-tag tag-type">게임</span>
+                        <span class="activity-tag tag-grade">1-3학년</span>
+                        <span class="activity-tag tag-topic">낱말</span>
+                    </div>
+                    <h3 class="activity-title">낱말 카드 매칭 게임</h3>
+                    <p class="activity-description">
+                        단어 카드와 그림 카드를 매칭하며 어휘력을 키울 수 있는 게임입니다.
+                        다양한 주제별 단어를 재미있게 배워보세요.
+                    </p>
+                    <div class="activity-stats">
+                        <span><i class="fas fa-star"></i> 4.8/5.0</span>
+                        <span><i class="fas fa-user"></i> 2,341명 참여</span>
+                    </div>
+                    <a href="word_matching_game.html" class="activity-button">활동 시작하기</a>
+                </div>
+            </div>
+
+            <!-- 문장 종류 맞추기 -->
+            <div class="activity-card type-quiz">
+                <div class="activity-image">
+                    <i class="fas fa-question-circle fa-3x"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-tags">
+                        <span class="activity-tag tag-type">퀴즈</span>
+                        <span class="activity-tag tag-grade">2-4학년</span>
+                        <span class="activity-tag tag-topic">문장</span>
+                    </div>
+                    <h3 class="activity-title">문장 종류 맞추기 퀴즈</h3>
+                    <p class="activity-description">
+                        다양한 문장을 보고 평서문, 의문문, 명령문, 청유문, 감탄문 중 
+                        어떤 종류의 문장인지 맞추는 퀴즈입니다.
+                    </p>
+                    <div class="activity-stats">
+                        <span><i class="fas fa-star"></i> 4.6/5.0</span>
+                        <span><i class="fas fa-user"></i> 1,987명 참여</span>
+                    </div>
+                    <a href="sentence_type_quiz.html" class="activity-button">활동 시작하기</a>
+                </div>
+            </div>
+
+            <!-- 품사 찾기 게임 -->
+            <div class="activity-card type-game">
+                <div class="activity-image">
+                    <i class="fas fa-search fa-3x"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-tags">
+                        <span class="activity-tag tag-type">게임</span>
+                        <span class="activity-tag tag-grade">3-4학년</span>
+                        <span class="activity-tag tag-topic">낱말</span>
+                    </div>
+                    <h3 class="activity-title">품사 찾기 게임</h3>
+                    <p class="activity-description">
+                        주어진 문장에서 다양한 품사(명사, 동사, 형용사 등)를 찾아내는 
+                        게임으로 품사를 재미있게 학습할 수 있습니다.
+                    </p>
+                    <div class="activity-stats">
+                        <span><i class="fas fa-star"></i> 4.5/5.0</span>
+                        <span><i class="fas fa-user"></i> 1,756명 참여</span>
+                    </div>
+                    <a href="parts_of_speech_game.html" class="activity-button">활동 시작하기</a>
+                </div>
+            </div>
+
+            <!-- 비유적 표현 만들기 -->
+            <div class="activity-card type-writing">
+                <div class="activity-image">
+                    <i class="fas fa-magic fa-3x"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-tags">
+                        <span class="activity-tag tag-type">글쓰기</span>
+                        <span class="activity-tag tag-grade">5-6학년</span>
+                        <span class="activity-tag tag-topic">표현</span>
+                    </div>
+                    <h3 class="activity-title">비유적 표현 만들기</h3>
+                    <p class="activity-description">
+                        주어진 대상을 직유법, 은유법, 의인법 등 다양한 비유법을 
+                        활용하여 표현해보는 창작 활동입니다.
+                    </p>
+                    <div class="activity-stats">
+                        <span><i class="fas fa-star"></i> 4.7/5.0</span>
+                        <span><i class="fas fa-user"></i> 1,432명 참여</span>
+                    </div>
+                    <a href="figurative_expressions.html" class="activity-button">활동 시작하기</a>
+                </div>
+            </div>
+
+            <!-- 높임말 변환하기 -->
+            <div class="activity-card type-quiz">
+                <div class="activity-image">
+                    <i class="fas fa-user-tie fa-3x"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-tags">
+                        <span class="activity-tag tag-type">퀴즈</span>
+                        <span class="activity-tag tag-grade">4-6학년</span>
+                        <span class="activity-tag tag-topic">문법</span>
+                    </div>
+                    <h3 class="activity-title">높임말 변환하기</h3>
+                    <p class="activity-description">
+                        일상 대화를 상황에 맞는 높임말로 바꾸어 보는 활동입니다.
+                        주체, 객체, 상대 높임법을 적절히 사용해 보세요.
+                    </p>
+                    <div class="activity-stats">
+                        <span><i class="fas fa-star"></i> 4.4/5.0</span>
+                        <span><i class="fas fa-user"></i> 1,289명 참여</span>
+                    </div>
+                    <a href="honorific_converter.html" class="activity-button">활동 시작하기</a>
+                </div>
+            </div>
+
+            <!-- 관용 표현 스토리텔링 -->
+            <div class="activity-card type-writing">
+                <div class="activity-image">
+                    <i class="fas fa-feather-alt fa-3x"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-tags">
+                        <span class="activity-tag tag-type">글쓰기</span>
+                        <span class="activity-tag tag-grade">5-6학년</span>
+                        <span class="activity-tag tag-topic">표현</span>
+                    </div>
+                    <h3 class="activity-title">관용 표현 스토리텔링</h3>
+                    <p class="activity-description">
+                        주어진 관용 표현을 활용하여 짧은 이야기를 만들어 보는 
+                        창작 활동입니다. 관용 표현의 의미를 이해하고 활용해보세요.
+                    </p>
+                    <div class="activity-stats">
+                        <span><i class="fas fa-star"></i> 4.9/5.0</span>
+                        <span><i class="fas fa-user"></i> 1,123명 참여</span>
+                    </div>
+                    <a href="idiom_storytelling.html" class="activity-button">활동 시작하기</a>
+                </div>
+            </div>
+
+            <!-- 문장 고치기 -->
+            <div class="activity-card type-quiz">
+                <div class="activity-image">
+                    <i class="fas fa-edit fa-3x"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-tags">
+                        <span class="activity-tag tag-type">퀴즈</span>
+                        <span class="activity-tag tag-grade">3-6학년</span>
+                        <span class="activity-tag tag-topic">문장</span>
+                    </div>
+                    <h3 class="activity-title">문장 고치기</h3>
+                    <p class="activity-description">
+                        문법적 오류가 있는 문장을 찾아 올바르게 고치는 활동입니다.
+                        주어와 서술어 호응, 시제, 높임 등을 바르게 고쳐보세요.
+                    </p>
+                    <div class="activity-stats">
+                        <span><i class="fas fa-star"></i> 4.3/5.0</span>
+                        <span><i class="fas fa-user"></i> 1,056명 참여</span>
+                    </div>
+                    <a href="sentence_correction.html" class="activity-button">활동 시작하기</a>
+                </div>
+            </div>
+
+            <!-- 속담 퍼즐 -->
+            <div class="activity-card type-game">
+                <div class="activity-image">
+                    <i class="fas fa-puzzle-piece fa-3x"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-tags">
+                        <span class="activity-tag tag-type">게임</span>
+                        <span class="activity-tag tag-grade">3-5학년</span>
+                        <span class="activity-tag tag-topic">표현</span>
+                    </div>
+                    <h3 class="activity-title">속담 퍼즐</h3>
+                    <p class="activity-description">
+                        속담의 앞부분과 뒷부분을 올바르게 매칭하는 퍼즐 게임입니다.
+                        다양한 속담을 재미있게 배워보세요.
+                    </p>
+                    <div class="activity-stats">
+                        <span><i class="fas fa-star"></i> 4.7/5.0</span>
+                        <span><i class="fas fa-user"></i> 987명 참여</span>
+                    </div>
+                    <a href="proverb_puzzle.html" class="activity-button">활동 시작하기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <button class="page-button active">1</button>
+            <button class="page-button">2</button>
+            <button class="page-button">3</button>
+            <button class="page-button">4</button>
+            <button class="page-button">...</button>
+            <button class="page-button">8</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="activities.html">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 필터 버튼에 이벤트 리스너 추가
+            const filterButtons = document.querySelectorAll('.filter-button');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 같은 그룹 내의 다른 버튼에서 active 클래스 제거
+                    const parent = this.parentElement;
+                    parent.querySelectorAll('.filter-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // 현재 버튼에 active 클래스 추가
+                    this.classList.add('active');
+                    
+                    // 필터링 기능 구현 (향후 개발)
+                    alert('필터링 기능은 현재 개발 중입니다.');
+                });
+            });
+            
+            // 페이지네이션 버튼에 이벤트 리스너 추가
+            const pageButtons = document.querySelectorAll('.page-button');
+            
+            pageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    pageButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    this.classList.add('active');
+                    
+                    // 페이지 변경 기능 구현 (향후 개발)
+                    if (this.textContent !== '...') {
+                        alert('페이지 ' + this.textContent + '로 이동합니다. (개발 중)');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

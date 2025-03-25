@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비유적 표현 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FF5722;
+            --secondary-color: #FF8A65;
+            --light-color: #FBE9E7;
+        }
+        
+        .topic-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .figurative-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .example-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .figurative-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .figurative-table th, .figurative-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .figurative-table th {
+            background-color: var(--light-color);
+            color: #333;
+        }
+
+        .practice-problem {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .answer-reveal {
+            background-color: #FBE9E7;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        .activity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .activity-icon {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li class="active"><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="topic-header">
+        <h1>비유적 표현</h1>
+        <p>글의 표현을 생생하고 풍부하게 만들어주는 비유적 표현의 종류와 방법에 대해 배워봅시다.</p>
+        <div class="breadcrumb">
+            <a href="index.html">홈</a> &gt;
+            <a href="topics.html">주제별 학습</a> &gt;
+            <span>비유적 표현</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="section intro-section">
+            <h2>비유적 표현이란?</h2>
+            <p><strong>비유적 표현</strong>은 하나의 사물이나 개념을 다른 것에 빗대어 표현하는 방법입니다.</p>
+            <p>비유적 표현을 사용하면 추상적인 개념을 구체적으로 표현할 수 있고, 글이나 말을 더욱 생생하고 인상적으로 만들 수 있습니다.</p>
+            
+            <div class="example-box">
+                <p>"그의 말은 <span class="highlight">칼날처럼 날카로웠다</span>." (말의 예리함을 칼날에 비유)</p>
+                <p>"나는 <span class="highlight">구름 위를 걷는 듯한</span> 기분이었다." (행복한 기분을 구름 위를 걷는 것에 비유)</p>
+                <p>"시간은 <span class="highlight">화살과 같이</span> 빠르게 지나간다." (시간의 빠름을 화살에 비유)</p>
+            </div>
+        </section>
+
+        <section class="section figurative-section">
+            <h2>비유적 표현의 종류</h2>
+            
+            <div class="figurative-card">
+                <h3>직유법(直喩法)</h3>
+                <p>직유법은 '~같이', '~처럼', '~듯이', '~인양' 등의 <strong>비유 표현을 직접 드러내는</strong> 말을 사용하여 두 대상을 비교하는 방법입니다.</p>
+                
+                <div class="example-box">
+                    <p>"그녀의 목소리는 <span class="highlight">종소리처럼</span> 맑았다."</p>
+                    <p>"그는 <span class="highlight">호랑이같이</span> 용감했다."</p>
+                    <p>"눈이 <span class="highlight">솜처럼</span> 내린다."</p>
+                </div>
+            </div>
+            
+            <div class="figurative-card">
+                <h3>은유법(隱喩法)</h3>
+                <p>은유법은 비유 표현을 나타내는 말 없이 <strong>직접적으로 한 대상을 다른 대상으로 표현</strong>하는 방법입니다.</p>
+                
+                <div class="example-box">
+                    <p>"그는 우리 팀의 <span class="highlight">기둥</span>이다." (기둥 = 중요한 역할을 하는 사람)</p>
+                    <p>"인생은 <span class="highlight">여행</span>이다." (여행 = 인생)</p>
+                    <p>"지식은 <span class="highlight">빛</span>이다." (빛 = 지식)</p>
+                </div>
+            </div>
+            
+            <div class="figurative-card">
+                <h3>의인법(擬人法)</h3>
+                <p>의인법은 <strong>사람이 아닌 것에 사람의 특성이나 행동을 부여</strong>하는 표현 방법입니다.</p>
+                
+                <div class="example-box">
+                    <p>"바람이 <span class="highlight">노래한다</span>." (바람에 사람처럼 노래하는 행동 부여)</p>
+                    <p>"꽃들이 <span class="highlight">춤을 춘다</span>." (꽃에 사람처럼 춤추는 행동 부여)</p>
+                    <p>"시계가 <span class="highlight">졸고 있다</span>." (시계에 사람처럼 조는 행동 부여)</p>
+                </div>
+            </div>
+            
+            <div class="figurative-card">
+                <h3>활유법(活喩法)</h3>
+                <p>활유법은 <strong>생명이 없는 사물이나 추상적인 개념에 생명이나 활동성을 부여</strong>하는 표현 방법입니다.</p>
+                
+                <div class="example-box">
+                    <p>"나무들이 <span class="highlight">손을 흔든다</span>." (나무에 움직임 부여)</p>
+                    <p>"구름이 <span class="highlight">하늘을 여행한다</span>." (구름에 여행하는 움직임 부여)</p>
+                    <p>"시간이 <span class="highlight">날아간다</span>." (시간에 날아가는 움직임 부여)</p>
+                </div>
+            </div>
+            
+            <div class="figurative-card">
+                <h3>대유법(代喩法)</h3>
+                <p>대유법은 <strong>사물의 한 부분이나 특징으로 그 사물 전체를 표현</strong>하는 방법입니다.</p>
+                
+                <div class="example-box">
+                    <p>"<span class="highlight">붓을 들다</span>." (붓 = 글을 쓰는 행위)</p>
+                    <p>"<span class="highlight">청와대</span>가 발표했다." (청와대 = 대통령이나 정부)</p>
+                    <p>"<span class="highlight">수저</span>를 놓다." (수저 = 식사)</p>
+                </div>
+            </div>
+            
+            <div class="figurative-card">
+                <h3>풍유법(諷喩法)</h3>
+                <p>풍유법은 <strong>풍자나 비판의 의미를 간접적으로 표현</strong>하는 방법입니다.</p>
+                
+                <div class="example-box">
+                    <p>"그는 정말 <span class="highlight">천재</span>야. 시험에서 10점을 맞았거든." (천재라는 표현으로 실력이 부족함을 풍자)</p>
+                    <p>"이 음식은 <span class="highlight">정말 맛있네</span>. 개도 안 먹겠다." (맛있다는 표현으로 맛이 없음을 풍자)</p>
+                </div>
+            </div>
+            
+            <h3>비유적 표현 정리</h3>
+            <table class="figurative-table">
+                <thead>
+                    <tr>
+                        <th>종류</th>
+                        <th>특징</th>
+                        <th>예시</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>직유법</td>
+                        <td>'~같이', '~처럼' 등을 사용하여 비유</td>
+                        <td>그녀는 꽃처럼 아름답다.</td>
+                    </tr>
+                    <tr>
+                        <td>은유법</td>
+                        <td>비유 표현 없이 직접적으로 비유</td>
+                        <td>그녀는 꽃이다.</td>
+                    </tr>
+                    <tr>
+                        <td>의인법</td>
+                        <td>사람이 아닌 것에 사람의 특성 부여</td>
+                        <td>바람이 속삭인다.</td>
+                    </tr>
+                    <tr>
+                        <td>활유법</td>
+                        <td>생명이 없는 것에 활동성 부여</td>
+                        <td>꽃이 춤을 춘다.</td>
+                    </tr>
+                    <tr>
+                        <td>대유법</td>
+                        <td>부분으로 전체를 표현</td>
+                        <td>붓을 들다(글을 쓰다).</td>
+                    </tr>
+                    <tr>
+                        <td>풍유법</td>
+                        <td>풍자나 비판을 간접적으로 표현</td>
+                        <td>천재다! 0점 맞았어.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section special-section">
+            <h2>비유적 표현의 효과</h2>
+            
+            <div class="figurative-card">
+                <h3>생생한 표현</h3>
+                <p>비유적 표현은 추상적인 개념이나 감정을 구체적이고 생생하게 표현할 수 있습니다.</p>
+                
+                <div class="example-box">
+                    <p>"그의 마음은 <span class="highlight">얼음장처럼 차가웠다</span>."는 감정의 상태를 구체적으로 느낄 수 있게 합니다.</p>
+                </div>
+            </div>
+            
+            <div class="figurative-card">
+                <h3>인상적인 표현</h3>
+                <p>독특한 비유는 독자에게 강한 인상을 남깁니다.</p>
+                
+                <div class="example-box">
+                    <p>"그의 웃음소리는 <span class="highlight">유리가 깨지는 소리</span> 같았다."는 특별한 인상을 줍니다.</p>
+                </div>
+            </div>
+            
+            <div class="figurative-card">
+                <h3>간결한 표현</h3>
+                <p>복잡한 개념이나 상황을 간결하게 표현할 수 있습니다.</p>
+                
+                <div class="example-box">
+                    <p>"그는 <span class="highlight">파도치는 감정</span>에 휩싸였다."는 복잡한 감정 상태를 간결하게 표현합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section practice-section">
+            <h2>연습 문제</h2>
+            <p>다음 문제를 풀어보며 비유적 표현의 종류와 효과를 익혀 봅시다.</p>
+            
+            <div class="practice-problem">
+                <h3>문제 1</h3>
+                <p>다음 문장에 사용된 비유적 표현의 종류는 무엇인가요?</p>
+                <p>"그의 미소는 <span class="highlight">봄햇살처럼</span> 따뜻했다."</p>
+                <ol type="a">
+                    <li>직유법</li>
+                    <li>은유법</li>
+                    <li>의인법</li>
+                    <li>대유법</li>
+                </ol>
+                <button class="btn" onclick="toggleAnswer('answer1')">정답 보기</button>
+                <div id="answer1" class="answer-reveal">
+                    <p><strong>정답:</strong> a. 직유법</p>
+                    <p>'~처럼'이라는 비유 표현을 직접 사용하여 '미소'와 '봄햇살'을 비교하고 있으므로 직유법입니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 2</h3>
+                <p>다음 문장에 사용된 비유적 표현의 종류는 무엇인가요?</p>
+                <p>"시간은 <span class="highlight">도둑</span>이다."</p>
+                <ol type="a">
+                    <li>직유법</li>
+                    <li>은유법</li>
+                    <li>의인법</li>
+                    <li>대유법</li>
+                </ol>
+                <button class="btn" onclick="toggleAnswer('answer2')">정답 보기</button>
+                <div id="answer2" class="answer-reveal">
+                    <p><strong>정답:</strong> b. 은유법</p>
+                    <p>'~처럼', '~같이' 등의 비유 표현 없이 '시간'을 직접 '도둑'으로 표현하고 있으므로 은유법입니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 3</h3>
+                <p>다음 문장에 사용된 비유적 표현의 종류는 무엇인가요?</p>
+                <p>"해가 <span class="highlight">웃으며</span> 떠올랐다."</p>
+                <ol type="a">
+                    <li>직유법</li>
+                    <li>은유법</li>
+                    <li>의인법</li>
+                    <li>활유법</li>
+                </ol>
+                <button class="btn" onclick="toggleAnswer('answer3')">정답 보기</button>
+                <div id="answer3" class="answer-reveal">
+                    <p><strong>정답:</strong> c. 의인법</p>
+                    <p>'해'라는 사물에 '웃다'라는 사람의 행동을 부여하고 있으므로 의인법입니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 4</h3>
+                <p>다음 중 '대유법'이 사용된 문장은 무엇인가요?</p>
+                <ol type="a">
+                    <li>그녀의 눈은 별처럼 반짝였다.</li>
+                    <li>청와대가 새로운 정책을 발표했다.</li>
+                    <li>바람이 나무를 어루만진다.</li>
+                    <li>인생은 마라톤이다.</li>
+                </ol>
+                <button class="btn" onclick="toggleAnswer('answer4')">정답 보기</button>
+                <div id="answer4" class="answer-reveal">
+                    <p><strong>정답:</strong> b. 청와대가 새로운 정책을 발표했다.</p>
+                    <p>'청와대'라는 장소(부분)으로 대통령이나 정부(전체)를 표현하고 있으므로 대유법입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section activity-section">
+            <h2>비유적 표현 학습 활동</h2>
+            <p>다양한 활동을 통해 비유적 표현을 재미있게 학습해 봅시다.</p>
+            
+            <div class="activity-list">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>비유적 표현 만들기</h3>
+                    <p>주어진 대상에 대해 다양한 비유적 표현을 만들어 봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>비유 그림 그리기</h3>
+                    <p>비유적 표현을 시각적으로 표현하는 그림을 그려봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>시에서 비유 찾기</h3>
+                    <p>유명한 시에서 다양한 비유적 표현을 찾아봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                    <h3>비유 사전 만들기</h3>
+                    <p>다양한 감정이나 상황을 표현하는 비유적 표현 사전을 만들어 봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAnswer(id) {
+            const answerElement = document.getElementById(id);
+            if (answerElement.style.display === 'block') {
+                answerElement.style.display = 'none';
+            } else {
+                answerElement.style.display = 'block';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 활동 버튼 이벤트
+            const activityButtons = document.querySelectorAll('.btn');
+            activityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 정답 버튼이 아닌 경우에만 알림 표시
+                    if (!this.getAttribute('onclick') || !this.getAttribute('onclick').includes('toggleAnswer')) {
+                        alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

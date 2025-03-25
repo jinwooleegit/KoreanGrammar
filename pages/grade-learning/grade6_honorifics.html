@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6학년 높임 표현 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 페이지 특정 스타일 */
+        :root {
+            --grade6-color: #FF5722;
+            --grade-light-color: #FBE9E7;
+        }
+        
+        .grade-header {
+            background: linear-gradient(135deg, var(--grade6-color) 0%, #FF8A65 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .grade-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .grade-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .intro-section, .honorific-card, .comparison-section, .activities-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: var(--grade6-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .honorific-card {
+            transition: transform 0.3s ease;
+        }
+
+        .honorific-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .honorific-header {
+            padding: 15px;
+            background-color: var(--grade-light-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .honorific-header h3 {
+            margin: 0;
+            color: var(--grade6-color);
+            font-size: 20px;
+        }
+
+        .honorific-icon {
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--grade6-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .definition-box {
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--grade6-color);
+        }
+
+        .example-list {
+            margin: 20px 0;
+        }
+
+        .example-item {
+            background-color: var(--grade-light-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .example-type {
+            flex: 0 0 100px;
+            font-weight: bold;
+            color: var(--grade6-color);
+        }
+
+        .example-content {
+            flex: 1;
+        }
+
+        .sentence {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--grade6-color);
+            text-decoration: underline;
+        }
+
+        .explanation {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .comparison-table th, 
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background-color: var(--grade-light-color);
+            color: #333;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .activity-card:hover {
+            border-color: var(--grade6-color);
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.1);
+        }
+
+        .activity-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            background-color: var(--grade-light-color);
+            color: var(--grade6-color);
+            font-size: 20px;
+        }
+
+        .activity-button {
+            margin-top: 15px;
+            background-color: var(--grade6-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .activity-button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .example-item {
+                flex-direction: column;
+            }
+            
+            .example-type {
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="../../index.html">
+                <div class="placeholder-img logo-img"></div>
+                <span>문법놀이터</span>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../../index.html">홈</a></li>
+                <li><a href="index.html" class="active">학년별 학습</a></li>
+                <li><a href="../topics/index.html">학습 주제별</a></li>
+                <li><a href="../activities/index.html">학습 활동</a></li>
+                <li><a href="../progress/index.html">학습 진도 관리</a></li>
+            </ul>
+        </nav>
+        <div class="header-utils">
+            <div class="search-box">
+                <input type="text" placeholder="배우고 싶은 내용을 검색해보세요">
+                <button class="search-btn">검색</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="grade-header">
+        <h1>6학년 높임 표현</h1>
+        <p>우리말의 다양한 높임 표현을 배우고 적절하게 사용해 봅시다.</p>
+        <div class="breadcrumb">
+            <a href="index.html">홈</a> &gt;
+            <a href="grade_learning.html">학년별 학습</a> &gt;
+            <a href="grade6.html">6학년</a> &gt;
+            <span>높임 표현</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="intro-section">
+            <h2 class="section-title">높임 표현이란?</h2>
+            <p>높임 표현은 대화 상대나 대화에 등장하는 인물을 높이거나 자신을 낮추어 예의를 갖추는 표현 방법입니다. 한국어는 세계적으로 높임 표현이 매우 발달한 언어입니다.</p>
+            <p>높임 표현을 적절하게 사용하면 예의 바른 의사소통을 할 수 있고, 원활한 인간관계를 맺는 데 도움이 됩니다. 높임 표현에는 상대 높임법, 주체 높임법, 객체 높임법 등이 있습니다.</p>
+        </section>
+
+        <section class="honorific-card">
+            <div class="honorific-header">
+                <div class="honorific-icon"><i class="fas fa-user-tie"></i></div>
+                <h3>상대 높임법</h3>
+            </div>
+            <div class="honorific-content">
+                <div class="definition-box">
+                    <p>상대 높임법은 <strong>대화하는 상대방</strong>을 높이는 표현입니다. 말을 끝맺을 때 사용하는 종결 어미에 따라 높임의 정도가 달라집니다.</p>
+                </div>
+                
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="example-type">해요체</div>
+                        <div class="example-content">
+                            <div class="sentence">"오늘 날씨가 <span class="highlight">좋아요</span>."</div>
+                            <div class="explanation">'-아요/-어요'를 사용하여 상대방을 존중하며 친근하게 말하는 표현입니다.</div>
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-type">합쇼체</div>
+                        <div class="example-content">
+                            <div class="sentence">"내일 회의가 <span class="highlight">있습니다</span>."</div>
+                            <div class="explanation">'-ㅂ니다/-습니다'를 사용하여 상대방을 격식을 갖춰 높이는 표현입니다.</div>
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-type">해체</div>
+                        <div class="example-content">
+                            <div class="sentence">"나 내일 학교에 <span class="highlight">가</span>."</div>
+                            <div class="explanation">높임 표현 없이 편안하게 말하는 반말 표현입니다.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="honorific-card">
+            <div class="honorific-header">
+                <div class="honorific-icon"><i class="fas fa-crown"></i></div>
+                <h3>주체 높임법</h3>
+            </div>
+            <div class="honorific-content">
+                <div class="definition-box">
+                    <p>주체 높임법은 <strong>문장의 주체</strong>가 되는 사람을 높이는 표현입니다. 특별한 어휘나 조사, 어미를 사용합니다.</p>
+                </div>
+                
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="example-type">높임 어휘</div>
+                        <div class="example-content">
+                            <div class="sentence">"할아버지께서 <span class="highlight">주무십니다</span>."</div>
+                            <div class="explanation">'자다' 대신 높임말 '주무시다'를 사용하여 주체인 할아버지를 높였습니다.</div>
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-type">조사 '께서'</div>
+                        <div class="example-content">
+                            <div class="sentence">"선생님<span class="highlight">께서</span> 말씀하셨어요."</div>
+                            <div class="explanation">주격조사 '이/가' 대신 '께서'를 사용하여 주체인 선생님을 높였습니다.</div>
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-type">선어말 '-시-'</div>
+                        <div class="example-content">
+                            <div class="sentence">"할머니가 책을 읽으<span class="highlight">시</span>어요."</div>
+                            <div class="explanation">동사 '읽다'에 '-시-'를 붙여 주체인 할머니를 높였습니다.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="honorific-card">
+            <div class="honorific-header">
+                <div class="honorific-icon"><i class="fas fa-hands"></i></div>
+                <h3>객체 높임법</h3>
+            </div>
+            <div class="honorific-content">
+                <div class="definition-box">
+                    <p>객체 높임법은 <strong>문장에서 동작이 미치는 대상</strong>을 높이는 표현입니다. 특별한 어휘나 조사를 사용합니다.</p>
+                </div>
+                
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="example-type">조사 '께'</div>
+                        <div class="example-content">
+                            <div class="sentence">"선생님<span class="highlight">께</span> 질문을 드렸어요."</div>
+                            <div class="explanation">부사격 조사 '에게' 대신 '께'를 사용하여 대상인 선생님을 높였습니다.</div>
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-type">높임 어휘</div>
+                        <div class="example-content">
+                            <div class="sentence">"할아버지께 선물을 <span class="highlight">드렸습니다</span>."</div>
+                            <div class="explanation">'주다' 대신 높임말 '드리다'를 사용하여 대상인 할아버지를 높였습니다.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="honorific-card">
+            <div class="honorific-header">
+                <div class="honorific-icon"><i class="fas fa-arrow-down"></i></div>
+                <h3>겸양 표현</h3>
+            </div>
+            <div class="honorific-content">
+                <div class="definition-box">
+                    <p>겸양 표현은 <strong>화자 자신이나 화자 쪽에 속한 사람의 행동이나 소유물</strong>을 낮추어 상대방을 간접적으로 높이는 표현입니다.</p>
+                </div>
+                
+                <div class="example-list">
+                    <div class="example-item">
+                        <div class="example-type">겸양어</div>
+                        <div class="example-content">
+                            <div class="sentence">"제가 한 번 <span class="highlight">여쭤보겠습니다</span>."</div>
+                            <div class="explanation">'묻다' 대신 겸양어 '여쭙다'를 사용하여 화자 자신을 낮추었습니다.</div>
+                        </div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-type">소유 표현</div>
+                        <div class="example-content">
+                            <div class="sentence">"<span class="highlight">저희</span> 집에 놀러 오세요."</div>
+                            <div class="explanation">'우리' 대신 '저희'를 사용하여 화자의 소유를 낮추었습니다.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="comparison-section">
+            <h2 class="section-title">높임 표현 비교하기</h2>
+            <p>같은 내용을 다양한 높임 표현을 사용하여 말해보면 어떻게 달라질까요?</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>상황</th>
+                        <th>높이지 않을 때</th>
+                        <th>상대 높임</th>
+                        <th>주체 높임</th>
+                        <th>객체 높임</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>식사</td>
+                        <td>밥 먹어.</td>
+                        <td>식사하세요.</td>
+                        <td>할아버지께서 진지를 드십니다.</td>
+                        <td>선생님께 음식을 대접했어요.</td>
+                    </tr>
+                    <tr>
+                        <td>질문</td>
+                        <td>내가 물어볼게.</td>
+                        <td>제가 여쭤보겠습니다.</td>
+                        <td>교수님께서 질문하셨습니다.</td>
+                        <td>부장님께 여쭤보았습니다.</td>
+                    </tr>
+                    <tr>
+                        <td>선물</td>
+                        <td>이거 줄게.</td>
+                        <td>이것을 드리겠습니다.</td>
+                        <td>할머니께서 선물을 주셨어요.</td>
+                        <td>선생님께 선물을 드렸어요.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="activities-section">
+            <h2 class="section-title">높임 표현 학습 활동</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>역할극</h3>
+                    <p>다양한 상황에서 적절한 높임 표현을 사용하여 역할극을 해봅시다.</p>
+                    <button class="activity-button">활동 시작하기</button>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>높임 표현 바꾸기</h3>
+                    <p>일상 대화를 다양한 높임 표현으로 바꿔보는 활동입니다.</p>
+                    <button class="activity-button">활동 시작하기</button>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>올바른 높임 표현 찾기</h3>
+                    <p>잘못된 높임 표현을 찾고 바르게 고쳐보는 활동입니다.</p>
+                    <button class="activity-button">활동 시작하기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                    <a href="../../index.html">
+                        <div class="placeholder-img logo-img"></div>
+                        <span>문법놀이터</span>
+                    </a>
+                </div>
+                <p class="footer-description">즐겁게 배우는 한국어 문법</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-links-column">
+                    <h4 class="footer-title">학습하기</h4>
+                    <ul>
+                        <li><a href="index.html">학년별 학습</a></li>
+                        <li><a href="../topics/index.html">학습 주제별</a></li>
+                        <li><a href="../activities/index.html">학습 활동</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-title">소개</h4>
+                    <ul>
+                        <li><a href="../../about.html">사이트 소개</a></li>
+                        <li><a href="../../contact.html">문의하기</a></li>
+                        <li><a href="../../faq.html">자주 묻는 질문</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4 class="footer-title">소식 받기</h4>
+                <p>최신 학습 자료와 업데이트 소식을 받아보세요</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="이메일 주소">
+                    <button>구독</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 문법놀이터. 모든 권리 보유.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 페이지 로딩 애니메이션
+            const cards = document.querySelectorAll('.honorific-card, .activity-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+            
+            // 학습 활동 버튼 이벤트
+            const activityButtons = document.querySelectorAll('.activity-button');
+            activityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

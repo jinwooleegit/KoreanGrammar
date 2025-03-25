@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학년별 학습 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .grade-selection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .grade-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 6px solid var(--grade-color);
+            cursor: pointer;
+        }
+
+        .grade-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .grade-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            background-color: var(--grade-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .grade-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--grade-color);
+        }
+
+        .grade-description {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .grade-topics {
+            font-size: 13px;
+            color: #666;
+            text-align: left;
+            padding-left: 15px;
+        }
+
+        .grade-topics li {
+            margin-bottom: 5px;
+        }
+
+        .grade-button {
+            background-color: var(--grade-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .grade-button:hover {
+            opacity: 0.9;
+        }
+
+        /* 학년별 색상 */
+        .grade-1 {
+            --grade-color: #FF6B6B;
+        }
+
+        .grade-2 {
+            --grade-color: #FFD93D;
+        }
+
+        .grade-3 {
+            --grade-color: #6BCB77;
+        }
+
+        .grade-4 {
+            --grade-color: #4D96FF;
+        }
+
+        .grade-5 {
+            --grade-color: #9B5DE5;
+        }
+
+        .grade-6 {
+            --grade-color: #F15BB5;
+        }
+
+        /* 페이지 설명 섹션 */
+        .page-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .page-description h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .page-description p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="../../index.html">
+                <div class="placeholder-img logo-img"></div>
+                <span>문법놀이터</span>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../../index.html">홈</a></li>
+                <li><a href="index.html" class="active">학년별 학습</a></li>
+                <li><a href="../topics/index.html">학습 주제별</a></li>
+                <li><a href="../activities/index.html">학습 활동</a></li>
+                <li><a href="../progress/index.html">학습 진도 관리</a></li>
+            </ul>
+        </nav>
+        <div class="header-utils">
+            <div class="search-box">
+                <input type="text" placeholder="배우고 싶은 내용을 검색해보세요">
+                <button class="search-btn">검색</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-description">
+            <h1>학년별 학습</h1>
+            <p>
+                초등학교 1~6학년 각 학년에 맞는 국어 문법 학습 내용을 제공합니다. 
+                학년별로 학습 난이도와 내용이 구성되어 있어 체계적인 문법 학습이 가능합니다.
+                아래에서 학년을 선택하여 학습을 시작해보세요!
+            </p>
+        </section>
+
+        <section class="grade-selection">
+            <!-- 1학년 카드 -->
+            <div class="grade-card grade-1">
+                <div class="grade-icon">1</div>
+                <h2 class="grade-title">1학년 문법</h2>
+                <p class="grade-description">
+                    글자와 낱말의 기초를 배우고 간단한 문장을 이해합니다.
+                </p>
+                <ul class="grade-topics">
+                    <li>낱말 알아보기</li>
+                    <li>문장 알아보기</li>
+                    <li>글자와 소리 관계 이해하기</li>
+                </ul>
+                <button class="grade-button" onclick="location.href='grade1.html'">학습 시작하기</button>
+            </div>
+
+            <!-- 2학년 카드 -->
+            <div class="grade-card grade-2">
+                <div class="grade-icon">2</div>
+                <h2 class="grade-title">2학년 문법</h2>
+                <p class="grade-description">
+                    문장의 종류와 기본 문장 구조를 학습합니다.
+                </p>
+                <ul class="grade-topics">
+                    <li>문장의 종류 배우기</li>
+                    <li>기본 문장 구조 이해하기</li>
+                    <li>낱말의 의미 관계 알기</li>
+                </ul>
+                <button class="grade-button" onclick="location.href='grade2.html'">학습 시작하기</button>
+            </div>
+
+            <!-- 3학년 카드 -->
+            <div class="grade-card grade-3">
+                <div class="grade-icon">3</div>
+                <h2 class="grade-title">3학년 문법</h2>
+                <p class="grade-description">
+                    기본 품사와 문장 성분을 배웁니다.
+                </p>
+                <ul class="grade-topics">
+                    <li>기본 품사 알아보기</li>
+                    <li>문장 성분 이해하기</li>
+                    <li>문장 부호 올바르게 사용하기</li>
+                </ul>
+                <button class="grade-button" onclick="location.href='grade3.html'">학습 시작하기</button>
+            </div>
+
+            <!-- 4학년 카드 -->
+            <div class="grade-card grade-4">
+                <div class="grade-icon">4</div>
+                <h2 class="grade-title">4학년 문법</h2>
+                <p class="grade-description">
+                    다양한 품사와 문장 확장 방법을 학습합니다.
+                </p>
+                <ul class="grade-topics">
+                    <li>다양한 품사 알아보기</li>
+                    <li>문장 확장 방법 배우기</li>
+                    <li>높임법과 시간 표현 이해하기</li>
+                </ul>
+                <button class="grade-button" onclick="location.href='grade4.html'">학습 시작하기</button>
+            </div>
+
+            <!-- 5학년 카드 -->
+            <div class="grade-card grade-5">
+                <div class="grade-icon">5</div>
+                <h2 class="grade-title">5학년 문법</h2>
+                <p class="grade-description">
+                    복잡한 문장 구조와 표현 방법을 배웁니다.
+                </p>
+                <ul class="grade-topics">
+                    <li>문장의 확장과 압축 방법</li>
+                    <li>관용 표현과 속담 이해하기</li>
+                    <li>문법 요소와 문맥 파악하기</li>
+                </ul>
+                <button class="grade-button" onclick="location.href='grade5.html'">학습 시작하기</button>
+            </div>
+
+            <!-- 6학년 카드 -->
+            <div class="grade-card grade-6">
+                <div class="grade-icon">6</div>
+                <h2 class="grade-title">6학년 문법</h2>
+                <p class="grade-description">
+                    언어의 다양한 표현과 고급 문법을 학습합니다.
+                </p>
+                <ul class="grade-topics">
+                    <li>다양한 표현 방법 익히기</li>
+                    <li>문장 호응 관계 이해하기</li>
+                    <li>국어 문법의 특징 알아보기</li>
+                </ul>
+                <button class="grade-button" onclick="location.href='grade6.html'">학습 시작하기</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                    <a href="../../index.html">
+                        <div class="placeholder-img logo-img"></div>
+                        <span>문법놀이터</span>
+                    </a>
+                </div>
+                <p class="footer-description">즐겁게 배우는 한국어 문법</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-links-column">
+                    <h4 class="footer-title">학습하기</h4>
+                    <ul>
+                        <li><a href="index.html">학년별 학습</a></li>
+                        <li><a href="../topics/index.html">학습 주제별</a></li>
+                        <li><a href="../activities/index.html">학습 활동</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4 class="footer-title">소개</h4>
+                    <ul>
+                        <li><a href="../../about.html">사이트 소개</a></li>
+                        <li><a href="../../contact.html">문의하기</a></li>
+                        <li><a href="../../faq.html">자주 묻는 질문</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4 class="footer-title">소식 받기</h4>
+                <p>최신 학습 자료와 업데이트 소식을 받아보세요</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="이메일 주소">
+                    <button>구독</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 문법놀이터. 모든 권리 보유.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 학년 카드 클릭 시 해당 학년 페이지로 이동
+            const gradeCards = document.querySelectorAll('.grade-card');
+            
+            gradeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const gradeBtn = this.querySelector('.grade-button');
+                    if(gradeBtn) {
+                        gradeBtn.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

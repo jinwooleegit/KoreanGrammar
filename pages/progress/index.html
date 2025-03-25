@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학습 진도 관리 - 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="progress-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">
+                <!-- 로고 이미지 플레이스홀더 -->
+                <div class="placeholder-img logo-img"></div>
+                <span>문법놀이터</span>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="#">학년별 학습</a></li>
+                <li><a href="#">학습 주제별</a></li>
+                <li><a href="#">학습 활동</a></li>
+                <li><a href="progress.html" class="active">학습 진도 관리</a></li>
+            </ul>
+        </nav>
+        <div class="header-utils">
+            <div class="search-box">
+                <input type="text" placeholder="배우고 싶은 내용을 검색해보세요">
+                <button class="search-btn">검색</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main>
+        <section class="progress-header">
+            <h1>나의 학습 진도</h1>
+            <p>내가 학습한 내용과 진행 상황을 확인할 수 있어요.</p>
+            
+            <div class="progress-actions">
+                <button id="reset-progress" class="secondary-btn">초기화</button>
+                <button id="export-progress" class="secondary-btn">내보내기</button>
+                <button id="import-progress" class="primary-btn">가져오기</button>
+            </div>
+        </section>
+
+        <!-- 학생용 가이드 섹션 -->
+        <section class="student-guide">
+            <div class="guide-header">
+                <h2>학습 진도 관리 이용 안내</h2>
+                <button id="toggle-guide" class="guide-toggle-btn">안내 숨기기</button>
+            </div>
+            <div class="guide-content" id="guide-content">
+                <div class="guide-card">
+                    <div class="guide-icon">
+                        <div class="placeholder-img small-icon"></div>
+                    </div>
+                    <div class="guide-text">
+                        <h3>진도 확인하기</h3>
+                        <p>이 페이지에서는 내가 공부한 내용과 얼마나 진도를 나갔는지 볼 수 있어요. 위쪽에 있는 학년 버튼을 눌러 각 학년별 학습 현황도 확인할 수 있어요.</p>
+                    </div>
+                </div>
+                
+                <div class="guide-card">
+                    <div class="guide-icon">
+                        <div class="placeholder-img small-icon"></div>
+                    </div>
+                    <div class="guide-text">
+                        <h3>다른 컴퓨터에서도 볼 수 있어요</h3>
+                        <p>"내보내기" 버튼을 누르면 내 학습 기록을 특별한 코드로 저장할 수 있어요. 이 코드를 복사해두었다가 다른 컴퓨터나 태블릿에서 "가져오기" 버튼을 누르고 코드를 붙여넣으면 내 학습 기록을 그대로 볼 수 있어요.</p>
+                    </div>
+                </div>
+                
+                <div class="guide-card">
+                    <div class="guide-icon">
+                        <div class="placeholder-img small-icon"></div>
+                    </div>
+                    <div class="guide-text">
+                        <h3>학습 기록이 자동으로 저장돼요</h3>
+                        <p>학습 활동을 할 때마다 이 페이지에 자동으로 기록이 남아요. 컴퓨터를 껐다 켜도 내 기록은 사라지지 않아요. 만약 모든 기록을 지우고 싶다면 "초기화" 버튼을 누르면 돼요.</p>
+                    </div>
+                </div>
+                
+                <div class="guide-card">
+                    <div class="guide-icon">
+                        <div class="placeholder-img small-icon"></div>
+                    </div>
+                    <div class="guide-text">
+                        <h3>학습 이어하기</h3>
+                        <p>각 학습 주제 옆에 있는 "이어하기" 버튼을 누르면 마지막으로 공부했던 부분부터 다시 시작할 수 있어요. 멈췄던 부분부터 다시 시작해보세요!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 학습 통계 섹션 -->
+        <section class="learning-stats">
+            <h2>학습 현황</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon completed-icon">
+                        <!-- 플레이스홀더 아이콘 -->
+                        <div class="placeholder-img small-icon"></div>
+                    </div>
+                    <div class="stat-content">
+                        <h3>학습 완료</h3>
+                        <p class="stat-number" id="completed-count">0</p>
+                        <div class="stat-label">활동</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon streak-icon">
+                        <!-- 플레이스홀더 아이콘 -->
+                        <div class="placeholder-img small-icon"></div>
+                    </div>
+                    <div class="stat-content">
+                        <h3>연속 학습일</h3>
+                        <p class="stat-number" id="streak-count">0</p>
+                        <div class="stat-label">일</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon time-icon">
+                        <!-- 플레이스홀더 아이콘 -->
+                        <div class="placeholder-img small-icon"></div>
+                    </div>
+                    <div class="stat-content">
+                        <h3>총 학습 시간</h3>
+                        <p class="stat-number" id="total-time">0</p>
+                        <div class="stat-label">분</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon score-icon">
+                        <!-- 플레이스홀더 아이콘 -->
+                        <div class="placeholder-img small-icon"></div>
+                    </div>
+                    <div class="stat-content">
+                        <h3>평균 점수</h3>
+                        <p class="stat-number" id="avg-score">0</p>
+                        <div class="stat-label">점</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 학년별 진도 현황 -->
+        <section class="grade-progress">
+            <h2>학년별 진도 현황</h2>
+            <div class="progress-tabs">
+                <button class="tab-btn active" data-grade="1">1학년</button>
+                <button class="tab-btn" data-grade="2">2학년</button>
+                <button class="tab-btn" data-grade="3">3학년</button>
+                <button class="tab-btn" data-grade="4">4학년</button>
+                <button class="tab-btn" data-grade="5">5학년</button>
+                <button class="tab-btn" data-grade="6">6학년</button>
+            </div>
+            
+            <div class="tab-content">
+                <div class="progress-chart">
+                    <h3>전체 진도율</h3>
+                    <div class="chart-container">
+                        <!-- 차트 이미지 플레이스홀더 -->
+                        <div class="placeholder-img chart-img"></div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-label">
+                            <span>진도율</span>
+                            <span id="progress-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-list">
+                    <h3>학습 주제</h3>
+                    <div id="topics-container" class="topics-container">
+                        <!-- 여기에 동적으로 학습 주제가 추가됩니다 -->
+                        <div class="empty-state">
+                            <p>아직 학습한 내용이 없습니다.</p>
+                            <a href="index.html" class="start-btn">학습 시작하기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 최근 학습 활동 -->
+        <section class="recent-activities">
+            <h2>최근 학습 활동</h2>
+            <div id="activities-container" class="activities-container">
+                <!-- 여기에 동적으로 최근 학습 활동이 추가됩니다 -->
+                <div class="empty-state">
+                    <p>아직 학습 활동 기록이 없습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 가져오기/내보내기 모달 -->
+        <div id="import-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>학습 코드 입력</h3>
+                <p>다른 기기에서 내보낸 학습 코드를 입력하세요:</p>
+                <textarea id="import-code" placeholder="학습 코드 붙여넣기"></textarea>
+                <button id="confirm-import" class="primary-btn">가져오기</button>
+            </div>
+        </div>
+
+        <div id="export-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>학습 코드 내보내기</h3>
+                <p>이 코드를 복사하여 다른 기기에서 사용하세요:</p>
+                <textarea id="export-code" readonly></textarea>
+                <button id="copy-code" class="primary-btn">코드 복사</button>
+            </div>
+        </div>
+
+        <div id="reset-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>주의: 학습 데이터 초기화</h3>
+                <p>모든 학습 데이터와 진도가 삭제됩니다. 정말 초기화하시겠어요?</p>
+                <div class="modal-actions">
+                    <button id="cancel-reset" class="secondary-btn">취소</button>
+                    <button id="confirm-reset" class="danger-btn">초기화하기</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 영역 -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="placeholder-img small-logo"></div>
+                <span>문법놀이터</span>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>이용 안내</h4>
+                    <ul>
+                        <li><a href="#">서비스 소개</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>학습 자료</h4>
+                    <ul>
+                        <li><a href="#">학년별 학습</a></li>
+                        <li><a href="#">주제별 학습</a></li>
+                        <li><a href="#">학습 게임</a></li>
+                        <li><a href="#">학습 도구</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>고객지원</h4>
+                    <ul>
+                        <li><a href="#">문의하기</a></li>
+                        <li><a href="#">자주 묻는 질문</a></li>
+                        <li><a href="#">사용 가이드</a></li>
+                        <li><a href="#">오류 신고</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-contact">
+                <h4>문의</h4>
+                <p>이메일: info@koreangrammar.edu</p>
+                <p>전화: 02-123-4567 (평일 9:00-18:00)</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">페이스북</a>
+                    <a href="#" class="social-icon">인스타그램</a>
+                    <a href="#" class="social-icon">유튜브</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="progress.js"></script>
+</body>
+</html> 

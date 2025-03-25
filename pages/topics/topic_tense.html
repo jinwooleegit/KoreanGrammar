@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시제 표현 | 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #64B5F6;
+            --light-color: #E3F2FD;
+        }
+        
+        .topic-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .tense-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .example-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .tense-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .tense-table th, .tense-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .tense-table th {
+            background-color: var(--light-color);
+            color: #333;
+        }
+
+        .timeline {
+            width: 100%;
+            height: 100px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            position: relative;
+            margin: 20px 0;
+            padding: 10px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-point {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-label {
+            position: absolute;
+            top: 70%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .timeline-now {
+            left: 50%;
+        }
+
+        .timeline-past {
+            left: 25%;
+        }
+
+        .timeline-future {
+            left: 75%;
+        }
+
+        .activity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .activity-icon {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .practice-problem {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .answer-reveal {
+            background-color: #E3F2FD;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li class="active"><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="topic-header">
+        <h1>시제 표현</h1>
+        <p>과거, 현재, 미래 시제를 나타내는 다양한 표현에 대해 배워봅시다.</p>
+        <div class="breadcrumb">
+            <a href="index.html">홈</a> &gt;
+            <a href="topics.html">주제별 학습</a> &gt;
+            <span>시제 표현</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="section intro-section">
+            <h2>시제란?</h2>
+            <p><strong>시제(時制)</strong>는 문장에서 동작이나 상태가 <strong>언제</strong> 일어났는지(과거), 일어나고 있는지(현재), 또는 일어날 것인지(미래)를 나타내는 표현입니다.</p>
+            <p>한국어에서는 시제를 나타내기 위해 주로 <strong>어미</strong>를 사용합니다. 시제는 크게 <strong>과거, 현재, 미래 시제</strong>로 나눌 수 있습니다.</p>
+            
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-point timeline-past"></div>
+                <div class="timeline-point timeline-now"></div>
+                <div class="timeline-point timeline-future"></div>
+                <div class="timeline-label timeline-past">과거</div>
+                <div class="timeline-label timeline-now">현재</div>
+                <div class="timeline-label timeline-future">미래</div>
+            </div>
+        </section>
+
+        <section class="section tense-section">
+            <h2>시제 표현의 종류</h2>
+            
+            <div class="tense-card">
+                <h3>현재 시제</h3>
+                <p>현재 시제는 <strong>현재 일어나고 있는 동작</strong>이나 <strong>현재의 상태</strong>를 나타냅니다.</p>
+                <p><strong>주요 표현:</strong> -ㄴ다/는다, -아/어/여 있다, -(으)ㅂ니다</p>
+                
+                <div class="example-box">
+                    <p>나는 지금 책을 읽<span class="highlight">는다</span>.</p>
+                    <p>창문이 열려 <span class="highlight">있다</span>.</p>
+                    <p>학생들이 운동장에서 놀고 <span class="highlight">있다</span>.</p>
+                </div>
+            </div>
+            
+            <div class="tense-card">
+                <h3>과거 시제</h3>
+                <p>과거 시제는 <strong>이미 일어난 동작</strong>이나 <strong>과거의 상태</strong>를 나타냅니다.</p>
+                <p><strong>주요 표현:</strong> -았/었/였다, -았/었/였었다, -(으)ㄴ 적이 있다</p>
+                
+                <div class="example-box">
+                    <p>어제 영화를 보<span class="highlight">았다</span>.</p>
+                    <p>작년에 제주도에 가<span class="highlight">았었다</span>.</p>
+                    <p>그 책을 읽<span class="highlight">은 적이 있다</span>.</p>
+                </div>
+            </div>
+            
+            <div class="tense-card">
+                <h3>미래 시제</h3>
+                <p>미래 시제는 <strong>앞으로 일어날 동작</strong>이나 <strong>미래의 상태</strong>를 나타냅니다.</p>
+                <p><strong>주요 표현:</strong> -(으)ㄹ 것이다, -(으)ㄹ게요, -(으)ㄹ 예정이다, -겠다</p>
+                
+                <div class="example-box">
+                    <p>내일 비가 올 <span class="highlight">것이다</span>.</p>
+                    <p>내가 숙제를 도와줄<span class="highlight">게요</span>.</p>
+                    <p>다음 주에 여행을 갈 <span class="highlight">예정이다</span>.</p>
+                    <p>곧 날씨가 더워지<span class="highlight">겠다</span>.</p>
+                </div>
+            </div>
+            
+            <h3>시제 표현 정리</h3>
+            <table class="tense-table">
+                <thead>
+                    <tr>
+                        <th>시제</th>
+                        <th>형태</th>
+                        <th>예시</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">현재</td>
+                        <td>-ㄴ다/는다</td>
+                        <td>나는 학교에 간다.</td>
+                    </tr>
+                    <tr>
+                        <td>-아/어/여 있다</td>
+                        <td>문이 열려 있다.</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">과거</td>
+                        <td>-았/었/였다</td>
+                        <td>어제 책을 읽었다.</td>
+                    </tr>
+                    <tr>
+                        <td>-았/었/였었다</td>
+                        <td>작년에 중국에 갔었다.</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">미래</td>
+                        <td>-(으)ㄹ 것이다</td>
+                        <td>내일은 맑을 것이다.</td>
+                    </tr>
+                    <tr>
+                        <td>-(으)ㄹ게요</td>
+                        <td>제가 도와줄게요.</td>
+                    </tr>
+                    <tr>
+                        <td>-겠다</td>
+                        <td>내일은 춥겠다.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section special-section">
+            <h2>특별한 시제 표현</h2>
+            
+            <div class="tense-card">
+                <h3>현재 완료</h3>
+                <p>과거에 시작된 동작이나 상태가 <strong>현재까지 지속</strong>되고 있음을 나타내는 표현입니다.</p>
+                <p><strong>주요 표현:</strong> -아/어/여 왔다, -아/어/여 있다</p>
+                
+                <div class="example-box">
+                    <p>나는 5년 동안 이 회사에서 일해 <span class="highlight">왔다</span>.</p>
+                    <p>그 문제에 대해 오랫동안 고민해 <span class="highlight">왔다</span>.</p>
+                </div>
+            </div>
+            
+            <div class="tense-card">
+                <h3>진행 시제</h3>
+                <p>어떤 동작이 <strong>계속 진행 중</strong>임을 나타내는 표현입니다.</p>
+                <p><strong>주요 표현:</strong> -고 있다, -는 중이다</p>
+                
+                <div class="example-box">
+                    <p>지금 비가 내리<span class="highlight">고 있다</span>.</p>
+                    <p>그는 책을 읽<span class="highlight">는 중이다</span>.</p>
+                </div>
+            </div>
+            
+            <div class="tense-card">
+                <h3>습관적 동작</h3>
+                <p><strong>규칙적으로 반복</strong>되는 동작을 나타내는 표현입니다.</p>
+                <p><strong>주요 표현:</strong> -ㄴ다/는다, -(으)ㄴ/는 편이다, -곤 하다</p>
+                
+                <div class="example-box">
+                    <p>나는 매일 아침에 운동을 <span class="highlight">한다</span>.</p>
+                    <p>그는 일찍 일어나는 <span class="highlight">편이다</span>.</p>
+                    <p>주말에는 영화를 보<span class="highlight">곤 한다</span>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section practice-section">
+            <h2>연습 문제</h2>
+            <p>다음 문제를 풀어보며 시제 표현을 익혀 봅시다.</p>
+            
+            <div class="practice-problem">
+                <h3>문제 1</h3>
+                <p>다음 중 과거 시제를 나타내는 문장은?</p>
+                <ol type="a">
+                    <li>내일 비가 온다.</li>
+                    <li>지금 책을 읽고 있다.</li>
+                    <li>어제 숙제를 했다.</li>
+                    <li>곧 수업이 시작될 것이다.</li>
+                </ol>
+                <button class="btn" onclick="toggleAnswer('answer1')">정답 보기</button>
+                <div id="answer1" class="answer-reveal">
+                    <p><strong>정답:</strong> c. 어제 숙제를 했다.</p>
+                    <p>'했다'는 '-았/었/였다' 형태로, 과거에 일어난 동작을 나타내는 과거 시제입니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 2</h3>
+                <p>다음 문장의 시제를 미래 시제로 바꿔보세요.</p>
+                <p>"나는 학교에 간다."</p>
+                <button class="btn" onclick="toggleAnswer('answer2')">정답 보기</button>
+                <div id="answer2" class="answer-reveal">
+                    <p><strong>정답:</strong> "나는 학교에 갈 것이다." 또는 "나는 학교에 가겠다."</p>
+                    <p>현재 시제 '간다'를 미래 시제 '갈 것이다' 또는 '가겠다'로 바꾸어 표현할 수 있습니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 3</h3>
+                <p>다음 문장에서 사용된 시제 표현을 찾고, 어떤 시제인지 말해보세요.</p>
+                <p>"그녀는 10년 동안 이 학교에서 가르쳐 왔다."</p>
+                <button class="btn" onclick="toggleAnswer('answer3')">정답 보기</button>
+                <div id="answer3" class="answer-reveal">
+                    <p><strong>정답:</strong> "가르쳐 왔다" - 현재 완료 시제</p>
+                    <p>'-아/어/여 왔다' 형태는 과거부터 현재까지 계속되어 온 동작을 나타내는 현재 완료 시제입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section activity-section">
+            <h2>시제 표현 학습 활동</h2>
+            <p>다양한 활동을 통해 시제 표현을 재미있게 학습해 봅시다.</p>
+            
+            <div class="activity-list">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>시제 변환하기</h3>
+                    <p>주어진 문장의 시제를 다른 시제로 바꿔보는 활동입니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>시간 이야기 만들기</h3>
+                    <p>과거, 현재, 미래를 포함한 짧은 이야기를 만들어봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>일기 쓰기</h3>
+                    <p>어제, 오늘, 내일에 대한 일기를 각각 다른 시제로 써봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>시제 카드 게임</h3>
+                    <p>시제 카드를 뽑아 해당 시제로 문장을 만드는 게임입니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAnswer(id) {
+            const answerElement = document.getElementById(id);
+            if (answerElement.style.display === 'block') {
+                answerElement.style.display = 'none';
+            } else {
+                answerElement.style.display = 'block';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 활동 버튼 이벤트
+            const activityButtons = document.querySelectorAll('.btn');
+            activityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 정답 버튼이 아닌 경우에만 알림 표시
+                    if (!this.getAttribute('onclick') || !this.getAttribute('onclick').includes('toggleAnswer')) {
+                        alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

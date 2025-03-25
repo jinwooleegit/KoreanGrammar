@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>품사 찾기 게임 | 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .game-header {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .game-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .game-header p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .game-info {
+            background-color: #F1F8E9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .game-info h2 {
+            color: #33691E;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .game-info p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .pos-explanation {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .pos-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+        }
+
+        .pos-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #4CAF50;
+            display: flex;
+            align-items: center;
+        }
+
+        .pos-title i {
+            margin-right: 8px;
+        }
+
+        .pos-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .game-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .target-pos {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 6px;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background-color: white;
+            border-radius: 6px;
+            padding: 8px 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .score-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .sentence-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .sentence-text {
+            font-size: 20px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .word {
+            position: relative;
+            display: inline-block;
+            padding: 2px 5px;
+            margin: 0 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .word:hover {
+            background-color: #f5f5f5;
+        }
+
+        .word.selected {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .word.correct {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            font-weight: bold;
+        }
+
+        .word.incorrect {
+            background-color: #FFEBEE;
+            color: #C62828;
+            text-decoration: line-through;
+        }
+
+        .popup {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .popup::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: #4CAF50 transparent transparent transparent;
+        }
+
+        .word:hover .popup {
+            opacity: 1;
+        }
+
+        .feedback {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .feedback-message {
+            color: #555;
+        }
+
+        .game-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .game-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .game-button:hover {
+            background-color: #388E3C;
+        }
+
+        .game-button.secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .game-button.secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .result-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .result-icon {
+            font-size: 60px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .result-message {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #E0E0E0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .pos-explanation {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-controls {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li class="active"><a href="activities.html">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="game-header">
+        <h1>품사 찾기 게임</h1>
+        <p>주어진 문장에서 특정 품사의 단어를 모두 찾아보세요. 품사의 개념을 익히고 실제로 구분하는 능력을 키울 수 있습니다.</p>
+    </div>
+
+    <div class="game-container">
+        <div class="game-info">
+            <h2>기본 품사 알아보기</h2>
+            <p>품사는 단어를 의미와 기능에 따라 분류한 것입니다. 한국어의 주요 품사는 다음과 같습니다.</p>
+        </div>
+
+        <div class="pos-explanation">
+            <div class="pos-card">
+                <div class="pos-title"><i class="fas fa-user"></i> 명사</div>
+                <div class="pos-description">사람, 사물, 개념 등의 이름을 나타내는 말 (예: 학교, 사람, 행복)</div>
+            </div>
+            <div class="pos-card">
+                <div class="pos-title"><i class="fas fa-running"></i> 동사</div>
+                <div class="pos-description">움직임이나 작용을 나타내는 말 (예: 가다, 먹다, 뛰다)</div>
+            </div>
+            <div class="pos-card">
+                <div class="pos-title"><i class="fas fa-star"></i> 형용사</div>
+                <div class="pos-description">상태나 성질을 나타내는 말 (예: 크다, 예쁘다, 좋다)</div>
+            </div>
+            <div class="pos-card">
+                <div class="pos-title"><i class="fas fa-quote-left"></i> 관형사</div>
+                <div class="pos-description">체언을 꾸며주는 말 (예: 새, 헌, 온갖)</div>
+            </div>
+            <div class="pos-card">
+                <div class="pos-title"><i class="fas fa-comment-dots"></i> 부사</div>
+                <div class="pos-description">용언이나 문장을 꾸며주는 말 (예: 매우, 빨리, 잘)</div>
+            </div>
+            <div class="pos-card">
+                <div class="pos-title"><i class="fas fa-link"></i> 조사</div>
+                <div class="pos-description">체언에 붙어 문법적 관계를 나타내는 말 (예: 이/가, 은/는, 에)</div>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <div class="target-pos" id="targetPos">
+                <i class="fas fa-search"></i> 찾아야 할 품사: <span id="currentPos">명사</span>
+            </div>
+            <div class="score-display">
+                <div class="score-label">총점</div>
+                <div class="score-value" id="scoreValue">0</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+
+        <div class="sentence-card">
+            <div class="sentence-text" id="sentenceDisplay">
+                <!-- 단어들이 JavaScript로 생성됩니다 -->
+            </div>
+            <div class="feedback" id="feedback">
+                <div class="feedback-title">피드백:</div>
+                <div class="feedback-message" id="feedbackMessage"></div>
+            </div>
+        </div>
+
+        <div class="game-actions">
+            <button class="game-button" id="checkButton">
+                <i class="fas fa-check"></i> 정답 확인하기
+            </button>
+            <button class="game-button secondary" id="nextButton" style="display: none;">
+                <i class="fas fa-arrow-right"></i> 다음 문제
+            </button>
+        </div>
+    </div>
+
+    <div class="result-popup" id="resultPopup">
+        <div class="result-content">
+            <div class="result-icon">
+                <i class="fas fa-award"></i>
+            </div>
+            <h2 class="result-title">게임 완료!</h2>
+            <div class="result-message" id="resultMessage">
+                총 10문장 중 8문장에서 품사를 정확히 찾았습니다!<br>
+                최종 점수: <strong>80점</strong>
+            </div>
+            <div class="game-actions">
+                <button class="game-button" id="restartButton">
+                    <i class="fas fa-redo-alt"></i> 다시 하기
+                </button>
+                <button class="game-button secondary" id="homeButton">
+                    <i class="fas fa-home"></i> 활동 목록으로
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="activities.html">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 게임 데이터
+            const gameData = [
+                {
+                    sentence: "귀여운 강아지가 신나게 공원을 달린다.",
+                    words: [
+                        { text: "귀여운", pos: "형용사" },
+                        { text: "강아지가", pos: "명사" },
+                        { text: "신나게", pos: "부사" },
+                        { text: "공원을", pos: "명사" },
+                        { text: "달린다", pos: "동사" }
+                    ]
+                },
+                {
+                    sentence: "작은 연필로 예쁜 그림을 그렸다.",
+                    words: [
+                        { text: "작은", pos: "형용사" },
+                        { text: "연필로", pos: "명사" },
+                        { text: "예쁜", pos: "형용사" },
+                        { text: "그림을", pos: "명사" },
+                        { text: "그렸다", pos: "동사" }
+                    ]
+                },
+                {
+                    sentence: "매우 높은 산에서 천천히 내려왔다.",
+                    words: [
+                        { text: "매우", pos: "부사" },
+                        { text: "높은", pos: "형용사" },
+                        { text: "산에서", pos: "명사" },
+                        { text: "천천히", pos: "부사" },
+                        { text: "내려왔다", pos: "동사" }
+                    ]
+                },
+                {
+                    sentence: "새 책을 빨리 읽고 친구에게 주었다.",
+                    words: [
+                        { text: "새", pos: "관형사" },
+                        { text: "책을", pos: "명사" },
+                        { text: "빨리", pos: "부사" },
+                        { text: "읽고", pos: "동사" },
+                        { text: "친구에게", pos: "명사" },
+                        { text: "주었다", pos: "동사" }
+                    ]
+                },
+                {
+                    sentence: "저 아이는 항상 웃으며 즐겁게 놀아요.",
+                    words: [
+                        { text: "저", pos: "관형사" },
+                        { text: "아이는", pos: "명사" },
+                        { text: "항상", pos: "부사" },
+                        { text: "웃으며", pos: "동사" },
+                        { text: "즐겁게", pos: "부사" },
+                        { text: "놀아요", pos: "동사" }
+                    ]
+                }
+            ];
+
+            // 품사 목록
+            const posList = ["명사", "동사", "형용사", "관형사", "부사", "조사"];
+
+            // 게임 요소
+            const sentenceDisplay = document.getElementById('sentenceDisplay');
+            const currentPosElement = document.getElementById('currentPos');
+            const scoreValue = document.getElementById('scoreValue');
+            const feedbackElement = document.getElementById('feedback');
+            const feedbackMessage = document.getElementById('feedbackMessage');
+            const checkButton = document.getElementById('checkButton');
+            const nextButton = document.getElementById('nextButton');
+            const progressFill = document.getElementById('progressFill');
+            const resultPopup = document.getElementById('resultPopup');
+            const resultMessage = document.getElementById('resultMessage');
+            const restartButton = document.getElementById('restartButton');
+            const homeButton = document.getElementById('homeButton');
+
+            // 게임 상태 변수
+            let currentSentenceIndex = 0;
+            let score = 0;
+            let currentTargetPos = "";
+            let selectedWords = [];
+            let gameSentences = [];
+
+            // 게임 초기화
+            function initGame() {
+                currentSentenceIndex = 0;
+                score = 0;
+                scoreValue.textContent = score;
+                
+                // 문제 랜덤 섞기
+                gameSentences = [...gameData].sort(() => 0.5 - Math.random());
+                
+                // 첫 문제 표시
+                showSentence();
+                
+                // 결과 팝업 닫기
+                resultPopup.style.display = 'none';
+            }
+
+            // 문장 표시 함수
+            function showSentence() {
+                const currentSentence = gameSentences[currentSentenceIndex];
+                
+                // 품사 랜덤 선택 (현재 문장에 포함된 품사 중)
+                const availablePosInSentence = [...new Set(currentSentence.words.map(word => word.pos))];
+                currentTargetPos = availablePosInSentence[Math.floor(Math.random() * availablePosInSentence.length)];
+                currentPosElement.textContent = currentTargetPos;
+                
+                // 문장 단어 생성
+                sentenceDisplay.innerHTML = '';
+                
+                currentSentence.words.forEach((wordData, index) => {
+                    const wordElement = document.createElement('span');
+                    wordElement.className = 'word';
+                    wordElement.textContent = wordData.text;
+                    wordElement.dataset.index = index;
+                    
+                    const popupElement = document.createElement('span');
+                    popupElement.className = 'popup';
+                    popupElement.textContent = wordData.pos;
+                    
+                    wordElement.appendChild(popupElement);
+                    
+                    wordElement.addEventListener('click', function() {
+                        if (!this.classList.contains('correct') && !this.classList.contains('incorrect')) {
+                            this.classList.toggle('selected');
+                        }
+                    });
+                    
+                    sentenceDisplay.appendChild(wordElement);
+                    
+                    // 마지막 단어가 아니라면 공백 추가
+                    if (index < currentSentence.words.length - 1) {
+                        sentenceDisplay.appendChild(document.createTextNode(' '));
+                    }
+                });
+                
+                // 피드백 초기화
+                feedbackElement.style.display = 'none';
+                
+                // 버튼 상태 업데이트
+                checkButton.style.display = 'flex';
+                nextButton.style.display = 'none';
+                
+                // 프로그레스 바 업데이트
+                progressFill.style.width = `${(currentSentenceIndex / gameSentences.length) * 100}%`;
+            }
+            
+            // 정답 확인 함수
+            function checkAnswer() {
+                const currentSentence = gameSentences[currentSentenceIndex];
+                const wordElements = document.querySelectorAll('.word');
+                
+                // 정답 카운트
+                let correctSelections = 0;
+                let incorrectSelections = 0;
+                
+                // 정답 확인
+                wordElements.forEach((wordElement) => {
+                    const index = parseInt(wordElement.dataset.index);
+                    const wordData = currentSentence.words[index];
+                    const isSelected = wordElement.classList.contains('selected');
+                    const isTargetPos = wordData.pos === currentTargetPos;
+                    
+                    // 선택된 단어 확인
+                    if (isSelected) {
+                        if (isTargetPos) {
+                            wordElement.classList.remove('selected');
+                            wordElement.classList.add('correct');
+                            correctSelections++;
+                        } else {
+                            wordElement.classList.remove('selected');
+                            wordElement.classList.add('incorrect');
+                            incorrectSelections++;
+                        }
+                    } 
+                    // 선택되지 않았지만 대상 품사인 경우
+                    else if (isTargetPos) {
+                        wordElement.classList.add('correct');
+                    }
+                });
+                
+                // 정답 개수 계산
+                const totalTargetWords = currentSentence.words.filter(word => word.pos === currentTargetPos).length;
+                
+                // 점수 계산 (정답률에 따라)
+                let sentenceScore = 0;
+                if (correctSelections === totalTargetWords && incorrectSelections === 0) {
+                    // 완벽한 정답
+                    sentenceScore = 20;
+                    feedbackMessage.textContent = `완벽해요! 모든 ${currentTargetPos}를 정확히 찾았습니다.`;
+                } else if (correctSelections > 0 && correctSelections === totalTargetWords) {
+                    // 대상 품사는 모두 찾았지만 다른 품사도 선택
+                    sentenceScore = 10;
+                    feedbackMessage.textContent = `모든 ${currentTargetPos}를 찾았지만, 다른 품사도 선택했어요.`;
+                } else if (correctSelections > 0) {
+                    // 일부만 찾음
+                    sentenceScore = 5;
+                    feedbackMessage.textContent = `일부 ${currentTargetPos}를 찾았지만, 모두 찾지 못했어요.`;
+                } else {
+                    // 하나도 못 찾음
+                    feedbackMessage.textContent = `아쉽게도 ${currentTargetPos}를 하나도 찾지 못했어요.`;
+                }
+                
+                score += sentenceScore;
+                scoreValue.textContent = score;
+                
+                // 피드백 표시
+                feedbackElement.style.display = 'block';
+                
+                // 버튼 상태 업데이트
+                checkButton.style.display = 'none';
+                nextButton.style.display = 'flex';
+                
+                // 마지막 문제인 경우
+                if (currentSentenceIndex === gameSentences.length - 1) {
+                    nextButton.innerHTML = '<i class="fas fa-flag-checkered"></i> 결과 보기';
+                }
+            }
+            
+            // 다음 문제로 이동
+            function goToNextSentence() {
+                currentSentenceIndex++;
+                
+                if (currentSentenceIndex < gameSentences.length) {
+                    showSentence();
+                } else {
+                    showResult();
+                }
+            }
+            
+            // 결과 표시
+            function showResult() {
+                // 결과 팝업 내용 업데이트
+                const totalPossibleScore = gameSentences.length * 20;
+                const percentage = Math.round((score / totalPossibleScore) * 100);
+                
+                resultMessage.innerHTML = `
+                    총 ${gameSentences.length}문장 중에서 품사를 찾았습니다.<br>
+                    최종 점수: <strong>${score}점</strong> (${percentage}%)
+                `;
+                
+                // 결과 팝업 표시
+                resultPopup.style.display = 'flex';
+            }
+            
+            // 이벤트 리스너 등록
+            checkButton.addEventListener('click', checkAnswer);
+            nextButton.addEventListener('click', goToNextSentence);
+            restartButton.addEventListener('click', initGame);
+            homeButton.addEventListener('click', function() {
+                window.location.href = 'activities.html';
+            });
+            
+            // 게임 시작
+            initGame();
+        });
+    </script>
+</body>
+</html> 

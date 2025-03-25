@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문법놀이터</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">
+                <!-- 로고 이미지 플레이스홀더 -->
+                <div class="placeholder-img logo-img">
+                    <!-- 
+                    이미지 생성 프롬프트:
+                    "초등학생을 위한 국어 문법 교육 웹사이트 로고. 귀엽고 친근한 스타일의 '문법놀이터' 로고. 
+                    밝은 파란색(#4B7BEC)과 주황색(#FFA502) 사용. 책과 연필 또는 문법 관련 심볼 포함. 
+                    둥근 형태와 아이들이 좋아할 만한 친근한 글꼴."
+                    -->
+                </div>
+                <span>문법놀이터</span>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html" class="active">홈</a></li>
+                <li><a href="pages/grade-learning/index.html">학년별 학습</a></li>
+                <li><a href="pages/topics/index.html">학습 주제별</a></li>
+                <li><a href="pages/activities/index.html">학습 활동</a></li>
+                <li><a href="pages/progress/index.html">학습 진도 관리</a></li>
+            </ul>
+        </nav>
+        <div class="header-utils">
+            <div class="search-box">
+                <input type="text" placeholder="배우고 싶은 내용을 검색해보세요">
+                <button class="search-btn">검색</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main>
+        <!-- 환영 배너/슬라이더 섹션 -->
+        <section class="welcome-banner">
+            <div class="banner-content">
+                <h1>즐겁게 배우는 국어 문법!</h1>
+                <p>게임하듯 재미있게, 우리말의 규칙을 배워보세요</p>
+                <a href="topics.html" class="cta-button">학습 시작하기</a>
+            </div>
+            <div class="banner-image">
+                <!-- 배너 이미지 플레이스홀더 -->
+                <div class="placeholder-img banner-img">
+                    <!-- 
+                    이미지 생성 프롬프트:
+                    "초등학생들이 즐겁게 국어 문법을 배우는 모습을 담은 일러스트. 밝고 생동감 있는 색상. 
+                    다양한 학습 요소(책, 태블릿, 게임 요소)와 함께 있는 행복한 어린이들. 
+                    다양한 국적의 아이들이 포함된 포용적인 이미지. 
+                    배경에는 문법 요소(문장 부호, 단어 등)가 떠다니는 재미있는 구성."
+                    -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 학년별 빠른 이동 버튼 섹션 -->
+        <section class="grade-buttons">
+            <h2>학년별 학습 바로가기</h2>
+            <div class="grade-buttons-container">
+                <a href="pages/grade-learning/grade1.html" class="grade-btn grade-1">
+                    <div class="placeholder-img grade-icon">
+                        <!-- 
+                        이미지 생성 프롬프트 (1학년 아이콘):
+                        "1학년을 나타내는 귀엽고 단순한 아이콘. 밝은 분홍색(#FF9FF3) 배경의 원형 디자인. 
+                        숫자 '1'과 함께 초등학교 1학년 수준의 간단한 낱말 또는 문장 요소 포함. 
+                        둥근 모서리와 부드러운 그림체로 어린 아이들에게 친근한 느낌."
+                        -->
+                    </div>
+                    <span>1학년</span>
+                    <small>낱말과 문장의 기초</small>
+                </a>
+                <a href="pages/grade-learning/grade2.html" class="grade-btn grade-2">
+                    <div class="placeholder-img grade-icon">
+                        <!-- 2학년 아이콘 프롬프트 생략 (비슷한 스타일로 노란색(#FECA57) 배경, 숫자 '2' 포함) -->
+                    </div>
+                    <span>2학년</span>
+                    <small>문장의 종류와 구조</small>
+                </a>
+                <a href="pages/grade-learning/grade3.html" class="grade-btn grade-3">
+                    <div class="placeholder-img grade-icon">
+                        <!-- 3학년 아이콘 프롬프트 생략 (비슷한 스타일로 빨간색(#FF6B6B) 배경, 숫자 '3' 포함) -->
+                    </div>
+                    <span>3학년</span>
+                    <small>품사와 문장 성분</small>
+                </a>
+                <a href="pages/grade-learning/grade4.html" class="grade-btn grade-4">
+                    <div class="placeholder-img grade-icon">
+                        <!-- 4학년 아이콘 프롬프트 생략 (비슷한 스타일로 하늘색(#48DBFB) 배경, 숫자 '4' 포함) -->
+                    </div>
+                    <span>4학년</span>
+                    <small>높임법과 시간 표현</small>
+                </a>
+                <a href="pages/grade-learning/grade5.html" class="grade-btn grade-5">
+                    <div class="placeholder-img grade-icon">
+                        <!-- 5학년 아이콘 프롬프트 생략 (비슷한 스타일로 녹색(#1DD1A1) 배경, 숫자 '5' 포함) -->
+                    </div>
+                    <span>5학년</span>
+                    <small>관용 표현과 속담</small>
+                </a>
+                <a href="pages/grade-learning/grade6.html" class="grade-btn grade-6">
+                    <div class="placeholder-img grade-icon">
+                        <!-- 6학년 아이콘 프롬프트 생략 (비슷한 스타일로 보라색(#5F27CD) 배경, 숫자 '6' 포함) -->
+                    </div>
+                    <span>6학년</span>
+                    <small>다양한 표현과 고급 문법</small>
+                </a>
+            </div>
+            <div class="see-all-button">
+                <a href="pages/grade-learning/index.html">모든 학년별 학습 보기</a>
+            </div>
+        </section>
+
+        <!-- 추천 학습 콘텐츠 섹션 -->
+        <section class="recommended-content">
+            <h2>나에게 맞는 추천 학습</h2>
+            
+            <!-- 학년별 탭 -->
+            <div class="content-tabs">
+                <button class="tab-btn active" data-grade="all">전체</button>
+                <button class="tab-btn" data-grade="grade1">1학년</button>
+                <button class="tab-btn" data-grade="grade2">2학년</button>
+                <button class="tab-btn" data-grade="grade3">3학년</button>
+                <button class="tab-btn" data-grade="grade4">4학년</button>
+                <button class="tab-btn" data-grade="grade5">5학년</button>
+                <button class="tab-btn" data-grade="grade6">6학년</button>
+            </div>
+
+            <div class="content-cards">
+                <!-- 1학년 콘텐츠 -->
+                <div class="content-card" data-grade="grade1">
+                    <div class="placeholder-img card-img">
+                        <!-- 이미지 프롬프트 생략 -->
+                    </div>
+                    <div class="card-content">
+                        <h3>낱말 알아보기</h3>
+                        <p>우리 주변의 다양한 낱말을 재미있게 배워봐요</p>
+                        <div class="card-meta">
+                            <span class="grade-tag">1학년</span>
+                            <span class="time">약 15분</span>
+                        </div>
+                        <a href="pages/topics/topic_parts_of_speech.html" class="start-btn">시작하기</a>
+                    </div>
+                </div>
+
+                <div class="content-card" data-grade="grade1">
+                    <div class="placeholder-img card-img"></div>
+                    <div class="card-content">
+                        <h3>글자와 소리 관계 배우기</h3>
+                        <p>글자와 소리가 어떻게 연결되는지 배워요</p>
+                        <div class="card-meta">
+                            <span class="grade-tag">1학년</span>
+                            <span class="time">약 10분</span>
+                        </div>
+                        <a href="pages/grade-learning/grade1_words.html" class="start-btn">시작하기</a>
+                    </div>
+                </div>
+
+                <!-- 2학년 콘텐츠 -->
+                <div class="content-card" data-grade="grade2">
+                    <div class="placeholder-img card-img">
+                        <!-- 이미지 프롬프트 생략 -->
+                    </div>
+                    <div class="card-content">
+                        <h3>문장의 종류 배우기</h3>
+                        <p>다양한 문장의 종류와 특징을 알아봐요</p>
+                        <div class="card-meta">
+                            <span class="grade-tag">2학년</span>
+                            <span class="time">약 20분</span>
+                        </div>
+                        <a href="pages/topics/topic_sentence_types.html" class="start-btn">시작하기</a>
+                    </div>
+                </div>
+
+                <div class="content-card" data-grade="grade2">
+                    <div class="placeholder-img card-img"></div>
+                    <div class="card-content">
+                        <h3>기본 문장 구조 이해하기</h3>
+                        <p>문장이 어떻게 구성되는지 알아봐요</p>
+                        <div class="card-meta">
+                            <span class="grade-tag">2학년</span>
+                            <span class="time">약 15분</span>
+                        </div>
+                        <a href="pages/grade-learning/grade2_sentences.html" class="start-btn">시작하기</a>
+                    </div>
+                </div>
+
+                <!-- 3학년 콘텐츠 -->
+                <div class="content-card" data-grade="grade3">
+                    <div class="placeholder-img card-img">
+                        <!-- 이미지 프롬프트 생략 -->
+                    </div>
+                    <div class="card-content">
+                        <h3>품사 알아보기</h3>
+                        <p>단어의 종류와 쓰임새를 탐험해보세요</p>
+                        <div class="card-meta">
+                            <span class="grade-tag">3학년</span>
+                            <span class="time">약 25분</span>
+                        </div>
+                        <a href="pages/topics/topic_parts_of_speech.html" class="start-btn">시작하기</a>
+                    </div>
+                </div>
+
+                <div class="content-card" data-grade="grade3">
+                    <div class="placeholder-img card-img"></div>
+                    <div class="card-content">
+                        <h3>문장 성분 이해하기</h3>
+                        <p>문장에서 각 부분의 역할 알아보기</p>
+                        <div class="card-meta">
+                            <span class="grade-tag">3학년</span>
+                            <span class="time">약 20분</span>
+                        </div>
+                        <a href="pages/grade-learning/grade3_sentence_components.html" class="start-btn">시작하기</a>
+                    </div>
+                </div>
+
+                <!-- 4-6학년 콘텐츠는 비슷한 구조로 추가 가능 -->
+            </div>
+
+            <div class="see-all-button">
+                <a href="pages/topics/index.html">모든 학습 주제 보기</a>
+            </div>
+        </section>
+
+        <!-- 학습 방법 안내 섹션 (로그인 영역 대체) -->
+        <section class="learning-guide">
+            <h2>학습 방법 안내</h2>
+            <div class="guide-content">
+                <div class="placeholder-img character-img">
+                    <!-- 
+                    이미지 생성 프롬프트:
+                    "안내를 제공하는 귀여운 캐릭터 일러스트. 메인 브랜드 색상(#4B7BEC)을 활용한 
+                    학생 또는 선생님 모습의 캐릭터. 손가락으로 안내하는 친절한 포즈. 
+                    둥근 형태와 단순한 그림체로 초등학생들에게 친근한 느낌의 디자인."
+                    -->
+                </div>
+                <div class="guide-steps">
+                    <div class="guide-step">
+                        <h4>1. 학년 또는 주제 선택하기</h4>
+                        <p>학년별 학습이나 주제별 학습 중에서 원하는 영역을 선택해요.</p>
+                    </div>
+                    <div class="guide-step">
+                        <h4>2. 학습 활동 시작하기</h4>
+                        <p>다양한 게임과 퀴즈로 재미있게 문법을 배워봐요. <a href="pages/activities/index.html">학습 활동 보러가기</a></p>
+                    </div>
+                    <div class="guide-step">
+                        <h4>3. 배운 내용 복습하기</h4>
+                        <p>학습한 내용을 복습하고 다른 주제도 탐험해보세요!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 최근 업데이트 콘텐츠 섹션 -->
+        <section class="recent-updates">
+            <h2>최근 업데이트된 콘텐츠</h2>
+            <div class="updates-container">
+                <div class="update-card new">
+                    <div class="update-badge">신규</div>
+                    <div class="update-content">
+                        <h3>속담으로 배우는 국어 문화</h3>
+                        <p>재미있는 속담의 유래와 의미를 통해 국어 문화를 배워보세요.</p>
+                        <div class="update-meta">
+                            <span class="update-date">2025.01.15 업데이트</span>
+                            <span class="grade-tag">4-6학년</span>
+                        </div>
+                        <a href="pages/topics/topic_idioms.html" class="update-link">바로가기</a>
+                    </div>
+                </div>
+                
+                <div class="update-card improved">
+                    <div class="update-badge">개선</div>
+                    <div class="update-content">
+                        <h3>낱말 카드 매칭 게임</h3>
+                        <p>더 많은 단어와 새로운 난이도 레벨이 추가되었습니다.</p>
+                        <div class="update-meta">
+                            <span class="update-date">2025.01.10 업데이트</span>
+                            <span class="grade-tag">전체 학년</span>
+                        </div>
+                        <a href="pages/activities/word_matching_game.html" class="update-link">바로가기</a>
+                    </div>
+                </div>
+                
+                <div class="update-card new">
+                    <div class="update-badge">신규</div>
+                    <div class="update-content">
+                        <h3>문장 성분 알아보기</h3>
+                        <p>주어, 목적어, 서술어 등 문장의 구성 요소를 배워봅니다.</p>
+                        <div class="update-meta">
+                            <span class="update-date">2025.01.05 업데이트</span>
+                            <span class="grade-tag">3학년</span>
+                        </div>
+                        <a href="pages/grade-learning/grade3_sentence_components.html" class="update-link">바로가기</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 인기 학습 활동 섹션 -->
+        <section class="popular-activities">
+            <h2>인기 학습 활동</h2>
+            
+            <!-- 활동 유형 필터 -->
+            <div class="activity-filters">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="game">게임</button>
+                <button class="filter-btn" data-filter="quiz">퀴즈</button>
+                <button class="filter-btn" data-filter="tool">학습 도구</button>
+            </div>
+            
+            <div class="activity-cards">
+                <div class="activity-card game" data-type="game">
+                    <div class="placeholder-img activity-img">
+                        <!-- 이미지 프롬프트 생략 -->
+                    </div>
+                    <div class="activity-content">
+                        <span class="activity-type">게임</span>
+                        <h3>낱말 카드 매칭 게임</h3>
+                        <p>단어와 그림을 연결하며 어휘력을 키워보세요</p>
+                        <div class="activity-meta">
+                            <span class="popularity">인기 ★★★★★</span>
+                            <span class="players">2,341명 참여</span>
+                        </div>
+                        <a href="pages/activities/word_matching_game.html" class="activity-link">시작하기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="activity-card quiz" data-type="quiz">
+                    <div class="placeholder-img activity-img">
+                        <!-- 이미지 프롬프트 생략 -->
+                    </div>
+                    <div class="activity-content">
+                        <span class="activity-type">퀴즈</span>
+                        <h3>문장 종류 맞추기 퀴즈</h3>
+                        <p>다양한 문장을 보고 종류를 맞혀보세요</p>
+                        <div class="activity-meta">
+                            <span class="popularity">인기 ★★★★☆</span>
+                            <span class="players">1,987명 참여</span>
+                        </div>
+                        <a href="pages/activities/sentence_type_quiz.html" class="activity-link">시작하기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="activity-card game" data-type="game">
+                    <div class="placeholder-img activity-img">
+                        <!-- 이미지 프롬프트 생략 -->
+                    </div>
+                    <div class="activity-content">
+                        <span class="activity-type">게임</span>
+                        <h3>품사 찾기 게임</h3>
+                        <p>문장에서 다양한 품사를 찾아 문법 실력을 키워보세요</p>
+                        <div class="activity-meta">
+                            <span class="popularity">인기 ★★★★☆</span>
+                            <span class="players">1,754명 참여</span>
+                        </div>
+                        <a href="pages/activities/parts_of_speech_game.html" class="activity-link">시작하기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card quiz" data-type="quiz">
+                    <div class="placeholder-img activity-img"></div>
+                    <div class="activity-content">
+                        <span class="activity-type">퀴즈</span>
+                        <h3>속담 퍼즐 맞추기</h3>
+                        <p>재미있는 속담을 퍼즐로 완성해보세요</p>
+                        <div class="activity-meta">
+                            <span class="popularity">인기 ★★★☆☆</span>
+                            <span class="players">1,523명 참여</span>
+                        </div>
+                        <a href="pages/activities/proverb_puzzle.html" class="activity-link">시작하기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card tool" data-type="tool">
+                    <div class="placeholder-img activity-img"></div>
+                    <div class="activity-content">
+                        <span class="activity-type">도구</span>
+                        <h3>높임말 변환기</h3>
+                        <p>일상 문장을 존댓말로 바꿔보는 도구</p>
+                        <div class="activity-meta">
+                            <span class="popularity">인기 ★★★★☆</span>
+                            <span class="players">1,342명 참여</span>
+                        </div>
+                        <a href="pages/activities/honorific_converter.html" class="activity-link">시작하기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card tool" data-type="tool">
+                    <div class="placeholder-img activity-img"></div>
+                    <div class="activity-content">
+                        <span class="activity-type">도구</span>
+                        <h3>문장 바로잡기</h3>
+                        <p>올바른 문장으로 고쳐보는 연습</p>
+                        <div class="activity-meta">
+                            <span class="popularity">인기 ★★★☆☆</span>
+                            <span class="players">1,105명 참여</span>
+                        </div>
+                        <a href="pages/activities/sentence_correction.html" class="activity-link">시작하기 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="see-all-button">
+                <a href="pages/activities/index.html">모든 학습 활동 보기</a>
+            </div>
+        </section>
+
+        <!-- 학습 로드맵 섹션 -->
+        <section class="learning-roadmap">
+            <h2>국어 문법 학습 로드맵</h2>
+            <p class="roadmap-intro">처음부터 차근차근 학습하고 싶다면 아래 로드맵을 따라가 보세요!</p>
+            
+            <div class="roadmap-container">
+                <div class="roadmap-path">
+                    <!-- 로드맵 연결선 -->
+                </div>
+                
+                <div class="roadmap-steps">
+                    <div class="roadmap-step beginner active">
+                        <div class="step-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>기초 단계</h3>
+                            <p>낱말과 기본 문장 구조 배우기</p>
+                            <ul class="step-topics">
+                                <li><a href="pages/topics/topic_parts_of_speech.html">낱말의 종류 알아보기</a></li>
+                                <li><a href="pages/topics/topic_sentence_types.html">문장의 종류 이해하기</a></li>
+                                <li><a href="pages/grade-learning/grade1_words.html">글자와 소리의 관계</a></li>
+                            </ul>
+                            <div class="step-grade">추천: 1-2학년</div>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step intermediate">
+                        <div class="step-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>발전 단계</h3>
+                            <p>품사와 문장 성분 익히기</p>
+                            <ul class="step-topics">
+                                <li><a href="pages/topics/topic_parts_of_speech.html">품사 자세히 알아보기</a></li>
+                                <li><a href="pages/grade-learning/grade3_sentence_components.html">문장 성분 이해하기</a></li>
+                                <li><a href="pages/topics/topic_connecting_sentences.html">문장 연결하기</a></li>
+                            </ul>
+                            <div class="step-grade">추천: 3-4학년</div>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step advanced">
+                        <div class="step-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>심화 단계</h3>
+                            <p>다양한 표현과 문법 활용하기</p>
+                            <ul class="step-topics">
+                                <li><a href="pages/topics/topic_honorifics.html">높임 표현 익히기</a></li>
+                                <li><a href="pages/topics/topic_idioms.html">관용 표현과 속담</a></li>
+                                <li><a href="pages/topics/topic_complex_sentences.html">복잡한 문장 구조</a></li>
+                            </ul>
+                            <div class="step-grade">추천: 5-6학년</div>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-step mastery">
+                        <div class="step-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>완성 단계</h3>
+                            <p>실전 활용과 창의적 표현</p>
+                            <ul class="step-topics">
+                                <li><a href="pages/topics/topic_effective_writing.html">효과적인 글쓰기</a></li>
+                                <li><a href="pages/topics/topic_persuasive_expression.html">설득하는 표현</a></li>
+                                <li><a href="pages/topics/topic_figurative_language.html">비유적 표현 활용하기</a></li>
+                            </ul>
+                            <div class="step-grade">추천: 고학년 및 중학생</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="roadmap-start-btn">
+                    <a href="pages/grade-learning/grade1.html">기초부터 시작하기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 영역 -->
+    <footer class="main-footer">
+        <div class="copyright">
+            <p>&copy; 2025 문법놀이터. All rights reserved. | 문의: <a href="mailto:milgae@naver.com">milgae@naver.com</a></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/scripts.js"></script>
+</body>
+</html> 

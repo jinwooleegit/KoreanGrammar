@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설득하는 표현 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #673AB7;
+            --secondary-color: #9575CD;
+            --light-color: #EDE7F6;
+        }
+        
+        .topic-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .persuasive-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .example-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .persuasive-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .persuasive-table th, .persuasive-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .persuasive-table th {
+            background-color: var(--light-color);
+            color: #333;
+        }
+
+        .practice-problem {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .answer-reveal {
+            background-color: #EDE7F6;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        .activity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .activity-icon {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li class="active"><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="topic-header">
+        <h1>설득하는 표현</h1>
+        <p>다른 사람을 설득하는 효과적인 표현 방법과 전략에 대해 배워봅시다.</p>
+        <div class="breadcrumb">
+            <a href="index.html">홈</a> &gt;
+            <a href="topics.html">주제별 학습</a> &gt;
+            <span>설득하는 표현</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="section intro-section">
+            <h2>설득하는 표현이란?</h2>
+            <p><strong>설득하는 표현</strong>은 다른 사람이 우리의 의견이나 생각에 동의하도록 하거나, 특정 행동을 하도록 영향을 주는 방법입니다.</p>
+            <p>효과적인 설득은 <strong>논리적인 근거</strong>와 <strong>감정적인 호소</strong>를 적절히 활용하여 상대방의 마음과 생각을 움직이는 것을 목표로 합니다.</p>
+            
+            <div class="example-box">
+                <p>설득하는 글이나 말에는 주장과 그것을 뒷받침하는 <span class="highlight">근거</span>, 그리고 독자나 청자를 고려한 <span class="highlight">표현 전략</span>이 필요합니다.</p>
+            </div>
+        </section>
+
+        <section class="section persuasive-section">
+            <h2>설득하는 표현의 요소</h2>
+            
+            <div class="persuasive-card">
+                <h3>1. 명확한 주장(Claim)</h3>
+                <p>설득하는 표현에서는 <strong>자신의 주장</strong>을 명확하게 제시해야 합니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">명확한 주장:</span> "학교에 휴대전화 사용 금지 정책을 완화해야 합니다."</p>
+                    <p><span class="highlight">모호한 주장:</span> "휴대전화에 대해 생각해 봐야 합니다."</p>
+                </div>
+            </div>
+            
+            <div class="persuasive-card">
+                <h3>2. 타당한 근거(Evidence)</h3>
+                <p>주장을 뒷받침하는 <strong>구체적이고 믿을 수 있는 근거</strong>를 제시해야 합니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">사실적 근거:</span> "지난 학기 설문조사 결과, 85%의 학생이 수업 중 계산기로 휴대전화를 사용하길 원했습니다."</p>
+                    <p><span class="highlight">권위적 근거:</span> "교육학 전문가 김박사는 적절한 휴대전화 사용이 학습에 도움이 된다고 주장합니다."</p>
+                    <p><span class="highlight">사례:</span> "A중학교에서는 제한적 휴대전화 사용을 허용한 후 학생들의 정보 검색 능력이 20% 향상되었습니다."</p>
+                </div>
+            </div>
+            
+            <div class="persuasive-card">
+                <h3>3. 논리적 연결(Reasoning)</h3>
+                <p>주장과 근거 사이의 <strong>논리적인 연결</strong>이 중요합니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">논리적 연결:</span> "휴대전화를 교육적 목적으로 사용할 수 있게 허용하면, 학생들은 다양한 정보에 접근할 수 있고, 이는 학습 효율을 높일 것입니다."</p>
+                </div>
+            </div>
+            
+            <div class="persuasive-card">
+                <h3>4. 감정적 호소(Emotional Appeal)</h3>
+                <p><strong>감정에 호소</strong>하는 표현으로 공감과 동의를 이끌어낼 수 있습니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">공감 유발:</span> "여러분도 중요한 정보를 찾아야 할 때 휴대전화가 없어 곤란했던 경험이 있을 것입니다."</p>
+                    <p><span class="highlight">윤리적 호소:</span> "디지털 시대의 학생들에게 필요한 도구를 제한하는 것은 공정한 교육 기회를 박탈하는 것입니다."</p>
+                </div>
+            </div>
+            
+            <div class="persuasive-card">
+                <h3>5. 반론 수용과 반박(Counterargument)</h3>
+                <p>예상되는 <strong>반론을 미리 언급하고 이에 대응</strong>하는 것이 설득력을 높입니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">반론 수용:</span> "물론 휴대전화가 수업 중 집중력을 저하시킬 수 있다는 우려가 있습니다."</p>
+                    <p><span class="highlight">반박:</span> "하지만 명확한 사용 지침과 교사의 지도가 있다면, 이러한 문제는 최소화될 수 있습니다."</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section special-section">
+            <h2>설득하는 표현 전략</h2>
+            
+            <div class="persuasive-card">
+                <h3>1. 설득력 있는 단어 선택</h3>
+                <p><strong>감정이나 가치를 담은 단어</strong>를 사용하여 설득력을 높일 수 있습니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">중립적 표현:</span> "이 정책은 변화를 가져올 것입니다."</p>
+                    <p><span class="highlight">설득력 있는 표현:</span> "이 혁신적인 정책은 학생들에게 새로운 기회를 제공할 것입니다."</p>
+                </div>
+            </div>
+            
+            <div class="persuasive-card">
+                <h3>2. 수사적 질문</h3>
+                <p><strong>답이 이미 암시된 질문</strong>을 통해 독자나 청자의 생각을 유도할 수 있습니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">수사적 질문:</span> "디지털 시대에 학생들이 가장 중요한 정보 도구를 사용하지 못하게 하는 것이 과연 합리적일까요?"</p>
+                </div>
+            </div>
+            
+            <div class="persuasive-card">
+                <h3>3. 구체적인 사례와 이야기</h3>
+                <p><strong>구체적인 사례나 개인 경험</strong>은 추상적인 주장보다 더 설득력이 있습니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">추상적 주장:</span> "휴대전화는 학습에 도움이 됩니다."</p>
+                    <p><span class="highlight">구체적 사례:</span> "지난 학기 과학 수업에서 민수는 식물 관찰 과제를 위해 휴대전화 카메라를 사용했고, 이를 통해 시간에 따른 변화를 효과적으로 기록할 수 있었습니다."</p>
+                </div>
+            </div>
+            
+            <div class="persuasive-card">
+                <h3>4. 비교와 대조</h3>
+                <p><strong>두 가지 상황이나 정책을 비교</strong>하여 자신의 주장이 더 나은 선택임을 보여줄 수 있습니다.</p>
+                
+                <div class="example-box">
+                    <p><span class="highlight">비교와 대조:</span> "휴대전화를 전면 금지하는 것은 학생들의 불만만 키우지만, 제한적 사용을 허용하면 학습 도구로서의 이점을 활용하면서 집중력 저하도 방지할 수 있습니다."</p>
+                </div>
+            </div>
+            
+            <h3>설득력 있는 표현과 그렇지 않은 표현의 비교</h3>
+            <table class="persuasive-table">
+                <thead>
+                    <tr>
+                        <th>요소</th>
+                        <th>설득력이 부족한 표현</th>
+                        <th>설득력 있는 표현</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>주장</td>
+                        <td>"휴대전화는 좋습니다."</td>
+                        <td>"학교에서 휴대전화의 교육적 사용을 허용해야 합니다."</td>
+                    </tr>
+                    <tr>
+                        <td>근거</td>
+                        <td>"모든 사람이 그렇게 생각합니다."</td>
+                        <td>"최근 교육부 연구에 따르면, 통제된 환경에서의 휴대전화 사용은 학습 효과를 15% 향상시켰습니다."</td>
+                    </tr>
+                    <tr>
+                        <td>논리</td>
+                        <td>"휴대전화가 있으면 좋으니까요."</td>
+                        <td>"휴대전화는 다양한 학습 자료에 접근할 수 있게 하고, 실시간 협업이 가능하며, 디지털 리터러시를 향상시키기 때문입니다."</td>
+                    </tr>
+                    <tr>
+                        <td>감정적 호소</td>
+                        <td>"휴대전화를 못 쓰면 슬픕니다."</td>
+                        <td>"급변하는 디지털 세상에서 학생들이 필요한 도구를 사용하지 못한다면, 우리는 그들의 미래 성공 기회를 제한하는 것입니다."</td>
+                    </tr>
+                    <tr>
+                        <td>반론 수용</td>
+                        <td>"반대 의견은 틀렸습니다."</td>
+                        <td>"휴대전화가 주의를 산만하게 할 수 있다는 우려는 이해합니다. 그러나 명확한 규칙과 적절한 감독이 있다면 이러한 문제는 최소화될 수 있습니다."</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section practice-section">
+            <h2>연습 문제</h2>
+            <p>다음 문제를 풀어보며 설득하는 표현의 요소와 전략을 익혀 봅시다.</p>
+            
+            <div class="practice-problem">
+                <h3>문제 1</h3>
+                <p>다음 중 가장 설득력 있는 주장은 무엇인가요?</p>
+                <ol type="a">
+                    <li>급식이 중요합니다.</li>
+                    <li>급식을 개선해야 합니다.</li>
+                    <li>학교 급식의 영양 균형을 개선하여 학생들의 건강을 증진해야 합니다.</li>
+                    <li>급식은 맛있어야 합니다.</li>
+                </ol>
+                <button class="btn" onclick="toggleAnswer('answer1')">정답 보기</button>
+                <div id="answer1" class="answer-reveal">
+                    <p><strong>정답:</strong> c. 학교 급식의 영양 균형을 개선하여 학생들의 건강을 증진해야 합니다.</p>
+                    <p>이 주장은 구체적인 목표(영양 균형 개선)와 그 이유(학생들의 건강 증진)를 모두 포함하고 있어 가장 설득력이 있습니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 2</h3>
+                <p>다음 주장에 적절한 근거를 찾아보세요.</p>
+                <p>"체육 수업 시간을 늘려야 합니다."</p>
+                <ol type="a">
+                    <li>운동은 재미있습니다.</li>
+                    <li>세계보건기구(WHO)의 연구에 따르면, 하루 60분 이상의 신체 활동은 청소년의 비만을 예방하고 정신 건강에 도움이 됩니다.</li>
+                    <li>우리 학교 교장 선생님도 체육을 좋아하십니다.</li>
+                    <li>모든 사람들이 체육 시간이 더 필요하다고 말합니다.</li>
+                </ol>
+                <button class="btn" onclick="toggleAnswer('answer2')">정답 보기</button>
+                <div id="answer2" class="answer-reveal">
+                    <p><strong>정답:</strong> b. 세계보건기구(WHO)의 연구에 따르면, 하루 60분 이상의 신체 활동은 청소년의 비만을 예방하고 정신 건강에 도움이 됩니다.</p>
+                    <p>이 근거는 권위 있는 기관의 연구 결과를 인용하여 체육 수업 시간 증가의 구체적인 이점을 제시하고 있어 가장 적절합니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 3</h3>
+                <p>다음 중 반론 수용과 반박이 가장 효과적으로 이루어진 것은 무엇인가요?</p>
+                <ol type="a">
+                    <li>환경 보호는 중요합니다. 반대하는 사람들은 잘못 생각하고 있습니다.</li>
+                    <li>환경 보호는 중요합니다. 비용이 많이 든다는 반론이 있지만, 장기적으로 볼 때 환경 파괴로 인한 비용이 더 클 것입니다.</li>
+                    <li>환경 보호는 중요합니다. 그러나 일부 사람들은 반대합니다.</li>
+                    <li>환경 보호는 중요합니다. 어떤 이유로든 반대할 수 없습니다.</li>
+                </ol>
+                <button class="btn" onclick="toggleAnswer('answer3')">정답 보기</button>
+                <div id="answer3" class="answer-reveal">
+                    <p><strong>정답:</strong> b. 환경 보호는 중요합니다. 비용이 많이 든다는 반론이 있지만, 장기적으로 볼 때 환경 파괴로 인한 비용이 더 클 것입니다.</p>
+                    <p>이 표현은 반론(비용 문제)을 구체적으로 언급하고, 논리적인 근거(장기적 비용 비교)로 이를 반박하고 있어 가장 효과적입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section activity-section">
+            <h2>설득하는 표현 학습 활동</h2>
+            <p>다양한 활동을 통해 설득하는 표현을 재미있게 학습해 봅시다.</p>
+            
+            <div class="activity-list">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>설득하는 글쓰기</h3>
+                    <p>주어진 주제에 대해 설득력 있는 글을 작성해 봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <h3>토론 놀이</h3>
+                    <p>간단한 주제로 짝과 함께 토론을 해봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>설득 표현 찾기</h3>
+                    <p>광고나 연설문에서 설득하는 표현을 찾아봅니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-theater-masks"></i>
+                    </div>
+                    <h3>설득 역할극</h3>
+                    <p>다양한 상황에서 설득하는 표현을 사용해 보는 역할극을 합니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAnswer(id) {
+            const answerElement = document.getElementById(id);
+            if (answerElement.style.display === 'block') {
+                answerElement.style.display = 'none';
+            } else {
+                answerElement.style.display = 'block';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 활동 버튼 이벤트
+            const activityButtons = document.querySelectorAll('.btn');
+            activityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 정답 버튼이 아닌 경우에만 알림 표시
+                    if (!this.getAttribute('onclick') || !this.getAttribute('onclick').includes('toggleAnswer')) {
+                        alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문법놀이터 로고 예시</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f7fa;
+            margin: 0;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo-icon {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .book {
+            position: absolute;
+            width: 40px;
+            height: 35px;
+            background-color: #4F46E5;
+            border-radius: 5px 0 0 5px;
+            transform: rotate(-10deg);
+            left: 0;
+            top: 10px;
+            z-index: 1;
+        }
+
+        .book:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 10px;
+            height: 35px;
+            background-color: #3730A3;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .pencil {
+            position: absolute;
+            width: 8px;
+            height: 45px;
+            background: linear-gradient(to bottom, #FCD34D 0%, #FCD34D 70%, #FBBF24 70%, #FBBF24 85%, #92400E 85%);
+            border-radius: 4px;
+            transform: rotate(20deg);
+            top: 0;
+            right: 5px;
+            z-index: 2;
+        }
+
+        .pencil:before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 8px solid #92400E;
+        }
+
+        .hangul {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #10B981;
+            border-radius: 50%;
+            left: 15px;
+            top: 5px;
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .logo-text span {
+            color: #4F46E5;
+        }
+
+        .logo-text .light {
+            color: #10B981;
+        }
+
+        /* 로고 변형 */
+        .logo-variations {
+            display: flex;
+            margin-top: 50px;
+            gap: 30px;
+        }
+
+        .small-logo {
+            transform: scale(0.7);
+        }
+
+        .favicon {
+            transform: scale(0.3);
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+        .variations-title {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <div class="logo">
+            <div class="logo-icon">
+                <div class="book"></div>
+                <div class="pencil"></div>
+                <div class="hangul">ㄱ</div>
+            </div>
+            <div class="logo-text">
+                <span>문법</span><span class="light">놀이터</span>
+            </div>
+        </div>
+
+        <h3>로고 예시</h3>
+        <p>이 로고는 책과 연필, 그리고 'ㄱ' 자모음을 조합하여 만든 것으로<br>
+           교육적이면서도 재미있는 느낌을 주려고 디자인했습니다.</p>
+        
+        <div class="variations-title">로고 변형</div>
+        <div class="logo-variations">
+            <div class="logo small-logo">
+                <div class="logo-icon">
+                    <div class="book"></div>
+                    <div class="pencil"></div>
+                    <div class="hangul">ㄱ</div>
+                </div>
+                <div class="logo-text">
+                    <span>문법</span><span class="light">놀이터</span>
+                </div>
+            </div>
+            
+            <div class="logo favicon">
+                <div class="logo-icon">
+                    <div class="book"></div>
+                    <div class="pencil"></div>
+                    <div class="hangul">ㄱ</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

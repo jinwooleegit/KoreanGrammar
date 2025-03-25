@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문장의 종류 | 문법놀이터</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 페이지 특정 스타일 */
+        .topic-header {
+            background: linear-gradient(135deg, #74B9FF 0%, #A5D4FF 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .topic-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .topic-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .intro-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .intro-section h2 {
+            color: #74B9FF;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .intro-section p {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .intro-highlight {
+            background-color: #F0F8FF;
+            border-left: 4px solid #74B9FF;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .sentence-types-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .sentence-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sentence-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .sentence-header {
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .declarative .sentence-header {
+            background-color: #74B9FF;
+        }
+
+        .interrogative .sentence-header {
+            background-color: #FF9F43;
+        }
+
+        .imperative .sentence-header {
+            background-color: #6C5CE7;
+        }
+
+        .exclamatory .sentence-header {
+            background-color: #FF7675;
+        }
+
+        .sentence-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .sentence-content {
+            padding: 20px;
+        }
+
+        .sentence-content p {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .example-list {
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .example-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .example-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .example-sentence {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .example-explanation {
+            font-size: 14px;
+            color: #777;
+            font-style: italic;
+        }
+
+        .punctuation-highlight {
+            font-weight: bold;
+            color: #FF7675;
+            font-size: 20px;
+        }
+
+        .activity-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .activity-section h2 {
+            color: #74B9FF;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .activity-card:hover {
+            border-color: #74B9FF;
+            box-shadow: 0 5px 15px rgba(116, 185, 255, 0.1);
+        }
+
+        .activity-icon {
+            background-color: #F0F8FF;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: #74B9FF;
+            font-size: 20px;
+        }
+
+        .activity-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .activity-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .activity-button {
+            margin-top: 15px;
+            background-color: #74B9FF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .activity-button:hover {
+            background-color: #5DACFF;
+        }
+
+        .practical-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .practical-section h2 {
+            color: #74B9FF;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .practical-box {
+            background-color: #F0F8FF;
+            border: 1px solid #D0E6FF;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .practical-box h3 {
+            color: #74B9FF;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .practical-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .practical-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .practical-list li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #74B9FF;
+            font-weight: bold;
+        }
+
+        /* 반응형 설정 */
+        @media (max-width: 768px) {
+            .sentence-types-section, .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li class="active"><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="topic-header">
+        <h1>문장의 종류</h1>
+        <p>평서문, 의문문, 명령문, 감탄문 등 다양한 문장의 종류와 그 특징을 배웁니다.</p>
+        <div class="breadcrumb">
+            <a href="index.html">홈</a> &gt;
+            <a href="topics.html">주제별 학습</a> &gt;
+            <span>문장의 종류</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="intro-section">
+            <h2>문장의 종류란?</h2>
+            <p>문장은 우리가 생각이나 감정을 표현하는 기본 단위입니다. 문장은 그 끝에 쓰이는 문장 부호와 표현 목적에 따라 크게 네 가지 종류로 나눌 수 있어요.</p>
+            
+            <div class="intro-highlight">
+                <p>문장의 4가지 종류: 평서문, 의문문, 명령문, 감탄문</p>
+            </div>
+            
+            <p>이런 문장의 종류를 잘 이해하고 사용하면 자신의 생각과 감정을 더 정확하게 표현할 수 있습니다. 상황에 따라 적절한 문장 종류를 사용하는 것은 효과적인 의사소통을 위해 중요해요.</p>
+        </section>
+
+        <section class="sentence-types-section">
+            <!-- 평서문 -->
+            <div class="sentence-card declarative">
+                <div class="sentence-header">
+                    <span class="sentence-icon"><i class="fas fa-comment"></i></span>
+                    평서문
+                </div>
+                <div class="sentence-content">
+                    <p>평서문은 <strong>사실이나 정보를 알리는</strong> 문장입니다. 어떤 일이나 상태를 설명하거나 서술할 때 사용하며, 문장 끝에는 마침표(.)를 붙입니다.</p>
+                    
+                    <div class="example-list">
+                        <div class="example-item">
+                            <div class="example-sentence">하늘이 맑습니다<span class="punctuation-highlight">.</span></div>
+                            <div class="example-explanation">날씨에 대한 사실을 서술하는 평서문</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-sentence">저는 학교에 갔어요<span class="punctuation-highlight">.</span></div>
+                            <div class="example-explanation">자신의 행동에 대해 설명하는 평서문</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-sentence">사과는 빨간색입니다<span class="punctuation-highlight">.</span></div>
+                            <div class="example-explanation">사과의 특징을 서술하는 평서문</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 의문문 -->
+            <div class="sentence-card interrogative">
+                <div class="sentence-header">
+                    <span class="sentence-icon"><i class="fas fa-question-circle"></i></span>
+                    의문문
+                </div>
+                <div class="sentence-content">
+                    <p>의문문은 <strong>질문을 하거나 답을 요구하는</strong> 문장입니다. 문장 끝에는 물음표(?)를 붙입니다.</p>
+                    
+                    <div class="example-list">
+                        <div class="example-item">
+                            <div class="example-sentence">너는 몇 살이니<span class="punctuation-highlight">?</span></div>
+                            <div class="example-explanation">나이를 묻는 의문문</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-sentence">어제 무슨 일이 있었습니까<span class="punctuation-highlight">?</span></div>
+                            <div class="example-explanation">상황에 대해 묻는 의문문</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-sentence">점심은 뭐 먹을래<span class="punctuation-highlight">?</span></div>
+                            <div class="example-explanation">상대방의 의견을 묻는 의문문</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 명령문 -->
+            <div class="sentence-card imperative">
+                <div class="sentence-header">
+                    <span class="sentence-icon"><i class="fas fa-exclamation-circle"></i></span>
+                    명령문
+                </div>
+                <div class="sentence-content">
+                    <p>명령문은 <strong>상대방에게 어떤 행동을 요구하는</strong> 문장입니다. 부탁, 명령, 요청 등을 할 때 사용하며, 문장 끝에는 느낌표(!)나 마침표(.)를 붙입니다.</p>
+                    
+                    <div class="example-list">
+                        <div class="example-item">
+                            <div class="example-sentence">이 문제를 풀어 보세요<span class="punctuation-highlight">.</span></div>
+                            <div class="example-explanation">정중하게 요청하는 명령문</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-sentence">빨리 일어나<span class="punctuation-highlight">!</span></div>
+                            <div class="example-explanation">강하게 명령하는 명령문</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-sentence">창문을 열어 주세요<span class="punctuation-highlight">.</span></div>
+                            <div class="example-explanation">부탁하는 느낌의 명령문</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 감탄문 -->
+            <div class="sentence-card exclamatory">
+                <div class="sentence-header">
+                    <span class="sentence-icon"><i class="fas fa-surprise"></i></span>
+                    감탄문
+                </div>
+                <div class="sentence-content">
+                    <p>감탄문은 <strong>놀람, 기쁨, 감동 등의 강한 감정을 나타내는</strong> 문장입니다. 문장 끝에는 느낌표(!)를 붙입니다.</p>
+                    
+                    <div class="example-list">
+                        <div class="example-item">
+                            <div class="example-sentence">정말 아름다운 풍경이구나<span class="punctuation-highlight">!</span></div>
+                            <div class="example-explanation">아름다움에 대한 감탄</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-sentence">와, 정말 대단해<span class="punctuation-highlight">!</span></div>
+                            <div class="example-explanation">놀라움을 표현하는 감탄문</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-sentence">얼마나 반가운지 몰라<span class="punctuation-highlight">!</span></div>
+                            <div class="example-explanation">기쁨을 표현하는 감탄문</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="practical-section">
+            <h2>문장 종류 활용하기</h2>
+            
+            <div class="practical-box">
+                <h3>같은 내용, 다른 문장 종류</h3>
+                <p>같은 내용을 다른 문장 종류로 표현해 보면 어떻게 달라질까요?</p>
+                
+                <ul class="practical-list">
+                    <li><strong>평서문:</strong> 오늘은 비가 옵니다.</li>
+                    <li><strong>의문문:</strong> 오늘은 비가 옵니까?</li>
+                    <li><strong>명령문:</strong> 오늘은 비가 오니 우산을 가져가세요.</li>
+                    <li><strong>감탄문:</strong> 오늘은 비가 오다니!</li>
+                </ul>
+            </div>
+            
+            <div class="practical-box">
+                <h3>문장 종류에 따른 문장 부호</h3>
+                <ul class="practical-list">
+                    <li><strong>마침표(.):</strong> 평서문과 부드러운 명령문 끝에 사용</li>
+                    <li><strong>물음표(?):</strong> 의문문 끝에 사용</li>
+                    <li><strong>느낌표(!):</strong> 감탄문과 강한 명령문 끝에 사용</li>
+                </ul>
+                <p>문장 부호는 글을 읽을 때 문장의 종류와 말투를 이해하는 데 중요한 역할을 합니다.</p>
+            </div>
+        </section>
+
+        <section class="activity-section">
+            <h2>학습 활동</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>문장 종류 맞추기</h3>
+                    <p>여러 문장을 보고 각각의 문장이 어떤 종류인지 맞춰보는 게임입니다. 문장 종류를 정확히 구분해보세요!</p>
+                    <button class="activity-button">게임 시작하기</button>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>문장 바꿔 쓰기</h3>
+                    <p>주어진 문장을 다른 종류의 문장으로 바꿔 써보는 활동입니다. 같은 내용을 다양하게 표현해보세요.</p>
+                    <button class="activity-button">활동 시작하기</button>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>문장 부호 찾기</h3>
+                    <p>문장 부호가 빠진 문장을 보고 알맞은 문장 부호를 찾아 넣는 활동입니다. 문장의 종류에 맞는 부호를 선택해보세요!</p>
+                    <button class="activity-button">연습 시작하기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 페이지 로딩 애니메이션
+            const cards = document.querySelectorAll('.sentence-card, .activity-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+            
+            // 학습 활동 버튼 이벤트
+            const activityButtons = document.querySelectorAll('.activity-button');
+            activityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조사 사용법 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #81C784;
+            --light-color: #E8F5E9;
+        }
+        
+        .topic-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .particle-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .example-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .particle-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .particle-table th, .particle-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .particle-table th {
+            background-color: var(--light-color);
+            color: #333;
+        }
+
+        .practice-problem {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .answer-reveal {
+            background-color: #E8F5E9;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        .activity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .activity-icon {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">문법놀이터</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li class="active"><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                    <li><a href="#">진도 관리</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="topic-header">
+        <h1>조사 사용법</h1>
+        <p>한국어에서 중요한 문법 요소인 다양한 조사의 쓰임과 활용에 대해 배워봅시다.</p>
+        <div class="breadcrumb">
+            <a href="index.html">홈</a> &gt;
+            <a href="topics.html">주제별 학습</a> &gt;
+            <span>조사 사용법</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="section intro-section">
+            <h2>조사란?</h2>
+            <p><strong>조사</strong>는 체언(명사, 대명사, 수사) 뒤에 붙어서 다른 말과의 관계를 나타내거나 특별한 뜻을 더해 주는 문법 요소입니다.</p>
+            <p>한국어에서 조사는 단어의 문장 속 역할이나 의미를 결정하는 중요한 역할을 합니다. 같은 단어라도 뒤에 오는 조사에 따라 문장에서의 역할이 달라집니다.</p>
+            
+            <div class="example-box">
+                <p><span class="highlight">철수가</span> 학교에 갔다. (주격 조사 '가' - 철수는 문장의 주어)</p>
+                <p><span class="highlight">철수를</span> 만났다. (목적격 조사 '를' - 철수는 문장의 목적어)</p>
+                <p><span class="highlight">철수의</span> 책이다. (관형격 조사 '의' - 철수는 책의 소유자)</p>
+            </div>
+        </section>
+
+        <section class="section particle-section">
+            <h2>조사의 종류와 용법</h2>
+            
+            <div class="particle-card">
+                <h3>주격 조사 (이/가)</h3>
+                <p>주격 조사는 <strong>문장의 주어</strong>임을 나타내는 조사입니다.</p>
+                <p>'이'는 자음으로 끝나는 말 뒤에, '가'는 모음으로 끝나는 말 뒤에 붙습니다.</p>
+                
+                <div class="example-box">
+                    <p>학생<span class="highlight">이</span> 공부한다. (자음으로 끝남)</p>
+                    <p>소나기<span class="highlight">가</span> 내린다. (모음으로 끝남)</p>
+                </div>
+            </div>
+            
+            <div class="particle-card">
+                <h3>목적격 조사 (을/를)</h3>
+                <p>목적격 조사는 <strong>문장의 목적어</strong>임을 나타내는 조사입니다.</p>
+                <p>'을'은 자음으로 끝나는 말 뒤에, '를'은 모음으로 끝나는 말 뒤에 붙습니다.</p>
+                
+                <div class="example-box">
+                    <p>책<span class="highlight">을</span> 읽는다. (자음으로 끝남)</p>
+                    <p>노래<span class="highlight">를</span> 부른다. (모음으로 끝남)</p>
+                </div>
+            </div>
+            
+            <div class="particle-card">
+                <h3>관형격 조사 (의)</h3>
+                <p>관형격 조사는 <strong>소유나 관계</strong>를 나타내는 조사입니다.</p>
+                
+                <div class="example-box">
+                    <p>철수<span class="highlight">의</span> 책 (소유)</p>
+                    <p>나무<span class="highlight">의</span> 높이 (관계)</p>
+                </div>
+            </div>
+            
+            <div class="particle-card">
+                <h3>부사격 조사 (에, 에서, 에게, 로/으로 등)</h3>
+                <p>부사격 조사는 <strong>장소, 시간, 대상, 방향, 수단</strong> 등을 나타내는 조사입니다.</p>
+                
+                <div class="example-box">
+                    <p>학교<span class="highlight">에</span> 간다. (장소-방향)</p>
+                    <p>학교<span class="highlight">에서</span> 공부한다. (장소-위치)</p>
+                    <p>친구<span class="highlight">에게</span> 선물을 준다. (대상)</p>
+                    <p>연필<span class="highlight">로</span> 그림을 그린다. (수단)</p>
+                    <p>기차<span class="highlight">으로</span> 여행한다. (수단)</p>
+                </div>
+            </div>
+            
+            <div class="particle-card">
+                <h3>보조사 (은/는, 도, 만, 까지 등)</h3>
+                <p>보조사는 <strong>특별한 의미</strong>를 더해주는 조사입니다.</p>
+                
+                <div class="example-box">
+                    <p>철수<span class="highlight">는</span> 학생이다. (주제, 대조)</p>
+                    <p>철수<span class="highlight">도</span> 학생이다. (포함)</p>
+                    <p>철수<span class="highlight">만</span> 학생이다. (유일)</p>
+                    <p>철수<span class="highlight">까지</span> 학생이다. (마지막 대상)</p>
+                </div>
+            </div>
+            
+            <div class="particle-card">
+                <h3>접속 조사 (와/과, 하고, 이랑/랑)</h3>
+                <p>접속 조사는 <strong>둘 이상의 체언을 연결</strong>하는 조사입니다.</p>
+                
+                <div class="example-box">
+                    <p>철수<span class="highlight">와</span> 영희 (모음으로 끝남)</p>
+                    <p>책<span class="highlight">과</span> 연필 (자음으로 끝남)</p>
+                    <p>사과<span class="highlight">하고</span> 바나나</p>
+                    <p>학생<span class="highlight">이랑</span> 선생님 (자음으로 끝남)</p>
+                    <p>의자<span class="highlight">랑</span> 책상 (모음으로 끝남)</p>
+                </div>
+            </div>
+            
+            <div class="particle-card">
+                <h3>호격 조사 (아/야)</h3>
+                <p>호격 조사는 <strong>부름이나 감탄</strong>을 나타내는 조사입니다.</p>
+                
+                <div class="example-box">
+                    <p>철수<span class="highlight">야</span>! (모음으로 끝남)</p>
+                    <p>민수<span class="highlight">야</span>! (모음으로 끝남)</p>
+                    <p>학생<span class="highlight">아</span>! (자음으로 끝남)</p>
+                </div>
+            </div>
+            
+            <h3>조사 정리</h3>
+            <table class="particle-table">
+                <thead>
+                    <tr>
+                        <th>종류</th>
+                        <th>조사</th>
+                        <th>의미</th>
+                        <th>예시</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>주격 조사</td>
+                        <td>이/가</td>
+                        <td>문장의 주어임을 나타냄</td>
+                        <td>철수가 간다.</td>
+                    </tr>
+                    <tr>
+                        <td>목적격 조사</td>
+                        <td>을/를</td>
+                        <td>문장의 목적어임을 나타냄</td>
+                        <td>책을 읽는다.</td>
+                    </tr>
+                    <tr>
+                        <td>관형격 조사</td>
+                        <td>의</td>
+                        <td>소유나 관계를 나타냄</td>
+                        <td>철수의 책</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">부사격 조사</td>
+                        <td>에</td>
+                        <td>장소, 시간, 방향</td>
+                        <td>학교에 간다.</td>
+                    </tr>
+                    <tr>
+                        <td>에서</td>
+                        <td>장소, 출발점</td>
+                        <td>학교에서 공부한다.</td>
+                    </tr>
+                    <tr>
+                        <td>로/으로</td>
+                        <td>방향, 수단, 재료</td>
+                        <td>연필로 그린다.</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">보조사</td>
+                        <td>은/는</td>
+                        <td>주제, 대조</td>
+                        <td>나는 학생이다.</td>
+                    </tr>
+                    <tr>
+                        <td>도</td>
+                        <td>포함</td>
+                        <td>나도 학생이다.</td>
+                    </tr>
+                    <tr>
+                        <td>만</td>
+                        <td>유일</td>
+                        <td>나만 학생이다.</td>
+                    </tr>
+                    <tr>
+                        <td>접속 조사</td>
+                        <td>와/과, 하고</td>
+                        <td>둘 이상을 연결</td>
+                        <td>사과와 배</td>
+                    </tr>
+                    <tr>
+                        <td>호격 조사</td>
+                        <td>아/야</td>
+                        <td>부름, 감탄</td>
+                        <td>철수야!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section special-section">
+            <h2>조사 사용 시 주의할 점</h2>
+            
+            <div class="particle-card">
+                <h3>조사의 중복 사용</h3>
+                <p>일부 조사는 함께 사용할 수 있습니다. 특히 보조사는 다른 조사와 함께 사용되는 경우가 많습니다.</p>
+                
+                <div class="example-box">
+                    <p>철수<span class="highlight">에게는</span> 책이 있다. ('에게' + '는')</p>
+                    <p>학교<span class="highlight">에서도</span> 공부한다. ('에서' + '도')</p>
+                </div>
+            </div>
+            
+            <div class="particle-card">
+                <h3>조사의 생략</h3>
+                <p>구어체에서는 문맥상 명확할 때 조사를 생략하는 경우가 많습니다.</p>
+                
+                <div class="example-box">
+                    <p>나(가) 학교 간다.</p>
+                    <p>책(을) 읽었어.</p>
+                </div>
+            </div>
+            
+            <div class="particle-card">
+                <h3>된소리되기</h3>
+                <p>일부 조사는 앞말의 받침에 따라 된소리로 발음됩니다.</p>
+                
+                <div class="example-box">
+                    <p>밥이 → [바비]</p>
+                    <p>꽃이 → [꼬치]</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section practice-section">
+            <h2>연습 문제</h2>
+            <p>다음 문제를 풀어보며 조사의 사용법을 익혀 봅시다.</p>
+            
+            <div class="practice-problem">
+                <h3>문제 1</h3>
+                <p>다음 문장에 알맞은 조사를 넣으세요.</p>
+                <p>"철수( ) 학교( ) 간다."</p>
+                <button class="btn" onclick="toggleAnswer('answer1')">정답 보기</button>
+                <div id="answer1" class="answer-reveal">
+                    <p><strong>정답:</strong> "철수<span class="highlight">가</span> 학교<span class="highlight">에</span> 간다."</p>
+                    <p>'철수'는 문장의 주어이므로 주격 조사 '가'를 사용하고, '학교'는 장소를 나타내므로 부사격 조사 '에'를 사용합니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 2</h3>
+                <p>다음 문장에 알맞은 조사를 넣으세요.</p>
+                <p>"영희( ) 민수( ) 친구이다."</p>
+                <button class="btn" onclick="toggleAnswer('answer2')">정답 보기</button>
+                <div id="answer2" class="answer-reveal">
+                    <p><strong>정답:</strong> "영희<span class="highlight">와</span> 민수<span class="highlight">는</span> 친구이다."</p>
+                    <p>'영희와 민수'는 함께 문장의 주어이므로 접속 조사 '와'를 사용하여 연결하고, 주제를 나타내는 보조사 '는'을 사용합니다.</p>
+                </div>
+            </div>
+            
+            <div class="practice-problem">
+                <h3>문제 3</h3>
+                <p>다음 문장에 알맞은 조사를 넣으세요.</p>
+                <p>"나( ) 연필( ) 그림을 그린다."</p>
+                <button class="btn" onclick="toggleAnswer('answer3')">정답 보기</button>
+                <div id="answer3" class="answer-reveal">
+                    <p><strong>정답:</strong> "나<span class="highlight">는</span> 연필<span class="highlight">로</span> 그림을 그린다."</p>
+                    <p>'나'는 문장의 주어이자 주제이므로 보조사 '는'을 사용하고, '연필'은 그림을 그리는 도구이므로 '로'를 사용합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section activity-section">
+            <h2>조사 사용법 학습 활동</h2>
+            <p>다양한 활동을 통해 조사 사용법을 재미있게 학습해 봅시다.</p>
+            
+            <div class="activity-list">
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                    <h3>조사 넣기</h3>
+                    <p>빈칸에 알맞은 조사를 넣어 문장을 완성하는 활동입니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>조사 바꾸기</h3>
+                    <p>문장의 조사를 바꾸어 의미가 어떻게 달라지는지 알아보는 활동입니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>조사 짝 맞추기</h3>
+                    <p>단어와 알맞은 조사를 연결하는 짝 맞추기 활동입니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>조사 빙고 게임</h3>
+                    <p>다양한 조사를 사용한 빙고 게임으로 재미있게 학습합니다.</p>
+                    <button class="btn">활동 시작하기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>문법놀이터</h3>
+                <p>초등학생을 위한 재미있는 국어 문법 학습 사이트</p>
+            </div>
+            <div class="footer-links">
+                <h4>바로가기</h4>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="grade_learning.html">학년별 학습</a></li>
+                    <li><a href="topics.html">학습 주제별</a></li>
+                    <li><a href="#">학습 활동</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>문의하기</h4>
+                <p>이메일: info@munjnori.co.kr</p>
+                <p>전화: 02-123-4567</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 문법놀이터. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAnswer(id) {
+            const answerElement = document.getElementById(id);
+            if (answerElement.style.display === 'block') {
+                answerElement.style.display = 'none';
+            } else {
+                answerElement.style.display = 'block';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // 활동 버튼 이벤트
+            const activityButtons = document.querySelectorAll('.btn');
+            activityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 정답 버튼이 아닌 경우에만 알림 표시
+                    if (!this.getAttribute('onclick') || !this.getAttribute('onclick').includes('toggleAnswer')) {
+                        alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
