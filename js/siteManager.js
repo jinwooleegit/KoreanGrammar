@@ -8,9 +8,9 @@ class SiteManager {
         // 메뉴 아이템 구성 (여기서 메뉴를 쉽게 추가/수정할 수 있음)
         this.menuItems = [
             { id: 'home', title: '홈', url: 'index.html', pattern: /index\.html$|^\/$/ },
-            { id: 'grade', title: '학년별 학습', url: 'pages/grade-learning/index.html', pattern: /grade-learning/ },
-            { id: 'topics', title: '학습 주제별', url: 'pages/topics/index.html', pattern: /topics/ },
-            { id: 'activities', title: '학습 활동', url: 'pages/activities/index.html', pattern: /activities/ }
+            { id: 'grade', title: '학년별 학습', url: 'grade-learning/index.html', pattern: /grade-learning/ },
+            { id: 'topics', title: '학습 주제별', url: 'topics/index.html', pattern: /topics/ },
+            { id: 'activities', title: '학습 활동', url: 'activities/index.html', pattern: /activities/ }
         ];
         
         // 현재 페이지 경로 분석
@@ -28,18 +28,24 @@ class SiteManager {
         const path = this.currentPath;
         console.log("현재 경로:", path);
         
-        if (path.includes('/pages/')) {
-            // 서브디렉토리(2단계) 확인
-            if (path.includes('/pages/topics/') || 
-                path.includes('/pages/activities/') || 
-                path.includes('/pages/grade-learning/')) {
-                return 2; // 2단계 (예: /pages/topics/something.html)
-            } else {
-                return 1; // 1단계 (예: /pages/something.html)
+        // '/pages/' 디렉토리가 경로에 포함되어 있는지 확인
+        const inPagesDir = path.includes('/pages/');
+        
+        // 서브디렉토리 깊이 계산
+        let depth = 0;
+        
+        if (inPagesDir) {
+            const pathParts = path.split('/').filter(Boolean);
+            const pagesIndex = pathParts.indexOf('pages');
+            
+            if (pagesIndex !== -1) {
+                // pages 디렉토리를 기준으로 깊이 계산
+                depth = pathParts.length - pagesIndex - 1;
             }
-        } else {
-            return 0; // 루트 레벨
         }
+        
+        console.log("계산된 경로 깊이:", depth);
+        return depth;
     }
     
     /**
@@ -47,9 +53,20 @@ class SiteManager {
      */
     getBasePath() {
         const depth = this.pathDepth;
-        if (depth === 2) return '../../';
-        if (depth === 1) return '../';
-        return '';
+        let basePath = '';
+        
+        // 각 깊이 수준에 맞게 '../'를 추가
+        for (let i = 0; i < depth; i++) {
+            basePath += '../';
+        }
+        
+        // 'pages/' 디렉토리가 포함된 경로인 경우 추가
+        if (this.currentPath.includes('/pages/')) {
+            basePath += 'pages/';
+        }
+        
+        console.log("기본 경로:", basePath);
+        return basePath;
     }
     
     /**
@@ -89,11 +106,14 @@ class SiteManager {
             return `<li id="${item.id}-nav"><a href="${url}">${item.title}</a></li>`;
         }).join('');
         
+        // 홈 링크도 basePath 적용
+        const homeLink = basePath + 'index.html';
+        
         return `
         <div class="site-header">
             <div class="header-container">
                 <div class="logo">
-                    <a href="${basePath}index.html">문법놀이터</a>
+                    <a href="${homeLink}">문법놀이터</a>
                 </div>
                 <nav>
                     <ul>${menuHTML}</ul>
