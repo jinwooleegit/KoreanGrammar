@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글쓰기 기초 | 2학년 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 2학년 전용 스타일 */
+        :root {
+            --grade2-color: #5D9CEC;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .lesson-header {
+            background: linear-gradient(135deg, var(--grade2-color) 0%, #8BB3F0 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .lesson-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade2-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--grade2-color);
+            padding-bottom: 10px;
+        }
+
+        .content-section h3 {
+            color: #444;
+            font-size: 22px;
+            margin: 25px 0 15px;
+        }
+
+        .content-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .example-box {
+            background-color: #f5f8ff;
+            border-left: 4px solid var(--grade2-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box h4 {
+            color: var(--grade2-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .writing-steps {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .step-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 220px;
+            overflow: hidden;
+        }
+
+        .step-header {
+            background-color: var(--grade2-color);
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .step-content {
+            padding: 15px;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: var(--grade2-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin: 0 auto 10px;
+        }
+
+        .step-desc {
+            color: #444;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .writing-tips {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .tips-title {
+            color: var(--grade2-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tips-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tips-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .tips-list li:before {
+            content: "✓";
+            color: var(--grade2-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .example-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .example-header {
+            background-color: var(--grade2-color);
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .example-body {
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .interactive-section {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .interactive-title {
+            color: var(--grade2-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topic-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .topic-card {
+            background-color: white;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .topic-card:hover {
+            border-color: var(--grade2-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .topic-card.selected {
+            border-color: var(--grade2-color);
+            background-color: #f0f5ff;
+        }
+
+        .writing-area {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .writing-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            resize: vertical;
+        }
+
+        .writing-button {
+            padding: 10px 20px;
+            background-color: var(--grade2-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .writing-button:hover {
+            opacity: 0.9;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade2-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .back-button {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="lesson-header">
+        <h1>글쓰기 기초</h1>
+        <p>글쓰기의 기본 개념과 간단한 문장 및 문단 작성법, 자신의 생각을 글로 표현하는 방법을 배워요.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>글쓰기란?</h2>
+        
+        <p>글쓰기는 우리의 생각, 느낌, 경험 등을 글로 표현하는 활동이에요. 글을 쓰면 자신의 생각을 정리할 수 있고, 다른 사람과 생각을 나눌 수도 있어요. 글쓰기는 우리의 생각을 더 깊고 넓게 만들어 주는 중요한 힘이랍니다.</p>
+        
+        <div class="example-box">
+            <h4>글쓰기의 중요성</h4>
+            <p>• 자신의 생각과 느낌을 표현할 수 있어요.</p>
+            <p>• 생각을 정리하고 발전시킬 수 있어요.</p>
+            <p>• 다른 사람들과 생각을 나눌 수 있어요.</p>
+            <p>• 상상력과 창의력을 키울 수 있어요.</p>
+            <p>• 국어 공부에 큰 도움이 되어요.</p>
+        </div>
+        
+        <h3>글쓰기의 기본 단계</h3>
+        
+        <div class="writing-steps">
+            <div class="step-card">
+                <div class="step-header">
+                    주제 정하기
+                </div>
+                <div class="step-content">
+                    <div class="step-number">1</div>
+                    <p class="step-desc">무엇에 대해 쓸지 주제를 정해요. 나의 경험이나 관심 있는 것에 대해 생각해봐요.</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">
+                    생각 모으기
+                </div>
+                <div class="step-content">
+                    <div class="step-number">2</div>
+                    <p class="step-desc">주제에 대한 생각, 느낌, 경험을 떠올려보고 간단히 메모해요.</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">
+                    순서 정하기
+                </div>
+                <div class="step-content">
+                    <div class="step-number">3</div>
+                    <p class="step-desc">생각을 어떤 순서로 쓸지 정해요. 처음, 가운데, 끝 부분으로 나눠요.</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">
+                    글 쓰기
+                </div>
+                <div class="step-content">
+                    <div class="step-number">4</div>
+                    <p class="step-desc">정한 순서대로 문장을 만들어 글을 써요. 처음에는 짧고 간단하게 시작해도 좋아요.</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">
+                    고쳐 쓰기
+                </div>
+                <div class="step-content">
+                    <div class="step-number">5</div>
+                    <p class="step-desc">쓴 글을 다시 읽어보고 틀린 부분이나 더 좋게 바꿀 부분을 찾아 고쳐요.</p>
+                </div>
+            </div>
+        </div>
+        
+        <h3>좋은 문장 쓰기</h3>
+        
+        <p>좋은 문장은 글쓰기의 기본이에요. 문장은 생각을 담는 그릇이라고 할 수 있어요. 다음은 좋은 문장을 쓰는 방법이에요.</p>
+        
+        <div class="writing-tips">
+            <div class="tips-title">
+                <i class="fas fa-lightbulb"></i>
+                좋은 문장 쓰기 팁
+            </div>
+            <ul class="tips-list">
+                <li>간결하고 명확하게 써요. 너무 길거나 복잡한 문장은 피해요.</li>
+                <li>주어와 서술어를 분명하게 써요. "나는 책을 읽었다."처럼요.</li>
+                <li>맞춤법과 문장 부호를 바르게 써요.</li>
+                <li>비슷한 단어를 반복해서 쓰지 않아요.</li>
+                <li>자신의 생각이나 느낌을 솔직하게 표현해요.</li>
+            </ul>
+        </div>
+        
+        <h3>문단 나누기</h3>
+        
+        <p>글을 쓸 때는 내용에 따라 문단을 나누는 것이 좋아요. 문단은 비슷한 내용의 문장들을 모아놓은 덩어리예요. 문단을 잘 나누면 글의 내용을 더 명확하게 전달할 수 있어요.</p>
+        
+        <div class="example-box">
+            <h4>문단 나누기 방법</h4>
+            <p>• 하나의 문단에는 하나의 중심 생각을 담아요.</p>
+            <p>• 새로운 내용이 시작될 때 문단을 바꿔요.</p>
+            <p>• 처음 문단에는 글의 주제나 시작 부분을 써요.</p>
+            <p>• 중간 문단에는 자세한 내용이나 설명을 써요.</p>
+            <p>• 마지막 문단에는 글을 마무리하는 내용을 써요.</p>
+        </div>
+        
+        <h3>글쓰기 예시</h3>
+        
+        <div class="example-grid">
+            <div class="example-card">
+                <div class="example-header">
+                    내가 좋아하는 것
+                </div>
+                <div class="example-body">
+                    <p>나는 그림 그리기를 좋아한다. 크레파스와 색연필로 그림을 그릴 때 기분이 좋아진다. 특히 동물 그림을 그리는 것을 좋아한다.</p>
+                    <p>토요일마다 미술 학원에 다닌다. 미술 학원에서는 여러 가지 그림 그리는 방법을 배운다. 선생님께서 칭찬해 주시면 더 열심히 그리게 된다.</p>
+                    <p>나는 커서 화가가 되고 싶다. 매일 그림을 그리면서 실력을 키우고 있다. 그림 그리기는 나의 소중한 취미이다.</p>
+                </div>
+            </div>
+            
+            <div class="example-card">
+                <div class="example-header">
+                    우리 가족 소개
+                </div>
+                <div class="example-body">
+                    <p>우리 가족은 네 명이다. 아빠, 엄마, 나, 그리고 여동생이 있다.</p>
+                    <p>아빠는 회사에서 일하신다. 주말에는 나와 자전거를 타러 가신다. 엄마는 맛있는 음식을 잘 만드신다. 특히 엄마가 만든 김치찌개가 제일 맛있다.</p>
+                    <p>내 여동생은 일곱 살이다. 동생은 노래 부르기를 좋아한다. 우리는 가끔 싸우지만 금방 화해한다.</p>
+                    <p>우리 가족은 서로 도우며 행복하게 지낸다. 나는 우리 가족이 자랑스럽다.</p>
+                </div>
+            </div>
+            
+            <div class="example-card">
+                <div class="example-header">
+                    여름 방학 계획
+                </div>
+                <div class="example-body">
+                    <p>여름 방학이 다가오고 있다. 나는 여름 방학에 하고 싶은 일이 많다.</p>
+                    <p>첫째, 책을 많이 읽을 것이다. 도서관에서 재미있는 책을 빌려서 읽을 계획이다. 둘째, 수영을 배우고 싶다. 작년에는 물을 무서워했지만 올해는 꼭 배우고 싶다.</p>
+                    <p>셋째, 할머니 댁에 놀러갈 것이다. 할머니 댁 근처에는 시냇물이 있어서 물놀이를 할 수 있다.</p>
+                    <p>여름 방학이 기다려진다. 즐겁고 보람찬 방학을 보내고 싶다.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3 class="interactive-title"><i class="fas fa-pencil-alt"></i> 글쓰기 연습하기</h3>
+            <p>다음 주제 중 하나를 선택해서 간단한 글을 써보세요. 자신의 생각과 느낌을 자유롭게 표현해보세요.</p>
+            
+            <div class="topic-cards">
+                <div class="topic-card" data-topic="favorite">내가 가장 좋아하는 음식</div>
+                <div class="topic-card" data-topic="friend">나의 친구 소개하기</div>
+                <div class="topic-card" data-topic="trip">가장 기억에 남는 여행</div>
+                <div class="topic-card" data-topic="dream">나의 꿈</div>
+                <div class="topic-card" data-topic="family">우리 가족 이야기</div>
+                <div class="topic-card" data-topic="pet">키우고 싶은 동물</div>
+            </div>
+            
+            <div class="writing-area" id="writingArea">
+                <h4 id="selectedTopicTitle">선택한 주제: </h4>
+                <textarea class="writing-textarea" id="writingTextarea" placeholder="여기에 글을 써보세요..."></textarea>
+                <button class="writing-button" id="saveButton">저장하기</button>
+                <p id="saveMessage" style="color: green; display: none; margin-top: 10px;">글이 저장되었습니다!</p>
+            </div>
+        </div>
+        
+        <div class="navigation-buttons">
+            <a href="grade2_punctuation.html" class="nav-button back-button"><i class="fas fa-arrow-left"></i> 이전 학습: 문장 부호 바르게 쓰기</a>
+            <a href="../grade2/" class="nav-button">2학년 학습 목록으로 <i class="fas fa-list"></i></a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 주제 선택 기능
+            const topicCards = document.querySelectorAll('.topic-card');
+            const writingArea = document.getElementById('writingArea');
+            const selectedTopicTitle = document.getElementById('selectedTopicTitle');
+            const writingTextarea = document.getElementById('writingTextarea');
+            const saveButton = document.getElementById('saveButton');
+            const saveMessage = document.getElementById('saveMessage');
+            
+            // 주제 매핑
+            const topicTitles = {
+                'favorite': '내가 가장 좋아하는 음식',
+                'friend': '나의 친구 소개하기',
+                'trip': '가장 기억에 남는 여행',
+                'dream': '나의 꿈',
+                'family': '우리 가족 이야기',
+                'pet': '키우고 싶은 동물'
+            };
+            
+            let selectedTopic = '';
+            
+            // 이전에 저장된 글 불러오기
+            const loadSavedWriting = function() {
+                if (selectedTopic) {
+                    const savedText = localStorage.getItem('writing_grade2_' + selectedTopic);
+                    if (savedText) {
+                        writingTextarea.value = savedText;
+                    } else {
+                        writingTextarea.value = '';
+                    }
+                }
+            };
+            
+            topicCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // 이전 선택 초기화
+                    topicCards.forEach(c => c.classList.remove('selected'));
+                    
+                    // 현재 선택 표시
+                    this.classList.add('selected');
+                    
+                    // 선택한 주제 저장
+                    selectedTopic = this.getAttribute('data-topic');
+                    selectedTopicTitle.textContent = '선택한 주제: ' + topicTitles[selectedTopic];
+                    
+                    // 글쓰기 영역 표시
+                    writingArea.style.display = 'block';
+                    
+                    // 저장 메시지 숨김
+                    saveMessage.style.display = 'none';
+                    
+                    // 이전에 저장된 글 불러오기
+                    loadSavedWriting();
+                });
+            });
+            
+            // 글 저장 기능
+            saveButton.addEventListener('click', function() {
+                if (selectedTopic && writingTextarea.value.trim() !== '') {
+                    // 로컬 스토리지에 저장
+                    localStorage.setItem('writing_grade2_' + selectedTopic, writingTextarea.value);
+                    
+                    // 저장 메시지 표시
+                    saveMessage.style.display = 'block';
+                    
+                    // 3초 후 메시지 숨김
+                    setTimeout(function() {
+                        saveMessage.style.display = 'none';
+                    }, 3000);
+                } else if (!selectedTopic) {
+                    alert('주제를 선택해주세요.');
+                } else {
+                    alert('글을 작성해주세요.');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

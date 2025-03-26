@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1학년 어휘력 키우기 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 1학년 전용 스타일 */
+        :root {
+            --grade1-color: #FF6B6B;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .grade-header {
+            background: linear-gradient(135deg, var(--grade1-color) 0%, #FF9292 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .grade-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .grade-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade1-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: var(--grade1-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .example-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--grade1-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .interactive-section {
+            background-color: #f5f5f5;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .interactive-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .vocab-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .vocab-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .vocab-card .word {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--grade1-color);
+        }
+
+        .vocab-card .description {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+
+        .vocab-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .category-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            background-color: #f0f0f0;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .category-btn.active {
+            background-color: var(--grade1-color);
+            color: white;
+        }
+
+        .word-search {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .word-search:focus {
+            border-color: var(--grade1-color);
+            outline: none;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade1-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .modal-word {
+            font-size: 24px;
+            color: var(--grade1-color);
+            margin-bottom: 15px;
+        }
+
+        .modal-img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin: 10px auto;
+        }
+
+        .modal-desc {
+            font-size: 16px;
+            color: #333;
+            margin: 15px 0;
+        }
+
+        .close-modal {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade1-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="grade-header">
+        <h1>어휘력 키우기</h1>
+        <p>다양한 낱말을 배우고 우리말의 풍부한 표현을 익혀보아요.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>낱말의 세계</h2>
+        
+        <div class="content-card">
+            <div class="card-header">
+                낱말이란 무엇일까요?
+            </div>
+            <div class="card-content">
+                <p>낱말은 의미를 가진 가장 작은 언어 단위예요. 낱말을 많이 알면 생각을 더 정확하게 표현할 수 있어요.</p>
+                
+                <div class="example-box">
+                    <h4>낱말의 특징</h4>
+                    <p>1. <strong>의미</strong>: 모든 낱말은 뜻을 가지고 있어요.</p>
+                    <p>2. <strong>소리</strong>: 낱말은 소리로 표현할 수 있어요.</p>
+                    <p>3. <strong>형태</strong>: 낱말은 글로 쓸 수 있는 모양을 가지고 있어요.</p>
+                </div>
+                
+                <p>우리는 말하고, 듣고, 읽고, 쓰면서 낱말을 사용해요. 많은 낱말을 알수록 더 풍부하게 표현할 수 있어요!</p>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                낱말의 종류
+            </div>
+            <div class="card-content">
+                <p>낱말은 여러 종류로 나눌 수 있어요. 1학년에서는 기본적인 낱말 종류를 배워 볼 거예요.</p>
+                
+                <div class="example-box">
+                    <h4>주변에서 볼 수 있는 낱말 종류</h4>
+                    <p>1. <strong>사람</strong>: 친구, 가족, 선생님, 의사, 경찰관...</p>
+                    <p>2. <strong>동물</strong>: 강아지, 고양이, 코끼리, 기린, 토끼...</p>
+                    <p>3. <strong>식물</strong>: 나무, 꽃, 풀, 사과, 바나나...</p>
+                    <p>4. <strong>장소</strong>: 학교, 집, 공원, 도서관, 병원...</p>
+                    <p>5. <strong>물건</strong>: 책, 연필, 가방, 컴퓨터, 전화기...</p>
+                    <p>6. <strong>동작</strong>: 달리다, 먹다, 자다, 놀다, 읽다...</p>
+                    <p>7. <strong>감정</strong>: 기쁨, 슬픔, 화남, 행복, 사랑...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3>낱말 탐험하기</h3>
+            <p style="text-align: center;">아래 분류를 선택하고 여러 낱말을 배워보세요!</p>
+            
+            <input type="text" class="word-search" id="wordSearch" placeholder="낱말 검색하기...">
+            
+            <div class="vocab-categories">
+                <button class="category-btn active" data-category="all">모두 보기</button>
+                <button class="category-btn" data-category="person">사람</button>
+                <button class="category-btn" data-category="animal">동물</button>
+                <button class="category-btn" data-category="food">음식</button>
+                <button class="category-btn" data-category="place">장소</button>
+                <button class="category-btn" data-category="object">물건</button>
+                <button class="category-btn" data-category="action">동작</button>
+            </div>
+            
+            <div class="vocab-grid" id="vocabGrid">
+                <!-- 사람 카테고리 -->
+                <div class="vocab-card" data-category="person">
+                    <img src="../../../assets/images/vocab/teacher.png" alt="선생님">
+                    <div class="word">선생님</div>
+                    <div class="description">학교에서 학생들을 가르치는 사람</div>
+                </div>
+                <div class="vocab-card" data-category="person">
+                    <img src="../../../assets/images/vocab/doctor.png" alt="의사">
+                    <div class="word">의사</div>
+                    <div class="description">아픈 사람을 치료하는 사람</div>
+                </div>
+                
+                <!-- 동물 카테고리 -->
+                <div class="vocab-card" data-category="animal">
+                    <img src="../../../assets/images/vocab/dog.png" alt="강아지">
+                    <div class="word">강아지</div>
+                    <div class="description">멍멍 짖는 애완동물</div>
+                </div>
+                <div class="vocab-card" data-category="animal">
+                    <img src="../../../assets/images/vocab/cat.png" alt="고양이">
+                    <div class="word">고양이</div>
+                    <div class="description">야옹 우는 애완동물</div>
+                </div>
+                <div class="vocab-card" data-category="animal">
+                    <img src="../../../assets/images/vocab/elephant.png" alt="코끼리">
+                    <div class="word">코끼리</div>
+                    <div class="description">긴 코를 가진 큰 동물</div>
+                </div>
+                
+                <!-- 음식 카테고리 -->
+                <div class="vocab-card" data-category="food">
+                    <img src="../../../assets/images/vocab/apple.png" alt="사과">
+                    <div class="word">사과</div>
+                    <div class="description">빨간 과일, 아삭아삭한 맛이 나요</div>
+                </div>
+                <div class="vocab-card" data-category="food">
+                    <img src="../../../assets/images/vocab/banana.png" alt="바나나">
+                    <div class="word">바나나</div>
+                    <div class="description">노란 과일, 달콤한 맛이 나요</div>
+                </div>
+                <div class="vocab-card" data-category="food">
+                    <img src="../../../assets/images/vocab/rice.png" alt="밥">
+                    <div class="word">밥</div>
+                    <div class="description">쌀로 지은 기본 음식</div>
+                </div>
+                
+                <!-- 장소 카테고리 -->
+                <div class="vocab-card" data-category="place">
+                    <img src="../../../assets/images/vocab/school.png" alt="학교">
+                    <div class="word">학교</div>
+                    <div class="description">공부를 하는 곳</div>
+                </div>
+                <div class="vocab-card" data-category="place">
+                    <img src="../../../assets/images/vocab/park.png" alt="공원">
+                    <div class="word">공원</div>
+                    <div class="description">놀이 기구가 있고 놀 수 있는 곳</div>
+                </div>
+                
+                <!-- 물건 카테고리 -->
+                <div class="vocab-card" data-category="object">
+                    <img src="../../../assets/images/vocab/pencil.png" alt="연필">
+                    <div class="word">연필</div>
+                    <div class="description">글씨를 쓰는 도구</div>
+                </div>
+                <div class="vocab-card" data-category="object">
+                    <img src="../../../assets/images/vocab/book.png" alt="책">
+                    <div class="word">책</div>
+                    <div class="description">글과 그림이 있는 읽는 물건</div>
+                </div>
+                
+                <!-- 동작 카테고리 -->
+                <div class="vocab-card" data-category="action">
+                    <img src="../../../assets/images/vocab/run.png" alt="달리다">
+                    <div class="word">달리다</div>
+                    <div class="description">빠르게 움직이는 동작</div>
+                </div>
+                <div class="vocab-card" data-category="action">
+                    <img src="../../../assets/images/vocab/eat.png" alt="먹다">
+                    <div class="word">먹다</div>
+                    <div class="description">음식을 입으로 섭취하는 동작</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                낱말 확장하기
+            </div>
+            <div class="card-content">
+                <p>낱말을 더 많이 알기 위한 방법들이에요.</p>
+                
+                <div class="example-box">
+                    <h4>어휘력을 키우는 방법</h4>
+                    <p>- 매일 새로운 낱말을 배우고 사용해보세요.</p>
+                    <p>- 책을 많이 읽으면 다양한 낱말을 만날 수 있어요.</p>
+                    <p>- 다른 사람들과 이야기를 많이 나누세요.</p>
+                    <p>- 그림 사전이나 낱말 카드를 활용해 보세요.</p>
+                    <p>- 낱말 놀이를 하면서 재미있게 배워보세요.</p>
+                </div>
+                
+                <p>낱말을 많이 알수록 생각과 말하기, 글쓰기가 더 풍부해져요!</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 모달 창 -->
+    <div class="modal" id="vocabModal">
+        <div class="modal-content">
+            <div class="modal-word" id="modalWord">낱말</div>
+            <img class="modal-img" id="modalImg" src="" alt="낱말 이미지">
+            <div class="modal-desc" id="modalDesc">설명</div>
+            <button class="close-modal" id="closeModal">닫기</button>
+        </div>
+    </div>
+    
+    <div class="navigation-buttons content-section">
+        <button class="nav-button" onclick="location.href='grade1_composition.html'">이전 학습: 작문 학습하기</button>
+        <button class="nav-button" onclick="location.href='grade1_grammar.html'">다음 학습: 기초 문법</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const vocabCards = document.querySelectorAll('.vocab-card');
+            const wordSearch = document.getElementById('wordSearch');
+            const modal = document.getElementById('vocabModal');
+            const modalWord = document.getElementById('modalWord');
+            const modalImg = document.getElementById('modalImg');
+            const modalDesc = document.getElementById('modalDesc');
+            const closeModal = document.getElementById('closeModal');
+            
+            // 카테고리 필터 기능
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // 버튼 활성화 상태 변경
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 카드 필터링
+                    vocabCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // 검색 기능
+            wordSearch.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                
+                vocabCards.forEach(card => {
+                    const word = card.querySelector('.word').textContent.toLowerCase();
+                    const desc = card.querySelector('.description').textContent.toLowerCase();
+                    
+                    if (word.includes(searchTerm) || desc.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // 모달 기능
+            vocabCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const word = this.querySelector('.word').textContent;
+                    const img = this.querySelector('img').src;
+                    const desc = this.querySelector('.description').textContent;
+                    
+                    modalWord.textContent = word;
+                    modalImg.src = img;
+                    modalDesc.textContent = desc;
+                    
+                    modal.style.display = 'flex';
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

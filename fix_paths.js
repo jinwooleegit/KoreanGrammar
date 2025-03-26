@@ -1,5 +1,5 @@
 /**
- * 모든 HTML 파일의 common.js 경로를 직접 수정하는 스크립트
+ * 모든 HTML 파일의 siteManager.js 경로를 직접 수정하는 스크립트
  * 실행 방법: node fix_paths.js
  */
 
@@ -24,7 +24,7 @@ function findHtmlFiles(directory, fileList = []) {
     return fileList;
 }
 
-// HTML 파일의 common.js 경로를 수정하는 함수
+// HTML 파일의 siteManager.js 경로를 수정하는 함수
 function fixJsPath(filePath) {
     console.log(`처리 중: ${filePath}`);
     
@@ -76,21 +76,35 @@ function fixJsPath(filePath) {
         console.log(`  - 경로 유형: ${pathType}`);
         console.log(`  - 계산된 상대 경로: ${relativePath}`);
         
-        // 기존 common.js 스크립트 태그 찾기와 교체 (강제 업데이트)
-        const scriptRegex = /<script[^>]*src=["']([^"']*)common\.js["'][^>]*><\/script>/i;
-        if (scriptRegex.test(content)) {
-            const oldScriptTag = content.match(scriptRegex)[0];
-            const newScriptTag = `<script src="${relativePath}js/common.js"></script>`;
+        // 기존 common.js 또는 siteManager.js 스크립트 태그 찾기와 교체
+        const commonJsRegex = /<script[^>]*src=["']([^"']*)common\.js["'][^>]*><\/script>/i;
+        const siteManagerJsRegex = /<script[^>]*src=["']([^"']*)siteManager\.js["'][^>]*><\/script>/i;
+        
+        if (commonJsRegex.test(content)) {
+            const oldScriptTag = content.match(commonJsRegex)[0];
+            const newScriptTag = `<script src="${relativePath}js/siteManager.js"></script>`;
             
-            content = content.replace(scriptRegex, newScriptTag);
+            content = content.replace(commonJsRegex, newScriptTag);
             updated = true;
-            console.log(`  - common.js 경로 수정됨: ${relativePath}js/common.js`);
+            console.log(`  - common.js 경로를 siteManager.js로 수정됨: ${relativePath}js/siteManager.js`);
+        } else if (siteManagerJsRegex.test(content)) {
+            const oldScriptTag = content.match(siteManagerJsRegex)[0];
+            const newScriptTag = `<script src="${relativePath}js/siteManager.js"></script>`;
+            
+            // 경로가 올바른지 확인
+            if (oldScriptTag !== newScriptTag) {
+                content = content.replace(siteManagerJsRegex, newScriptTag);
+                updated = true;
+                console.log(`  - siteManager.js 경로 수정됨: ${relativePath}js/siteManager.js`);
+            } else {
+                console.log(`  - siteManager.js 경로가 이미 올바름: ${relativePath}js/siteManager.js`);
+            }
         } else if (content.includes('</body>')) {
-            // common.js 스크립트가 없으면 추가
-            const scriptTag = `<script src="${relativePath}js/common.js"></script>`;
+            // siteManager.js 스크립트가 없으면 추가
+            const scriptTag = `<script src="${relativePath}js/siteManager.js"></script>`;
             content = content.replace('</body>', `    ${scriptTag}\n</body>`);
             updated = true;
-            console.log(`  - common.js 추가됨: ${relativePath}js/common.js`);
+            console.log(`  - siteManager.js 추가됨: ${relativePath}js/siteManager.js`);
         } else {
             console.warn(`  - body 태그를 찾을 수 없습니다: ${filePath}`);
         }

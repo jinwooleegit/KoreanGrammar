@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>편지와 초대장 쓰기 | 4학년 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 4학년 전용 스타일 */
+        :root {
+            --grade4-color: #26547C;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .lesson-header {
+            background: linear-gradient(135deg, var(--grade4-color) 0%, #5A8DB8 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .lesson-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade4-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--grade4-color);
+            padding-bottom: 10px;
+        }
+
+        .content-section h3 {
+            color: #444;
+            font-size: 22px;
+            margin: 25px 0 15px;
+        }
+
+        .content-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .example-box {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--grade4-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box h4 {
+            color: var(--grade4-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .example-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .example-item:before {
+            content: "•";
+            color: var(--grade4-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .letter-sample {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .letter-header {
+            font-weight: bold;
+            color: var(--grade4-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .letter-date {
+            text-align: right;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .letter-greeting {
+            margin-bottom: 20px;
+        }
+
+        .letter-body {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .letter-closing {
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        .invitation-sample {
+            background-color: #f9f4e8;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .invitation-title {
+            color: #8B4513;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .invitation-event {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .invitation-details {
+            margin: 25px 0;
+            line-height: 1.8;
+        }
+
+        .invitation-details p {
+            margin-bottom: 10px;
+        }
+
+        .invitation-rsvp {
+            margin-top: 20px;
+            font-style: italic;
+            color: #8B4513;
+        }
+
+        .interactive-section {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .interactive-title {
+            color: var(--grade4-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .interactive-title i {
+            font-size: 24px;
+        }
+
+        .practice-container {
+            margin-top: 20px;
+        }
+
+        .practice-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .practice-prompt {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .letter-form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            font-family: inherit;
+        }
+
+        .form-textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .save-button {
+            background-color: var(--grade4-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .save-button:hover {
+            opacity: 0.9;
+        }
+
+        .save-message {
+            color: green;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .tips-box {
+            background-color: #e6f0ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tips-title {
+            color: var(--grade4-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .tips-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .tips-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--grade4-color);
+            font-weight: bold;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade4-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .back-button {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="lesson-header">
+        <h1>편지와 초대장 쓰기</h1>
+        <p>편지와 초대장의 특징을 이해하고 다양한 상황에 맞는 글을 작성하는 방법을 배웁니다.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>편지의 특징과 구성 요소</h2>
+        
+        <p>편지는 상대방에게 자신의 생각이나 소식을 전하는 글이에요. 요즘은 전자 메일이나 문자 메시지를 많이 사용하지만, 편지는 여전히 마음을 전하는 중요한 수단이랍니다.</p>
+        
+        <h3>편지의 기본 구성 요소</h3>
+        
+        <div class="example-box">
+            <h4>편지의 구성 요소</h4>
+            <div class="example-item"><strong>날짜:</strong> 편지를 쓴 날짜를 적어요.</div>
+            <div class="example-item"><strong>인사말:</strong> 상대방에게 인사를 건네요. (예: 사랑하는 엄마께, 친애하는 친구에게)</div>
+            <div class="example-item"><strong>본문:</strong> 전하고 싶은 내용을 적어요.</div>
+            <div class="example-item"><strong>맺음말:</strong> 끝인사와 자신의 이름을 적어요. (예: 사랑하는 딸 민지 올림)</div>
+        </div>
+        
+        <h3>편지의 종류</h3>
+        <p>편지는 그 목적과 대상에 따라 여러 종류로 나눌 수 있어요.</p>
+        
+        <div class="example-box">
+            <h4>편지의 종류</h4>
+            <div class="example-item"><strong>감사 편지:</strong> 고마움을 표현하는 편지</div>
+            <div class="example-item"><strong>안부 편지:</strong> 근황을 전하고 안부를 묻는 편지</div>
+            <div class="example-item"><strong>사과 편지:</strong> 잘못한 일에 대해 사과하는 편지</div>
+            <div class="example-item"><strong>축하 편지:</strong> 기쁜 일을 축하하는 편지</div>
+        </div>
+        
+        <div class="letter-sample">
+            <div class="letter-header">감사 편지 예시</div>
+            <div class="letter-date">2023년 5월 15일</div>
+            <div class="letter-greeting">사랑하는 김 선생님께,</div>
+            <div class="letter-body">
+                <p>안녕하세요, 선생님. 저는 4학년 2반 이민수입니다.</p>
+                <p>지난 과학 대회를 준비할 때 선생님께서 방과 후에도 남아서 저를 도와주신 것에 정말 감사드립니다. 선생님의 도움 덕분에 좋은 결과를 얻을 수 있었습니다.</p>
+                <p>특히 실험 방법을 자세히 알려주시고, 발표 연습도 여러 번 들어주셔서 자신감을 가질 수 있었습니다. 선생님이 계셔서 정말 행복한 학교생활을 하고 있습니다.</p>
+                <p>앞으로도 열심히 공부해서 선생님의 기대에 보답하겠습니다.</p>
+            </div>
+            <div class="letter-closing">
+                <p>감사하는 마음을 담아,</p>
+                <p>이민수 올림</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>초대장의 특징과 구성 요소</h2>
+        
+        <p>초대장은 특별한 행사나 모임에 다른 사람을 초대할 때 보내는 글이에요. 생일 파티, 졸업식, 학급 행사 등 다양한 상황에서 초대장을 사용할 수 있어요.</p>
+        
+        <h3>초대장의 기본 구성 요소</h3>
+        
+        <div class="example-box">
+            <h4>초대장의 구성 요소</h4>
+            <div class="example-item"><strong>초대의 글:</strong> 무슨 행사에 초대하는지 밝혀요.</div>
+            <div class="example-item"><strong>날짜와 시간:</strong> 행사가 열리는 날짜와 시간을 정확히 적어요.</div>
+            <div class="example-item"><strong>장소:</strong> 행사가 열리는 곳의 주소나 위치를 알려줘요.</div>
+            <div class="example-item"><strong>행사 내용:</strong> 어떤 행사인지, 무엇을 할 것인지 간략히 설명해요.</div>
+            <div class="example-item"><strong>회신 요청:</strong> 참석 여부를 알려달라는 문구를 넣어요.</div>
+        </div>
+        
+        <div class="invitation-sample">
+            <div class="invitation-title">✨ 초대합니다 ✨</div>
+            <div class="invitation-event">이민수의 10번째 생일 파티</div>
+            <div class="invitation-details">
+                <p><strong>날짜:</strong> 2023년 6월 20일 토요일</p>
+                <p><strong>시간:</strong> 오후 2시 ~ 오후 5시</p>
+                <p><strong>장소:</strong> 행복아파트 커뮤니티 센터</p>
+                <p><strong>내용:</strong> 케이크 자르기, 게임, 간식 타임</p>
+            </div>
+            <div class="invitation-rsvp">
+                6월 15일까지 010-1234-5678로 참석 여부를 알려주세요.
+            </div>
+        </div>
+        
+        <div class="tips-box">
+            <div class="tips-title">초대장 작성 시 주의할 점</div>
+            <ul class="tips-list">
+                <li>날짜, 시간, 장소는 정확하게 적어야 해요.</li>
+                <li>필요한 준비물이 있다면 꼭 알려주세요.</li>
+                <li>초대하는 사람의 연락처를 적어두면 좋아요.</li>
+                <li>글씨를 깔끔하게 쓰고, 꾸미기를 해도 좋아요.</li>
+                <li>초대 내용에 맞는 그림이나 사진을 넣으면 더 특별해져요.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="interactive-section">
+        <h2 class="interactive-title"><i class="fas fa-pencil-alt"></i> 편지와 초대장 작성 연습</h2>
+        
+        <div class="practice-container">
+            <div class="practice-item">
+                <div class="practice-prompt">친구에게 보내는 안부 편지를 작성해 봅시다.</div>
+                
+                <div class="letter-form">
+                    <div class="form-group">
+                        <label class="form-label">날짜:</label>
+                        <input type="text" id="letter-date" class="form-input" placeholder="예: 2023년 9월 10일">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">받는 사람:</label>
+                        <input type="text" id="letter-receiver" class="form-input" placeholder="예: 사랑하는 친구 영희에게">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">편지 내용:</label>
+                        <textarea id="letter-content" class="form-textarea" placeholder="안부와 소식을 전하는 내용을 작성해보세요..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">보내는 사람:</label>
+                        <input type="text" id="letter-sender" class="form-input" placeholder="예: 너의 친구 철수가">
+                    </div>
+                    
+                    <button id="save-letter" class="save-button">편지 저장하기</button>
+                    <p id="letter-save-message" class="save-message">편지가 저장되었습니다!</p>
+                </div>
+            </div>
+            
+            <div class="practice-item">
+                <div class="practice-prompt">특별한 행사 초대장을 작성해 봅시다.</div>
+                
+                <div class="letter-form">
+                    <div class="form-group">
+                        <label class="form-label">행사 제목:</label>
+                        <input type="text" id="invitation-title" class="form-input" placeholder="예: 우리 반 캠핑 모임">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">날짜와 시간:</label>
+                        <input type="text" id="invitation-datetime" class="form-input" placeholder="예: 2023년 10월 15일 토요일, 오전 10시 ~ 오후 3시">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">장소:</label>
+                        <input type="text" id="invitation-place" class="form-input" placeholder="예: 행복 공원 잔디밭">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">행사 내용:</label>
+                        <textarea id="invitation-content" class="form-textarea" placeholder="행사에서 무엇을 할지 간략히 설명해보세요..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">회신 정보:</label>
+                        <input type="text" id="invitation-rsvp" class="form-input" placeholder="예: 10월 10일까지 010-1234-5678로 알려주세요.">
+                    </div>
+                    
+                    <button id="save-invitation" class="save-button">초대장 저장하기</button>
+                    <p id="invitation-save-message" class="save-message">초대장이 저장되었습니다!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation-buttons">
+        <a href="grade4_presentation.html" class="nav-button"><i class="fas fa-arrow-left"></i> 이전 학습</a>
+        <a href="../index.html" class="nav-button">목록으로 <i class="fas fa-list"></i></a>
+    </div>
+
+    <script>
+        // 편지 저장 기능
+        document.getElementById('save-letter').addEventListener('click', function() {
+            const date = document.getElementById('letter-date').value;
+            const receiver = document.getElementById('letter-receiver').value;
+            const content = document.getElementById('letter-content').value;
+            const sender = document.getElementById('letter-sender').value;
+            
+            // 로컬 스토리지에 저장
+            localStorage.setItem('letter_date', date);
+            localStorage.setItem('letter_receiver', receiver);
+            localStorage.setItem('letter_content', content);
+            localStorage.setItem('letter_sender', sender);
+            
+            // 저장 메시지 표시
+            const saveMessage = document.getElementById('letter-save-message');
+            saveMessage.style.display = 'block';
+            
+            // 3초 후 메시지 숨기기
+            setTimeout(function() {
+                saveMessage.style.display = 'none';
+            }, 3000);
+        });
+        
+        // 초대장 저장 기능
+        document.getElementById('save-invitation').addEventListener('click', function() {
+            const title = document.getElementById('invitation-title').value;
+            const datetime = document.getElementById('invitation-datetime').value;
+            const place = document.getElementById('invitation-place').value;
+            const content = document.getElementById('invitation-content').value;
+            const rsvp = document.getElementById('invitation-rsvp').value;
+            
+            // 로컬 스토리지에 저장
+            localStorage.setItem('invitation_title', title);
+            localStorage.setItem('invitation_datetime', datetime);
+            localStorage.setItem('invitation_place', place);
+            localStorage.setItem('invitation_content', content);
+            localStorage.setItem('invitation_rsvp', rsvp);
+            
+            // 저장 메시지 표시
+            const saveMessage = document.getElementById('invitation-save-message');
+            saveMessage.style.display = 'block';
+            
+            // 3초 후 메시지 숨기기
+            setTimeout(function() {
+                saveMessage.style.display = 'none';
+            }, 3000);
+        });
+        
+        // 페이지 로드 시 이전에 저장된 내용 불러오기
+        window.onload = function() {
+            // 편지 데이터 불러오기
+            const savedDate = localStorage.getItem('letter_date');
+            const savedReceiver = localStorage.getItem('letter_receiver');
+            const savedContent = localStorage.getItem('letter_content');
+            const savedSender = localStorage.getItem('letter_sender');
+            
+            if (savedDate) document.getElementById('letter-date').value = savedDate;
+            if (savedReceiver) document.getElementById('letter-receiver').value = savedReceiver;
+            if (savedContent) document.getElementById('letter-content').value = savedContent;
+            if (savedSender) document.getElementById('letter-sender').value = savedSender;
+            
+            // 초대장 데이터 불러오기
+            const savedTitle = localStorage.getItem('invitation_title');
+            const savedDatetime = localStorage.getItem('invitation_datetime');
+            const savedPlace = localStorage.getItem('invitation_place');
+            const savedInvContent = localStorage.getItem('invitation_content');
+            const savedRsvp = localStorage.getItem('invitation_rsvp');
+            
+            if (savedTitle) document.getElementById('invitation-title').value = savedTitle;
+            if (savedDatetime) document.getElementById('invitation-datetime').value = savedDatetime;
+            if (savedPlace) document.getElementById('invitation-place').value = savedPlace;
+            if (savedInvContent) document.getElementById('invitation-content').value = savedInvContent;
+            if (savedRsvp) document.getElementById('invitation-rsvp').value = savedRsvp;
+            
+            console.log("편지와 초대장 쓰기 페이지가 로드되었습니다.");
+        };
+    </script>
+</body>
+</html> 

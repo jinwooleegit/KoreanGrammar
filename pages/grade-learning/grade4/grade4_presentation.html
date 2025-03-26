@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>발표문 작성하기 | 4학년 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../styles/style.css">
+    <link rel="stylesheet" href="../../../styles/grade-learning.css">
+    <style>
+        .presentation-step {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .presentation-step::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background-color: #26547C;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #26547C;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .step-title {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+            color: #26547C;
+            margin-bottom: 10px;
+        }
+        
+        .step-content {
+            margin-top: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .example-box {
+            background-color: #e6f0ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #26547C;
+            margin-bottom: 10px;
+        }
+        
+        .tips-section {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .tips-title {
+            color: #26547C;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tips-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .tips-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .tips-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #26547C;
+            font-weight: bold;
+        }
+        
+        .structure-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .structure-table th, .structure-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+        
+        .structure-table th {
+            background-color: #26547C;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .structure-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .practice-section {
+            background-color: #fff8e1;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .practice-title {
+            color: #26547C;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .practice-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            font-family: inherit;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .save-button {
+            background-color: #26547C;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .save-button:hover {
+            opacity: 0.9;
+        }
+        
+        .save-message {
+            color: green;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .do-dont-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .do-box, .dont-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .do-box {
+            background-color: #e7f6e7;
+            border-left: 4px solid #2e7d32;
+        }
+        
+        .dont-box {
+            background-color: #fdeded;
+            border-left: 4px solid #c62828;
+        }
+        
+        .do-title, .dont-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .do-title {
+            color: #2e7d32;
+        }
+        
+        .dont-title {
+            color: #c62828;
+        }
+        
+        .do-box ul, .dont-box ul {
+            padding-left: 20px;
+        }
+        
+        .do-box li, .dont-box li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="lesson-header">
+            <h1>발표문 작성하기</h1>
+            <p>청중의 관심을 끌고 정보를 효과적으로 전달하는 발표문을 작성해봅시다.</p>
+        </header>
+
+        <section class="content-section">
+            <h2>발표문이란?</h2>
+            <p>발표문은 여러 사람 앞에서 주제에 대해 설명하거나 의견을 나누기 위해 작성하는 글입니다. 자신의 생각이나 조사한 내용을 다른 사람들에게 전달하기 위한 글이므로, 청중이 쉽게 이해할 수 있도록 명확하고 체계적으로 작성해야 합니다.</p>
+            
+            <div class="info-box">
+                <h3>좋은 발표문의 특징</h3>
+                <ul>
+                    <li>주제가 분명하고 목적이 확실합니다.</li>
+                    <li>청중의 관심을 끌 수 있는 내용을 담고 있습니다.</li>
+                    <li>논리적인 구조로 이루어져 이해하기 쉽습니다.</li>
+                    <li>적절한 예시와 자료를 활용합니다.</li>
+                    <li>듣는 사람이 공감할 수 있는 내용을 담고 있습니다.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>발표문의 구조</h2>
+            
+            <table class="structure-table">
+                <tr>
+                    <th>부분</th>
+                    <th>내용</th>
+                </tr>
+                <tr>
+                    <td><strong>서론</strong></td>
+                    <td>
+                        - 인사말로 시작<br>
+                        - 주제 소개<br>
+                        - 청중의 관심을 끌기 위한 도입 부분<br>
+                        - 발표의 목적과 개요
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>본론</strong></td>
+                    <td>
+                        - 주제에 대한 자세한 내용<br>
+                        - 주요 내용을 논리적으로 구성<br>
+                        - 뒷받침하는 자료와 예시<br>
+                        - 내용을 이해하기 쉽게 단계별로 설명
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>결론</strong></td>
+                    <td>
+                        - 발표 내용 요약<br>
+                        - 중요한 점 강조<br>
+                        - 마무리 인사와 감사 표현<br>
+                        - 질문 받기(필요한 경우)
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="content-section">
+            <h2>발표문 작성 단계</h2>
+            
+            <div class="presentation-step">
+                <span class="step-number">1</span>
+                <span class="step-title">주제 정하기</span>
+                <div class="step-content">
+                    <p>여러분이 관심 있거나 잘 알고 있는 주제를 선택하세요. 청중이 관심을 가질 만한 주제가 좋습니다.</p>
+                    <div class="example-box">
+                        <div class="example-title">주제 예시</div>
+                        <ul>
+                            <li>우리 동네 소개하기</li>
+                            <li>내가 좋아하는 책 소개</li>
+                            <li>환경 보호의 중요성</li>
+                            <li>건강한 생활 습관</li>
+                            <li>우리 반 교실 꾸미기 계획</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="presentation-step">
+                <span class="step-number">2</span>
+                <span class="step-title">자료 수집하기</span>
+                <div class="step-content">
+                    <p>주제에 관한 정보를 책, 인터넷, 신문 등에서 찾아보세요. 중요한 내용을 메모하고 필요한 자료를 수집합니다.</p>
+                    <div class="example-box">
+                        <div class="example-title">자료 수집 방법</div>
+                        <ul>
+                            <li>도서관에서 관련 책 찾기</li>
+                            <li>선생님이나 부모님께 도움 요청하기</li>
+                            <li>인터넷에서 신뢰할 수 있는 정보 찾기</li>
+                            <li>직접 조사하거나 인터뷰하기</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="presentation-step">
+                <span class="step-number">3</span>
+                <span class="step-title">개요 작성하기</span>
+                <div class="step-content">
+                    <p>발표할 내용을 서론, 본론, 결론으로 나누어 간단하게 메모해보세요. 어떤 순서로 발표할지 구조를 잡는 것이 중요합니다.</p>
+                    <div class="example-box">
+                        <div class="example-title">개요 예시: '내가 좋아하는 책 소개'</div>
+                        <p><strong>서론:</strong> 인사말, 책 제목 소개, 왜 이 책을 소개하는지 이유</p>
+                        <p><strong>본론:</strong><br>
+                        1. 책의 내용 간략히 소개<br>
+                        2. 주요 등장인물 소개<br>
+                        3. 가장 인상 깊었던 장면<br>
+                        4. 이 책의 교훈이나 배울 점</p>
+                        <p><strong>결론:</strong> 전체 내용 요약, 이 책을 추천하는 이유, 마무리 인사</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="presentation-step">
+                <span class="step-number">4</span>
+                <span class="step-title">발표문 작성하기</span>
+                <div class="step-content">
+                    <p>개요를 바탕으로 발표문을 작성합니다. 간결하고 명확한 문장으로 작성하고, 청중이 이해하기 쉬운 단어를 사용하세요.</p>
+                    <div class="example-box">
+                        <div class="example-title">발표문 작성 팁</div>
+                        <ul>
+                            <li>문장은 짧고 명확하게 작성하기</li>
+                            <li>중요한 내용은 강조하거나 반복하기</li>
+                            <li>청중의 입장에서 이해하기 쉬운지 확인하기</li>
+                            <li>발표 시간에 맞게 내용의 양 조절하기</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="presentation-step">
+                <span class="step-number">5</span>
+                <span class="step-title">시각 자료 준비하기</span>
+                <div class="step-content">
+                    <p>발표 내용을 더 효과적으로 전달하기 위해 그림, 사진, 도표 등의 시각 자료를 준비하면 좋습니다.</p>
+                    <div class="example-box">
+                        <div class="example-title">시각 자료 예시</div>
+                        <ul>
+                            <li>책의 표지나 중요한 장면 그림</li>
+                            <li>환경 보호 활동 사진</li>
+                            <li>조사한 내용을 정리한 표나 그래프</li>
+                            <li>간단한 포스터나 모형</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="presentation-step">
+                <span class="step-number">6</span>
+                <span class="step-title">연습하기</span>
+                <div class="step-content">
+                    <p>완성된 발표문을 여러 번 읽어보고 연습합니다. 거울 앞에서 연습하거나 가족에게 들려주면 더 효과적입니다.</p>
+                    <div class="example-box">
+                        <div class="example-title">연습 방법</div>
+                        <ul>
+                            <li>천천히, 또박또박 말하기</li>
+                            <li>중요한 부분에서 잠시 멈추거나 목소리 톤 바꾸기</li>
+                            <li>시간 확인하며 연습하기</li>
+                            <li>자신감 있는 태도로 연습하기</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>발표 시 주의할 점</h2>
+            
+            <div class="do-dont-section">
+                <div class="do-box">
+                    <div class="do-title">이렇게 하세요</div>
+                    <ul>
+                        <li>청중을 바라보며 발표하기</li>
+                        <li>천천히 또박또박 말하기</li>
+                        <li>적절한 몸짓과 표정 사용하기</li>
+                        <li>중요한 내용은 강조해서 말하기</li>
+                        <li>발표 시간을 지키기</li>
+                        <li>자신감 있게 말하기</li>
+                    </ul>
+                </div>
+                
+                <div class="dont-box">
+                    <div class="dont-title">이렇게 하지 마세요</div>
+                    <ul>
+                        <li>너무 빠르게 말하기</li>
+                        <li>발표문만 계속 보기</li>
+                        <li>긴장해서 작은 목소리로 말하기</li>
+                        <li>불필요한 내용으로 시간 낭비하기</li>
+                        <li>준비 없이 즉흥적으로 발표하기</li>
+                        <li>청중의 질문에 무시하거나 화내기</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="tips-section">
+            <h2 class="tips-title">발표 성공을 위한 TIP</h2>
+            <ul class="tips-list">
+                <li>발표 전날 충분한 휴식을 취하세요.</li>
+                <li>발표 시작 전 심호흡을 통해 긴장을 풀어보세요.</li>
+                <li>청중과 눈 맞춤을 하며 친근하게 발표하세요.</li>
+                <li>발표 중 실수를 해도 당황하지 말고 자연스럽게 넘어가세요.</li>
+                <li>발표가 끝난 후 질문에 성실히 답변하세요.</li>
+                <li>발표 후 스스로 잘한 점과 개선할 점을 생각해보세요.</li>
+            </ul>
+        </section>
+
+        <section class="practice-section">
+            <h2 class="practice-title">발표문 작성 연습하기</h2>
+            <p>아래 양식에 맞춰 여러분만의 발표문을 작성해보세요.</p>
+            
+            <div class="practice-form">
+                <div class="form-group">
+                    <label class="form-label">발표 주제:</label>
+                    <input type="text" id="presentation-topic" class="form-input" placeholder="발표할 주제를 입력하세요...">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">서론 (인사말, 주제 소개):</label>
+                    <textarea id="presentation-intro" class="form-textarea" placeholder="발표의 시작 부분을 작성해보세요..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">본론 (주요 내용):</label>
+                    <textarea id="presentation-main" class="form-textarea" placeholder="발표의 중심 내용을 작성해보세요..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">결론 (요약, 마무리):</label>
+                    <textarea id="presentation-conclusion" class="form-textarea" placeholder="발표의 마무리 부분을 작성해보세요..."></textarea>
+                </div>
+                
+                <button id="save-presentation" class="save-button">발표문 저장하기</button>
+                <p id="save-message" class="save-message">발표문이 저장되었습니다!</p>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="grade4_idioms.html" class="nav-button">이전 학습</a>
+            <a href="grade4_letters.html" class="nav-button">다음 학습</a>
+        </div>
+    </div>
+
+    <script>
+        // 발표문 저장 기능
+        document.getElementById('save-presentation').addEventListener('click', function() {
+            const topic = document.getElementById('presentation-topic').value;
+            const intro = document.getElementById('presentation-intro').value;
+            const main = document.getElementById('presentation-main').value;
+            const conclusion = document.getElementById('presentation-conclusion').value;
+            
+            // 로컬 스토리지에 저장
+            localStorage.setItem('presentation_topic', topic);
+            localStorage.setItem('presentation_intro', intro);
+            localStorage.setItem('presentation_main', main);
+            localStorage.setItem('presentation_conclusion', conclusion);
+            
+            // 저장 메시지 표시
+            const saveMessage = document.getElementById('save-message');
+            saveMessage.style.display = 'block';
+            
+            // 3초 후 메시지 숨기기
+            setTimeout(function() {
+                saveMessage.style.display = 'none';
+            }, 3000);
+        });
+        
+        // 페이지 로드 시 이전에 저장된 내용 불러오기
+        window.onload = function() {
+            const savedTopic = localStorage.getItem('presentation_topic');
+            const savedIntro = localStorage.getItem('presentation_intro');
+            const savedMain = localStorage.getItem('presentation_main');
+            const savedConclusion = localStorage.getItem('presentation_conclusion');
+            
+            if (savedTopic) document.getElementById('presentation-topic').value = savedTopic;
+            if (savedIntro) document.getElementById('presentation-intro').value = savedIntro;
+            if (savedMain) document.getElementById('presentation-main').value = savedMain;
+            if (savedConclusion) document.getElementById('presentation-conclusion').value = savedConclusion;
+            
+            console.log("발표문 작성하기 페이지가 로드되었습니다.");
+        };
+    </script>
+</body>
+</html> 

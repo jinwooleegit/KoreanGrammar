@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문장 연결 방법 | 5학년 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 5학년 전용 스타일 */
+        :root {
+            --grade5-color: #FF9F1C;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .lesson-header {
+            background: linear-gradient(135deg, var(--grade5-color) 0%, #FFBF69 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .lesson-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade5-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--grade5-color);
+            padding-bottom: 10px;
+        }
+
+        .content-section h3 {
+            color: #444;
+            font-size: 22px;
+            margin: 25px 0 15px;
+        }
+
+        .content-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .example-box {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--grade5-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box h4 {
+            color: var(--grade5-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .example-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .example-item:before {
+            content: "•";
+            color: var(--grade5-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .connector-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .connector-table th, .connector-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .connector-table th {
+            background-color: var(--grade5-color);
+            color: white;
+        }
+
+        .connector-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .interactive-section {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .interactive-title {
+            color: var(--grade5-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .interactive-title i {
+            font-size: 24px;
+        }
+
+        .practice-container {
+            margin-top: 20px;
+        }
+
+        .practice-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .practice-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .practice-sentence {
+            font-size: 16px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .connector-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .connector-option {
+            padding: 5px 15px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .connector-option:hover {
+            border-color: var(--grade5-color);
+            background-color: #FFF8E8;
+        }
+
+        .connector-option.selected {
+            border-color: var(--grade5-color);
+            background-color: var(--grade5-color);
+            color: white;
+        }
+
+        .practice-answer {
+            display: none;
+            padding: 10px;
+            background-color: #E8F5E9;
+            border-radius: 6px;
+            color: #2E7D32;
+            margin-top: 10px;
+        }
+
+        .practice-answer.show {
+            display: block;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade5-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .back-button {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="lesson-header">
+        <h1>문장 연결 방법</h1>
+        <p>문장을 더 복잡하고 다양하게 연결하는 방법을 배우고, 다양한 접속사와 연결 표현을 익힙니다.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>문장 연결의 중요성</h2>
+        
+        <p>문장을 적절하게 연결하면 생각을 더 논리적이고 체계적으로 표현할 수 있어요. 문장 간의 관계를 명확하게 표현하면 글의 흐름이 자연스러워지고, 글의 내용을 더 쉽게 이해할 수 있게 됩니다.</p>
+        
+        <h3>1. 대등 연결</h3>
+        <p>두 문장이 대등한 관계로 연결되는 방식입니다. 서로 동등한 내용이나 대조되는 내용을 연결할 때 사용합니다.</p>
+        
+        <div class="example-box">
+            <h4>대등 연결 표현</h4>
+            <div class="example-item"><strong>나열</strong>: -고, 그리고, 또한, 게다가, -며</div>
+            <div class="example-item"><strong>대조</strong>: -지만, 그러나, 하지만, 반면에</div>
+            <div class="example-item"><strong>선택</strong>: -거나, 또는, 혹은</div>
+        </div>
+        
+        <h3>2. 종속 연결</h3>
+        <p>한 문장이 다른 문장에 종속되는 관계로 연결되는 방식입니다. 원인과 결과, 조건과 결과 등의 관계를 나타낼 때 사용합니다.</p>
+        
+        <div class="example-box">
+            <h4>종속 연결 표현</h4>
+            <div class="example-item"><strong>원인과 결과</strong>: -아서/-어서, -니까, -기 때문에, 그래서</div>
+            <div class="example-item"><strong>조건</strong>: -면, -다면, -거든, 만약, 만일</div>
+            <div class="example-item"><strong>목적</strong>: -려고, -기 위해, -도록</div>
+            <div class="example-item"><strong>시간</strong>: -기 전에, -고 나서, -을 때, 먼저, 그 다음에</div>
+        </div>
+        
+        <h3>3. 문장 연결 표현 한눈에 보기</h3>
+        
+        <table class="connector-table">
+            <tr>
+                <th>관계</th>
+                <th>연결 표현</th>
+                <th>예시</th>
+            </tr>
+            <tr>
+                <td>나열</td>
+                <td>-고, 그리고, 또한</td>
+                <td>아침에 운동을 하고 학교에 갔습니다.</td>
+            </tr>
+            <tr>
+                <td>대조</td>
+                <td>-지만, 그러나</td>
+                <td>비가 왔지만 소풍을 갔습니다.</td>
+            </tr>
+            <tr>
+                <td>원인/결과</td>
+                <td>-아서/-어서, -기 때문에</td>
+                <td>비가 와서 우산을 썼습니다.</td>
+            </tr>
+            <tr>
+                <td>조건</td>
+                <td>-면, 만약</td>
+                <td>비가 오면 우산을 쓰세요.</td>
+            </tr>
+            <tr>
+                <td>목적</td>
+                <td>-려고, -기 위해</td>
+                <td>건강해지려고 매일 운동합니다.</td>
+            </tr>
+            <tr>
+                <td>시간</td>
+                <td>-기 전에, -고 나서</td>
+                <td>숙제를 하고 나서 놀러 갔습니다.</td>
+            </tr>
+        </table>
+        
+        <h3>4. 자연스러운 문장 연결의 중요성</h3>
+        <p>문장을 연결할 때는 내용의 논리적 관계에 맞는 연결 표현을 선택하는 것이 중요합니다. 적절한 연결 표현을 사용하면 글의 흐름이 자연스러워지고, 독자가 내용을 더 쉽게 이해할 수 있게 됩니다.</p>
+        
+        <div class="example-box">
+            <h4>자연스러운 문장 연결 예시</h4>
+            <div class="example-item"><strong>원인과 결과</strong>: 비가 와서 우산을 썼습니다. (O)<br>비가 왔지만 우산을 썼습니다. (X)</div>
+            <div class="example-item"><strong>대조</strong>: 비가 왔지만 소풍을 갔습니다. (O)<br>비가 와서 소풍을 갔습니다. (X)</div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3 class="interactive-title"><i class="fas fa-puzzle-piece"></i> 문장 연결하기 연습</h3>
+            <p>다음 문장들을 적절한 연결 표현을 사용하여 연결해 보세요.</p>
+            
+            <div class="practice-container">
+                <div class="practice-item" id="practice1">
+                    <div class="practice-question">다음 두 문장을 원인과 결과의 관계로 연결하세요.</div>
+                    <div class="practice-sentence">날씨가 추웠다. 두꺼운 옷을 입었다.</div>
+                    <div class="connector-options">
+                        <div class="connector-option" data-type="cause">-아서/-어서</div>
+                        <div class="connector-option" data-type="cause">-기 때문에</div>
+                        <div class="connector-option" data-type="contrast">-지만</div>
+                        <div class="connector-option" data-type="condition">-면</div>
+                    </div>
+                    <button class="connector-check" data-practice="practice1">정답 확인하기</button>
+                    <div class="practice-answer" id="practice1-answer">정답: '날씨가 추워서 두꺼운 옷을 입었다.' 또는 '날씨가 추웠기 때문에 두꺼운 옷을 입었다.'</div>
+                </div>
+                
+                <div class="practice-item" id="practice2">
+                    <div class="practice-question">다음 두 문장을 대조의 관계로 연결하세요.</div>
+                    <div class="practice-sentence">비가 왔다. 소풍을 갔다.</div>
+                    <div class="connector-options">
+                        <div class="connector-option" data-type="cause">-아서/-어서</div>
+                        <div class="connector-option" data-type="contrast">-지만</div>
+                        <div class="connector-option" data-type="contrast">그러나</div>
+                        <div class="connector-option" data-type="condition">-면</div>
+                    </div>
+                    <button class="connector-check" data-practice="practice2">정답 확인하기</button>
+                    <div class="practice-answer" id="practice2-answer">정답: '비가 왔지만 소풍을 갔다.' 또는 '비가 왔다. 그러나 소풍을 갔다.'</div>
+                </div>
+                
+                <div class="practice-item" id="practice3">
+                    <div class="practice-question">다음 두 문장을 조건의 관계로 연결하세요.</div>
+                    <div class="practice-sentence">비가 온다. 우산을 가져갈 것이다.</div>
+                    <div class="connector-options">
+                        <div class="connector-option" data-type="condition">-면</div>
+                        <div class="connector-option" data-type="contrast">-지만</div>
+                        <div class="connector-option" data-type="cause">-기 때문에</div>
+                        <div class="connector-option" data-type="condition">-다면</div>
+                    </div>
+                    <button class="connector-check" data-practice="practice3">정답 확인하기</button>
+                    <div class="practice-answer" id="practice3-answer">정답: '비가 오면 우산을 가져갈 것이다.' 또는 '비가 온다면 우산을 가져갈 것이다.'</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation-buttons">
+            <a href="../index.html" class="nav-button back-button"><i class="fas fa-arrow-left"></i> 학습 목록으로</a>
+            <a href="grade5_quotation.html" class="nav-button">다음 학습: 인용과 직접 간접 표현 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 연결 표현 옵션 클릭 이벤트 처리
+            const connectorOptions = document.querySelectorAll('.connector-option');
+            
+            connectorOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // 같은 문제 내의 다른 옵션들의 선택 상태 제거
+                    const practiceItem = this.closest('.practice-item');
+                    const options = practiceItem.querySelectorAll('.connector-option');
+                    
+                    options.forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // 현재 옵션 선택 상태로 변경
+                    this.classList.add('selected');
+                });
+            });
+            
+            // 정답 확인 버튼 클릭 이벤트 처리
+            const checkButtons = document.querySelectorAll('.connector-check');
+            
+            checkButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const practiceId = this.getAttribute('data-practice');
+                    const answerElement = document.getElementById(`${practiceId}-answer`);
+                    
+                    answerElement.classList.add('show');
+                    
+                    // 정답 강조 표시
+                    const practiceItem = this.closest('.practice-item');
+                    const selectedOption = practiceItem.querySelector('.connector-option.selected');
+                    
+                    if (selectedOption) {
+                        const optionType = selectedOption.getAttribute('data-type');
+                        const questionType = practiceId === 'practice1' ? 'cause' : 
+                                            practiceId === 'practice2' ? 'contrast' : 'condition';
+                        
+                        if (optionType === questionType) {
+                            selectedOption.style.backgroundColor = '#4CAF50';
+                            selectedOption.style.borderColor = '#4CAF50';
+                            selectedOption.style.color = 'white';
+                        } else {
+                            selectedOption.style.backgroundColor = '#F44336';
+                            selectedOption.style.borderColor = '#F44336';
+                            selectedOption.style.color = 'white';
+                            
+                            // 정답 옵션 강조
+                            const options = practiceItem.querySelectorAll('.connector-option');
+                            options.forEach(opt => {
+                                if (opt.getAttribute('data-type') === questionType) {
+                                    opt.style.backgroundColor = '#4CAF50';
+                                    opt.style.borderColor = '#4CAF50';
+                                    opt.style.color = 'white';
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

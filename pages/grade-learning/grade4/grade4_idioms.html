@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관용 표현 배우기 | 4학년 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../styles/style.css">
+    <link rel="stylesheet" href="../../../styles/grade-learning.css">
+    <style>
+        .idiom-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .idiom-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background-color: #26547C;
+        }
+        
+        .idiom-title {
+            color: #26547C;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .idiom-meaning {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .idiom-example {
+            background-color: #e6f0ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .proverb-section {
+            margin-top: 40px;
+        }
+        
+        .proverb-card {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3366cc;
+        }
+        
+        .proverb-title {
+            color: #3366cc;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .proverb-meaning {
+            margin-bottom: 10px;
+        }
+        
+        .matching-game {
+            background-color: #fff8e1;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .game-title {
+            color: #26547C;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .idiom-pairs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .idiom-card-game {
+            background-color: #ffffff;
+            border: 2px solid #26547C;
+            border-radius: 5px;
+            padding: 10px;
+            width: calc(50% - 5px);
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .idiom-card-game:hover {
+            background-color: #e6f0ff;
+        }
+        
+        .idiom-card-game.selected {
+            background-color: #26547C;
+            color: white;
+        }
+        
+        .game-feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .game-feedback.correct {
+            background-color: #e7f6e7;
+            color: #2e7d32;
+        }
+        
+        .game-feedback.incorrect {
+            background-color: #fdeded;
+            color: #c62828;
+        }
+        
+        .quiz-section {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .quiz-item {
+            margin-bottom: 20px;
+        }
+        
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .quiz-option {
+            padding: 10px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .quiz-option:hover {
+            background-color: #e6f0ff;
+        }
+        
+        .quiz-feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .submit-button {
+            background-color: #26547C;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .submit-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="lesson-header">
+            <h1>관용 표현 배우기</h1>
+            <p>우리말의 다양한 관용어와 속담을 배우고 이해해봅시다.</p>
+        </header>
+
+        <section class="content-section">
+            <h2>관용 표현이란?</h2>
+            <p>관용 표현은 단어의 원래 뜻과는 다른 특별한 의미로 사용되는 말들입니다. 두 개 이상의 단어가 모여 새로운 의미를 만드는 경우가 많습니다. 관용 표현을 알면 우리말을 더 재미있고 풍부하게 사용할 수 있습니다.</p>
+            
+            <div class="info-box">
+                <h3>관용 표현의 특징</h3>
+                <ul>
+                    <li>단어들의 원래 뜻과는 다른 의미를 갖습니다.</li>
+                    <li>일상 대화에서 자주 사용됩니다.</li>
+                    <li>우리 문화와 생활 방식을 반영합니다.</li>
+                    <li>글이나 말을 더 생동감 있게 만들어 줍니다.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>자주 쓰이는 관용 표현</h2>
+            
+            <div class="idiom-card">
+                <div class="idiom-title">눈이 빠지게 기다리다</div>
+                <div class="idiom-meaning">매우 간절하게 오랫동안 기다린다는 뜻입니다.</div>
+                <div class="idiom-example">
+                    <p>예문: 동생은 소포가 오기를 <strong>눈이 빠지게 기다렸어요</strong>.</p>
+                </div>
+            </div>
+            
+            <div class="idiom-card">
+                <div class="idiom-title">손이 크다</div>
+                <div class="idiom-meaning">씀씀이가 크거나 후하다는 뜻입니다.</div>
+                <div class="idiom-example">
+                    <p>예문: 우리 선생님은 <strong>손이 커서</strong> 학생들에게 늘 맛있는 간식을 사주십니다.</p>
+                </div>
+            </div>
+            
+            <div class="idiom-card">
+                <div class="idiom-title">발이 넓다</div>
+                <div class="idiom-meaning">아는 사람이 많고 인맥이 넓다는 뜻입니다.</div>
+                <div class="idiom-example">
+                    <p>예문: 우리 아버지는 <strong>발이 넓어서</strong> 어디를 가든 아는 분이 있습니다.</p>
+                </div>
+            </div>
+            
+            <div class="idiom-card">
+                <div class="idiom-title">귀가 얇다</div>
+                <div class="idiom-meaning">남의 말을 쉽게 믿고 따른다는 뜻입니다.</div>
+                <div class="idiom-example">
+                    <p>예문: 민수는 <strong>귀가 얇아서</strong> 친구들이 하는 말을 모두 믿어버립니다.</p>
+                </div>
+            </div>
+            
+            <div class="idiom-card">
+                <div class="idiom-title">배가 아프다</div>
+                <div class="idiom-meaning">남이 잘되는 것을 보고 질투한다는 뜻입니다.</div>
+                <div class="idiom-example">
+                    <p>예문: 친구가 1등 했다는 소식을 듣고 <strong>배가 아팠습니다</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section proverb-section">
+            <h2>재미있는 속담</h2>
+            <p>속담은 오랫동안 사람들 사이에서 전해 내려오는 짧은 문장으로, 교훈이나 지혜를 담고 있습니다.</p>
+            
+            <div class="proverb-card">
+                <div class="proverb-title">티끌 모아 태산</div>
+                <div class="proverb-meaning">작은 것이라도 모이면 큰 것이 된다는 뜻입니다.</div>
+                <p>예문: 용돈을 조금씩 모아서 원하는 장난감을 샀어요. <strong>티끌 모아 태산</strong>이라더니 정말이에요.</p>
+            </div>
+            
+            <div class="proverb-card">
+                <div class="proverb-title">소 잃고 외양간 고친다</div>
+                <div class="proverb-meaning">일이 잘못된 후에 뒤늦게 대책을 세운다는 뜻입니다.</div>
+                <p>예문: 시험을 망치고 나서야 공부를 열심히 하기 시작했어요. <strong>소 잃고 외양간 고치는</strong> 격이죠.</p>
+            </div>
+            
+            <div class="proverb-card">
+                <div class="proverb-title">가는 말이 고와야 오는 말이 곱다</div>
+                <div class="proverb-meaning">상대방에게 좋게 대하면 자신도 좋은 대접을 받는다는 뜻입니다.</div>
+                <p>예문: 친구에게 친절하게 대하니 친구도 나에게 잘해줬어요. <strong>가는 말이 고와야 오는 말이 곱다</strong>는 말이 맞아요.</p>
+            </div>
+            
+            <div class="proverb-card">
+                <div class="proverb-title">천 리 길도 한 걸음부터</div>
+                <div class="proverb-meaning">큰일도 작은 일부터 차근차근 시작해야 한다는 뜻입니다.</div>
+                <p>예문: 많은 한자를 외우려면 하루에 조금씩 공부해야 해요. <strong>천 리 길도 한 걸음부터</strong>니까요.</p>
+            </div>
+        </section>
+
+        <section class="matching-game">
+            <h2 class="game-title">관용 표현 짝 맞추기 게임</h2>
+            <p>관용 표현과 그 의미를 올바르게 연결해 보세요.</p>
+            
+            <div class="idiom-pairs">
+                <div class="idiom-card-game" data-pair="1">눈이 높다</div>
+                <div class="idiom-card-game" data-pair="1">안목이 좋고 까다롭다</div>
+                <div class="idiom-card-game" data-pair="2">입이 무겁다</div>
+                <div class="idiom-card-game" data-pair="2">비밀을 잘 지킨다</div>
+                <div class="idiom-card-game" data-pair="3">손이 모자라다</div>
+                <div class="idiom-card-game" data-pair="3">일할 사람이 부족하다</div>
+                <div class="idiom-card-game" data-pair="4">발이 묶이다</div>
+                <div class="idiom-card-game" data-pair="4">어떤 일로 인해 이동이 자유롭지 못하다</div>
+            </div>
+            
+            <div class="game-feedback correct" id="match-correct">
+                정답입니다! 관용 표현과 의미를 잘 연결했습니다.
+            </div>
+            <div class="game-feedback incorrect" id="match-incorrect">
+                다시 시도해보세요. 관용 표현과 의미가 잘못 연결되었습니다.
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <h2>관용 표현 퀴즈</h2>
+            <p>다음 문장에 알맞은 관용 표현을 고르세요.</p>
+            
+            <div class="quiz-item" id="quiz1">
+                <div class="quiz-question">1. 민수는 시험 성적이 잘 나와서 ( ).</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkQuiz(1, 1)">가슴이 아팠다</div>
+                    <div class="quiz-option" onclick="checkQuiz(1, 2)">머리가 컸다</div>
+                    <div class="quiz-option" onclick="checkQuiz(1, 3)">어깨가 으쓱했다</div>
+                    <div class="quiz-option" onclick="checkQuiz(1, 4)">배가 고팠다</div>
+                </div>
+                <div class="quiz-feedback" id="quiz1-feedback"></div>
+            </div>
+            
+            <div class="quiz-item" id="quiz2">
+                <div class="quiz-question">2. 할머니는 항상 손자를 ( ) 기다리신다.</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkQuiz(2, 1)">손이 크게</div>
+                    <div class="quiz-option" onclick="checkQuiz(2, 2)">눈이 빠지게</div>
+                    <div class="quiz-option" onclick="checkQuiz(2, 3)">발이 넓게</div>
+                    <div class="quiz-option" onclick="checkQuiz(2, 4)">입이 가볍게</div>
+                </div>
+                <div class="quiz-feedback" id="quiz2-feedback"></div>
+            </div>
+            
+            <div class="quiz-item" id="quiz3">
+                <div class="quiz-question">3. 우리 반 회장은 친구들 사이에서 ( ).</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkQuiz(3, 1)">입이 무겁다</div>
+                    <div class="quiz-option" onclick="checkQuiz(3, 2)">손이 모자라다</div>
+                    <div class="quiz-option" onclick="checkQuiz(3, 3)">귀가 얇다</div>
+                    <div class="quiz-option" onclick="checkQuiz(3, 4)">발이 넓다</div>
+                </div>
+                <div class="quiz-feedback" id="quiz3-feedback"></div>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="grade4_story_structure.html" class="nav-button">이전 학습</a>
+            <a href="grade4_presentation.html" class="nav-button">다음 학습</a>
+        </div>
+    </div>
+
+    <script>
+        // 짝 맞추기 게임 기능
+        let firstSelected = null;
+        let secondSelected = null;
+        let matchedPairs = 0;
+        
+        document.querySelectorAll('.idiom-card-game').forEach(card => {
+            card.addEventListener('click', function() {
+                // 이미 맞춘 카드는 클릭 안됨
+                if (this.classList.contains('matched')) {
+                    return;
+                }
+                
+                // 두 카드가 이미 선택된 경우 초기화
+                if (firstSelected && secondSelected) {
+                    document.querySelectorAll('.idiom-card-game').forEach(c => {
+                        if (!c.classList.contains('matched')) {
+                            c.classList.remove('selected');
+                        }
+                    });
+                    firstSelected = null;
+                    secondSelected = null;
+                    document.getElementById('match-correct').style.display = 'none';
+                    document.getElementById('match-incorrect').style.display = 'none';
+                }
+                
+                // 첫 번째 카드 선택
+                if (!firstSelected) {
+                    this.classList.add('selected');
+                    firstSelected = this;
+                    return;
+                }
+                
+                // 같은 카드를 다시 클릭한 경우
+                if (this === firstSelected) {
+                    return;
+                }
+                
+                // 두 번째 카드 선택
+                this.classList.add('selected');
+                secondSelected = this;
+                
+                // 짝이 맞는지 확인
+                if (firstSelected.getAttribute('data-pair') === secondSelected.getAttribute('data-pair')) {
+                    // 짝이 맞는 경우
+                    firstSelected.classList.add('matched');
+                    secondSelected.classList.add('matched');
+                    matchedPairs++;
+                    document.getElementById('match-correct').style.display = 'block';
+                    document.getElementById('match-incorrect').style.display = 'none';
+                    
+                    // 모든 짝을 다 맞췄는지 확인
+                    if (matchedPairs === 4) {
+                        document.getElementById('match-correct').textContent = '축하합니다! 모든 짝을 다 맞추셨습니다.';
+                    }
+                } else {
+                    // 짝이 맞지 않는 경우
+                    document.getElementById('match-incorrect').style.display = 'block';
+                    document.getElementById('match-correct').style.display = 'none';
+                }
+            });
+        });
+        
+        // 퀴즈 기능
+        function checkQuiz(quizNum, selectedOption) {
+            const correctAnswers = {
+                1: 3, // 어깨가 으쓱했다
+                2: 2, // 눈이 빠지게
+                3: 4  // 발이 넓다
+            };
+            
+            const feedback = document.getElementById(`quiz${quizNum}-feedback`);
+            
+            if (selectedOption === correctAnswers[quizNum]) {
+                feedback.textContent = "정답입니다!";
+                feedback.style.color = "#2e7d32";
+            } else {
+                feedback.textContent = "다시 생각해보세요.";
+                feedback.style.color = "#c62828";
+            }
+            
+            feedback.style.display = 'block';
+            
+            // 로컬 스토리지에 저장
+            localStorage.setItem(`idioms_quiz${quizNum}`, selectedOption);
+        }
+        
+        // 페이지 로드 시 이전에 저장된 답변 불러오기
+        window.onload = function() {
+            for (let i = 1; i <= 3; i++) {
+                const savedAnswer = localStorage.getItem(`idioms_quiz${i}`);
+                if (savedAnswer) {
+                    checkQuiz(i, parseInt(savedAnswer));
+                }
+            }
+            console.log("관용 표현 배우기 페이지가 로드되었습니다.");
+        };
+    </script>
+</body>
+</html> 

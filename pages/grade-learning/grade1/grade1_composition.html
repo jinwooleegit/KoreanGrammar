@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1학년 작문 학습 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 1학년 전용 스타일 */
+        :root {
+            --grade1-color: #FF6B6B;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .grade-header {
+            background: linear-gradient(135deg, var(--grade1-color) 0%, #FF9292 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .grade-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .grade-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade1-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: var(--grade1-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .example-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--grade1-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .interactive-section {
+            background-color: #f5f5f5;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .interactive-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .writing-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .writing-prompt {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .writing-area {
+            width: 100%;
+            max-width: 600px;
+            min-height: 150px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 16px;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        .writing-area:focus {
+            border-color: var(--grade1-color);
+            outline: none;
+        }
+
+        .writing-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .writing-button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade1-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .writing-button:hover {
+            opacity: 0.9;
+        }
+
+        .picture-prompt {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .picture-item {
+            width: 120px;
+            text-align: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .picture-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .picture-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+
+        .picture-item p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade1-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="grade-header">
+        <h1>작문 학습하기</h1>
+        <p>간단한 문장으로 나의 생각을 글로 표현하는 방법을 배워요.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>글쓰기의 기초</h2>
+        
+        <div class="content-card">
+            <div class="card-header">
+                글쓰기란 무엇일까요?
+            </div>
+            <div class="card-content">
+                <p>글쓰기는 내 생각이나 느낌을 글로 표현하는 것이에요. 우리는 말로 하는 것처럼 글로도 여러 가지를 표현할 수 있어요.</p>
+                
+                <div class="example-box">
+                    <h4>글쓰기의 종류</h4>
+                    <p>1. <strong>경험 쓰기</strong>: 내가 보고, 듣고, 느낀 것을 글로 쓰는 것</p>
+                    <p>2. <strong>상상 쓰기</strong>: 상상한 이야기를 글로 쓰는 것</p>
+                    <p>3. <strong>설명 쓰기</strong>: 어떤 것에 대해 알려주는 글을 쓰는 것</p>
+                </div>
+                
+                <p>글을 쓸 때는 <strong>누가, 언제, 어디서, 무엇을, 어떻게, 왜</strong> 했는지 생각하면 좋아요.</p>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                작문의 순서
+            </div>
+            <div class="card-content">
+                <p>글을 쓸 때는 순서대로 생각하면서 쓰는 것이 중요해요.</p>
+                
+                <div class="example-box">
+                    <h4>글쓰기 순서</h4>
+                    <p>1. <strong>무엇을 쓸지 생각하기</strong>: 주제 정하기</p>
+                    <p>2. <strong>어떤 내용을 쓸지 생각하기</strong>: 쓸 내용 모으기</p>
+                    <p>3. <strong>순서대로 정리하기</strong>: 처음, 가운데, 끝 정하기</p>
+                    <p>4. <strong>글로 표현하기</strong>: 생각한 내용을 문장으로 쓰기</p>
+                    <p>5. <strong>다시 읽고 고치기</strong>: 틀린 부분 찾아 고치기</p>
+                </div>
+                
+                <p>글을 쓸 때는 <strong>처음, 가운데, 끝</strong>으로 나누어 생각하면 좋아요.</p>
+                <p>- <strong>처음</strong>: 무엇에 대해 쓸 것인지 소개해요.</p>
+                <p>- <strong>가운데</strong>: 자세한 내용을 차례대로 써요.</p>
+                <p>- <strong>끝</strong>: 글을 마무리하며 느낀 점을 써요.</p>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3>그림을 보고 문장 만들기</h3>
+            <p style="text-align: center;">아래 그림들 중 하나를 선택하고, 그림에 대한 문장을 만들어 보세요!</p>
+            
+            <div class="writing-container">
+                <div class="picture-prompt">
+                    <div class="picture-item" data-prompt="학교에 가는 아이들">
+                        <img src="../../../assets/images/school_kids.png" alt="학교에 가는 아이들">
+                        <p>학교 가는 길</p>
+                    </div>
+                    <div class="picture-item" data-prompt="공원에서 놀고 있는 아이들">
+                        <img src="../../../assets/images/park_play.png" alt="공원에서 놀고 있는 아이들">
+                        <p>공원 놀이</p>
+                    </div>
+                    <div class="picture-item" data-prompt="동물원에 있는 동물들">
+                        <img src="../../../assets/images/zoo_animals.png" alt="동물원에 있는 동물들">
+                        <p>동물원 구경</p>
+                    </div>
+                    <div class="picture-item" data-prompt="가족과 함께하는 저녁 식사">
+                        <img src="../../../assets/images/family_dinner.png" alt="가족과 함께하는 저녁 식사">
+                        <p>가족 식사</p>
+                    </div>
+                </div>
+                
+                <div class="writing-prompt" id="selectedPrompt">
+                    그림을 선택하면 여기에 안내가 나타납니다!
+                </div>
+                
+                <textarea class="writing-area" id="writingArea" placeholder="여기에 글을 써보세요..."></textarea>
+                
+                <div class="writing-buttons">
+                    <button class="writing-button" id="saveButton">저장하기</button>
+                    <button class="writing-button" id="resetButton">다시 쓰기</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                글쓰기 도움말
+            </div>
+            <div class="card-content">
+                <p>글을 더 잘 쓰기 위한 몇 가지 도움말이에요.</p>
+                
+                <div class="example-box">
+                    <h4>글을 더 잘 쓰려면?</h4>
+                    <p>- 자세하게 관찰하고 느낀 것을 써보세요.</p>
+                    <p>- 비슷한 말을 계속 반복하지 않도록 해요.</p>
+                    <p>- 맞춤법에 주의하며 글을 써요.</p>
+                    <p>- 내용이 순서대로 잘 이어지는지 살펴보세요.</p>
+                    <p>- 다 쓴 후에는 소리 내어 읽어보며 이상한 점이 없는지 확인해요.</p>
+                </div>
+                
+                <p>글을 쓰는 것은 연습이 필요해요. 매일 조금씩 글을 쓰다 보면 점점 더 잘 쓸 수 있게 될 거예요!</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation-buttons content-section">
+        <button class="nav-button" onclick="location.href='grade1_writing.html'">이전 학습: 바른 글씨 쓰기</button>
+        <button class="nav-button" onclick="location.href='grade1_vocab.html'">다음 학습: 어휘력 키우기</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pictureItems = document.querySelectorAll('.picture-item');
+            const selectedPrompt = document.getElementById('selectedPrompt');
+            const writingArea = document.getElementById('writingArea');
+            const saveButton = document.getElementById('saveButton');
+            const resetButton = document.getElementById('resetButton');
+            
+            // 그림 선택 기능
+            pictureItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const prompt = this.getAttribute('data-prompt');
+                    const promptText = `<strong>${prompt}</strong>에 대한 이야기를 써보세요. 누가, 언제, 어디서, 무엇을, 어떻게, 왜 했는지 생각하면서 쓰면 좋아요!`;
+                    selectedPrompt.innerHTML = promptText;
+                    
+                    // 모든 아이템에서 선택 효과 제거
+                    pictureItems.forEach(pic => pic.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)');
+                    
+                    // 선택된 아이템에 효과 추가
+                    this.style.boxShadow = '0 0 0 3px var(--grade1-color), 0 2px 8px rgba(0,0,0,0.1)';
+                });
+            });
+            
+            // 저장 버튼 기능
+            saveButton.addEventListener('click', function() {
+                if (writingArea.value.trim() !== '') {
+                    alert('작성한 글이 저장되었어요! 잘했어요!');
+                } else {
+                    alert('글을 작성한 후에 저장해 주세요!');
+                }
+            });
+            
+            // 리셋 버튼 기능
+            resetButton.addEventListener('click', function() {
+                if (confirm('정말 다시 쓰시겠어요? 작성한 내용이 모두 지워집니다.')) {
+                    writingArea.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

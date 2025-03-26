@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문장의 종류 배우기 | 2학년 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 2학년 전용 스타일 */
+        :root {
+            --grade2-color: #4ECDC4;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .lesson-header {
+            background: linear-gradient(135deg, var(--grade2-color) 0%, #7CEEAB 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .lesson-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade2-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--grade2-color);
+            padding-bottom: 10px;
+        }
+
+        .content-section h3 {
+            color: #444;
+            font-size: 22px;
+            margin: 25px 0 15px;
+        }
+
+        .content-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .example-box {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--grade2-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box h4 {
+            color: var(--grade2-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .example-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .example-item:before {
+            content: "•";
+            color: var(--grade2-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .interactive-section {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .interactive-title {
+            color: var(--grade2-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .interactive-title i {
+            font-size: 24px;
+        }
+
+        .quiz-container {
+            margin-top: 20px;
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-option {
+            padding: 10px 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .quiz-option.selected {
+            background-color: var(--grade2-color);
+            color: white;
+            border-color: var(--grade2-color);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade2-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .back-button {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="lesson-header">
+        <h1>문장의 종류 배우기</h1>
+        <p>우리가 사용하는 다양한 문장의 종류(평서문, 의문문, 감탄문, 명령문)를 배우고, 상황에 맞게 사용하는 방법을 알아봅니다.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>문장의 종류</h2>
+        
+        <p>우리는 말이나 글로 표현할 때 다양한 종류의 문장을 사용해요. 문장은 하고 싶은 말의 목적에 따라 여러 종류로 나눌 수 있어요. 크게 <strong>평서문</strong>, <strong>의문문</strong>, <strong>감탄문</strong>, <strong>명령문</strong>으로 나눌 수 있답니다.</p>
+        
+        <h3>1. 평서문</h3>
+        <p>평서문은 어떤 사실이나 생각을 그대로 말하는 문장이에요. 문장의 끝에는 보통 마침표(.)를 사용해요.</p>
+        
+        <div class="example-box">
+            <h4>평서문 예시</h4>
+            <div class="example-item">오늘은 날씨가 좋아요.</div>
+            <div class="example-item">저는 학교에 다녀요.</div>
+            <div class="example-item">사과는 빨간색이에요.</div>
+        </div>
+        
+        <h3>2. 의문문</h3>
+        <p>의문문은 무언가를 물어보거나 질문하는 문장이에요. 문장의 끝에는 물음표(?)를 사용해요.</p>
+        
+        <div class="example-box">
+            <h4>의문문 예시</h4>
+            <div class="example-item">오늘 날씨가 어때요?</div>
+            <div class="example-item">학교에 어떻게 가나요?</div>
+            <div class="example-item">사과는 무슨 색인가요?</div>
+        </div>
+        
+        <h3>3. 감탄문</h3>
+        <p>감탄문은 기쁨, 슬픔, 놀라움 등의 감정을 강하게 나타내는 문장이에요. 문장의 끝에는 느낌표(!)를 사용해요.</p>
+        
+        <div class="example-box">
+            <h4>감탄문 예시</h4>
+            <div class="example-item">와! 날씨가 정말 좋네요!</div>
+            <div class="example-item">아이고! 넘어졌어요!</div>
+            <div class="example-item">우와! 이 사과는 정말 빨갛네요!</div>
+        </div>
+        
+        <h3>4. 명령문</h3>
+        <p>명령문은 상대방에게 무엇을 시키거나 요청하는 문장이에요. 문장의 끝에는 보통 마침표(.)나 느낌표(!)를 사용해요.</p>
+        
+        <div class="example-box">
+            <h4>명령문 예시</h4>
+            <div class="example-item">창문을 열어 주세요.</div>
+            <div class="example-item">책을 읽으세요.</div>
+            <div class="example-item">조용히 해주세요!</div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3 class="interactive-title"><i class="fas fa-gamepad"></i> 문장 종류 알아맞히기</h3>
+            <p>아래 문장들이 어떤 종류의 문장인지 골라보세요.</p>
+            
+            <div class="quiz-container" id="quiz1">
+                <div class="quiz-question">1. 오늘 숙제를 다 했나요?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-answer="false">평서문</div>
+                    <div class="quiz-option" data-answer="true">의문문</div>
+                    <div class="quiz-option" data-answer="false">감탄문</div>
+                    <div class="quiz-option" data-answer="false">명령문</div>
+                </div>
+                
+                <div class="quiz-question">2. 와! 정말 예쁜 그림이네요!</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-answer="false">평서문</div>
+                    <div class="quiz-option" data-answer="false">의문문</div>
+                    <div class="quiz-option" data-answer="true">감탄문</div>
+                    <div class="quiz-option" data-answer="false">명령문</div>
+                </div>
+                
+                <div class="quiz-question">3. 손을 깨끗이 씻으세요.</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-answer="false">평서문</div>
+                    <div class="quiz-option" data-answer="false">의문문</div>
+                    <div class="quiz-option" data-answer="false">감탄문</div>
+                    <div class="quiz-option" data-answer="true">명령문</div>
+                </div>
+                
+                <div class="quiz-question">4. 저는 매일 아침에 일어나요.</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-answer="true">평서문</div>
+                    <div class="quiz-option" data-answer="false">의문문</div>
+                    <div class="quiz-option" data-answer="false">감탄문</div>
+                    <div class="quiz-option" data-answer="false">명령문</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3 class="interactive-title"><i class="fas fa-pencil-alt"></i> 문장 만들기 연습</h3>
+            <p>다음 주제로 각 종류의 문장을 만들어 보세요.</p>
+            
+            <div class="example-box">
+                <h4>주제: 학교</h4>
+                <div class="example-item"><strong>평서문:</strong> 우리 학교는 크고 아름다워요.</div>
+                <div class="example-item"><strong>의문문:</strong> 너의 학교는 어디에 있니?</div>
+                <div class="example-item"><strong>감탄문:</strong> 우와! 학교 운동장이 정말 넓구나!</div>
+                <div class="example-item"><strong>명령문:</strong> 학교 규칙을 잘 지켜주세요.</div>
+            </div>
+            
+            <div class="example-box">
+                <h4>주제: 음식</h4>
+                <div class="example-item"><strong>평서문:</strong> 나는 과일을 좋아해요.</div>
+                <div class="example-item"><strong>의문문:</strong> 당신은 어떤 음식을 좋아하나요?</div>
+                <div class="example-item"><strong>감탄문:</strong> 맛있다! 이 케이크는 정말 달콤하네요!</div>
+                <div class="example-item"><strong>명령문:</strong> 음식을 골고루 먹으세요.</div>
+            </div>
+        </div>
+        
+        <div class="navigation-buttons">
+            <a href="../index.html" class="nav-button back-button"><i class="fas fa-arrow-left"></i> 학습 목록으로</a>
+            <a href="grade2_sentence_structure.html" class="nav-button">다음 학습: 기본 문장 구조 이해하기 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 퀴즈 옵션 클릭 이벤트 처리
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            
+            quizOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // 같은 문제 내의 다른 옵션들의 선택 상태 제거
+                    const questionElement = this.parentElement;
+                    const options = questionElement.querySelectorAll('.quiz-option');
+                    
+                    options.forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // 현재 옵션 선택 상태로 변경
+                    this.classList.add('selected');
+                    
+                    // 정답 체크 (data-answer 속성이 "true"인 경우가 정답)
+                    if(this.getAttribute('data-answer') === "true") {
+                        this.style.backgroundColor = "#4CD964";
+                    } else {
+                        this.style.backgroundColor = "#FF3B30";
+                        
+                        // 정답 표시
+                        options.forEach(opt => {
+                            if(opt.getAttribute('data-answer') === "true") {
+                                opt.style.backgroundColor = "#4CD964";
+                                opt.classList.add('selected');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>국어 문법의 특징 | 문법놀이터</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .activity-header {
+            background: linear-gradient(135deg, #E91E63 0%, #F5A9D0 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .activity-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .activity-header p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .activity-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .activity-info {
+            background-color: #FCE4EC;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .activity-info h2 {
+            color: #C2185B;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .activity-info p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .activity-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #C2185B;
+            margin-bottom: 20px;
+        }
+
+        .grammar-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            border-left: 4px solid #E91E63;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .feature-desc {
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .feature-example {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .discussion-container {
+            margin-top: 30px;
+        }
+
+        .discussion-topic {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .topic-title {
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .topic-desc {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .topic-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background-color: #E91E63;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action-button {
+            background-color: #E91E63;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .action-button:hover {
+            background-color: #C2185B;
+        }
+
+        .action-button.secondary {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .action-button.secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .language-change {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .change-examples {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .change-examples {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .change-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .change-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .change-past {
+            color: #9E9E9E;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .change-present {
+            color: #C2185B;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body
+    
+
+    
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="activity-header">
+        <h1>국어 문법의 특징</h1>
+        <p>우리말의 독특한 특징과 다른 언어와 구별되는 문법 요소를 알아봅시다.</p>
+    </div>
+
+    <div class="activity-container">
+        <div class="activity-info">
+            <h2>국어 문법이란?</h2>
+            <p>국어 문법은 우리말을 사용할 때 지켜야 하는 규칙과 체계를 말합니다. 국어는 오랜 역사를 거치면서 형성된 독특한 특징을 가지고 있으며, 다른 언어와는 구별되는 고유한 문법 체계를 갖추고 있습니다. 이 학습에서는 국어 문법의 주요 특징과 다른 언어와의 차이점, 그리고 시간에 따른 변화를 살펴보겠습니다.</p>
+        </div>
+
+        <div class="activity-section">
+            <h3 class="section-title">국어 문법의 주요 특징</h3>
+            
+            <div class="grammar-features">
+                <div class="feature-card">
+                    <div class="feature-title">교착어적 특성</div>
+                    <div class="feature-desc">단어의 뒤에 조사나 어미 등 문법적 요소를 붙여 문장 안에서의 역할과 의미를 나타냅니다.</div>
+                    <div class="feature-example">
+                        <strong>예시:</strong> "학교에서" (학교 + 에서), "먹었습니다" (먹- + -었- + -습니다)
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-title">어순의 특징</div>
+                    <div class="feature-desc">기본적으로 '주어-목적어-서술어' 순서로 문장이 구성되며, 서술어가 문장의 마지막에 옵니다.</div>
+                    <div class="feature-example">
+                        <strong>예시:</strong> "나는 사과를 먹었다." (주어 + 목적어 + 서술어)
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-title">조사의 발달</div>
+                    <div class="feature-desc">다양한 조사를 사용하여 문장 성분의 역할과 의미 관계를 나타냅니다.</div>
+                    <div class="feature-example">
+                        <strong>예시:</strong> "학생이"(주격), "학생을"(목적격), "학생의"(관형격), "학생에게"(여격)
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-title">높임법 체계</div>
+                    <div class="feature-desc">주체, 객체, 상대에 따라 다양한 높임 표현을 사용합니다.</div>
+                    <div class="feature-example">
+                        <strong>예시:</strong> "할아버지께서 주무신다."(주체 높임), "선생님께 드렸다."(객체 높임), "밥 먹었습니까?"(상대 높임)
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-title">품사의 특징</div>
+                    <div class="feature-desc">체언, 용언, 수식언, 관계언, 독립언 등 다양한 품사 체계를 가지고 있습니다.</div>
+                    <div class="feature-example">
+                        <strong>예시:</strong> 명사, 대명사, 수사(체언), 동사, 형용사(용언), 관형사, 부사(수식언), 조사(관계언), 감탄사(독립언)
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-title">시제 표현</div>
+                    <div class="feature-desc">과거, 현재, 미래를 나타내는 다양한 어미와 표현을 사용합니다.</div>
+                    <div class="feature-example">
+                        <strong>예시:</strong> "먹었다"(과거), "먹는다"(현재), "먹을 것이다"(미래)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-section">
+            <h3 class="section-title">국어와 다른 언어의 차이점</h3>
+            
+            <div class="grammar-features">
+                <div class="feature-card">
+                    <div class="feature-title">영어와의 차이</div>
+                    <div class="feature-desc">영어는 주어-동사-목적어 순서, 전치사 사용, 관사 존재 등의 특징이 있습니다.</div>
+                    <div class="feature-example">
+                        <strong>영어:</strong> "I ate an apple." (주어 + 동사 + 목적어)<br>
+                        <strong>한국어:</strong> "나는 사과를 먹었다." (주어 + 목적어 + 서술어)
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-title">일본어와의 유사점</div>
+                    <div class="feature-desc">한국어와 일본어는 어순과 조사 사용, 존댓말 체계 등에서 유사점을 가집니다.</div>
+                    <div class="feature-example">
+                        <strong>일본어:</strong> "私はりんごを食べました。" (주어 + 목적어 + 서술어)<br>
+                        <strong>한국어:</strong> "나는 사과를 먹었다." (주어 + 목적어 + 서술어)
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-title">중국어와의 차이</div>
+                    <div class="feature-desc">중국어는 성조가 있고, 조사 대신 어순으로 문법적 기능을 표현합니다.</div>
+                    <div class="feature-example">
+                        <strong>중국어:</strong> "我吃了苹果。" (주어 + 동사 + 목적어)<br>
+                        <strong>한국어:</strong> "나는 사과를 먹었다." (주어 + 목적어 + 서술어)
+                    </div>
+                </div>
+            </div>
+
+            <div class="language-change">
+                <h4>시간에 따른 국어의 변화</h4>
+                <p>언어는 시간이 지남에 따라 자연스럽게 변화합니다. 국어도 역사적, 사회적 변화에 따라 발음, 어휘, 문법 등이 조금씩 변화해 왔습니다.</p>
+                
+                <div class="change-examples">
+                    <div class="change-card">
+                        <div class="change-title">발음의 변화</div>
+                        <div class="change-past">과거: 깊다 [긷따]</div>
+                        <div class="change-present">현재: 깊다 [깁따]</div>
+                    </div>
+                    
+                    <div class="change-card">
+                        <div class="change-title">어휘의 변화</div>
+                        <div class="change-past">과거: 사오일 (15일)</div>
+                        <div class="change-present">현재: 열닷새 (15일)</div>
+                    </div>
+                    
+                    <div class="change-card">
+                        <div class="change-title">문법의 변화</div>
+                        <div class="change-past">과거: "깊고 넓은 바다"</div>
+                        <div class="change-present">현재: "깊고 넓은 바다" (유지)</div>
+                    </div>
+                    
+                    <div class="change-card">
+                        <div class="change-title">새로운 표현의 등장</div>
+                        <div class="change-past">과거: 없음</div>
+                        <div class="change-present">현재: "인스타각", "꿀잼", "완내스" 등</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-section">
+            <h3 class="section-title">언어 변화에 대한 토론</h3>
+            
+            <div class="discussion-container">
+                <div class="discussion-topic">
+                    <div class="topic-title">신조어와 언어 발전</div>
+                    <div class="topic-desc">최근 인터넷과 SNS에서 많이 사용되는 신조어에 대해 여러분의 생각을 자유롭게 적어보세요. 신조어의 등장이 국어의 발전에 긍정적인지 부정적인지, 그 이유는 무엇인지 생각해보세요.</div>
+                    <textarea class="topic-textarea" placeholder="여기에 의견을 작성하세요."></textarea>
+                    <button class="submit-button" onclick="showFeedback(this, '좋은 의견이에요! 언어의 변화와 발전에 대해 깊이 생각해보셨군요.')">의견 제출</button>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="discussion-topic">
+                    <div class="topic-title">외래어 사용과 국어 순화</div>
+                    <div class="topic-desc">일상생활에서 자주 사용하는 외래어에 대해 생각해보고, 국어 순화의 필요성에 대한 자신의 의견을 작성해보세요. 외래어 사용이 국어에 미치는 영향은 무엇일까요?</div>
+                    <textarea class="topic-textarea" placeholder="여기에 의견을 작성하세요."></textarea>
+                    <button class="submit-button" onclick="showFeedback(this, '훌륭한 의견입니다! 외래어와 국어 순화에 대해 균형 잡힌 시각을 가지고 계시네요.')">의견 제출</button>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="discussion-topic">
+                    <div class="topic-title">바른 언어 사용의 중요성</div>
+                    <div class="topic-desc">일상생활이나 인터넷에서 바른 언어를 사용하는 것이 왜 중요한지 생각해보고, 바른 언어 사용을 위해 우리가 할 수 있는 일은 무엇인지 의견을 작성해보세요.</div>
+                    <textarea class="topic-textarea" placeholder="여기에 의견을 작성하세요."></textarea>
+                    <button class="submit-button" onclick="showFeedback(this, '정말 좋은 의견이에요! 바른 언어 사용의 중요성과 구체적인 실천 방안까지 생각해주셨네요.')">의견 제출</button>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="grade6.html" class="action-button secondary">
+                <i class="fas fa-arrow-left"></i> 학년 페이지로
+            </a>
+            <a href="activities.html" class="action-button">
+                <i class="fas fa-th-list"></i> 다른 활동 보기
+            </a>
+        </div>
+    </div>
+
+    
+
+    <script>
+        function showFeedback(button, message) {
+            const textarea = button.previousElementSibling;
+            const feedback = button.nextElementSibling;
+            
+            if (textarea.value.length > 50) {
+                feedback.textContent = message;
+                feedback.style.display = 'block';
+                feedback.style.backgroundColor = '#E8F5E9';
+                feedback.style.color = '#388E3C';
+                feedback.style.padding = '10px';
+                feedback.style.borderRadius = '4px';
+            } else {
+                feedback.textContent = '조금 더 자세히 의견을 작성해 보세요.';
+                feedback.style.display = 'block';
+                feedback.style.backgroundColor = '#FFEBEE';
+                feedback.style.color = '#D32F2F';
+                feedback.style.padding = '10px';
+                feedback.style.borderRadius = '4px';
+            }
+        }
+    </script>
+    
+    
+    
+    
+    
+    <!-- 푸터 영역 -->
+    <footer></footer>
+    
+    <script src="../../js/siteManager.js"></script>
+</body>
+</html> 

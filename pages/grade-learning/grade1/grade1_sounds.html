@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1학년 글자와 소리 관계 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 1학년 전용 스타일 */
+        :root {
+            --grade1-color: #FF6B6B;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .grade-header {
+            background: linear-gradient(135deg, var(--grade1-color) 0%, #FF9292 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .grade-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .grade-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade1-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: var(--grade1-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .sound-item {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: transform 0.3s ease;
+        }
+
+        .sound-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .sound-char {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--grade1-color);
+        }
+
+        .sound-name {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .sound-example {
+            font-size: 13px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .example-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--grade1-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .interactive-section {
+            background-color: #f5f5f5;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .interactive-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .syllable-builder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .builder-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .char-button {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .char-button:hover {
+            border-color: var(--grade1-color);
+            transform: scale(1.1);
+        }
+
+        .char-button.consonant {
+            background-color: #ffecec;
+        }
+
+        .char-button.vowel {
+            background-color: #ecf4ff;
+        }
+
+        .result-display {
+            width: 120px;
+            height: 120px;
+            border: 3px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 20px 0;
+            background-color: white;
+        }
+
+        .result-word {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade1-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="grade-header">
+        <h1>글자와 소리 관계 이해하기</h1>
+        <p>한글의 자음과 모음이 어떤 소리를 내는지 배우고, 글자와 소리의 관계를 이해해요.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>한글의 기본 소리</h2>
+        
+        <div class="content-card">
+            <div class="card-header">
+                자음(consonant)의 소리
+            </div>
+            <div class="card-content">
+                <p>자음은 입 모양과 혀의 위치에 따라 다른 소리가 나요. 자음을 발음할 때는 공기의 흐름이 방해를 받아요.</p>
+                
+                <div class="sound-grid">
+                    <div class="sound-item">
+                        <div class="sound-char">ㄱ</div>
+                        <div class="sound-name">기역</div>
+                        <div class="sound-example">가, 고, 구</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㄴ</div>
+                        <div class="sound-name">니은</div>
+                        <div class="sound-example">나, 노, 누</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㄷ</div>
+                        <div class="sound-name">디귿</div>
+                        <div class="sound-example">다, 도, 두</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㄹ</div>
+                        <div class="sound-name">리을</div>
+                        <div class="sound-example">라, 로, 루</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅁ</div>
+                        <div class="sound-name">미음</div>
+                        <div class="sound-example">마, 모, 무</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅂ</div>
+                        <div class="sound-name">비읍</div>
+                        <div class="sound-example">바, 보, 부</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅅ</div>
+                        <div class="sound-name">시옷</div>
+                        <div class="sound-example">사, 소, 수</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅇ</div>
+                        <div class="sound-name">이응</div>
+                        <div class="sound-example">아, 오, 우</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅈ</div>
+                        <div class="sound-name">지읒</div>
+                        <div class="sound-example">자, 조, 주</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅊ</div>
+                        <div class="sound-name">치읓</div>
+                        <div class="sound-example">차, 초, 추</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅋ</div>
+                        <div class="sound-name">키읔</div>
+                        <div class="sound-example">카, 코, 쿠</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅌ</div>
+                        <div class="sound-name">티읕</div>
+                        <div class="sound-example">타, 토, 투</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅍ</div>
+                        <div class="sound-name">피읖</div>
+                        <div class="sound-example">파, 포, 푸</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅎ</div>
+                        <div class="sound-name">히읗</div>
+                        <div class="sound-example">하, 호, 후</div>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>자음 소리의 차이 이해하기</h4>
+                    <p>비슷한 소리를 내는 자음들도 있어요.</p>
+                    <p>ㄱ(기역), ㅋ(키읔): '가방'과 '카드'의 첫 소리를 비교해 보세요.</p>
+                    <p>ㄷ(디귿), ㅌ(티읕): '도깨비'와 '토끼'의 첫 소리를 비교해 보세요.</p>
+                    <p>ㅂ(비읍), ㅍ(피읖): '바다'와 '파도'의 첫 소리를 비교해 보세요.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                모음(vowel)의 소리
+            </div>
+            <div class="card-content">
+                <p>모음은 목소리를 막지 않고 공기를 내보내며 소리를 내요. 입 모양과 혀의 위치에 따라 다양한 모음 소리가 만들어져요.</p>
+                
+                <div class="sound-grid">
+                    <div class="sound-item">
+                        <div class="sound-char">ㅏ</div>
+                        <div class="sound-name">아</div>
+                        <div class="sound-example">가, 나, 다</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅑ</div>
+                        <div class="sound-name">야</div>
+                        <div class="sound-example">갸, 냐, 댜</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅓ</div>
+                        <div class="sound-name">어</div>
+                        <div class="sound-example">거, 너, 더</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅕ</div>
+                        <div class="sound-name">여</div>
+                        <div class="sound-example">겨, 녀, 뎌</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅗ</div>
+                        <div class="sound-name">오</div>
+                        <div class="sound-example">고, 노, 도</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅛ</div>
+                        <div class="sound-name">요</div>
+                        <div class="sound-example">교, 뇨, 됴</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅜ</div>
+                        <div class="sound-name">우</div>
+                        <div class="sound-example">구, 누, 두</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅠ</div>
+                        <div class="sound-name">유</div>
+                        <div class="sound-example">규, 뉴, 듀</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅡ</div>
+                        <div class="sound-name">으</div>
+                        <div class="sound-example">그, 느, 드</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-char">ㅣ</div>
+                        <div class="sound-name">이</div>
+                        <div class="sound-example">기, 니, 디</div>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>모음의 조합</h4>
+                    <p>모음끼리 결합하여 새로운 소리를 만들 수 있어요.</p>
+                    <p>ㅏ + ㅣ = ㅐ (애): '개', '새', '배'</p>
+                    <p>ㅓ + ㅣ = ㅔ (에): '게', '세', '베'</p>
+                    <p>ㅗ + ㅏ = ㅘ (와): '과', '화', '좌'</p>
+                    <p>ㅜ + ㅓ = ㅝ (워): '궈', '훠', '줘'</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3>글자 조합해 보기</h3>
+            <p style="text-align: center;">자음과 모음을 선택해서 글자를 만들어 보세요!</p>
+            
+            <div class="syllable-builder">
+                <div class="result-display" id="resultDisplay">　</div>
+                <div class="result-word" id="resultWord"></div>
+                
+                <div class="builder-row">
+                    <div class="char-button consonant" data-char="ㄱ">ㄱ</div>
+                    <div class="char-button consonant" data-char="ㄴ">ㄴ</div>
+                    <div class="char-button consonant" data-char="ㄷ">ㄷ</div>
+                    <div class="char-button consonant" data-char="ㄹ">ㄹ</div>
+                    <div class="char-button consonant" data-char="ㅁ">ㅁ</div>
+                    <div class="char-button consonant" data-char="ㅂ">ㅂ</div>
+                    <div class="char-button consonant" data-char="ㅅ">ㅅ</div>
+                </div>
+                
+                <div class="builder-row">
+                    <div class="char-button vowel" data-char="ㅏ">ㅏ</div>
+                    <div class="char-button vowel" data-char="ㅓ">ㅓ</div>
+                    <div class="char-button vowel" data-char="ㅗ">ㅗ</div>
+                    <div class="char-button vowel" data-char="ㅜ">ㅜ</div>
+                    <div class="char-button vowel" data-char="ㅡ">ㅡ</div>
+                    <div class="char-button vowel" data-char="ㅣ">ㅣ</div>
+                </div>
+                
+                <button class="nav-button" id="resetButton">다시 하기</button>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                글자와 소리의 관계
+            </div>
+            <div class="card-content">
+                <p>한글은 글자의 모양이 발음 기관과 비슷해요. 예를 들어 'ㄱ'은 혀의 뒷부분이 입천장에 닿는 모습과 비슷해요.</p>
+                
+                <div class="example-box">
+                    <h4>한글 창제 원리</h4>
+                    <p>한글은 세종대왕께서 만드신 과학적인 글자예요.</p>
+                    <p>자음은 발음할 때 입 모양과 비슷하게 만들었어요.</p>
+                    <p>모음은 하늘(·), 땅(ㅡ), 사람(ㅣ)을 기본으로 만들었어요.</p>
+                </div>
+                
+                <p>글자와 소리는 일대일로 대응해요. 즉, 같은 글자는 항상 같은 소리를 내요. 이것이 한글 학습을 쉽게 만들어 주는 특징이에요.</p>
+                
+                <div class="example-box">
+                    <h4>소리의 변화</h4>
+                    <p>단, 특정 위치에서는 소리가 변하기도 해요.</p>
+                    <p>예: '물고기'에서 'ㄱ'은 [ㄱ] 소리지만, '학교'에서 받침 'ㄱ'은 [ㄱ̚] 소리로 약하게 발음돼요.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation-buttons content-section">
+        <button class="nav-button" onclick="location.href='grade1_sentences.html'">이전 학습: 문장 알아보기</button>
+        <button class="nav-button" onclick="location.href='grade1_writing.html'">다음 학습: 바른 글씨 쓰기</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const charButtons = document.querySelectorAll('.char-button');
+            const resultDisplay = document.getElementById('resultDisplay');
+            const resultWord = document.getElementById('resultWord');
+            const resetButton = document.getElementById('resetButton');
+            
+            let currentConsonant = '';
+            let currentVowel = '';
+            
+            const syllableMap = {
+                'ㄱㅏ': '가', 'ㄱㅓ': '거', 'ㄱㅗ': '고', 'ㄱㅜ': '구', 'ㄱㅡ': '그', 'ㄱㅣ': '기',
+                'ㄴㅏ': '나', 'ㄴㅓ': '너', 'ㄴㅗ': '노', 'ㄴㅜ': '누', 'ㄴㅡ': '느', 'ㄴㅣ': '니',
+                'ㄷㅏ': '다', 'ㄷㅓ': '더', 'ㄷㅗ': '도', 'ㄷㅜ': '두', 'ㄷㅡ': '드', 'ㄷㅣ': '디',
+                'ㄹㅏ': '라', 'ㄹㅓ': '러', 'ㄹㅗ': '로', 'ㄹㅜ': '루', 'ㄹㅡ': '르', 'ㄹㅣ': '리',
+                'ㅁㅏ': '마', 'ㅁㅓ': '머', 'ㅁㅗ': '모', 'ㅁㅜ': '무', 'ㅁㅡ': '므', 'ㅁㅣ': '미',
+                'ㅂㅏ': '바', 'ㅂㅓ': '버', 'ㅂㅗ': '보', 'ㅂㅜ': '부', 'ㅂㅡ': '브', 'ㅂㅣ': '비',
+                'ㅅㅏ': '사', 'ㅅㅓ': '서', 'ㅅㅗ': '소', 'ㅅㅜ': '수', 'ㅅㅡ': '스', 'ㅅㅣ': '시'
+            };
+            
+            const wordMap = {
+                '가': '가방, 가족, 가게', '나': '나비, 나무, 나라',
+                '다': '다리, 다섯, 다시', '라': '라면, 라디오',
+                '마': '마을, 마음, 마루', '바': '바다, 바람, 바구니',
+                '사': '사과, 사람, 사진', '거': '거울, 거미, 거북이',
+                '너': '너구리, 너무', '더': '더위, 더하기',
+                '러': '러시아', '머': '머리, 머리카락',
+                '버': '버스, 버섯, 버튼', '서': '서울, 서점, 서랍',
+                '고': '고양이, 고래, 고구마', '노': '노래, 노을, 노력',
+                '도': '도시, 도서관, 도로', '로': '로봇, 로켓',
+                '모': '모자, 모양, 모래', '보': '보물, 보자기, 보석',
+                '소': '소리, 소방관, 소나무', '구': '구름, 구슬, 구두',
+                '누': '누나, 누구, 누리집', '두': '두부, 두꺼비, 두통',
+                '루': '루피, 루돌프', '무': '무지개, 무릎, 무당벌레',
+                '부': '부엌, 부모님, 부자', '수': '수박, 수영, 수돗물'
+            };
+            
+            charButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const char = this.getAttribute('data-char');
+                    
+                    if (this.classList.contains('consonant')) {
+                        currentConsonant = char;
+                    } else if (this.classList.contains('vowel')) {
+                        currentVowel = char;
+                    }
+                    
+                    if (currentConsonant && currentVowel) {
+                        const key = currentConsonant + currentVowel;
+                        const syllable = syllableMap[key] || '';
+                        
+                        if (syllable) {
+                            resultDisplay.textContent = syllable;
+                            resultWord.textContent = wordMap[syllable] || '';
+                        }
+                    }
+                });
+            });
+            
+            resetButton.addEventListener('click', function() {
+                currentConsonant = '';
+                currentVowel = '';
+                resultDisplay.textContent = '　';
+                resultWord.textContent = '';
+            });
+        });
+    </script>
+</body>
+</html>

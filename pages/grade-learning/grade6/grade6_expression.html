@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다양한 표현 방법 | 문법놀이터</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .activity-header {
+            background: linear-gradient(135deg, #E91E63 0%, #F5A9D0 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .activity-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .activity-header p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .activity-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .activity-info {
+            background-color: #FCE4EC;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .activity-info h2 {
+            color: #C2185B;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .activity-info p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .activity-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #C2185B;
+            margin-bottom: 20px;
+        }
+
+        .expression-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .expression-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            border-left: 4px solid #E91E63;
+            transition: transform 0.3s;
+        }
+
+        .expression-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .expression-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .expression-desc {
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .expression-example {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .practice-container {
+            margin-top: 30px;
+        }
+
+        .practice-item {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .practice-title {
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .practice-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background-color: #E91E63;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action-button {
+            background-color: #E91E63;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .action-button:hover {
+            background-color: #C2185B;
+        }
+
+        .action-button.secondary {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .action-button.secondary:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body
+    
+
+    
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="activity-header">
+        <h1>다양한 표현 방법</h1>
+        <p>설명, 묘사, 비교, 설득 등 다양한 표현 방법을 배우고 효과적으로 활용해 봅시다.</p>
+    </div>
+
+    <div class="activity-container">
+        <div class="activity-info">
+            <h2>표현 방법이란?</h2>
+            <p>표현 방법은 자신의 생각이나 감정, 정보를 글이나 말로 전달할 때 사용하는 다양한 방식을 말합니다. 전달하려는 내용과 목적에 따라 적절한 표현 방법을 선택하면 더 효과적으로 의사소통할 수 있습니다. 이 학습에서는 다양한 표현 방법의 특징과 활용법을 배워보겠습니다.</p>
+        </div>
+
+        <div class="activity-section">
+            <h3 class="section-title">주요 표현 방법 알아보기</h3>
+            
+            <div class="expression-types">
+                <div class="expression-card">
+                    <div class="expression-title">설명하는 표현</div>
+                    <div class="expression-desc">사실이나 정보를 객관적이고 명확하게 전달하는 표현 방법</div>
+                    <div class="expression-example">
+                        <strong>특징:</strong> 객관적인 사실, 정확한 정보, 논리적 구성<br>
+                        <strong>예시:</strong> "지구는 태양계의 세 번째 행성으로, 표면의 약 71%는 물로 덮여 있습니다."
+                    </div>
+                </div>
+                
+                <div class="expression-card">
+                    <div class="expression-title">묘사하는 표현</div>
+                    <div class="expression-desc">사물, 장소, 사람, 감정 등을 생생하게 그려내는 표현 방법</div>
+                    <div class="expression-example">
+                        <strong>특징:</strong> 감각적 표현, 세부 묘사, 비유와 상징 활용<br>
+                        <strong>예시:</strong> "잔잔한 호수 위로 붉게 물든 노을이 금빛 물결을 만들어내며 춤추고 있었다."
+                    </div>
+                </div>
+                
+                <div class="expression-card">
+                    <div class="expression-title">비교하는 표현</div>
+                    <div class="expression-desc">둘 이상의 대상을 견주어 공통점과 차이점을 드러내는 표현 방법</div>
+                    <div class="expression-example">
+                        <strong>특징:</strong> 대조, 유사성, 비교 접속사(~처럼, ~보다 등) 사용<br>
+                        <strong>예시:</strong> "태권도는 손기술보다 발기술이 더 발달한 반면, 가라테는 손기술이 더 많이 사용된다."
+                    </div>
+                </div>
+                
+                <div class="expression-card">
+                    <div class="expression-title">설득하는 표현</div>
+                    <div class="expression-desc">상대방의 생각이나 행동에 영향을 주려는 표현 방법</div>
+                    <div class="expression-example">
+                        <strong>특징:</strong> 주장과 근거, 논리적 구성, 호소력 있는 표현<br>
+                        <strong>예시:</strong> "플라스틱 사용을 줄여야 합니다. 이것은 해양 생물의 생존뿐 아니라 우리의 건강도 위협하고 있기 때문입니다."
+                    </div>
+                </div>
+                
+                <div class="expression-card">
+                    <div class="expression-title">주장하는 표현</div>
+                    <div class="expression-desc">자신의 의견이나 생각을 분명하게 제시하는 표현 방법</div>
+                    <div class="expression-example">
+                        <strong>특징:</strong> 명확한 주장, 근거 제시, 논리적 전개<br>
+                        <strong>예시:</strong> "학교에서 체육 시간을 늘려야 한다. 그 이유는 학생들의 체력 증진과 스트레스 해소에 큰 도움이 되기 때문이다."
+                    </div>
+                </div>
+                
+                <div class="expression-card">
+                    <div class="expression-title">감정 표현</div>
+                    <div class="expression-desc">자신의 감정이나 느낌을 나타내는 표현 방법</div>
+                    <div class="expression-example">
+                        <strong>특징:</strong> 감정 표현 어휘, 감탄사, 비유적 표현<br>
+                        <strong>예시:</strong> "와! 정말 기뻐요. 오랜만에 친구를 만나서 마음이 무척 설렙니다."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-section">
+            <h3 class="section-title">표현 방법 활용하기</h3>
+            
+            <div class="practice-container">
+                <div class="practice-item">
+                    <div class="practice-title">설명하는 글 쓰기</div>
+                    <p>다음 주제 중 하나를 골라 설명하는 글을 작성해 보세요. 객관적인 사실과 정확한 정보를 바탕으로 논리적으로 작성하세요.</p>
+                    <ul>
+                        <li>우리 동네의 명소</li>
+                        <li>내가 좋아하는 취미</li>
+                        <li>스마트폰의 좋은 점과 나쁜 점</li>
+                    </ul>
+                    <textarea class="practice-textarea" placeholder="여기에 글을 작성하세요."></textarea>
+                    <button class="submit-button" onclick="showFeedback(this, '잘 작성했어요! 객관적인 사실과 정확한 정보를 바탕으로 논리적으로 구성했습니다.')">확인하기</button>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="practice-item">
+                    <div class="practice-title">묘사하는 글 쓰기</div>
+                    <p>다음 대상 중 하나를 선택하여 감각적이고 생생하게 묘사하는 글을 작성해 보세요.</p>
+                    <ul>
+                        <li>내가 좋아하는 장소</li>
+                        <li>기억에 남는 계절의 풍경</li>
+                        <li>인상 깊은 사람</li>
+                    </ul>
+                    <textarea class="practice-textarea" placeholder="여기에 글을 작성하세요."></textarea>
+                    <button class="submit-button" onclick="showFeedback(this, '훌륭해요! 감각적인 표현과 세부 묘사를 통해 대상을 생생하게 그려냈습니다.')">확인하기</button>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="practice-item">
+                    <div class="practice-title">설득하는 글 쓰기</div>
+                    <p>다음 주제 중 하나를 선택하여 상대방을 설득하는 글을 작성해 보세요. 주장과 그에 맞는 근거를 들어 논리적으로 작성하세요.</p>
+                    <ul>
+                        <li>학교에 휴대폰을 가지고 가야 하는 이유</li>
+                        <li>아침 식사의 중요성</li>
+                        <li>환경 보호를 위해 우리가 할 수 있는 일</li>
+                    </ul>
+                    <textarea class="practice-textarea" placeholder="여기에 글을 작성하세요."></textarea>
+                    <button class="submit-button" onclick="showFeedback(this, '잘 했어요! 명확한 주장과 그에 맞는 근거를 들어 논리적으로 설득력 있게 작성했습니다.')">확인하기</button>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="grade6.html" class="action-button secondary">
+                <i class="fas fa-arrow-left"></i> 학년 페이지로
+            </a>
+            <a href="activities.html" class="action-button">
+                <i class="fas fa-th-list"></i> 다른 활동 보기
+            </a>
+        </div>
+    </div>
+
+    
+
+    <script>
+        function showFeedback(button, message) {
+            const textarea = button.previousElementSibling;
+            const feedback = button.nextElementSibling;
+            
+            if (textarea.value.length > 50) {
+                feedback.textContent = message;
+                feedback.style.display = 'block';
+                feedback.style.backgroundColor = '#E8F5E9';
+                feedback.style.color = '#388E3C';
+                feedback.style.padding = '10px';
+                feedback.style.borderRadius = '4px';
+            } else {
+                feedback.textContent = '조금 더 자세히 작성해 보세요.';
+                feedback.style.display = 'block';
+                feedback.style.backgroundColor = '#FFEBEE';
+                feedback.style.color = '#D32F2F';
+                feedback.style.padding = '10px';
+                feedback.style.borderRadius = '4px';
+            }
+        }
+    </script>
+    
+    
+    
+    
+    
+    <!-- 푸터 영역 -->
+    <footer></footer>
+    
+    <script src="../../js/siteManager.js"></script>
+</body>
+</html> 

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1학년 기초 문법 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 1학년 전용 스타일 */
+        :root {
+            --grade1-color: #FF6B6B;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .grade-header {
+            background: linear-gradient(135deg, var(--grade1-color) 0%, #FF9292 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .grade-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .grade-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade1-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: var(--grade1-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .example-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--grade1-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .interactive-section {
+            background-color: #f5f5f5;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .interactive-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .grammar-quiz {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-question {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quiz-option {
+            padding: 10px 15px;
+            background-color: #f0f0f0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background-color: #e0e0e0;
+        }
+
+        .quiz-option.correct {
+            background-color: #a3e4d7;
+        }
+
+        .quiz-option.incorrect {
+            background-color: #f5b7b1;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .quiz-feedback.correct {
+            background-color: #d5f5e3;
+            color: #196f3d;
+            display: block;
+        }
+
+        .quiz-feedback.incorrect {
+            background-color: #f9ebea;
+            color: #922b21;
+            display: block;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .quiz-button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade1-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .quiz-button:hover {
+            opacity: 0.9;
+        }
+
+        .quiz-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .grammar-table th, .grammar-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .grammar-table th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        .grammar-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade1-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="grade-header">
+        <h1>기초 문법 학습하기</h1>
+        <p>한국어의 기본 문법 규칙을 배우고 올바른 문장을 만드는 방법을 익혀보아요.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>문법이란 무엇일까요?</h2>
+        
+        <div class="content-card">
+            <div class="card-header">
+                문법의 기본 개념
+            </div>
+            <div class="card-content">
+                <p>문법은 <strong>말과 글을 올바르게 쓰는 규칙</strong>이에요. 문법을 알면 문장을 바르게 만들 수 있어요.</p>
+                
+                <div class="example-box">
+                    <h4>문법이 중요한 이유</h4>
+                    <p>- 내 생각을 <strong>정확하게</strong> 전달할 수 있어요.</p>
+                    <p>- 다른 사람의 말이나 글을 <strong>잘 이해</strong>할 수 있어요.</p>
+                    <p>- 말과 글을 더 <strong>아름답게</strong> 표현할 수 있어요.</p>
+                </div>
+                
+                <p>1학년에서는 가장 기본적인 문법 규칙부터 배워볼 거예요.</p>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                주어와 서술어
+            </div>
+            <div class="card-content">
+                <p>문장은 보통 <strong>주어</strong>와 <strong>서술어</strong>로 이루어져 있어요.</p>
+                
+                <div class="example-box">
+                    <h4>주어와 서술어 알아보기</h4>
+                    <p><strong>주어</strong>: 문장에서 '누가' 또는 '무엇이'에 해당하는 부분이에요.</p>
+                    <p><strong>서술어</strong>: 주어의 동작이나 상태를 설명하는 부분이에요.</p>
+                    <p>예: <span style="color: #FF6B6B;">강아지</span>가 <span style="color: #4A89DC;">달립니다</span>.</p>
+                    <p>　　<span style="color: #FF6B6B;">주어</span>　 <span style="color: #4A89DC;">서술어</span></p>
+                </div>
+                
+                <p>다음 문장에서 주어와 서술어를 찾아보세요:</p>
+                <p>1. <strong>사과</strong>가 <strong>빨갛습니다</strong>.</p>
+                <p>2. <strong>친구</strong>가 <strong>웃어요</strong>.</p>
+                <p>3. <strong>바람</strong>이 <strong>붑니다</strong>.</p>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                문장의 종류
+            </div>
+            <div class="card-content">
+                <p>문장은 끝맺는 방법에 따라 여러 종류로 나눌 수 있어요.</p>
+                
+                <div class="example-box">
+                    <h4>문장의 종류</h4>
+                    <p>1. <strong>평서문</strong>: 무엇인가를 설명하는 문장</p>
+                    <p>　 예: 하늘이 파랗다.</p>
+                    <p>2. <strong>의문문</strong>: 질문하는 문장</p>
+                    <p>　 예: 하늘이 파랗니?</p>
+                    <p>3. <strong>감탄문</strong>: 감정이나 느낌을 강하게 표현하는 문장</p>
+                    <p>　 예: 하늘이 정말 파랗구나!</p>
+                    <p>4. <strong>명령문</strong>: 무엇을 하라고 시키는 문장</p>
+                    <p>　 예: 창문을 열어라.</p>
+                    <p>5. <strong>청유문</strong>: 함께 무엇을 하자고 제안하는 문장</p>
+                    <p>　 예: 같이 놀자.</p>
+                </div>
+                
+                <table class="grammar-table">
+                    <tr>
+                        <th>문장 종류</th>
+                        <th>끝맺는 방법</th>
+                        <th>문장 부호</th>
+                    </tr>
+                    <tr>
+                        <td>평서문</td>
+                        <td>~다, ~니다</td>
+                        <td>.</td>
+                    </tr>
+                    <tr>
+                        <td>의문문</td>
+                        <td>~니?, ~까?</td>
+                        <td>?</td>
+                    </tr>
+                    <tr>
+                        <td>감탄문</td>
+                        <td>~구나!, ~다!</td>
+                        <td>!</td>
+                    </tr>
+                    <tr>
+                        <td>명령문</td>
+                        <td>~라, ~세요</td>
+                        <td>.</td>
+                    </tr>
+                    <tr>
+                        <td>청유문</td>
+                        <td>~자, ~읍시다</td>
+                        <td>.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3>문법 퀴즈</h3>
+            <p style="text-align: center;">배운 내용을 확인해 보세요!</p>
+            
+            <div class="grammar-quiz" id="grammarQuiz">
+                <div class="quiz-question" id="quizQuestion">
+                    <p><strong>1. 다음 중 주어가 올바르게 표시된 문장은 무엇인가요?</strong></p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">
+                            <strong>바람에</strong> 나뭇잎이 흔들립니다.
+                        </div>
+                        <div class="quiz-option" data-correct="true">
+                            <strong>토끼가</strong> 당근을 먹어요.
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            학교에서 <strong>공부를</strong> 해요.
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            빨간 <strong>사과를</strong> 먹었어요.
+                        </div>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                
+                <div class="quiz-nav">
+                    <button class="quiz-button" id="prevButton" disabled>이전 문제</button>
+                    <span id="questionCounter">1/5</span>
+                    <button class="quiz-button" id="nextButton" disabled>다음 문제</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                조사 배우기
+            </div>
+            <div class="card-content">
+                <p>조사는 낱말 뒤에 붙어서 그 낱말의 역할이나 뜻을 더해 주는 말이에요.</p>
+                
+                <div class="example-box">
+                    <h4>자주 사용하는 조사</h4>
+                    <p>1. <strong>이/가</strong>: 주어를 나타내는 조사</p>
+                    <p>　 예: 사과<strong>가</strong> 맛있어요. / 친구<strong>가</strong> 왔어요.</p>
+                    <p>2. <strong>은/는</strong>: 주제를 나타내는 조사</p>
+                    <p>　 예: 나<strong>는</strong> 학생이에요. / 바나나<strong>는</strong> 노랗습니다.</p>
+                    <p>3. <strong>을/를</strong>: 목적어를 나타내는 조사</p>
+                    <p>　 예: 책<strong>을</strong> 읽어요. / 물<strong>을</strong> 마셔요.</p>
+                    <p>4. <strong>에</strong>: 장소나 시간을 나타내는 조사</p>
+                    <p>　 예: 학교<strong>에</strong> 갑니다. / 3시<strong>에</strong> 만나요.</p>
+                </div>
+                
+                <p>※ 조사 '이/가', '은/는', '을/를'은 앞 글자의 받침 유무에 따라 달라져요.</p>
+                <p>- 받침이 있으면: 이, 은, 을</p>
+                <p>- 받침이 없으면: 가, 는, 를</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation-buttons content-section">
+        <button class="nav-button" onclick="location.href='grade1_vocab.html'">이전 학습: 어휘력 키우기</button>
+        <button class="nav-button" onclick="location.href='../grade1.html'">1학년 학습으로 돌아가기</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizQuestions = [
+                {
+                    question: "<strong>1. 다음 중 주어가 올바르게 표시된 문장은 무엇인가요?</strong>",
+                    options: [
+                        { text: "<strong>바람에</strong> 나뭇잎이 흔들립니다.", correct: false },
+                        { text: "<strong>토끼가</strong> 당근을 먹어요.", correct: true },
+                        { text: "학교에서 <strong>공부를</strong> 해요.", correct: false },
+                        { text: "빨간 <strong>사과를</strong> 먹었어요.", correct: false }
+                    ],
+                    feedback: {
+                        correct: "잘했어요! '토끼가'는 '누가'에 해당하는 주어입니다.",
+                        incorrect: "다시 생각해 보세요. 주어는 '누가' 또는 '무엇이'에 해당하는 부분입니다."
+                    }
+                },
+                {
+                    question: "<strong>2. 다음 중 의문문은 무엇인가요?</strong>",
+                    options: [
+                        { text: "오늘 날씨가 좋다.", correct: false },
+                        { text: "창문을 닫으세요.", correct: false },
+                        { text: "너는 몇 살이니?", correct: true },
+                        { text: "와, 정말 예쁘구나!", correct: false }
+                    ],
+                    feedback: {
+                        correct: "맞았습니다! '너는 몇 살이니?'는 질문하는 의문문입니다.",
+                        incorrect: "틀렸어요. 의문문은 질문하는 문장으로, 보통 '~니?', '~까?'로 끝납니다."
+                    }
+                },
+                {
+                    question: "<strong>3. 다음 중 서술어가 올바르게 표시된 문장은 무엇인가요?</strong>",
+                    options: [
+                        { text: "새가 <strong>하늘을</strong> 날아요.", correct: false },
+                        { text: "꽃이 <strong>아름답게</strong> 피었어요.", correct: false },
+                        { text: "친구와 <strong>함께</strong> 놀아요.", correct: false },
+                        { text: "강아지가 <strong>짖습니다</strong>.", correct: true }
+                    ],
+                    feedback: {
+                        correct: "정답입니다! '짖습니다'는 주어인 '강아지가'의 동작을 설명하는 서술어입니다.",
+                        incorrect: "틀렸습니다. 서술어는 주어의 동작이나 상태를 설명하는 부분입니다."
+                    }
+                },
+                {
+                    question: "<strong>4. 다음 중 올바른 조사 사용은 무엇인가요?</strong>",
+                    options: [
+                        { text: "책를 읽어요.", correct: false },
+                        { text: "학교가 갑니다.", correct: false },
+                        { text: "바나나는 맛있어요.", correct: true },
+                        { text: "친구을 만났어요.", correct: false }
+                    ],
+                    feedback: {
+                        correct: "맞았습니다! '바나나는'은 올바른 조사 사용입니다.",
+                        incorrect: "틀렸습니다. 조사는 앞 글자의 받침 유무에 따라 달라집니다."
+                    }
+                },
+                {
+                    question: "<strong>5. 다음 중 명령문은 무엇인가요?</strong>",
+                    options: [
+                        { text: "같이 놀자.", correct: false },
+                        { text: "창문을 열어라.", correct: true },
+                        { text: "비가 오니?", correct: false },
+                        { text: "하늘이 파랗다.", correct: false }
+                    ],
+                    feedback: {
+                        correct: "정답입니다! '창문을 열어라'는 무엇을 하라고 시키는 명령문입니다.",
+                        incorrect: "틀렸습니다. 명령문은 무엇을 하라고 시키는 문장으로, '~라', '~세요' 등으로 끝납니다."
+                    }
+                }
+            ];
+            
+            let currentQuestion = 0;
+            const quizQuestion = document.getElementById('quizQuestion');
+            const questionCounter = document.getElementById('questionCounter');
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            
+            // 퀴즈 초기화
+            function initQuiz() {
+                showQuestion(currentQuestion);
+                updateQuestionCounter();
+            }
+            
+            // 문제 표시
+            function showQuestion(questionIndex) {
+                const question = quizQuestions[questionIndex];
+                quizQuestion.querySelector('p').innerHTML = question.question;
+                
+                const optionsContainer = quizQuestion.querySelector('.quiz-options');
+                optionsContainer.innerHTML = '';
+                
+                question.options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'quiz-option';
+                    optionElement.innerHTML = option.text;
+                    optionElement.setAttribute('data-correct', option.correct);
+                    
+                    optionElement.addEventListener('click', selectOption);
+                    
+                    optionsContainer.appendChild(optionElement);
+                });
+                
+                const feedbackElement = quizQuestion.querySelector('.quiz-feedback');
+                feedbackElement.className = 'quiz-feedback';
+                feedbackElement.textContent = '';
+                
+                // 버튼 상태 업데이트
+                prevButton.disabled = questionIndex === 0;
+                nextButton.disabled = true;
+            }
+            
+            // 옵션 선택
+            function selectOption() {
+                const options = quizQuestion.querySelectorAll('.quiz-option');
+                options.forEach(option => {
+                    option.removeEventListener('click', selectOption);
+                    
+                    const isCorrect = option.getAttribute('data-correct') === 'true';
+                    if (option === this) {
+                        option.classList.add(isCorrect ? 'correct' : 'incorrect');
+                        
+                        // 피드백 표시
+                        const feedback = quizQuestions[currentQuestion].feedback;
+                        const feedbackElement = quizQuestion.querySelector('.quiz-feedback');
+                        feedbackElement.textContent = isCorrect ? feedback.correct : feedback.incorrect;
+                        feedbackElement.className = `quiz-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+                    } else if (isCorrect) {
+                        option.classList.add('correct');
+                    }
+                });
+                
+                // 다음 버튼 활성화
+                nextButton.disabled = false;
+            }
+            
+            // 문제 카운터 업데이트
+            function updateQuestionCounter() {
+                questionCounter.textContent = `${currentQuestion + 1}/${quizQuestions.length}`;
+            }
+            
+            // 이전 문제 버튼
+            prevButton.addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                    updateQuestionCounter();
+                }
+            });
+            
+            // 다음 문제 버튼
+            nextButton.addEventListener('click', function() {
+                if (currentQuestion < quizQuestions.length - 1) {
+                    currentQuestion++;
+                    showQuestion(currentQuestion);
+                    updateQuestionCounter();
+                }
+            });
+            
+            // 초기화
+            initQuiz();
+        });
+    </script>
+</body>
+</html> 

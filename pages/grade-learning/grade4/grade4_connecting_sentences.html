@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문장의 연결 | 4학년 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../styles/style.css">
+    <link rel="stylesheet" href="../../../styles/grade-learning.css">
+    <style>
+        .connector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .connector-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .connector-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 5px;
+        }
+        .connector-examples {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .example-box {
+            background-color: #ebf5fb;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .practice-container {
+            background-color: #fff8e1;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .practice-item {
+            margin-bottom: 20px;
+        }
+        .practice-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .check-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .correct {
+            background-color: #e7f6e7;
+            color: #2e7d32;
+        }
+        .incorrect {
+            background-color: #fdeded;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="lesson-header">
+            <h1>문장의 연결</h1>
+            <p>문장과 문장을 이어 자연스럽게 표현하는 방법을 배워봅시다.</p>
+        </header>
+
+        <section class="content-section">
+            <h2>문장을 연결하는 이유</h2>
+            <p>문장과 문장을 적절하게 연결하면 생각과 생각이 어떻게 관련되어 있는지 명확하게 표현할 수 있습니다. 또한 글이 자연스럽게 이어지고 읽기 쉬워집니다.</p>
+            
+            <div class="example-box">
+                <p><strong>연결하지 않은 문장:</strong> 비가 왔다. 우산을 가지고 나갔다.</p>
+                <p><strong>연결한 문장:</strong> 비가 와서 우산을 가지고 나갔다.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>문장 연결 방법</h2>
+            
+            <div class="connector-grid">
+                <div class="connector-card">
+                    <h3>시간 관계</h3>
+                    <p>사건이 일어난 순서나 시간을 나타냅니다.</p>
+                    <div class="connector-examples">
+                        <p><span class="highlight">~하고 나서</span>: 숙제를 하고 나서 놀았다.</p>
+                        <p><span class="highlight">~하기 전에</span>: 잠자기 전에 이를 닦았다.</p>
+                        <p><span class="highlight">~하는 동안</span>: 비가 오는 동안 집에 있었다.</p>
+                    </div>
+                </div>
+
+                <div class="connector-card">
+                    <h3>원인과 결과</h3>
+                    <p>왜 그런 일이 일어났는지 이유를 설명합니다.</p>
+                    <div class="connector-examples">
+                        <p><span class="highlight">~해서</span>: 배가 아파서 병원에 갔다.</p>
+                        <p><span class="highlight">~때문에</span>: 눈이 많이 왔기 때문에 길이 미끄러웠다.</p>
+                        <p><span class="highlight">~니까</span>: 시간이 없으니까 서둘러야 한다.</p>
+                    </div>
+                </div>
+
+                <div class="connector-card">
+                    <h3>대조와 비교</h3>
+                    <p>두 가지 내용이 다르거나 반대됨을 나타냅니다.</p>
+                    <div class="connector-examples">
+                        <p><span class="highlight">~지만</span>: 비가 오지만 소풍을 갔다.</p>
+                        <p><span class="highlight">~는데</span>: 열심히 공부했는데 시험을 못 봤다.</p>
+                        <p><span class="highlight">~와/과 달리</span>: 형과 달리 동생은 운동을 좋아한다.</p>
+                    </div>
+                </div>
+
+                <div class="connector-card">
+                    <h3>목적</h3>
+                    <p>무엇을 위해 행동했는지 목적을 나타냅니다.</p>
+                    <div class="connector-examples">
+                        <p><span class="highlight">~기 위해</span>: 건강해지기 위해 운동한다.</p>
+                        <p><span class="highlight">~려고</span>: 친구를 만나려고 공원에 갔다.</p>
+                        <p><span class="highlight">~도록</span>: 늦지 않도록 일찍 출발했다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>문장 연결의 효과</h2>
+            
+            <div class="example-box">
+                <h3>연결하지 않은 짧은 문장들</h3>
+                <p>아침에 일어났다. 밥을 먹었다. 학교에 갔다. 수업을 들었다. 집에 왔다. 숙제를 했다.</p>
+                
+                <h3>연결사를 사용한 문장</h3>
+                <p>아침에 일어나서 밥을 먹고 학교에 갔다. 수업을 들은 후에 집에 와서 숙제를 했다.</p>
+            </div>
+            
+            <p>문장을 적절하게 연결하면 글이 자연스럽게 흐르고, 읽는 사람이 더 쉽게 이해할 수 있습니다.</p>
+        </section>
+
+        <section class="practice-container">
+            <h2>연습해 봅시다</h2>
+            <p>다음 문장들을 알맞은 연결사를 사용하여 하나의 문장으로 만들어 보세요.</p>
+
+            <div class="practice-item" id="practice1">
+                <p>1. "비가 많이 왔다. 우산을 가지고 나갔다." (원인과 결과)</p>
+                <input type="text" class="practice-input" id="input1" placeholder="연결된 문장을 입력하세요...">
+                <button class="check-button" onclick="checkAnswer(1)">확인하기</button>
+                <div class="feedback" id="feedback1-correct">
+                    정답입니다! "비가 많이 와서 우산을 가지고 나갔다."와 같이 '~해서'를 사용하여 원인과 결과를 연결할 수 있습니다.
+                </div>
+                <div class="feedback" id="feedback1-incorrect">
+                    다시 생각해보세요. 원인(비가 많이 옴)과 결과(우산을 가지고 나감)를 '~해서'와 같은 연결사로 이어보세요.
+                </div>
+            </div>
+
+            <div class="practice-item" id="practice2">
+                <p>2. "친구가 아프다. 병문안을 갔다." (목적)</p>
+                <input type="text" class="practice-input" id="input2" placeholder="연결된 문장을 입력하세요...">
+                <button class="check-button" onclick="checkAnswer(2)">확인하기</button>
+                <div class="feedback" id="feedback2-correct">
+                    정답입니다! "친구가 아파서 병문안을 갔다." 또는 "친구의 병문안을 가기 위해 찾아갔다."와 같이 표현할 수 있습니다.
+                </div>
+                <div class="feedback" id="feedback2-incorrect">
+                    다시 생각해보세요. 목적을 나타내는 '~기 위해', '~려고' 등의 연결사를 사용해보세요.
+                </div>
+            </div>
+
+            <div class="practice-item" id="practice3">
+                <p>3. "숙제를 끝냈다. 친구와 놀았다." (시간 관계)</p>
+                <input type="text" class="practice-input" id="input3" placeholder="연결된 문장을 입력하세요...">
+                <button class="check-button" onclick="checkAnswer(3)">확인하기</button>
+                <div class="feedback" id="feedback3-correct">
+                    정답입니다! "숙제를 끝내고 친구와 놀았다." 또는 "숙제를 끝낸 후에 친구와 놀았다."와 같이 표현할 수 있습니다.
+                </div>
+                <div class="feedback" id="feedback3-incorrect">
+                    다시 생각해보세요. 시간 순서를 나타내는 '~하고 나서', '~한 후에' 등의 연결사를 사용해보세요.
+                </div>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="grade4_formal_informal.html" class="nav-button">이전 학습</a>
+            <a href="index.html" class="nav-button">목록으로</a>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(questionNum) {
+            const input = document.getElementById(`input${questionNum}`);
+            const correctFeedback = document.getElementById(`feedback${questionNum}-correct`);
+            const incorrectFeedback = document.getElementById(`feedback${questionNum}-incorrect`);
+            
+            let isCorrect = false;
+            
+            if (questionNum === 1) {
+                isCorrect = input.value.includes('비가 많이 와서') || 
+                           input.value.includes('비가 많이 왔기 때문에') || 
+                           input.value.includes('비가 많이 오니까');
+            } else if (questionNum === 2) {
+                isCorrect = input.value.includes('친구가 아파서') || 
+                           input.value.includes('친구의 병문안을 가기 위해') || 
+                           input.value.includes('친구를 병문안하려고');
+            } else if (questionNum === 3) {
+                isCorrect = input.value.includes('숙제를 끝내고') || 
+                           input.value.includes('숙제를 끝낸 후에') || 
+                           input.value.includes('숙제를 끝내고 나서');
+            }
+            
+            if (isCorrect) {
+                correctFeedback.style.display = 'block';
+                incorrectFeedback.style.display = 'none';
+            } else {
+                correctFeedback.style.display = 'none';
+                incorrectFeedback.style.display = 'block';
+            }
+
+            // 로컬 스토리지에 저장
+            localStorage.setItem(`connectingSentences_answer${questionNum}`, input.value);
+        }
+
+        // 페이지 로드 시 이전에 저장된 답변 불러오기
+        window.onload = function() {
+            for (let i = 1; i <= 3; i++) {
+                const savedAnswer = localStorage.getItem(`connectingSentences_answer${i}`);
+                if (savedAnswer) {
+                    document.getElementById(`input${i}`).value = savedAnswer;
+                }
+            }
+            console.log("문장의 연결 페이지가 로드되었습니다.");
+        };
+    </script>
+</body>
+</html> 

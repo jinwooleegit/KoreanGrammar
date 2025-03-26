@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>독서 감상문 쓰기 | 5학년 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 5학년 전용 스타일 */
+        :root {
+            --grade5-color: #FF9F1C;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .lesson-header {
+            background: linear-gradient(135deg, var(--grade5-color) 0%, #FFBF69 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .lesson-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade5-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--grade5-color);
+            padding-bottom: 10px;
+        }
+
+        .content-section h3 {
+            color: #444;
+            font-size: 22px;
+            margin: 25px 0 15px;
+        }
+
+        .content-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .example-box {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--grade5-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box h4 {
+            color: var(--grade5-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .example-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .example-item:before {
+            content: "•";
+            color: var(--grade5-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .book-report-structure {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .report-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .section-number {
+            width: 30px;
+            height: 30px;
+            background-color: var(--grade5-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .section-content {
+            flex-grow: 1;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: var(--grade5-color);
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .section-desc {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .tips-box {
+            background-color: #fff8e8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tips-title {
+            color: var(--grade5-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tips-title i {
+            font-size: 22px;
+        }
+
+        .tips-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tips-list li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .tips-list li:before {
+            content: "✓";
+            color: var(--grade5-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .book-report-example {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .example-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: var(--grade5-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 15px;
+        }
+
+        .report-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--grade5-color);
+        }
+
+        .report-metadata {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .report-content {
+            line-height: 1.8;
+        }
+
+        .report-content p {
+            margin-bottom: 15px;
+            text-indent: 1em;
+        }
+
+        .interactive-section {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .interactive-title {
+            color: var(--grade5-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .interactive-title i {
+            font-size: 24px;
+        }
+
+        .practice-form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            font-family: inherit;
+        }
+
+        .form-textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .save-button {
+            background-color: var(--grade5-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .save-button:hover {
+            opacity: 0.9;
+        }
+
+        .save-message {
+            color: green;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade5-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .back-button {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="lesson-header">
+        <h1>독서 감상문 쓰기</h1>
+        <p>책을 읽고 난 후의 느낌과 생각을 효과적으로 표현하는 독서 감상문 작성법을 배웁니다.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>독서 감상문이란?</h2>
+        
+        <p>독서 감상문은 책을 읽고 난 후에 그 내용에 대한 이해와 자신의 생각, 느낌을 정리하여 쓰는 글입니다. 단순히 책의 내용을 요약하는 것이 아니라, 책을 통해 배운 점, 느낀 점, 생각한 점 등을 자신만의 관점에서 표현하는 글이에요.</p>
+        
+        <div class="example-box">
+            <h4>독서 감상문의 특징</h4>
+            <div class="example-item">책의 내용을 간략하게 소개합니다.</div>
+            <div class="example-item">책을 읽고 난 후의 자신의 생각과 느낌을 담습니다.</div>
+            <div class="example-item">책에서 인상 깊었던 부분이나 구절을 인용할 수 있습니다.</div>
+            <div class="example-item">책을 통해 배운 점이나 깨달은 점을 표현합니다.</div>
+            <div class="example-item">자신의 경험과 연결하여 작성할 수 있습니다.</div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>독서 감상문의 구성</h2>
+        
+        <p>효과적인 독서 감상문을 작성하기 위해서는 일정한 구성을 따르는 것이 좋습니다. 아래와 같은 구성 요소를 포함하면 글의 흐름이 자연스러워집니다.</p>
+        
+        <div class="book-report-structure">
+            <div class="report-section">
+                <div class="section-number">1</div>
+                <div class="section-content">
+                    <div class="section-title">서론: 책 소개</div>
+                    <div class="section-desc">
+                        <p>책의 제목, 작가, 출판사 등 기본 정보를 소개합니다.</p>
+                        <p>이 책을 읽게 된 계기나 책을 선택한 이유를 간략히 설명합니다.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <div class="section-number">2</div>
+                <div class="section-content">
+                    <div class="section-title">본론: 내용 요약</div>
+                    <div class="section-desc">
+                        <p>책의 주요 내용을 간략하게 요약합니다. 이때 모든 내용을 다 요약하기보다는 중요한 부분을 중심으로 작성합니다.</p>
+                        <p>주인공이나 중요한 인물의 특성, 사건의 전개 과정 등을 포함할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <div class="section-number">3</div>
+                <div class="section-content">
+                    <div class="section-title">본론: 인상 깊은 부분</div>
+                    <div class="section-desc">
+                        <p>책에서 가장 인상 깊었던 장면이나 구절을 소개하고, 왜 그 부분이 인상적이었는지 설명합니다.</p>
+                        <p>인용문을 사용할 때는 책의 페이지 번호를 함께 적어주면 좋습니다.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <div class="section-number">4</div>
+                <div class="section-content">
+                    <div class="section-title">본론: 느낀 점과 생각</div>
+                    <div class="section-desc">
+                        <p>책을 읽으면서 어떤 생각이나 감정이 들었는지 자세히 설명합니다.</p>
+                        <p>주인공이나 사건에 대한 자신의 의견, 책에서 배운 교훈 등을 작성합니다.</p>
+                        <p>실제 자신의 경험과 연결하여 작성하면 더욱 풍부한 감상문이 됩니다.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <div class="section-number">5</div>
+                <div class="section-content">
+                    <div class="section-title">결론: 총평과 추천</div>
+                    <div class="section-desc">
+                        <p>책에 대한 전체적인 평가를 내립니다.</p>
+                        <p>이 책을 다른 사람에게 추천하고 싶은지, 그렇다면 어떤 이유에서인지 작성합니다.</p>
+                        <p>책을 읽고 난 후 자신에게 어떤 변화가 있었는지 언급할 수도 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tips-box">
+            <div class="tips-title"><i class="fas fa-lightbulb"></i> 독서 감상문 작성 팁</div>
+            <ul class="tips-list">
+                <li>책을 읽으면서 중요한 내용이나 인상 깊은 구절에 표시해두면 감상문 작성에 도움이 됩니다.</li>
+                <li>자신만의 독특한 시각으로 책을 바라보고 감상을 표현해보세요.</li>
+                <li>단순히 줄거리를 요약하는 것보다 자신의 생각과 느낌을 더 많이, 더 깊게 표현하는 것이 중요합니다.</li>
+                <li>비슷한 주제의 다른 책과 비교하거나 연결하면 더 풍부한 감상문이 될 수 있습니다.</li>
+                <li>책에서 배운 내용을 자신의 삶에 어떻게 적용할 수 있을지 생각해보세요.</li>
+                <li>맞춤법과 문장 구성에 주의하여 글을 작성합니다.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>독서 감상문 예시</h2>
+        
+        <div class="book-report-example">
+            <div class="example-label">감상문 예시</div>
+            <div class="report-header">
+                <div class="report-title">『해리 포터와 마법사의 돌』을 읽고</div>
+                <div class="report-metadata">
+                    <span>작성자: 김민준</span>
+                    <span>작성일: 2023년 7월 15일</span>
+                </div>
+            </div>
+            <div class="report-content">
+                <p>J.K. 롤링의 『해리 포터와 마법사의 돌』은 고아가 된 해리 포터가 자신이 마법사임을 알게 되고 호그와트 마법학교에 입학하면서 겪는 모험을 그린 판타지 소설입니다. 이 책은 친구들의 추천으로 읽게 되었고, 마법의 세계와 주인공의 성장 이야기가 궁금해서 선택했습니다.</p>
+                
+                <p>해리 포터는 부모님을 잃고 더즐리 가족과 함께 살아가는 평범한 소년이었습니다. 그러나 11살 생일에 자신이 마법사라는 사실을 알게 되고, 호그와트 마법학교에 입학하게 됩니다. 그곳에서 론과 헤르미온느라는 친구를 사귀게 되고, 스네이프 교수와 볼드모트라는 악당의 음모와 맞서며 마법사의 돌을 지키는 모험을 하게 됩니다.</p>
+                
+                <p>가장 인상 깊었던 장면은 해리가 거울 앞에서 자신의 부모님을 보게 되는 장면입니다(p.210). "해리는 자신의 가족을 처음으로 보았다." 이 문장이 마음에 깊이 와닿았습니다. 해리의 슬픔과 가족에 대한 그리움이 느껴졌기 때문입니다. 또한 덤블도어 교수가 "가장 행복한 사람은 소망의 거울에서 자신의 모습만을 볼 것이다"라고 말한 부분도 많은 생각을 하게 했습니다.</p>
+                
+                <p>이 책을 읽으면서 진정한 용기와 우정에 대해 많은 것을 느꼈습니다. 해리와 그의 친구들은 서로를 위해 희생하고 함께 어려움을 극복했습니다. 특히 론이 체스 게임에서 자신을 희생하는 모습은 진정한 우정이 무엇인지 생각하게 했습니다. 또한 해리가 볼드모트와 맞서는 모습을 보며, 두려움 속에서도 옳은 일을 위해 나아가는 용기의 중요성도 배웠습니다.</p>
+                
+                <p>이 책은 마법이라는 판타지적 요소를 통해 우정, 용기, 희생, 사랑과 같은 중요한 가치를 전달합니다. 상상력이 풍부하고 재미있는 이야기와 함께 깊은 메시지도 담고 있어서 정말 좋았습니다. 저는 이 책을 친구들에게 추천하고 싶습니다. 특히 모험과 판타지를 좋아하는 친구들이라면 더욱 재미있게 읽을 수 있을 것입니다. 책을 읽은 후에는 다른 사람들과의 우정이 얼마나 소중한지 다시 한번 생각하게 되었습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="interactive-section">
+        <h2 class="interactive-title"><i class="fas fa-pencil-alt"></i> 독서 감상문 작성 연습</h2>
+        
+        <p>여러분이 최근에 읽은 책에 대한 독서 감상문을 작성해보세요. 위에서 배운 구성 요소와 팁을 활용하면 좋은 독서 감상문을 쓸 수 있습니다.</p>
+        
+        <div class="practice-form">
+            <div class="form-group">
+                <label class="form-label">책 제목:</label>
+                <input type="text" id="book-title" class="form-input" placeholder="읽은 책의 제목을 입력하세요...">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">저자:</label>
+                <input type="text" id="book-author" class="form-input" placeholder="책의 작가 이름을 입력하세요...">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">책을 선택한 이유:</label>
+                <textarea id="book-reason" class="form-textarea" placeholder="이 책을 읽게 된 계기나 이유를 작성하세요..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">책의 내용 요약:</label>
+                <textarea id="book-summary" class="form-textarea" placeholder="책의 주요 내용을 간략하게 요약해보세요..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">인상 깊었던 부분:</label>
+                <textarea id="book-impressive" class="form-textarea" placeholder="가장 인상 깊었던 장면이나 구절을 쓰고, 그 이유를 설명해보세요..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">느낀 점과 생각:</label>
+                <textarea id="book-thoughts" class="form-textarea" placeholder="책을 읽고 느낀 점이나 생각을 자세히 작성해보세요..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">총평과 추천:</label>
+                <textarea id="book-recommendation" class="form-textarea" placeholder="책에 대한 전체적인 평가와 추천 여부, 이유를 작성해보세요..."></textarea>
+            </div>
+            
+            <button id="save-report" class="save-button">감상문 저장하기</button>
+            <p id="save-message" class="save-message">독서 감상문이 저장되었습니다!</p>
+        </div>
+    </div>
+
+    <div class="navigation-buttons">
+        <a href="grade5_figurative.html" class="nav-button"><i class="fas fa-arrow-left"></i> 이전 학습</a>
+        <a href="../index.html" class="nav-button">목록으로 <i class="fas fa-list"></i></a>
+    </div>
+
+    <script>
+        // 독서 감상문 저장 기능
+        document.getElementById('save-report').addEventListener('click', function() {
+            const title = document.getElementById('book-title').value;
+            const author = document.getElementById('book-author').value;
+            const reason = document.getElementById('book-reason').value;
+            const summary = document.getElementById('book-summary').value;
+            const impressive = document.getElementById('book-impressive').value;
+            const thoughts = document.getElementById('book-thoughts').value;
+            const recommendation = document.getElementById('book-recommendation').value;
+            
+            // 로컬 스토리지에 저장
+            localStorage.setItem('book_title', title);
+            localStorage.setItem('book_author', author);
+            localStorage.setItem('book_reason', reason);
+            localStorage.setItem('book_summary', summary);
+            localStorage.setItem('book_impressive', impressive);
+            localStorage.setItem('book_thoughts', thoughts);
+            localStorage.setItem('book_recommendation', recommendation);
+            
+            // 저장 메시지 표시
+            const saveMessage = document.getElementById('save-message');
+            saveMessage.style.display = 'block';
+            
+            // 3초 후 메시지 숨기기
+            setTimeout(function() {
+                saveMessage.style.display = 'none';
+            }, 3000);
+        });
+        
+        // 페이지 로드 시 이전에 저장된 내용 불러오기
+        window.onload = function() {
+            const savedTitle = localStorage.getItem('book_title');
+            const savedAuthor = localStorage.getItem('book_author');
+            const savedReason = localStorage.getItem('book_reason');
+            const savedSummary = localStorage.getItem('book_summary');
+            const savedImpressive = localStorage.getItem('book_impressive');
+            const savedThoughts = localStorage.getItem('book_thoughts');
+            const savedRecommendation = localStorage.getItem('book_recommendation');
+            
+            if (savedTitle) document.getElementById('book-title').value = savedTitle;
+            if (savedAuthor) document.getElementById('book-author').value = savedAuthor;
+            if (savedReason) document.getElementById('book-reason').value = savedReason;
+            if (savedSummary) document.getElementById('book-summary').value = savedSummary;
+            if (savedImpressive) document.getElementById('book-impressive').value = savedImpressive;
+            if (savedThoughts) document.getElementById('book-thoughts').value = savedThoughts;
+            if (savedRecommendation) document.getElementById('book-recommendation').value = savedRecommendation;
+            
+            console.log("독서 감상문 쓰기 페이지가 로드되었습니다.");
+        };
+    </script>
+</body>
+</html> 

@@ -125,4 +125,161 @@ nav ul li.active:after {
 .simple-footer a:hover {
     color: #2A69BC;
     text-decoration: underline;
+}
+
+/* 사이트맵 섹션 스타일 */
+.site-map {
+    background-color: #f8f9fa;
+    padding: 50px 20px;
+    margin: 40px 0;
+}
+
+.site-map h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2A69BC;
+}
+
+.site-map-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.site-map-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.site-map-image img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.site-map-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.directory-tree {
+    list-style: none;
+    padding-left: 15px;
+}
+
+.directory-tree ul {
+    list-style: none;
+    padding-left: 25px;
+    margin-top: 5px;
+}
+
+.directory-tree li {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.directory-tree li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -15px;
+    height: 100%;
+    border-left: 1px dotted #ccc;
+}
+
+.directory-tree li:last-child::before {
+    height: 10px;
+}
+
+.directory-tree li::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -15px;
+    width: 10px;
+    border-top: 1px dotted #ccc;
+}
+
+.folder-icon, .file-icon {
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.directory-tree a {
+    color: #4A89DC;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.directory-tree a:hover {
+    color: #2A69BC;
+    text-decoration: underline;
+}
+
+.site-structure h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* 사이트맵 추가 스타일 */
+.sitemap-notice {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sitemap-view-btn {
+    display: inline-block;
+    background-color: #4A89DC;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+}
+
+.sitemap-view-btn:hover {
+    background-color: #2A69BC;
+}
+
+.sitemap-placeholder {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+.sitemap-preview {
+    max-width: 500px;
+}
+
+.sitemap-preview h3 {
+    color: #4A89DC;
+    margin-bottom: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.sitemap-sections {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.sitemap-sections li {
+    margin-bottom: 10px;
+    line-height: 1.5;
 } 

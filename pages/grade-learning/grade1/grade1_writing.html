@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1학년 바른 글씨 쓰기 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 1학년 전용 스타일 */
+        :root {
+            --grade1-color: #FF6B6B;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .grade-header {
+            background: linear-gradient(135deg, var(--grade1-color) 0%, #FF9292 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .grade-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .grade-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade1-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: var(--grade1-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .example-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--grade1-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .writing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .writing-item {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .writing-char {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: var(--grade1-color);
+            font-family: 'Nanum Pen Script', cursive;
+        }
+
+        .writing-steps {
+            font-size: 13px;
+            color: #666;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .writing-steps ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .writing-steps li {
+            margin-bottom: 5px;
+        }
+
+        .interactive-section {
+            background-color: #f5f5f5;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .interactive-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .practice-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .practice-canvas {
+            width: 300px;
+            height: 300px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background-color: white;
+            position: relative;
+        }
+
+        .practice-canvas::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            border-top: 1px dashed #ddd;
+        }
+
+        .practice-canvas::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            border-left: 1px dashed #ddd;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .practice-button {
+            padding: 8px 16px;
+            background-color: var(--grade1-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .practice-button:hover {
+            opacity: 0.9;
+        }
+
+        .instructions {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .instructions h4 {
+            color: var(--grade1-color);
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .letter-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .letter-button {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .letter-button:hover {
+            border-color: var(--grade1-color);
+            transform: scale(1.1);
+        }
+
+        .letter-button.active {
+            background-color: var(--grade1-color);
+            color: white;
+            border-color: var(--grade1-color);
+        }
+
+        .tracing-image {
+            max-width: 100%;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade1-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="grade-header">
+        <h1>바른 글씨 쓰기</h1>
+        <p>한글 자음과 모음을 올바르게 쓰는 방법을 배우고, 낱말을 정확하게 쓰는 연습을 해요.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>바른 자세로 글씨 쓰기</h2>
+        
+        <div class="content-card">
+            <div class="card-header">
+                글씨를 쓸 때 바른 자세
+            </div>
+            <div class="card-content">
+                <p>글씨를 바르게 쓰려면 먼저 바른 자세가 중요해요.</p>
+                
+                <div class="example-box">
+                    <h4>글씨 쓰기의 바른 자세</h4>
+                    <ol>
+                        <li>등을 곧게 펴고 앉아요.</li>
+                        <li>종이와 눈 사이의 거리는 약 30cm가 좋아요.</li>
+                        <li>연필은 너무 세게 잡지 않고 적당한 힘으로 잡아요.</li>
+                        <li>손목은 책상에 가볍게 대고, 팔꿈치는 몸에서 너무 멀리 벌리지 않아요.</li>
+                        <li>종이는 약간 비스듬히 놓고 왼손으로 가볍게 누르면서 써요.</li>
+                    </ol>
+                </div>
+                
+                <p>바른 자세로 글씨를 쓰면 글씨가 더 예쁘게 쓰이고, 몸도 건강해요!</p>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                자음 바르게 쓰기
+            </div>
+            <div class="card-content">
+                <p>자음은 획순과 모양을 정확하게 지켜서 써야 예쁜 글씨가 됩니다.</p>
+                
+                <div class="writing-grid">
+                    <div class="writing-item">
+                        <div class="writing-char">ㄱ</div>
+                        <div class="writing-steps">
+                            <ol>
+                                <li>가로획을 왼쪽에서 오른쪽으로</li>
+                                <li>세로획을 위에서 아래로</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="writing-item">
+                        <div class="writing-char">ㄴ</div>
+                        <div class="writing-steps">
+                            <ol>
+                                <li>세로획을 위에서 아래로</li>
+                                <li>가로획을 왼쪽에서 오른쪽으로</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="writing-item">
+                        <div class="writing-char">ㄷ</div>
+                        <div class="writing-steps">
+                            <ol>
+                                <li>가로획을 왼쪽에서 오른쪽으로</li>
+                                <li>세로획을 위에서 아래로</li>
+                                <li>아래 가로획을 왼쪽에서 오른쪽으로</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="writing-item">
+                        <div class="writing-char">ㅁ</div>
+                        <div class="writing-steps">
+                            <ol>
+                                <li>왼쪽 세로획 위에서 아래로</li>
+                                <li>위 가로획 왼쪽에서 오른쪽으로</li>
+                                <li>오른쪽 세로획 위에서 아래로</li>
+                                <li>아래 가로획 왼쪽에서 오른쪽으로</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>자음 쓸 때 주의할 점</h4>
+                    <p>자음을 쓸 때는 각 글자의 모양과 균형을 맞추는 것이 중요해요.</p>
+                    <p>ㄱ, ㄴ, ㄷ, ㅁ 등의 기본 자음부터 익숙해진 후에 ㅋ, ㅌ, ㅍ 같은 복잡한 자음을 연습하는 것이 좋아요.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                모음 바르게 쓰기
+            </div>
+            <div class="card-content">
+                <p>모음은 가로, 세로, 점의 조합으로 이루어져 있어요. 모음도 획순과 방향을 바르게 지켜 써야 해요.</p>
+                
+                <div class="writing-grid">
+                    <div class="writing-item">
+                        <div class="writing-char">ㅏ</div>
+                        <div class="writing-steps">
+                            <ol>
+                                <li>세로획을 위에서 아래로</li>
+                                <li>점을 찍듯이 가로획을 오른쪽에</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="writing-item">
+                        <div class="writing-char">ㅓ</div>
+                        <div class="writing-steps">
+                            <ol>
+                                <li>세로획을 위에서 아래로</li>
+                                <li>점을 찍듯이 가로획을 왼쪽에</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="writing-item">
+                        <div class="writing-char">ㅗ</div>
+                        <div class="writing-steps">
+                            <ol>
+                                <li>가로획을 왼쪽에서 오른쪽으로</li>
+                                <li>세로획을 위에서 가로획 중앙으로</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="writing-item">
+                        <div class="writing-char">ㅜ</div>
+                        <div class="writing-steps">
+                            <ol>
+                                <li>가로획을 왼쪽에서 오른쪽으로</li>
+                                <li>세로획을 가로획 중앙에서 아래로</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>모음 쓸 때 주의할 점</h4>
+                    <p>모음을 쓸 때는 획의 방향과 길이에 주의해야 해요.</p>
+                    <p>복합모음(ㅐ, ㅒ, ㅚ 등)은 기본모음의 조합이므로, 기본모음을 정확하게 쓸 수 있어야 해요.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3>글씨 쓰기 연습</h3>
+            
+            <div class="instructions">
+                <h4>따라 써보세요</h4>
+                <ol>
+                    <li>아래에서 연습할 글자를 선택하세요.</li>
+                    <li>선택한 글자의 획순을 참고하여 연습 공간에 그려보세요.</li>
+                    <li>글자를 다 쓴 후 다시하기 버튼을 눌러 새로 연습할 수 있어요.</li>
+                </ol>
+            </div>
+            
+            <div class="letter-selector">
+                <div class="letter-button" data-letter="ㄱ">ㄱ</div>
+                <div class="letter-button" data-letter="ㄴ">ㄴ</div>
+                <div class="letter-button" data-letter="ㄷ">ㄷ</div>
+                <div class="letter-button" data-letter="ㅁ">ㅁ</div>
+                <div class="letter-button" data-letter="ㅂ">ㅂ</div>
+                <div class="letter-button" data-letter="ㅅ">ㅅ</div>
+                <div class="letter-button" data-letter="ㅇ">ㅇ</div>
+                <div class="letter-button" data-letter="ㅏ">ㅏ</div>
+                <div class="letter-button" data-letter="ㅓ">ㅓ</div>
+                <div class="letter-button" data-letter="ㅗ">ㅗ</div>
+                <div class="letter-button" data-letter="ㅜ">ㅜ</div>
+                <div class="letter-button" data-letter="ㅡ">ㅡ</div>
+                <div class="letter-button" data-letter="ㅣ">ㅣ</div>
+            </div>
+            
+            <div class="practice-area">
+                <canvas id="practiceCanvas" class="practice-canvas" width="300" height="300"></canvas>
+                
+                <div class="practice-controls">
+                    <button id="clearButton" class="practice-button">다시하기</button>
+                    <button id="saveButton" class="practice-button">저장하기</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                글자 모양과 크기 맞추기
+            </div>
+            <div class="card-content">
+                <p>한글은 자음과 모음이 모여 하나의 글자를 이루어요. 글자의 모양과 크기를 균형있게 맞추는 것이 중요해요.</p>
+                
+                <div class="example-box">
+                    <h4>낱글자 모양 맞추기</h4>
+                    <p>자음과 모음을 모아 쓸 때는 각 글자마다 정해진 위치가 있어요.</p>
+                    <p>예: '가'는 'ㄱ'과 'ㅏ'를 조합할 때, 'ㄱ'은 왼쪽 위에, 'ㅏ'는 오른쪽에 배치해요.</p>
+                    <p>예: '밥'은 'ㅂ', 'ㅏ', 'ㅂ'을 조합할 때, 첫 'ㅂ'은 위에, 'ㅏ'는 오른쪽에, 마지막 'ㅂ'은 아래에 배치해요.</p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>글씨 크기 맞추기</h4>
+                    <p>글씨를 쓸 때는 모든 글자의 크기가 비슷하게 유지되어야 보기 좋아요.</p>
+                    <p>줄이 있는 공책에 쓸 때는 줄 사이에 글자 크기를 맞추면 좋아요.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation-buttons content-section">
+        <button class="nav-button" onclick="location.href='grade1_sounds.html'">이전 학습: 글자와 소리 관계</button>
+        <button class="nav-button" onclick="location.href='grade1.html'">1학년 학습으로 돌아가기</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('practiceCanvas');
+            const ctx = canvas.getContext('2d');
+            const letterButtons = document.querySelectorAll('.letter-button');
+            const clearButton = document.getElementById('clearButton');
+            const saveButton = document.getElementById('saveButton');
+            
+            let selectedLetter = null;
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            
+            // 초기 설정
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = '#000';
+            
+            // 캔버스 지우기 함수
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // 글자 선택 기능
+            letterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 이전 선택 버튼의 active 제거
+                    letterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // 현재 버튼 active 추가
+                    this.classList.add('active');
+                    
+                    // 선택된 글자 저장
+                    selectedLetter = this.getAttribute('data-letter');
+                    
+                    // 캔버스 초기화
+                    clearCanvas();
+                });
+            });
+            
+            // 그리기 이벤트
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            });
+            
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isDrawing) return;
+                
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+                
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            });
+            
+            canvas.addEventListener('mouseup', () => {
+                isDrawing = false;
+            });
+            
+            canvas.addEventListener('mouseout', () => {
+                isDrawing = false;
+            });
+            
+            // 터치 이벤트
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                isDrawing = true;
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                [lastX, lastY] = [touch.clientX - rect.left, touch.clientY - rect.top];
+            });
+            
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (!isDrawing) return;
+                
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const offsetX = touch.clientX - rect.left;
+                const offsetY = touch.clientY - rect.top;
+                
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(offsetX, offsetY);
+                ctx.stroke();
+                
+                [lastX, lastY] = [offsetX, offsetY];
+            });
+            
+            canvas.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                isDrawing = false;
+            });
+            
+            // 다시하기 버튼
+            clearButton.addEventListener('click', clearCanvas);
+            
+            // 저장하기 버튼
+            saveButton.addEventListener('click', () => {
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = `한글쓰기_${selectedLetter || '연습'}.png`;
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html> 

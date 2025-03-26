@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기본 문장 구조 이해하기 | 2학년 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 2학년 전용 스타일 */
+        :root {
+            --grade2-color: #4ECDC4;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .lesson-header {
+            background: linear-gradient(135deg, var(--grade2-color) 0%, #7CEEAB 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .lesson-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade2-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--grade2-color);
+            padding-bottom: 10px;
+        }
+
+        .content-section h3 {
+            color: #444;
+            font-size: 22px;
+            margin: 25px 0 15px;
+        }
+
+        .content-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .example-box {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--grade2-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box h4 {
+            color: var(--grade2-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .example-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .example-item:before {
+            content: "•";
+            color: var(--grade2-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .highlight-item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 200px;
+            border-top: 3px solid var(--grade2-color);
+        }
+
+        .highlight-title {
+            font-weight: bold;
+            color: var(--grade2-color);
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .highlight-desc {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .sentence-diagram {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .diagram-sentence {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .diagram-parts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .diagram-part {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .subject {
+            background-color: #FFE0B2;
+            color: #E65100;
+        }
+
+        .predicate {
+            background-color: #C8E6C9;
+            color: #2E7D32;
+        }
+
+        .object {
+            background-color: #BBDEFB;
+            color: #1565C0;
+        }
+
+        .adverb {
+            background-color: #E1BEE7;
+            color: #6A1B9A;
+        }
+
+        .connector {
+            font-size: 24px;
+            color: #888;
+            align-self: center;
+        }
+
+        .interactive-section {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .interactive-title {
+            color: var(--grade2-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .interactive-title i {
+            font-size: 24px;
+        }
+
+        .practice-container {
+            margin-top: 20px;
+        }
+
+        .practice-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .practice-sentence {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .practice-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .practice-option {
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .practice-option:hover {
+            border-color: var(--grade2-color);
+            background-color: #f0f9f8;
+        }
+
+        .practice-option.selected {
+            border-color: var(--grade2-color);
+            background-color: var(--grade2-color);
+            color: white;
+        }
+
+        .practice-result {
+            font-weight: bold;
+            color: #4CAF50;
+            display: none;
+        }
+
+        .practice-result.show {
+            display: block;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade2-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+
+        .back-button {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="lesson-header">
+        <h1>기본 문장 구조 이해하기</h1>
+        <p>문장을 이루는 기본 요소들을 알아보고, 문장이 어떻게 구성되는지 배웁니다. 누가, 무엇을, 어떻게 하는지를 나타내는 방법을 학습해요.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>문장의 기본 구조</h2>
+        
+        <p>문장은 생각이나 느낌을 완전하게 표현하는 말의 모음이에요. 모든 문장은 기본적인 요소들로 이루어져 있어요. 오늘은 문장을 구성하는 가장 중요한 요소인 <strong>주어</strong>와 <strong>서술어</strong>에 대해 배워볼 거예요.</p>
+        
+        <div class="highlight-box">
+            <div class="highlight-item">
+                <div class="highlight-title">주어</div>
+                <div class="highlight-desc">문장에서 '누가' 또는 '무엇이' 부분을 말해요. 행동을 하는 대상이나 상태의 주체를 나타내요.</div>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-title">서술어</div>
+                <div class="highlight-desc">문장에서 주어가 '어떻게 한다' 또는 '어떠하다'를 말해요. 동작이나 상태를 나타내요.</div>
+            </div>
+        </div>
+        
+        <h3>1. 주어 알아보기</h3>
+        <p>주어는 문장에서 '누가' 또는 '무엇이' 행동을 하는지, 어떤 상태인지를 나타내는 부분이에요. 주어는 보통 문장의 앞에 오고, 조사 '은/는', '이/가'와 함께 사용돼요.</p>
+        
+        <div class="example-box">
+            <h4>주어 예시</h4>
+            <div class="example-item"><strong>민수가</strong> 학교에 갑니다. → '민수가'가 주어예요.</div>
+            <div class="example-item"><strong>토끼는</strong> 당근을 먹습니다. → '토끼는'이 주어예요.</div>
+            <div class="example-item"><strong>바람이</strong> 붑니다. → '바람이'가 주어예요.</div>
+        </div>
+        
+        <h3>2. 서술어 알아보기</h3>
+        <p>서술어는 주어가 '어떻게 한다' 또는 '어떠하다'를 나타내는 부분이에요. 서술어는 보통 문장의 끝에 와요.</p>
+        
+        <div class="example-box">
+            <h4>서술어 예시</h4>
+            <div class="example-item">민수가 학교에 <strong>갑니다</strong>. → '갑니다'가 서술어예요.</div>
+            <div class="example-item">토끼는 당근을 <strong>먹습니다</strong>. → '먹습니다'가 서술어예요.</div>
+            <div class="example-item">바람이 <strong>붑니다</strong>. → '붑니다'가 서술어예요.</div>
+        </div>
+        
+        <div class="sentence-diagram">
+            <div class="diagram-sentence">민수가 공원에서 축구를 합니다.</div>
+            <div>
+                <span class="diagram-part subject">민수가</span>
+                <span class="connector">+</span>
+                <span class="diagram-part adverb">공원에서</span>
+                <span class="connector">+</span>
+                <span class="diagram-part object">축구를</span>
+                <span class="connector">+</span>
+                <span class="diagram-part predicate">합니다</span>
+            </div>
+            <div class="diagram-parts">
+                <div class="diagram-part subject">주어</div>
+                <div class="diagram-part adverb">부사어</div>
+                <div class="diagram-part object">목적어</div>
+                <div class="diagram-part predicate">서술어</div>
+            </div>
+        </div>
+        
+        <h3>3. 목적어 알아보기</h3>
+        <p>목적어는 주어의 동작이 미치는 대상을 나타내는 부분이에요. 목적어는 보통 조사 '을/를'과 함께 사용돼요.</p>
+        
+        <div class="example-box">
+            <h4>목적어 예시</h4>
+            <div class="example-item">민수가 <strong>책을</strong> 읽습니다. → '책을'이 목적어예요.</div>
+            <div class="example-item">토끼는 <strong>당근을</strong> 먹습니다. → '당근을'이 목적어예요.</div>
+            <div class="example-item">선생님께서 <strong>글씨를</strong> 쓰십니다. → '글씨를'이 목적어예요.</div>
+        </div>
+        
+        <h3>4. 부사어 알아보기</h3>
+        <p>부사어는 주로 동작이 일어나는 시간, 장소, 방법 등을 나타내는 부분이에요. 부사어는 다양한 조사와 함께 사용돼요.</p>
+        
+        <div class="example-box">
+            <h4>부사어 예시</h4>
+            <div class="example-item">민수가 <strong>학교에서</strong> 공부합니다. → '학교에서'가 부사어예요.</div>
+            <div class="example-item">토끼는 <strong>빨리</strong> 뛰어갑니다. → '빨리'가 부사어예요.</div>
+            <div class="example-item"><strong>오늘</strong> 비가 많이 옵니다. → '오늘'이 부사어예요.</div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3 class="interactive-title"><i class="fas fa-puzzle-piece"></i> 문장 구성 요소 찾기</h3>
+            <p>다음 문장에서 주어, 서술어, 목적어, 부사어를 찾아보세요.</p>
+            
+            <div class="practice-container">
+                <div class="practice-item" id="practice1">
+                    <div class="practice-sentence">영희가 어제 도서관에서 책을 읽었습니다.</div>
+                    <div>
+                        <p>주어는 무엇인가요?</p>
+                        <div class="practice-options">
+                            <div class="practice-option" data-type="subject" data-answer="true">영희가</div>
+                            <div class="practice-option" data-type="subject" data-answer="false">어제</div>
+                            <div class="practice-option" data-type="subject" data-answer="false">도서관에서</div>
+                            <div class="practice-option" data-type="subject" data-answer="false">책을</div>
+                            <div class="practice-option" data-type="subject" data-answer="false">읽었습니다</div>
+                        </div>
+                        
+                        <p>서술어는 무엇인가요?</p>
+                        <div class="practice-options">
+                            <div class="practice-option" data-type="predicate" data-answer="false">영희가</div>
+                            <div class="practice-option" data-type="predicate" data-answer="false">어제</div>
+                            <div class="practice-option" data-type="predicate" data-answer="false">도서관에서</div>
+                            <div class="practice-option" data-type="predicate" data-answer="false">책을</div>
+                            <div class="practice-option" data-type="predicate" data-answer="true">읽었습니다</div>
+                        </div>
+                        
+                        <p>목적어는 무엇인가요?</p>
+                        <div class="practice-options">
+                            <div class="practice-option" data-type="object" data-answer="false">영희가</div>
+                            <div class="practice-option" data-type="object" data-answer="false">어제</div>
+                            <div class="practice-option" data-type="object" data-answer="false">도서관에서</div>
+                            <div class="practice-option" data-type="object" data-answer="true">책을</div>
+                            <div class="practice-option" data-type="object" data-answer="false">읽었습니다</div>
+                        </div>
+                        
+                        <p>부사어는 무엇인가요? (2개 선택)</p>
+                        <div class="practice-options">
+                            <div class="practice-option" data-type="adverb" data-answer="false">영희가</div>
+                            <div class="practice-option" data-type="adverb" data-answer="true">어제</div>
+                            <div class="practice-option" data-type="adverb" data-answer="true">도서관에서</div>
+                            <div class="practice-option" data-type="adverb" data-answer="false">책을</div>
+                            <div class="practice-option" data-type="adverb" data-answer="false">읽었습니다</div>
+                        </div>
+                    </div>
+                    <div class="practice-result" id="practice1-result">정답입니다! 잘했어요!</div>
+                </div>
+                
+                <div class="practice-item" id="practice2">
+                    <div class="practice-sentence">강아지가 공원에서 즐겁게 뛰어놉니다.</div>
+                    <div>
+                        <p>이 문장의 주어와 서술어를 찾아보세요.</p>
+                        <div class="practice-options">
+                            <div class="practice-option" data-type="subject" data-answer="true">강아지가</div>
+                            <div class="practice-option" data-type="subject" data-answer="false">공원에서</div>
+                            <div class="practice-option" data-type="subject" data-answer="false">즐겁게</div>
+                            <div class="practice-option" data-type="subject" data-answer="false">뛰어놉니다</div>
+                        </div>
+                        
+                        <div class="practice-options">
+                            <div class="practice-option" data-type="predicate" data-answer="false">강아지가</div>
+                            <div class="practice-option" data-type="predicate" data-answer="false">공원에서</div>
+                            <div class="practice-option" data-type="predicate" data-answer="false">즐겁게</div>
+                            <div class="practice-option" data-type="predicate" data-answer="true">뛰어놉니다</div>
+                        </div>
+                    </div>
+                    <div class="practice-result" id="practice2-result">정답입니다! 잘했어요!</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3 class="interactive-title"><i class="fas fa-pencil-alt"></i> 문장 만들기 연습</h3>
+            <p>다음 단어들을 사용하여 문장을 만들어 보세요. 주어와 서술어를 반드시 포함해야 해요.</p>
+            
+            <div class="example-box">
+                <h4>주어와 서술어로 문장 만들기</h4>
+                <div class="example-item">
+                    <strong>단어들</strong>: 학생, 책, 읽다
+                    <br>
+                    <strong>문장</strong>: 학생이 책을 읽습니다.
+                </div>
+                <div class="example-item">
+                    <strong>단어들</strong>: 바람, 불다, 세게
+                    <br>
+                    <strong>문장</strong>: 바람이 세게 붑니다.
+                </div>
+                <div class="example-item">
+                    <strong>단어들</strong>: 친구, 축구, 운동장, 하다
+                    <br>
+                    <strong>문장</strong>: 친구가 운동장에서 축구를 합니다.
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation-buttons">
+            <a href="grade2_sentence_types.html" class="nav-button back-button"><i class="fas fa-arrow-left"></i> 이전 학습: 문장의 종류 배우기</a>
+            <a href="grade2_word_relations.html" class="nav-button">다음 학습: 낱말의 의미 관계 알기 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 연습 문제 옵션 클릭 처리
+            const practiceOptions = document.querySelectorAll('.practice-option');
+            
+            practiceOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const type = this.getAttribute('data-type');
+                    const practiceItem = this.closest('.practice-item');
+                    
+                    // 부사어는 여러 개 선택 가능, 나머지는 하나만 선택 가능
+                    if (type !== 'adverb') {
+                        // 같은 유형의 다른 옵션들 선택 해제
+                        const sameTypeOptions = practiceItem.querySelectorAll(`.practice-option[data-type="${type}"]`);
+                        sameTypeOptions.forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                    }
+                    
+                    // 현재 옵션 선택 상태 토글
+                    this.classList.toggle('selected');
+                    
+                    // 체크 - practice1 문제
+                    if (practiceItem.id === 'practice1') {
+                        // 모든 타입의 정답 체크
+                        const subjectCorrect = practiceItem.querySelector('.practice-option[data-type="subject"][data-answer="true"]').classList.contains('selected');
+                        const predicateCorrect = practiceItem.querySelector('.practice-option[data-type="predicate"][data-answer="true"]').classList.contains('selected');
+                        const objectCorrect = practiceItem.querySelector('.practice-option[data-type="object"][data-answer="true"]').classList.contains('selected');
+                        
+                        // 부사어 체크 (2개 모두 선택해야 함)
+                        const adverbOptions = practiceItem.querySelectorAll('.practice-option[data-type="adverb"]');
+                        let adverbCorrect = true;
+                        adverbOptions.forEach(opt => {
+                            const isCorrect = opt.getAttribute('data-answer') === 'true';
+                            const isSelected = opt.classList.contains('selected');
+                            if ((isCorrect && !isSelected) || (!isCorrect && isSelected)) {
+                                adverbCorrect = false;
+                            }
+                        });
+                        
+                        // 모든 문제를 맞췄는지 확인
+                        if (subjectCorrect && predicateCorrect && objectCorrect && adverbCorrect) {
+                            document.getElementById('practice1-result').classList.add('show');
+                        } else {
+                            document.getElementById('practice1-result').classList.remove('show');
+                        }
+                    }
+                    
+                    // 체크 - practice2 문제
+                    if (practiceItem.id === 'practice2') {
+                        const subjectCorrect = practiceItem.querySelector('.practice-option[data-type="subject"][data-answer="true"]').classList.contains('selected');
+                        const predicateCorrect = practiceItem.querySelector('.practice-option[data-type="predicate"][data-answer="true"]').classList.contains('selected');
+                        
+                        if (subjectCorrect && predicateCorrect) {
+                            document.getElementById('practice2-result').classList.add('show');
+                        } else {
+                            document.getElementById('practice2-result').classList.remove('show');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

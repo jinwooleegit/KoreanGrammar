@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1학년 문장 알아보기 | 문법놀이터</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 1학년 전용 스타일 */
+        :root {
+            --grade1-color: #FF6B6B;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .grade-header {
+            background: linear-gradient(135deg, var(--grade1-color) 0%, #FF9292 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .grade-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .grade-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--grade1-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: var(--grade1-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .example-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--grade1-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .example-sentence {
+            font-size: 18px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .interactive-section {
+            background-color: #f5f5f5;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .interactive-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .sentence-builder {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .word-block {
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .word-block:hover {
+            border-color: var(--grade1-color);
+            transform: translateY(-3px);
+        }
+
+        .sentence-result {
+            min-height: 60px;
+            background-color: white;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--grade1-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .nav-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="grade-header">
+        <h1>문장 알아보기</h1>
+        <p>문장이 무엇인지 알아보고, 간단한 문장을 읽고 만드는 방법을 배워요.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>문장이란 무엇일까요?</h2>
+        
+        <div class="content-card">
+            <div class="card-header">
+                문장의 기본 개념
+            </div>
+            <div class="card-content">
+                <p>문장은 <strong>생각이나 느낌을 말이나 글로 표현한 것</strong>이에요. 문장은 보통 여러 낱말로 이루어져 있어요.</p>
+                
+                <div class="example-box">
+                    <h4>문장의 예시</h4>
+                    <p class="example-sentence">• 하늘이 파랗다.</p>
+                    <p class="example-sentence">• 새가 날아간다.</p>
+                    <p class="example-sentence">• 나는 학교에 간다.</p>
+                </div>
+                
+                <p>문장은 <strong>주어</strong>와 <strong>서술어</strong>로 이루어져 있어요. 주어는 문장에서 '누가' 또는 '무엇이'에 해당하는 부분이고, 서술어는 주어의 동작이나 상태를 설명하는 부분이에요.</p>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                문장의 종류
+            </div>
+            <div class="card-content">
+                <p>문장은 끝맺는 방법에 따라 여러 종류로 나눌 수 있어요.</p>
+                
+                <div class="example-box">
+                    <h4>1. 평서문 (설명하는 문장)</h4>
+                    <p class="example-sentence">• 하늘이 파랗다.</p>
+                    <p class="example-sentence">• 새가 노래한다.</p>
+                    <p><small>→ 무엇인가를 설명하는 문장으로, 보통 '~다', '~니다'로 끝나요.</small></p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>2. 의문문 (질문하는 문장)</h4>
+                    <p class="example-sentence">• 하늘이 파랗니?</p>
+                    <p class="example-sentence">• 네 이름은 무엇이니?</p>
+                    <p><small>→ 질문을 하는 문장으로, 보통 '~니?', '~까?'로 끝나요.</small></p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>3. 감탄문 (느낌을 나타내는 문장)</h4>
+                    <p class="example-sentence">• 와, 하늘이 정말 파랗구나!</p>
+                    <p class="example-sentence">• 아, 날씨가 정말 좋다!</p>
+                    <p><small>→ 감정이나 느낌을 강하게 표현하는 문장으로, '~구나!', '~다!' 등으로 끝나요.</small></p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>4. 명령문 (시키는 문장)</h4>
+                    <p class="example-sentence">• 창문을 열어라.</p>
+                    <p class="example-sentence">• 책을 읽으세요.</p>
+                    <p><small>→ 다른 사람에게 무엇을 하라고 시키는 문장으로, '~라', '~세요' 등으로 끝나요.</small></p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>5. 청유문 (함께 하자고 제안하는 문장)</h4>
+                    <p class="example-sentence">• 같이 놀자.</p>
+                    <p class="example-sentence">• 도서관에 가자.</p>
+                    <p><small>→ 함께 무엇을 하자고 제안하는 문장으로, '~자', '~ㅂ시다' 등으로 끝나요.</small></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h3>문장 만들기 놀이</h3>
+            <p style="text-align: center; margin-bottom: 20px;">아래 낱말 블록을 클릭해서 문장을 만들어 보세요!</p>
+            
+            <div class="sentence-builder">
+                <div class="word-block">나는</div>
+                <div class="word-block">친구는</div>
+                <div class="word-block">동생이</div>
+                <div class="word-block">학교에</div>
+                <div class="word-block">집에서</div>
+                <div class="word-block">공원에서</div>
+                <div class="word-block">간다</div>
+                <div class="word-block">논다</div>
+                <div class="word-block">공부한다</div>
+                <div class="word-block">책을</div>
+                <div class="word-block">밥을</div>
+                <div class="word-block">읽는다</div>
+                <div class="word-block">먹는다</div>
+            </div>
+            
+            <div class="sentence-result" id="sentenceResult">
+                여기에 문장이 나타납니다!
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <div class="card-header">
+                마침표, 물음표, 느낌표 사용하기
+            </div>
+            <div class="card-content">
+                <p>문장의 끝에는 마침표(.), 물음표(?), 느낌표(!)와 같은 문장 부호를 붙여요.</p>
+                
+                <div class="example-box">
+                    <h4>마침표(.)</h4>
+                    <p class="example-sentence">• 오늘은 날씨가 좋다.</p>
+                    <p><small>→ 평서문의 끝에 사용해요.</small></p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>물음표(?)</h4>
+                    <p class="example-sentence">• 너는 몇 살이니?</p>
+                    <p><small>→ 의문문의 끝에 사용해요.</small></p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>느낌표(!)</h4>
+                    <p class="example-sentence">• 와, 정말 멋지다!</p>
+                    <p><small>→ 감탄문이나 강한 명령문의 끝에 사용해요.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation-buttons content-section">
+        <button class="nav-button" onclick="location.href='grade1.html'">1학년 학습으로 돌아가기</button>
+        <button class="nav-button" onclick="location.href='grade1_sounds.html'">다음 학습: 글자와 소리 관계 이해하기</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wordBlocks = document.querySelectorAll('.word-block');
+            const sentenceResult = document.getElementById('sentenceResult');
+            let currentSentence = '';
+            
+            wordBlocks.forEach(block => {
+                block.addEventListener('click', function() {
+                    if(currentSentence === '여기에 문장이 나타납니다!') {
+                        currentSentence = '';
+                    }
+                    
+                    if(currentSentence) {
+                        currentSentence += ' ' + this.textContent;
+                    } else {
+                        currentSentence = this.textContent;
+                    }
+                    
+                    sentenceResult.textContent = currentSentence;
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
