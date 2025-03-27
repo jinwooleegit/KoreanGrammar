@@ -7,11 +7,10 @@ class SiteManager {
     constructor() {
         // 메뉴 아이템 구성 (여기서 메뉴를 쉽게 추가/수정할 수 있음)
         this.menuItems = [
-            { id: 'home', title: '홈', url: 'index.html', pattern: /index\.html$|^\/$/ },
-            { id: 'grade', title: '학년별 학습', url: 'grade-learning/index.html', pattern: /grade-learning/ },
-            { id: 'topics', title: '학습 주제별', url: 'topics/index.html', pattern: /topics/ },
-            { id: 'activities', title: '학습 활동', url: 'activities/index.html', pattern: /activities/ },
-            { id: 'sitemap', title: '사이트맵', url: 'sitemap.html', pattern: /sitemap\.html/ }
+            { id: 'grade', title: '학년별 학습', url: '/pages/grade-learning/index.html', pattern: /grade-learning/ },
+            { id: 'topics', title: '학습 주제별', url: '/pages/topics/index.html', pattern: /topics/ },
+            { id: 'activities', title: '학습 활동', url: '/pages/activities/index.html', pattern: /activities/ },
+            { id: 'sitemap', title: '사이트맵', url: '/sitemap.html', pattern: /sitemap\.html/ }
         ];
         
         // 현재 페이지 경로 분석
@@ -99,39 +98,15 @@ class SiteManager {
      * 헤더 HTML 생성
      */
     generateHeader(basePath) {
-        // basePath가 빈 문자열일 경우 루트 경로로 설정
-        const finalBasePath = basePath || '/';
-        
         const menuHTML = this.menuItems.map(item => {
-            // 경로 설정
-            let url;
-            if (item.url.startsWith('http')) {
-                url = item.url; 
-            } else if (item.url === 'index.html' && finalBasePath === '/') {
-                url = '/';
-            } else if (item.id === 'grade') {
-                url = finalBasePath === '/' ? '/pages/grade-learning/index.html' : finalBasePath + 'grade-learning/index.html';
-            } else if (item.id === 'topics') {
-                url = finalBasePath === '/' ? '/pages/topics/index.html' : finalBasePath + 'topics/index.html';
-            } else if (item.id === 'activities') {
-                url = finalBasePath === '/' ? '/pages/activities/index.html' : finalBasePath + 'activities/index.html';
-            } else if (item.id === 'sitemap') {
-                url = finalBasePath === '/' ? '/sitemap.html' : finalBasePath + 'sitemap.html';
-            } else {
-                url = finalBasePath + item.url.replace(/^\//, '');
-            }
-            
-            return `<li id="${item.id}-nav"><a href="${url}">${item.title}</a></li>`;
+            return `<li id="${item.id}-nav"><a href="${item.url}">${item.title}</a></li>`;
         }).join('');
-        
-        // 홈 링크
-        const homeLink = finalBasePath === '/' ? '/' : finalBasePath + 'index.html';
         
         return `
         <div class="site-header">
             <div class="header-container">
                 <div class="logo">
-                    <a href="${homeLink}">문법놀이터</a>
+                    <a href="/">문법놀이터</a>
                 </div>
                 <nav>
                     <ul>${menuHTML}</ul>
