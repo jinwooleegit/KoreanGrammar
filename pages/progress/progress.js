@@ -1,6 +1,7 @@
 /**
  * 학습 진도 관리 시스템
  * 사용자의 학습 활동을 추적하고 저장하는 기능을 제공합니다.
+ * 버전: 1.1.0 (경로 수정)
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -224,6 +225,12 @@ document.addEventListener('DOMContentLoaded', function() {
             topicsContainer.innerHTML = '';
             
             gradeData.topics.forEach(topic => {
+                // 상대 경로로 변환
+                let continueUrl = topic.continueUrl;
+                if (continueUrl.startsWith('/')) {
+                    continueUrl = '../../..' + continueUrl;
+                }
+                
                 const topicItem = document.createElement('div');
                 topicItem.className = 'topic-item';
                 topicItem.innerHTML = `
@@ -231,16 +238,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h4 class="topic-title">${topic.title}</h4>
                         <div class="topic-progress">${topic.completed}/${topic.total} 완료</div>
                     </div>
-                    <a href="${topic.continueUrl}" class="continue-btn">이어하기</a>
+                    <a href="${continueUrl}" class="continue-btn">이어하기</a>
                 `;
                 topicsContainer.appendChild(topicItem);
             });
         } else {
-            // 학습 주제가 없는 경우
+            // 학습 주제가 없는 경우 - 상대 경로로 변경
             topicsContainer.innerHTML = `
                 <div class="empty-state">
                     <p>아직 학습한 내용이 없습니다.</p>
-                    <a href="/pages/grade-learning/grade${grade}/" class="start-btn">학습 시작하기</a>
+                    <a href="../../grade-learning/grade${grade}/" class="start-btn">학습 시작하기</a>
                 </div>
             `;
         }
@@ -325,8 +332,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     completed: 7,
                     total: 10,
                     topics: [
-                        { title: '낱말 알아보기', completed: 5, total: 5, continueUrl: '/pages/grade-learning/grade1/grade1_words.html' },
-                        { title: '문장 알아보기', completed: 2, total: 5, continueUrl: '/pages/grade-learning/grade1/grade1_sentences.html' }
+                        { title: '낱말 알아보기', completed: 5, total: 5, continueUrl: '../../grade-learning/grade1/grade1_words.html' },
+                        { title: '문장 알아보기', completed: 2, total: 5, continueUrl: '../../grade-learning/grade1/grade1_sentences.html' }
                     ]
                 },
                 '2': { completed: 4, total: 10, topics: [] },
