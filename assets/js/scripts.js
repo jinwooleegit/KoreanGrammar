@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 카드 및 버튼 호버 효과
     initHoverEffects();
+    
+    // 학년별 탭 기능 초기화
+    initGradeTabs();
+    
+    // 학습 활동 필터 기능 초기화
+    initActivityFilters();
 
     // 위로 가기 버튼 기능
     // 위로 가기 버튼 요소 생성
@@ -147,6 +153,97 @@ function initHoverEffects() {
             this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.05)';
         });
     });
+}
+
+// 학년별 탭 기능 초기화
+function initGradeTabs() {
+    const tabButtons = document.querySelectorAll('.content-tabs .tab-btn');
+    const contentCards = document.querySelectorAll('.content-card');
+    
+    if (tabButtons.length > 0 && contentCards.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 모든 탭 버튼에서 active 클래스 제거
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // 현재 클릭한 버튼에 active 클래스 추가
+                this.classList.add('active');
+                
+                // 선택한 학년 데이터 가져오기
+                const selectedGrade = this.getAttribute('data-grade');
+                
+                // 모든 카드 표시 여부 설정
+                contentCards.forEach(card => {
+                    if (selectedGrade === 'all') {
+                        // '전체' 선택 시 모든 카드 표시
+                        card.style.display = 'block';
+                    } else {
+                        // 특정 학년 선택 시 해당 학년 카드만 표시
+                        if (card.getAttribute('data-grade') === selectedGrade) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    }
+}
+
+// 학습 활동 필터 기능 초기화
+function initActivityFilters() {
+    const filterButtons = document.querySelectorAll('.activity-filters .filter-btn');
+    const activityCards = document.querySelectorAll('.activity-cards .activity-card');
+    
+    if (filterButtons.length > 0 && activityCards.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 모든 필터 버튼에서 active 클래스 제거
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // 현재 클릭한 버튼에 active 클래스 추가
+                this.classList.add('active');
+                
+                // 선택한 필터 데이터 가져오기
+                const selectedFilter = this.getAttribute('data-filter');
+                
+                // 모든 활동 카드 표시 여부 설정
+                activityCards.forEach(card => {
+                    // 카드 애니메이션 준비
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        if (selectedFilter === 'all') {
+                            // '전체' 선택 시 모든 카드 표시
+                            card.style.display = 'block';
+                        } else {
+                            // 특정 유형 선택 시 해당 유형 카드만 표시
+                            if (card.getAttribute('data-type') === selectedFilter) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                        
+                        // 표시되는 카드에 애니메이션 적용
+                        if (card.style.display === 'block') {
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50);
+                        }
+                    }, 200);
+                });
+            });
+        });
+        
+        // 카드 애니메이션을 위한 스타일 추가
+        activityCards.forEach(card => {
+            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        });
+    }
 }
 
 // 지정된 섹션으로 스크롤 이동
