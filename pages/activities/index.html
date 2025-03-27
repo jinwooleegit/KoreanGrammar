@@ -40,19 +40,21 @@
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .filter-label {
             font-weight: bold;
             color: #333;
             margin-right: 5px;
+            width: 100%;
         }
 
         .filter-group {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            margin-bottom: 15px;
         }
 
         .filter-button {
@@ -70,6 +72,58 @@
             background-color: #FF9800;
             color: white;
             border-color: #FF9800;
+        }
+        
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .filter-reset {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-reset:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .search-button {
+            background-color: #FF9800;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-left: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .search-button:hover {
+            background-color: #F57C00;
         }
 
         .main-content {
@@ -153,7 +207,9 @@
             color: #666;
             line-height: 1.5;
             margin-bottom: 15px;
-            height: 63px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
@@ -240,6 +296,14 @@
             .topic-card, .activity-card, .exercise-card {
                 width: 100%;
             }
+            
+            .filter-container {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
         }
         
         @media (max-width: 480px) {
@@ -250,7 +314,22 @@
             p {
                 font-size: 14px;
             }
-        }</style>
+            
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 애니메이션 */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
     <!-- 구형 브라우저 지원을 위한 폴리필 -->
     <script src="../../js/polyfills.js"></script>
     <!-- IE 호환성을 위한 CSS -->
@@ -270,30 +349,39 @@
 
     <section class="filter-section">
         <div class="filter-container">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="활동 검색..." aria-label="활동 검색">
+                <button class="search-button" aria-label="검색"><i class="fas fa-search"></i></button>
+            </div>
+            
             <div class="filter-label">활동 유형:</div>
-            <div class="filter-group">
-                <button class="filter-button active">전체</button>
-                <button class="filter-button">게임</button>
-                <button class="filter-button">퀴즈</button>
-                <button class="filter-button">글쓰기</button>
-                <button class="filter-button">대화</button>
+            <div class="filter-group" role="group" aria-label="활동 유형 필터">
+                <button class="filter-button active" aria-pressed="true">전체</button>
+                <button class="filter-button" aria-pressed="false">게임</button>
+                <button class="filter-button" aria-pressed="false">퀴즈</button>
+                <button class="filter-button" aria-pressed="false">글쓰기</button>
+                <button class="filter-button" aria-pressed="false">대화</button>
             </div>
 
             <div class="filter-label">학년:</div>
-            <div class="filter-group">
-                <button class="filter-button active">전체</button>
-                <button class="filter-button">1-2학년</button>
-                <button class="filter-button">3-4학년</button>
-                <button class="filter-button">5-6학년</button>
+            <div class="filter-group" role="group" aria-label="학년 필터">
+                <button class="filter-button active" aria-pressed="true">전체</button>
+                <button class="filter-button" aria-pressed="false">1-2학년</button>
+                <button class="filter-button" aria-pressed="false">3-4학년</button>
+                <button class="filter-button" aria-pressed="false">5-6학년</button>
             </div>
 
             <div class="filter-label">학습 주제:</div>
-            <div class="filter-group">
-                <button class="filter-button active">전체</button>
-                <button class="filter-button">낱말</button>
-                <button class="filter-button">문장</button>
-                <button class="filter-button">문법</button>
-                <button class="filter-button">표현</button>
+            <div class="filter-group" role="group" aria-label="학습 주제 필터">
+                <button class="filter-button active" aria-pressed="true">전체</button>
+                <button class="filter-button" aria-pressed="false">낱말</button>
+                <button class="filter-button" aria-pressed="false">문장</button>
+                <button class="filter-button" aria-pressed="false">문법</button>
+                <button class="filter-button" aria-pressed="false">표현</button>
+            </div>
+            
+            <div class="filter-actions">
+                <button class="filter-reset" id="reset-filters"><i class="fas fa-undo"></i> 필터 초기화</button>
             </div>
         </div>
     </section>
@@ -301,8 +389,8 @@
     <main class="main-content">
         <div class="activities-grid">
             <!-- 낱말 카드 매칭 게임 -->
-            <div class="activity-card type-game">
-                <div class="activity-image">
+            <div class="activity-card type-game fade-in">
+                <div class="activity-image" aria-label="낱말 카드 매칭 게임">
                     <i class="fas fa-gamepad fa-3x"></i>
                 </div>
                 <div class="activity-content">
@@ -493,13 +581,13 @@
             </div>
         </div>
 
-        <div class="pagination">
-            <button class="page-button active">1</button>
-            <button class="page-button">2</button>
-            <button class="page-button">3</button>
-            <button class="page-button">4</button>
-            <button class="page-button">...</button>
-            <button class="page-button">8</button>
+        <div class="pagination" role="navigation" aria-label="페이지 네비게이션">
+            <button class="page-button active" aria-label="1페이지" aria-current="page">1</button>
+            <button class="page-button" aria-label="2페이지">2</button>
+            <button class="page-button" aria-label="3페이지">3</button>
+            <button class="page-button" aria-label="4페이지">4</button>
+            <button class="page-button" aria-label="중간 페이지">...</button>
+            <button class="page-button" aria-label="마지막 페이지">8</button>
         </div>
     </main>
 
@@ -517,10 +605,12 @@
                     const parent = this.parentElement;
                     parent.querySelectorAll('.filter-button').forEach(btn => {
                         btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
                     });
                     
                     // 현재 버튼에 active 클래스 추가
                     this.classList.add('active');
+                    this.setAttribute('aria-pressed', 'true');
                     
                     // 필터링 기능 구현
                     applyFilters();
@@ -534,9 +624,11 @@
                 button.addEventListener('click', function() {
                     pageButtons.forEach(btn => {
                         btn.classList.remove('active');
+                        btn.removeAttribute('aria-current');
                     });
                     
                     this.classList.add('active');
+                    this.setAttribute('aria-current', 'page');
                     
                     // 페이지 변경 기능 구현
                     if (this.textContent !== '...') {
@@ -544,6 +636,43 @@
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                 });
+            });
+            
+            // 필터 초기화 버튼
+            const resetButton = document.getElementById('reset-filters');
+            resetButton.addEventListener('click', function() {
+                // 모든 필터를 첫 번째 옵션(전체)로 리셋
+                document.querySelectorAll('.filter-group').forEach(group => {
+                    const buttons = group.querySelectorAll('.filter-button');
+                    buttons.forEach((btn, index) => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                        if (index === 0) {
+                            btn.classList.add('active');
+                            btn.setAttribute('aria-pressed', 'true');
+                        }
+                    });
+                });
+                
+                // 검색어 초기화
+                document.querySelector('.search-input').value = '';
+                
+                // 필터 적용
+                applyFilters();
+            });
+            
+            // 검색 기능
+            const searchButton = document.querySelector('.search-button');
+            const searchInput = document.querySelector('.search-input');
+            
+            searchButton.addEventListener('click', function() {
+                applyFilters();
+            });
+            
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    applyFilters();
+                }
             });
 
             // 필터링 함수
@@ -560,6 +689,9 @@
                         activeFilters[filterLabel] = activeButton.textContent;
                     }
                 });
+                
+                // 검색어 가져오기
+                const searchTerm = searchInput.value.toLowerCase().trim();
                 
                 // 모든 활동 카드 선택
                 const activityCards = document.querySelectorAll('.activity-card');
@@ -592,13 +724,29 @@
                         }
                     }
                     
+                    // 검색어 필터링
+                    if (shouldShow && searchTerm !== '') {
+                        const title = card.querySelector('.activity-title').textContent.toLowerCase();
+                        const description = card.querySelector('.activity-description').textContent.toLowerCase();
+                        if (!title.includes(searchTerm) && !description.includes(searchTerm)) {
+                            shouldShow = false;
+                        }
+                    }
+                    
                     // 필터링 결과에 따라 카드 표시/숨김
                     card.style.display = shouldShow ? 'block' : 'none';
+                    
+                    // 애니메이션 효과 추가
+                    if (shouldShow) {
+                        card.classList.remove('fade-in');
+                        void card.offsetWidth; // 리플로우 강제로 발생시켜 애니메이션 재시작
+                        card.classList.add('fade-in');
+                    }
                 });
                 
                 // 필터링 결과가 없을 때 메시지 표시
                 const visibleCards = document.querySelectorAll('.activity-card[style="display: block"]');
-                const noResultsMsg = document.getElementById('no-results-message');
+                let noResultsMsg = document.getElementById('no-results-message');
                 
                 if (visibleCards.length === 0) {
                     // 결과 없음 메시지가 없으면 생성
@@ -608,7 +756,8 @@
                         message.style.textAlign = 'center';
                         message.style.padding = '30px';
                         message.style.color = '#666';
-                        message.innerHTML = '검색 결과가 없습니다. 다른 필터를 선택해 보세요.';
+                        message.style.width = '100%';
+                        message.innerHTML = '검색 결과가 없습니다. 다른 필터를 선택하거나 검색어를 변경해 보세요.';
                         
                         const activitiesGrid = document.querySelector('.activities-grid');
                         activitiesGrid.appendChild(message);
