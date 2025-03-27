@@ -6,16 +6,21 @@ const glob = require('glob');
 function convertPathsToAbsolute(content) {
   // CSS 파일 경로 수정 
   content = content.replace(/href="(\.\.\/)*assets\/css\/styles\.css"/g, 'href="/assets/css/styles.css"');
+  content = content.replace(/href="\/\/assets\/css\/styles\.css"/g, 'href="/assets/css/styles.css"');
   
   // polyfill.js 경로 수정
   content = content.replace(/src="(\.\.\/)*js\/polyfills\.js"/g, 'src="/js/polyfills.js"');
+  content = content.replace(/src="\/\/js\/polyfills\.js"/g, 'src="/js/polyfills.js"');
   
   // IE 호환성 CSS 경로 수정
   content = content.replace(/href="(\.\.\/)*css\/ie-compatibility\.css"/g, 'href="/css/ie-compatibility.css"');
+  content = content.replace(/href="\/\/css\/ie-compatibility\.css"/g, 'href="/css/ie-compatibility.css"');
   
   // 스크립트 파일 경로 수정
   content = content.replace(/src="(\.\.\/)*assets\/js\/scripts\.js"/g, 'src="/assets/js/scripts.js"');
+  content = content.replace(/src="\/\/assets\/js\/scripts\.js"/g, 'src="/assets/js/scripts.js"');
   content = content.replace(/src="(\.\.\/)*js\/siteManager\.js"/g, 'src="/js/siteManager.js"');
+  content = content.replace(/src="\/\/js\/siteManager\.js"/g, 'src="/js/siteManager.js"');
   
   // 닫힐 때 푸터 스크립트가 있는지 확인하고 없으면 추가
   if (!content.includes('</footer>')) {
@@ -36,6 +41,9 @@ function convertPathsToAbsolute(content) {
     // </body> 태그 앞에 스크립트 태그 추가
     content = content.replace('</body>', `${scriptsTag}\n</body>`);
   }
+  
+  // 닫히지 않은 body 태그 수정
+  content = content.replace(/<body\s*\n/, '<body>\n');
   
   return content;
 }
