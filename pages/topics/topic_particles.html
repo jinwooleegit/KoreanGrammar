@@ -139,12 +139,36 @@
             justify-content: center;
             margin-bottom: 15px;
         }
-    </style>
+    
+        /* 반응형 설정 */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0 15px;
+            }
+            
+            .topic-card, .activity-card, .exercise-card {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 14px;
+            }
+        }</style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="../../js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="../../css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-icon">
 </head>
-<body
-    
-
-    
+<body>
     <!-- 헤더 영역 -->
     <header></header>
     
@@ -152,8 +176,8 @@
         <h1>조사 사용법</h1>
         <p>한국어에서 중요한 문법 요소인 다양한 조사의 쓰임과 활용에 대해 배워봅시다.</p>
         <div class="breadcrumb">
-            <a href="index.html">홈</a> &gt;
-            <a href="topics.html">주제별 학습</a> &gt;
+            <a href="../../index.html">홈</a> &gt;
+            <a href="index.html">주제별 학습</a> &gt;
             <span>조사 사용법</span>
         </div>
     </div>
@@ -448,8 +472,6 @@
         </section>
     </main>
 
-    
-
     <script>
         function toggleAnswer(id) {
             const answerElement = document.getElementById(id);
@@ -461,22 +483,83 @@
         }
         
         document.addEventListener('DOMContentLoaded', function() {
-            // 활동 버튼 이벤트
-            const activityButtons = document.querySelectorAll('.btn');
+            // 활동 버튼 이벤트 핸들러
+            const activityButtons = document.querySelectorAll('.btn:not([onclick])');
             activityButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // 정답 버튼이 아닌 경우에만 알림 표시
-                    if (!this.getAttribute('onclick') || !this.getAttribute('onclick').includes('toggleAnswer')) {
-                        alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                    const activityType = this.getAttribute('data-activity-type') || '기본 연습';
+                    const activityContainer = this.closest('.practice-problem').querySelector('.answer-reveal') || 
+                                           document.createElement('div');
+                    
+                    if (!this.closest('.practice-problem').querySelector('.answer-reveal')) {
+                        activityContainer.className = 'answer-reveal';
+                        activityContainer.id = 'activity-' + Math.random().toString(36).substr(2, 9);
+                        activityContainer.style.display = 'block';
+                        activityContainer.innerHTML = `
+                            <h4>${activityType} 연습하기</h4>
+                            <p>다음 문장에서 알맞은 조사를 선택해보세요:</p>
+                            <div class="practice-items">
+                                <p>1. 어제 친구<select class="particle-select">
+                                    <option value="">선택</option>
+                                    <option value="correct">와</option>
+                                    <option value="wrong">을</option>
+                                    <option value="wrong">이</option>
+                                </select> 영화를 보았다.</p>
+                                
+                                <p>2. 나<select class="particle-select">
+                                    <option value="">선택</option>
+                                    <option value="wrong">은</option>
+                                    <option value="correct">는</option>
+                                    <option value="wrong">이</option>
+                                </select> 학교에 갔다.</p>
+                                
+                                <p>3. 책<select class="particle-select">
+                                    <option value="">선택</option>
+                                    <option value="wrong">에</option>
+                                    <option value="wrong">이</option>
+                                    <option value="correct">을</option>
+                                </select> 읽습니다.</p>
+                            </div>
+                            <button class="btn check-answers">정답 확인하기</button>
+                            <div class="result-feedback"></div>
+                        `;
+                        this.closest('.practice-problem').appendChild(activityContainer);
+                        
+                        // 정답 확인 버튼 이벤트 추가
+                        activityContainer.querySelector('.check-answers').addEventListener('click', function() {
+                            const selects = activityContainer.querySelectorAll('.particle-select');
+                            let correctCount = 0;
+                            
+                            selects.forEach(select => {
+                                if (select.value === 'correct') {
+                                    select.style.backgroundColor = '#E8F5E9';
+                                    select.style.borderColor = '#4CAF50';
+                                    correctCount++;
+                                } else if (select.value === 'wrong') {
+                                    select.style.backgroundColor = '#FFEBEE';
+                                    select.style.borderColor = '#F44336';
+                                }
+                            });
+                            
+                            const resultDiv = activityContainer.querySelector('.result-feedback');
+                            if (correctCount === selects.length) {
+                                resultDiv.innerHTML = '<p style="color:#4CAF50;"><strong>훌륭합니다!</strong> 모든 문제를 맞췄습니다.</p>';
+                            } else {
+                                resultDiv.innerHTML = `<p style="color:#F44336;"><strong>${correctCount}/${selects.length}</strong> 정답입니다. 다시 시도해보세요.</p>`;
+                            }
+                        });
+                    } else {
+                        // 이미 존재하는 경우 토글
+                        if (activityContainer.style.display === 'block') {
+                            activityContainer.style.display = 'none';
+                        } else {
+                            activityContainer.style.display = 'block';
+                        }
                     }
                 });
             });
         });
     </script>
-    
-    
-    
-    
     
     <!-- 푸터 영역 -->
     <footer></footer>

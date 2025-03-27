@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>문장의 종류 | 문법놀이터</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
     <!-- Font Awesome 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -303,20 +303,25 @@
             }
         }
     </style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="../../js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="../../css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-icon">
 </head>
-<body
-    
-
+<body>
     
     <!-- 헤더 영역 -->
     <header></header>
     
     <div class="topic-header">
         <h1>문장의 종류</h1>
-        <p>평서문, 의문문, 명령문, 감탄문 등 다양한 문장의 종류와 그 특징을 배웁니다.</p>
+        <p>평서문, 의문문, 명령문, 감탄문 등 문장의 유형과 특징에 대해 배워봅시다.</p>
         <div class="breadcrumb">
-            <a href="index.html">홈</a> &gt;
-            <a href="topics.html">주제별 학습</a> &gt;
+            <a href="../../index.html">홈</a> &gt;
+            <a href="index.html">주제별 학습</a> &gt;
             <span>문장의 종류</span>
         </div>
     </div>
@@ -466,39 +471,44 @@
         </section>
 
         <section class="activity-section">
-            <h2>학습 활동</h2>
+            <h2>문장 유형 연습하기</h2>
+            <p>문장의 유형을 정확히 구분하는 능력을 기르는 다양한 활동들을 제공합니다.</p>
+            
             <div class="activities-grid">
-                <div class="activity-card">
-                    <div class="activity-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <h3>문장 종류 맞추기</h3>
-                    <p>여러 문장을 보고 각각의 문장이 어떤 종류인지 맞춰보는 게임입니다. 문장 종류를 정확히 구분해보세요!</p>
-                    <button class="activity-button">게임 시작하기</button>
-                </div>
-
+                <!-- 활동 카드 목록 -->
                 <div class="activity-card">
                     <div class="activity-icon">
                         <i class="fas fa-pencil-alt"></i>
                     </div>
-                    <h3>문장 바꿔 쓰기</h3>
-                    <p>주어진 문장을 다른 종류의 문장으로 바꿔 써보는 활동입니다. 같은 내용을 다양하게 표현해보세요.</p>
+                    <h3>문장 유형 식별하기</h3>
+                    <p>다양한 문장을 읽고 평서문, 의문문, 명령문, 감탄문 중 어떤 유형인지 맞혀보세요.</p>
                     <button class="activity-button">활동 시작하기</button>
                 </div>
-
+                
+                <!-- 추가 활동 카드들 -->
                 <div class="activity-card">
                     <div class="activity-icon">
-                        <i class="fas fa-puzzle-piece"></i>
+                        <i class="fas fa-sync-alt"></i>
                     </div>
-                    <h3>문장 부호 찾기</h3>
-                    <p>문장 부호가 빠진 문장을 보고 알맞은 문장 부호를 찾아 넣는 활동입니다. 문장의 종류에 맞는 부호를 선택해보세요!</p>
-                    <button class="activity-button">연습 시작하기</button>
+                    <h3>문장 변환하기</h3>
+                    <p>주어진 문장을 다른 유형의 문장으로 바꿔보며 문장 표현 능력을 키워보세요.</p>
+                    <button class="activity-button">활동 시작하기</button>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>문장 유형 게임</h3>
+                    <p>재미있는 게임을 통해 문장의 유형을 구분하는 연습을 해보세요.</p>
+                    <button class="activity-button">활동 시작하기</button>
                 </div>
             </div>
+            
+            <!-- 활동 컨테이너 추가 -->
+            <div id="activity-container" style="margin-top: 30px; background-color: #f8f8f8; border-radius: 10px; padding: 20px; display: none;"></div>
         </section>
     </main>
-
-    
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -515,15 +525,92 @@
             const activityButtons = document.querySelectorAll('.activity-button');
             activityButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                    const activityContainer = document.getElementById('activity-container');
+                    if (!activityContainer.innerHTML) {
+                        // 문장 유형 연습 활동 내용 추가
+                        activityContainer.innerHTML = `
+                            <h3>문장 유형 연습하기</h3>
+                            <p>다음 문장들의 유형을 선택해보세요.</p>
+                            
+                            <div class="practice-items">
+                                <div class="practice-item">
+                                    <p>1. 오늘 날씨가 정말 좋다.</p>
+                                    <div class="options">
+                                        <label><input type="radio" name="q1" value="correct"> 평서문</label>
+                                        <label><input type="radio" name="q1" value="wrong"> 의문문</label>
+                                        <label><input type="radio" name="q1" value="wrong"> 명령문</label>
+                                        <label><input type="radio" name="q1" value="wrong"> 감탄문</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <p>2. 빨리 숙제를 끝내라!</p>
+                                    <div class="options">
+                                        <label><input type="radio" name="q2" value="wrong"> 평서문</label>
+                                        <label><input type="radio" name="q2" value="wrong"> 의문문</label>
+                                        <label><input type="radio" name="q2" value="correct"> 명령문</label>
+                                        <label><input type="radio" name="q2" value="wrong"> 감탄문</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <p>3. 너는 언제 집에 돌아올 예정이니?</p>
+                                    <div class="options">
+                                        <label><input type="radio" name="q3" value="wrong"> 평서문</label>
+                                        <label><input type="radio" name="q3" value="correct"> 의문문</label>
+                                        <label><input type="radio" name="q3" value="wrong"> 명령문</label>
+                                        <label><input type="radio" name="q3" value="wrong"> 감탄문</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <p>4. 와, 정말 아름다운 풍경이구나!</p>
+                                    <div class="options">
+                                        <label><input type="radio" name="q4" value="wrong"> 평서문</label>
+                                        <label><input type="radio" name="q4" value="wrong"> 의문문</label>
+                                        <label><input type="radio" name="q4" value="wrong"> 명령문</label>
+                                        <label><input type="radio" name="q4" value="correct"> 감탄문</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="check-answers-btn">정답 확인하기</button>
+                            <div class="result-feedback"></div>
+                        `;
+                        
+                        // 정답 확인 버튼 이벤트 처리
+                        activityContainer.querySelector('.check-answers-btn').addEventListener('click', function() {
+                            const answers = activityContainer.querySelectorAll('input[type="radio"]:checked');
+                            let correctCount = 0;
+                            
+                            answers.forEach(answer => {
+                                if (answer.value === 'correct') {
+                                    correctCount++;
+                                    answer.parentNode.style.color = '#4CAF50';
+                                    answer.parentNode.style.fontWeight = 'bold';
+                                } else {
+                                    answer.parentNode.style.color = '#F44336';
+                                    answer.parentNode.style.fontWeight = 'bold';
+                                }
+                            });
+                            
+                            const resultDiv = activityContainer.querySelector('.result-feedback');
+                            if (answers.length < 4) {
+                                resultDiv.innerHTML = '<p style="color:#FF9800;"><strong>모든 문제에 답을 선택해주세요.</strong></p>';
+                            } else if (correctCount === 4) {
+                                resultDiv.innerHTML = '<p style="color:#4CAF50;"><strong>축하합니다!</strong> 모든 문제를 맞혔습니다. 문장의 유형을 잘 이해하고 있네요!</p>';
+                            } else {
+                                resultDiv.innerHTML = `<p style="color:#F44336;"><strong>${correctCount}/4</strong> 정답입니다. 틀린 문제를 다시 확인해보세요.</p>`;
+                            }
+                        });
+                    } else {
+                        // 이미 내용이 있으면 표시/숨김 토글
+                        activityContainer.style.display = activityContainer.style.display === 'none' ? 'block' : 'none';
+                    }
                 });
             });
         });
     </script>
-    
-    
-    
-    
     
     <!-- 푸터 영역 -->
     <footer></footer>

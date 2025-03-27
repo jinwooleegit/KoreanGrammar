@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>다양한 표현 방법 | 문법놀이터</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .activity-header {
@@ -186,7 +186,34 @@
         .action-button.secondary:hover {
             background-color: #e0e0e0;
         }
-    </style>
+    
+        /* 반응형 설정 */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0 15px;
+            }
+            
+            .topic-card, .activity-card, .exercise-card {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 14px;
+            }
+        }</style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="../../../js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="../../../css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body
     
@@ -315,7 +342,7 @@
             <a href="grade6.html" class="action-button secondary">
                 <i class="fas fa-arrow-left"></i> 학년 페이지로
             </a>
-            <a href="activities.html" class="action-button">
+            <a href="../../activities/index.html" class="action-button">
                 <i class="fas fa-th-list"></i> 다른 활동 보기
             </a>
         </div>
@@ -353,6 +380,6 @@
     <!-- 푸터 영역 -->
     <footer></footer>
     
-    <script src="../../js/siteManager.js"></script>
+    <script src="../../../js/siteManager.js"></script>
 </body>
 </html> 

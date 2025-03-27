@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>시제 표현 | 문법놀이터</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -184,7 +184,34 @@
             padding: 8px 16px;
             cursor: pointer;
         }
-    </style>
+    
+        /* 반응형 설정 */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0 15px;
+            }
+            
+            .topic-card, .activity-card, .exercise-card {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 14px;
+            }
+        }</style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="../../js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="../../css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body
     
@@ -197,8 +224,8 @@
         <h1>시제 표현</h1>
         <p>과거, 현재, 미래 시제를 나타내는 다양한 표현에 대해 배워봅시다.</p>
         <div class="breadcrumb">
-            <a href="index.html">홈</a> &gt;
-            <a href="topics.html">주제별 학습</a> &gt;
+            <a href="../../index.html">홈</a> &gt;
+            <a href="index.html">주제별 학습</a> &gt;
             <span>시제 표현</span>
         </div>
     </div>
@@ -397,7 +424,7 @@
                     </div>
                     <h3>시제 변환하기</h3>
                     <p>주어진 문장의 시제를 다른 시제로 바꿔보는 활동입니다.</p>
-                    <button class="btn">활동 시작하기</button>
+                    <button class="btn" data-activity="activity1">활동 시작하기</button>
                 </div>
                 
                 <div class="activity-card">
@@ -406,7 +433,7 @@
                     </div>
                     <h3>시간 이야기 만들기</h3>
                     <p>과거, 현재, 미래를 포함한 짧은 이야기를 만들어봅니다.</p>
-                    <button class="btn">활동 시작하기</button>
+                    <button class="btn" data-activity="activity2">활동 시작하기</button>
                 </div>
                 
                 <div class="activity-card">
@@ -415,7 +442,7 @@
                     </div>
                     <h3>일기 쓰기</h3>
                     <p>어제, 오늘, 내일에 대한 일기를 각각 다른 시제로 써봅니다.</p>
-                    <button class="btn">활동 시작하기</button>
+                    <button class="btn" data-activity="activity3">활동 시작하기</button>
                 </div>
                 
                 <div class="activity-card">
@@ -424,7 +451,106 @@
                     </div>
                     <h3>시제 카드 게임</h3>
                     <p>시제 카드를 뽑아 해당 시제로 문장을 만드는 게임입니다.</p>
-                    <button class="btn">활동 시작하기</button>
+                    <button class="btn" data-activity="activity4">활동 시작하기</button>
+                </div>
+            </div>
+            
+            <!-- 활동 컨테이너 추가 -->
+            <div id="activity-container" style="display: none; margin-top: 30px; background-color: #f9f9f9; border-radius: 10px; padding: 20px;">
+                <!-- 활동 1: 시제 변환하기 -->
+                <div id="activity1" style="display: none;">
+                    <h3>시제 변환하기</h3>
+                    <p>다음 문장을 지시된 시제로 변환해보세요.</p>
+                    
+                    <div class="practice-problem">
+                        <p><strong>문장:</strong> <span id="sentence-to-change">나는 학교에 간다.</span></p>
+                        <p><strong>변환할 시제:</strong> <span id="target-tense">과거 시제</span></p>
+                        
+                        <div style="margin: 15px 0;">
+                            <input type="text" id="user-answer" placeholder="변환된 문장을 입력하세요" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn" id="check-answer">정답 확인</button>
+                            <button class="btn" id="next-question" style="background-color: #4CAF50;">다음 문제</button>
+                        </div>
+                        
+                        <div id="feedback" style="margin-top: 15px; padding: 10px; border-radius: 4px; display: none;"></div>
+                    </div>
+                </div>
+                
+                <!-- 활동 2: 시간 이야기 만들기 -->
+                <div id="activity2" style="display: none;">
+                    <h3>시간 이야기 만들기</h3>
+                    <p>과거, 현재, 미래를 포함한 짧은 이야기를 만들어봅시다.</p>
+                    
+                    <div style="background-color: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <p><strong>주제:</strong> <span id="story-topic">여행</span></p>
+                        <p>아래 텍스트 영역에 세 개의 문장을 작성하세요:</p>
+                        <ol>
+                            <li>과거에 일어난 일 (과거 시제)</li>
+                            <li>현재 일어나고 있는 일 (현재 시제)</li>
+                            <li>미래에 일어날 일 (미래 시제)</li>
+                        </ol>
+                        
+                        <textarea id="story-text" rows="6" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;" placeholder="여기에 이야기를 작성하세요..."></textarea>
+                        
+                        <button class="btn" id="save-story" style="margin-top: 10px;">저장하기</button>
+                        <div id="story-feedback" style="margin-top: 10px; padding: 10px; border-radius: 4px; display: none;"></div>
+                    </div>
+                    
+                    <div>
+                        <button class="btn" id="new-topic" style="background-color: #4CAF50;">새 주제 받기</button>
+                    </div>
+                </div>
+                
+                <!-- 활동 3: 일기 쓰기 -->
+                <div id="activity3" style="display: none;">
+                    <h3>일기 쓰기</h3>
+                    <p>어제, 오늘, 내일에 대한 일기를 각각 다른 시제로 써봅시다.</p>
+                    
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 250px; background-color: white; padding: 15px; border-radius: 8px;">
+                            <h4>어제 (과거 시제)</h4>
+                            <textarea rows="5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" placeholder="어제 있었던 일을 과거 시제로 적어보세요..."></textarea>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 250px; background-color: white; padding: 15px; border-radius: 8px;">
+                            <h4>오늘 (현재 시제)</h4>
+                            <textarea rows="5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" placeholder="오늘 하고 있는 일을 현재 시제로 적어보세요..."></textarea>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 250px; background-color: white; padding: 15px; border-radius: 8px;">
+                            <h4>내일 (미래 시제)</h4>
+                            <textarea rows="5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" placeholder="내일 할 일을 미래 시제로 적어보세요..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <button class="btn" id="save-diary" style="margin-top: 15px;">일기 저장하기</button>
+                    <div id="diary-feedback" style="margin-top: 10px; padding: 10px; border-radius: 4px; display: none;"></div>
+                </div>
+                
+                <!-- 활동 4: 시제 카드 게임 -->
+                <div id="activity4" style="display: none;">
+                    <h3>시제 카드 게임</h3>
+                    <p>랜덤 카드를 뽑아 해당 시제로 문장을 만들어보세요.</p>
+                    
+                    <div style="display: flex; justify-content: center; margin: 20px 0;">
+                        <div id="tense-card" style="width: 200px; height: 120px; background-color: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 18px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                            카드를 뽑아주세요
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <button class="btn" id="draw-card">카드 뽑기</button>
+                    </div>
+                    
+                    <div style="background-color: white; padding: 15px; border-radius: 8px;">
+                        <p><strong>주제:</strong> <span id="card-topic">가족</span></p>
+                        <input type="text" id="card-sentence" placeholder="여기에 문장을 입력하세요" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin: 10px 0;">
+                        <button class="btn" id="submit-sentence">제출하기</button>
+                        <div id="card-feedback" style="margin-top: 10px; padding: 10px; border-radius: 4px; display: none;"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -445,22 +571,215 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 활동 버튼 이벤트
             const activityButtons = document.querySelectorAll('.btn');
+            const activityContainer = document.getElementById('activity-container');
+            
+            // 정답 버튼이 아닌 경우에만 알림 표시
             activityButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // 정답 버튼이 아닌 경우에만 알림 표시
-                    if (!this.getAttribute('onclick') || !this.getAttribute('onclick').includes('toggleAnswer')) {
-                        alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                if (!button.getAttribute('onclick') || !button.getAttribute('onclick').includes('toggleAnswer')) {
+                    const activityId = button.getAttribute('data-activity');
+                    if (activityId) {
+                        button.addEventListener('click', function() {
+                            // 모든 활동 숨기기
+                            document.querySelectorAll('[id^="activity"]').forEach(activity => {
+                                activity.style.display = 'none';
+                            });
+                            
+                            // 선택한 활동 표시
+                            const selectedActivity = document.getElementById(activityId);
+                            if (selectedActivity) {
+                                activityContainer.style.display = 'block';
+                                selectedActivity.style.display = 'block';
+                                
+                                // 활동 초기화
+                                initActivity(activityId);
+                            }
+                        });
+                    }
+                }
+            });
+            
+            // 활동 1: 시제 변환하기 초기화
+            function initActivity1() {
+                const sentences = [
+                    { text: "나는 학교에 간다.", tense: "과거 시제", answer: "나는 학교에 갔다." },
+                    { text: "그녀는 책을 읽었다.", tense: "미래 시제", answer: "그녀는 책을 읽을 것이다." },
+                    { text: "우리는 내일 여행을 갈 것이다.", tense: "현재 시제", answer: "우리는 여행을 간다." },
+                    { text: "그는 음악을 듣고 있다.", tense: "과거 시제", answer: "그는 음악을 들었다." }
+                ];
+                
+                let currentIndex = 0;
+                const sentenceElement = document.getElementById('sentence-to-change');
+                const tenseElement = document.getElementById('target-tense');
+                const userAnswerInput = document.getElementById('user-answer');
+                const checkButton = document.getElementById('check-answer');
+                const nextButton = document.getElementById('next-question');
+                const feedbackElement = document.getElementById('feedback');
+                
+                // 문제 설정
+                function setQuestion(index) {
+                    sentenceElement.textContent = sentences[index].text;
+                    tenseElement.textContent = sentences[index].tense;
+                    userAnswerInput.value = '';
+                    feedbackElement.style.display = 'none';
+                }
+                
+                setQuestion(currentIndex);
+                
+                // 정답 확인
+                checkButton.addEventListener('click', function() {
+                    const userAnswer = userAnswerInput.value.trim();
+                    const correctAnswer = sentences[currentIndex].answer;
+                    
+                    if (userAnswer === '') {
+                        feedbackElement.textContent = '답을 입력해주세요.';
+                        feedbackElement.style.backgroundColor = '#FFEBEE';
+                        feedbackElement.style.color = '#D32F2F';
+                        feedbackElement.style.display = 'block';
+                    } else if (userAnswer === correctAnswer) {
+                        feedbackElement.textContent = '정답입니다! 👍';
+                        feedbackElement.style.backgroundColor = '#E8F5E9';
+                        feedbackElement.style.color = '#388E3C';
+                        feedbackElement.style.display = 'block';
+                    } else {
+                        feedbackElement.textContent = `틀렸습니다. 정답: ${correctAnswer}`;
+                        feedbackElement.style.backgroundColor = '#FFEBEE';
+                        feedbackElement.style.color = '#D32F2F';
+                        feedbackElement.style.display = 'block';
                     }
                 });
-            });
+                
+                // 다음 문제
+                nextButton.addEventListener('click', function() {
+                    currentIndex = (currentIndex + 1) % sentences.length;
+                    setQuestion(currentIndex);
+                });
+            }
+            
+            // 활동 2: 시간 이야기 만들기 초기화
+            function initActivity2() {
+                const topics = ["여행", "학교 생활", "취미", "가족", "음식", "스포츠", "친구", "계절", "동물"];
+                const topicElement = document.getElementById('story-topic');
+                const storyText = document.getElementById('story-text');
+                const saveButton = document.getElementById('save-story');
+                const newTopicButton = document.getElementById('new-topic');
+                const feedbackElement = document.getElementById('story-feedback');
+                
+                // 랜덤 주제 설정
+                function setRandomTopic() {
+                    const randomIndex = Math.floor(Math.random() * topics.length);
+                    topicElement.textContent = topics[randomIndex];
+                    storyText.value = '';
+                    feedbackElement.style.display = 'none';
+                }
+                
+                // 초기 주제 설정
+                setRandomTopic();
+                
+                // 새 주제 받기
+                newTopicButton.addEventListener('click', setRandomTopic);
+                
+                // 이야기 저장
+                saveButton.addEventListener('click', function() {
+                    const story = storyText.value.trim();
+                    
+                    if (story === '') {
+                        feedbackElement.textContent = '이야기를 작성해주세요.';
+                        feedbackElement.style.backgroundColor = '#FFEBEE';
+                        feedbackElement.style.color = '#D32F2F';
+                    } else if (story.split('.').length < 3) {
+                        feedbackElement.textContent = '과거, 현재, 미래 시제를 각각 포함한 최소 3개의 문장을 작성해주세요.';
+                        feedbackElement.style.backgroundColor = '#FFEBEE';
+                        feedbackElement.style.color = '#D32F2F';
+                    } else {
+                        feedbackElement.textContent = '이야기가 저장되었습니다! 좋은 이야기네요. 👏';
+                        feedbackElement.style.backgroundColor = '#E8F5E9';
+                        feedbackElement.style.color = '#388E3C';
+                    }
+                    
+                    feedbackElement.style.display = 'block';
+                });
+            }
+            
+            // 활동 3: 일기 쓰기 초기화
+            function initActivity3() {
+                const saveButton = document.getElementById('save-diary');
+                const feedbackElement = document.getElementById('diary-feedback');
+                
+                saveButton.addEventListener('click', function() {
+                    feedbackElement.textContent = '일기가 저장되었습니다! 시제를 잘 활용하셨네요. 👍';
+                    feedbackElement.style.backgroundColor = '#E8F5E9';
+                    feedbackElement.style.color = '#388E3C';
+                    feedbackElement.style.display = 'block';
+                });
+            }
+            
+            // 활동 4: 시제 카드 게임 초기화
+            function initActivity4() {
+                const tenses = ["현재 시제", "과거 시제", "미래 시제", "현재 진행형", "현재 완료"];
+                const topics = ["가족", "학교", "취미", "여행", "음식", "친구", "동물", "계절", "스포츠"];
+                
+                const cardElement = document.getElementById('tense-card');
+                const topicElement = document.getElementById('card-topic');
+                const sentenceInput = document.getElementById('card-sentence');
+                const drawButton = document.getElementById('draw-card');
+                const submitButton = document.getElementById('submit-sentence');
+                const feedbackElement = document.getElementById('card-feedback');
+                
+                let currentTense = "";
+                
+                // 카드 뽑기
+                drawButton.addEventListener('click', function() {
+                    const randomTenseIndex = Math.floor(Math.random() * tenses.length);
+                    const randomTopicIndex = Math.floor(Math.random() * topics.length);
+                    
+                    currentTense = tenses[randomTenseIndex];
+                    cardElement.textContent = currentTense;
+                    topicElement.textContent = topics[randomTopicIndex];
+                    
+                    sentenceInput.value = '';
+                    feedbackElement.style.display = 'none';
+                });
+                
+                // 문장 제출
+                submitButton.addEventListener('click', function() {
+                    const sentence = sentenceInput.value.trim();
+                    
+                    if (sentence === '') {
+                        feedbackElement.textContent = '문장을 입력해주세요.';
+                        feedbackElement.style.backgroundColor = '#FFEBEE';
+                        feedbackElement.style.color = '#D32F2F';
+                    } else {
+                        feedbackElement.textContent = '좋은 문장이네요! 시제를 잘 활용하셨습니다. 👏';
+                        feedbackElement.style.backgroundColor = '#E8F5E9';
+                        feedbackElement.style.color = '#388E3C';
+                    }
+                    
+                    feedbackElement.style.display = 'block';
+                });
+            }
+            
+            // 활동 초기화 함수
+            function initActivity(activityId) {
+                switch(activityId) {
+                    case 'activity1':
+                        initActivity1();
+                        break;
+                    case 'activity2':
+                        initActivity2();
+                        break;
+                    case 'activity3':
+                        initActivity3();
+                        break;
+                    case 'activity4':
+                        initActivity4();
+                        break;
+                }
+            }
         });
     </script>
     
     
-    
-    
-    
-    <!-- 푸터 영역 -->
+
     <footer></footer>
     
     <script src="../../js/siteManager.js"></script>

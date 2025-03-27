@@ -1,0 +1,175 @@
+/**
+ * ie-compatibility.css
+ * IE 11 이하의 구형 브라우저에서 Flexbox 및 Grid 레이아웃 지원을 위한 CSS
+ */
+
+/* IE 10-11 용 Flexbox 대체 스타일 */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* 가로 중앙 정렬 (Flexbox 대체) */
+    .d-flex, .flex-row, .flex-column, [class*="d-flex"], [class*="flex-"] {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* 요소 간 간격 확보를 위한 마진 추가 */
+    .d-flex > *, .flex-row > *, .flex-column > *, [class*="d-flex"] > *, [class*="flex-"] > * {
+        margin-bottom: 15px;
+    }
+    
+    /* 마지막 요소는 마진 제거 */
+    .d-flex > *:last-child, .flex-row > *:last-child, .flex-column > *:last-child,
+    [class*="d-flex"] > *:last-child, [class*="flex-"] > *:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* 2-컬럼 그리드 대체 */
+    .row, .grid, [class*="row-"], [class*="grid-"] {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    
+    /* 2-컬럼 레이아웃을 위한 float 사용 */
+    .col-6, .col-md-6, .grid-item, .grid-cell, [class*="col-6"], [class*="col-md-6"] {
+        float: left;
+        width: 48%;
+        margin-right: 4%;
+        box-sizing: border-box;
+    }
+    
+    /* 짝수 요소 마진 제거 */
+    .col-6:nth-child(2n), .col-md-6:nth-child(2n), .grid-item:nth-child(2n), 
+    .grid-cell:nth-child(2n), [class*="col-6"]:nth-child(2n), [class*="col-md-6"]:nth-child(2n) {
+        margin-right: 0;
+    }
+    
+    /* 3-컬럼 레이아웃을 위한 float 사용 */
+    .col-4, .col-md-4, [class*="col-4"], [class*="col-md-4"] {
+        float: left;
+        width: 31%;
+        margin-right: 3.5%;
+        box-sizing: border-box;
+    }
+    
+    /* 3번째 요소 마진 제거 */
+    .col-4:nth-child(3n), .col-md-4:nth-child(3n), 
+    [class*="col-4"]:nth-child(3n), [class*="col-md-4"]:nth-child(3n) {
+        margin-right: 0;
+    }
+    
+    /* clearfix */
+    .row::after, .grid::after, [class*="row-"]::after, [class*="grid-"]::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    
+    /* 중앙 정렬 */
+    .justify-content-center, .align-items-center, .text-center {
+        text-align: center;
+    }
+    
+    /* 가로 끝 정렬 */
+    .justify-content-end, .text-right {
+        text-align: right;
+    }
+    
+    /* 이미지를 부모에 맞게 조정 */
+    img.img-fluid, img.responsive-img, img[class*="img-fluid"], img[class*="responsive"] {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* 테이블 반응형 */
+    .table-responsive {
+        overflow-x: auto;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    
+    /* IE에서 수평 스크롤 방지 */
+    html, body {
+        overflow-x: hidden;
+    }
+    
+    /* IE에서 flex: 1 대체 */
+    [class*="flex-grow"], [class*="flex-1"], .flex-grow, .flex-grow-1 {
+        width: 100%;
+    }
+    
+    /* 세로 중앙 정렬 대체 */
+    .align-middle, .vertical-align-middle {
+        position: relative;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+}
+
+/* 모바일 최적화 (대부분의 구형 브라우저에서도 지원) */
+@media screen and (max-width: 768px) {
+    /* 모바일에서는 대부분 단일 컬럼으로 변경 */
+    .col-6, .col-md-6, .col-4, .col-md-4, .grid-item, .grid-cell,
+    [class*="col-6"], [class*="col-md-6"], [class*="col-4"], [class*="col-md-4"] {
+        float: none;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    /* 마지막 요소 마진 제거 */
+    .col-6:last-child, .col-md-6:last-child, .col-4:last-child, .col-md-4:last-child,
+    .grid-item:last-child, .grid-cell:last-child,
+    [class*="col-6"]:last-child, [class*="col-md-6"]:last-child,
+    [class*="col-4"]:last-child, [class*="col-md-4"]:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* 인쇄시 배경색 및 이미지 표시 */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+    
+    .no-print, .no-print * {
+        display: none !important;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+    
+    a[href^="#"]:after, 
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+    
+    pre, blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+    
+    thead {
+        display: table-header-group;
+    }
+    
+    tr, img {
+        page-break-inside: avoid;
+    }
+    
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+    }
+    
+    h2, h3 {
+        page-break-after: avoid;
+    }
+} 

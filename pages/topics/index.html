@@ -202,6 +202,13 @@
             }
         }
     </style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="../../js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="../../css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body
     
@@ -609,11 +616,110 @@
             topicButtons.forEach(button => {
                 if (!button.hasAttribute('onclick')) {
                     button.addEventListener('click', function() {
-                        alert('준비 중인 페이지입니다. 곧 서비스될 예정입니다.');
+                        showComingSoonModal(this.closest('.topic-card').querySelector('h3').textContent);
                     });
                 }
             });
         });
+
+        // 준비 중 모달 표시 함수
+        function showComingSoonModal(topicTitle) {
+            // 기존 모달 제거
+            const existingModal = document.querySelector('.coming-soon-modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // 모달 생성
+            const modal = document.createElement('div');
+            modal.className = 'coming-soon-modal';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '1000';
+            
+            // 모달 내용
+            const modalContent = document.createElement('div');
+            modalContent.style.backgroundColor = 'white';
+            modalContent.style.borderRadius = '12px';
+            modalContent.style.padding = '30px';
+            modalContent.style.maxWidth = '500px';
+            modalContent.style.width = '80%';
+            modalContent.style.textAlign = 'center';
+            modalContent.style.position = 'relative';
+            
+            // 닫기 버튼
+            const closeButton = document.createElement('button');
+            closeButton.innerHTML = '&times;';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '10px';
+            closeButton.style.right = '10px';
+            closeButton.style.border = 'none';
+            closeButton.style.background = 'none';
+            closeButton.style.fontSize = '24px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.color = '#FF9800';
+            closeButton.onclick = function() {
+                modal.remove();
+            };
+            
+            // 아이콘
+            const icon = document.createElement('div');
+            icon.innerHTML = '<i class="fas fa-tools" style="font-size: 48px; color: #FF9800; margin-bottom: 20px;"></i>';
+            
+            // 제목
+            const title = document.createElement('h2');
+            title.textContent = '준비 중인 페이지';
+            title.style.color = '#333';
+            title.style.marginBottom = '15px';
+            
+            // 내용
+            const content = document.createElement('p');
+            content.innerHTML = '<strong>' + topicTitle + '</strong> 페이지는 현재 개발 중입니다.<br>더 나은 콘텐츠로 곧 만나뵙겠습니다.';
+            content.style.color = '#666';
+            content.style.marginBottom = '20px';
+            content.style.lineHeight = '1.6';
+            
+            // 알림 구독 버튼
+            const subscribeButton = document.createElement('button');
+            subscribeButton.textContent = '페이지 완성 시 알림 받기';
+            subscribeButton.style.backgroundColor = '#FF9800';
+            subscribeButton.style.color = 'white';
+            subscribeButton.style.border = 'none';
+            subscribeButton.style.borderRadius = '6px';
+            subscribeButton.style.padding = '10px 20px';
+            subscribeButton.style.cursor = 'pointer';
+            subscribeButton.style.fontWeight = 'bold';
+            subscribeButton.onclick = function() {
+                // 알림 구독 기능은 향후 구현
+                const subText = document.createElement('p');
+                subText.textContent = '알림 서비스가 준비되면 연락 드리겠습니다!';
+                subText.style.color = '#4CAF50';
+                subText.style.marginTop = '15px';
+                subText.style.fontWeight = 'bold';
+                
+                if (!modalContent.querySelector('.subscription-text')) {
+                    subText.className = 'subscription-text';
+                    modalContent.appendChild(subText);
+                }
+            };
+            
+            // 모달에 요소 추가
+            modalContent.appendChild(closeButton);
+            modalContent.appendChild(icon);
+            modalContent.appendChild(title);
+            modalContent.appendChild(content);
+            modalContent.appendChild(subscribeButton);
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+        }
     </script>
     
     

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>학습 활동 | 문법놀이터</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
     <!-- Font Awesome 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -230,7 +230,34 @@
         .page-button:hover:not(.active) {
             background-color: #f0f0f0;
         }
-    </style>
+    
+        /* 반응형 설정 */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 0 15px;
+            }
+            
+            .topic-card, .activity-card, .exercise-card {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 14px;
+            }
+        }</style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="../../js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="../../css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <!-- 헤더 영역 -->
@@ -495,8 +522,8 @@
                     // 현재 버튼에 active 클래스 추가
                     this.classList.add('active');
                     
-                    // 필터링 기능 구현 (향후 개발)
-                    alert('필터링 기능은 현재 개발 중입니다.');
+                    // 필터링 기능 구현
+                    applyFilters();
                 });
             });
             
@@ -511,12 +538,86 @@
                     
                     this.classList.add('active');
                     
-                    // 페이지 변경 기능 구현 (향후 개발)
+                    // 페이지 변경 기능 구현
                     if (this.textContent !== '...') {
-                        alert('페이지 ' + this.textContent + '로 이동합니다. (개발 중)');
+                        // 여기서는 간단히 스크롤만 상단으로 올림
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                 });
             });
+
+            // 필터링 함수
+            function applyFilters() {
+                // 현재 활성화된 필터 값들 가져오기
+                const activeFilters = {};
+                
+                // 각 필터 그룹에서 활성화된 버튼의 텍스트 가져오기
+                document.querySelectorAll('.filter-group').forEach((group, index) => {
+                    const activeButton = group.querySelector('.filter-button.active');
+                    if (activeButton) {
+                        // 필터 라벨에 따라 필터 타입 설정
+                        const filterLabel = group.previousElementSibling.textContent.trim().replace(':', '');
+                        activeFilters[filterLabel] = activeButton.textContent;
+                    }
+                });
+                
+                // 모든 활동 카드 선택
+                const activityCards = document.querySelectorAll('.activity-card');
+                
+                // 각 카드에 대해 필터링 적용
+                activityCards.forEach(card => {
+                    let shouldShow = true;
+                    
+                    // 활동 유형 필터링
+                    if (activeFilters['활동 유형'] && activeFilters['활동 유형'] !== '전체') {
+                        const typeTag = card.querySelector('.tag-type');
+                        if (!typeTag || typeTag.textContent !== activeFilters['활동 유형']) {
+                            shouldShow = false;
+                        }
+                    }
+                    
+                    // 학년 필터링
+                    if (shouldShow && activeFilters['학년'] && activeFilters['학년'] !== '전체') {
+                        const gradeTag = card.querySelector('.tag-grade');
+                        if (!gradeTag || !gradeTag.textContent.includes(activeFilters['학년'].replace('학년', ''))) {
+                            shouldShow = false;
+                        }
+                    }
+                    
+                    // 학습 주제 필터링
+                    if (shouldShow && activeFilters['학습 주제'] && activeFilters['학습 주제'] !== '전체') {
+                        const topicTag = card.querySelector('.tag-topic');
+                        if (!topicTag || topicTag.textContent !== activeFilters['학습 주제']) {
+                            shouldShow = false;
+                        }
+                    }
+                    
+                    // 필터링 결과에 따라 카드 표시/숨김
+                    card.style.display = shouldShow ? 'block' : 'none';
+                });
+                
+                // 필터링 결과가 없을 때 메시지 표시
+                const visibleCards = document.querySelectorAll('.activity-card[style="display: block"]');
+                const noResultsMsg = document.getElementById('no-results-message');
+                
+                if (visibleCards.length === 0) {
+                    // 결과 없음 메시지가 없으면 생성
+                    if (!noResultsMsg) {
+                        const message = document.createElement('div');
+                        message.id = 'no-results-message';
+                        message.style.textAlign = 'center';
+                        message.style.padding = '30px';
+                        message.style.color = '#666';
+                        message.innerHTML = '검색 결과가 없습니다. 다른 필터를 선택해 보세요.';
+                        
+                        const activitiesGrid = document.querySelector('.activities-grid');
+                        activitiesGrid.appendChild(message);
+                    }
+                } else if (noResultsMsg) {
+                    // 결과가 있는데 메시지가 있으면 제거
+                    noResultsMsg.remove();
+                }
+            }
         });
     </script>
     

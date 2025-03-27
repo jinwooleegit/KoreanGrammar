@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>6학년 높임 표현 | 문법놀이터</title>
-    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../../assets/css/styles.css">
     <!-- Font Awesome 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -213,6 +213,13 @@
             }
         }
     </style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="../../../js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="../../../css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body
     
@@ -226,7 +233,7 @@
         <h1>6학년 높임 표현</h1>
         <p>우리말의 다양한 높임 표현을 배우고 적절하게 사용해 봅시다.</p>
         <div class="breadcrumb">
-            <a href="index.html">홈</a> &gt;
+            <a href="../../index.html">홈</a> &gt;
             <a href="grade_learning.html">학년별 학습</a> &gt;
             <a href="grade6.html">6학년</a> &gt;
             <span>높임 표현</span>
@@ -461,10 +468,361 @@
             const activityButtons = document.querySelectorAll('.activity-button');
             activityButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                    // 버튼 텍스트에 따라 다른 활동 실행
+                    const activityTitle = this.parentElement.querySelector('h3').textContent;
+                    const activityDescription = this.parentElement.querySelector('p').textContent;
+                    openActivityModal(activityTitle, activityDescription);
                 });
             });
         });
+
+        // 활동 모달 열기 함수
+        function openActivityModal(title, description) {
+            // 기존 모달 제거
+            const existingModal = document.querySelector('.activity-modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // 모달 컨테이너 생성
+            const modal = document.createElement('div');
+            modal.className = 'activity-modal';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '1000';
+            
+            // 모달 내용 생성
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            modalContent.style.backgroundColor = 'white';
+            modalContent.style.borderRadius = '12px';
+            modalContent.style.padding = '30px';
+            modalContent.style.width = '80%';
+            modalContent.style.maxWidth = '800px';
+            modalContent.style.maxHeight = '80vh';
+            modalContent.style.overflow = 'auto';
+            modalContent.style.position = 'relative';
+            
+            // 닫기 버튼
+            const closeButton = document.createElement('button');
+            closeButton.innerHTML = '&times;';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '15px';
+            closeButton.style.right = '15px';
+            closeButton.style.border = 'none';
+            closeButton.style.background = 'none';
+            closeButton.style.fontSize = '24px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.color = '#6C5CE7';
+            closeButton.onclick = () => modal.remove();
+            
+            // 모달 제목
+            const modalTitle = document.createElement('h2');
+            modalTitle.textContent = title;
+            modalTitle.style.color = '#6C5CE7';
+            modalTitle.style.marginBottom = '20px';
+            
+            // 모달 설명
+            const modalDesc = document.createElement('p');
+            modalDesc.textContent = description;
+            modalDesc.style.color = '#666';
+            modalDesc.style.marginBottom = '30px';
+            modalDesc.style.lineHeight = '1.6';
+            
+            // 활동 내용 생성 (타이틀에 따라 다른 내용)
+            const activityContent = document.createElement('div');
+            
+            // 타이틀에 따라 다른 활동 생성
+            if (title.includes('높임 표현 바꾸기')) {
+                activityContent.appendChild(createHonorificExercise());
+            } else if (title.includes('상황별 대화 연습')) {
+                activityContent.appendChild(createDialogueExercise());
+            } else {
+                const defaultContent = document.createElement('p');
+                defaultContent.textContent = '이 활동은 곧 제공될 예정입니다.';
+                activityContent.appendChild(defaultContent);
+            }
+            
+            // 모달에 요소 추가
+            modalContent.appendChild(closeButton);
+            modalContent.appendChild(modalTitle);
+            modalContent.appendChild(modalDesc);
+            modalContent.appendChild(activityContent);
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+        }
+        
+        // 높임 표현 바꾸기 연습 생성
+        function createHonorificExercise() {
+            const container = document.createElement('div');
+            
+            const instruction = document.createElement('p');
+            instruction.textContent = '다음 문장을 높임 표현으로 바꾸어 보세요.';
+            instruction.style.marginBottom = '20px';
+            instruction.style.fontWeight = 'bold';
+            
+            const exerciseList = document.createElement('div');
+            exerciseList.style.display = 'flex';
+            exerciseList.style.flexDirection = 'column';
+            exerciseList.style.gap = '20px';
+            
+            const exercises = [
+                {
+                    original: '할아버지가 밥을 먹었다.',
+                    honorific: '할아버지께서 진지를 드셨다.',
+                    hint: '주체(할아버지) 높임, 객체(밥→진지) 높임'
+                },
+                {
+                    original: '어머니가 아버지를 기다린다.',
+                    honorific: '어머니께서 아버지를 기다리신다.',
+                    hint: '주체(어머니) 높임'
+                },
+                {
+                    original: '선생님이 책을 읽고 있어.',
+                    honorific: '선생님께서 책을 읽고 계세요.',
+                    hint: '주체(선생님) 높임, 상대 높임'
+                },
+                {
+                    original: '할머니가 손자에게 옷을 줬어.',
+                    honorific: '할머니께서 손자에게 옷을 주셨어요.',
+                    hint: '주체(할머니) 높임, 상대 높임'
+                }
+            ];
+            
+            exercises.forEach((exercise, index) => {
+                const exerciseItem = document.createElement('div');
+                exerciseItem.style.backgroundColor = '#f5f5f5';
+                exerciseItem.style.padding = '15px';
+                exerciseItem.style.borderRadius = '8px';
+                
+                const questionNumber = document.createElement('div');
+                questionNumber.textContent = (index + 1) + '.';
+                questionNumber.style.fontWeight = 'bold';
+                questionNumber.style.marginBottom = '10px';
+                
+                const originalSentence = document.createElement('div');
+                originalSentence.textContent = '원래 문장: ' + exercise.original;
+                originalSentence.style.marginBottom = '10px';
+                
+                const inputContainer = document.createElement('div');
+                inputContainer.style.marginBottom = '10px';
+                
+                const inputLabel = document.createElement('label');
+                inputLabel.textContent = '높임 표현: ';
+                inputLabel.style.display = 'block';
+                inputLabel.style.marginBottom = '5px';
+                
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'honorific-input';
+                input.style.width = '100%';
+                input.style.padding = '8px';
+                input.style.borderRadius = '4px';
+                input.style.border = '1px solid #ddd';
+                
+                inputContainer.appendChild(inputLabel);
+                inputContainer.appendChild(input);
+                
+                const buttonContainer = document.createElement('div');
+                buttonContainer.style.display = 'flex';
+                buttonContainer.style.gap = '10px';
+                
+                const checkButton = document.createElement('button');
+                checkButton.textContent = '확인하기';
+                checkButton.style.padding = '8px 16px';
+                checkButton.style.backgroundColor = '#6C5CE7';
+                checkButton.style.color = 'white';
+                checkButton.style.border = 'none';
+                checkButton.style.borderRadius = '4px';
+                checkButton.style.cursor = 'pointer';
+                
+                const hintButton = document.createElement('button');
+                hintButton.textContent = '힌트 보기';
+                hintButton.style.padding = '8px 16px';
+                hintButton.style.backgroundColor = '#FFF';
+                hintButton.style.color = '#6C5CE7';
+                hintButton.style.border = '1px solid #6C5CE7';
+                hintButton.style.borderRadius = '4px';
+                hintButton.style.cursor = 'pointer';
+                
+                buttonContainer.appendChild(checkButton);
+                buttonContainer.appendChild(hintButton);
+                
+                const resultContainer = document.createElement('div');
+                resultContainer.style.marginTop = '10px';
+                resultContainer.style.display = 'none';
+                
+                checkButton.onclick = function() {
+                    const userAnswer = input.value.trim();
+                    resultContainer.style.display = 'block';
+                    
+                    if (userAnswer === exercise.honorific) {
+                        resultContainer.textContent = '정답입니다! 👍';
+                        resultContainer.style.color = 'green';
+                    } else {
+                        resultContainer.textContent = '다시 한번 생각해보세요. 정답: ' + exercise.honorific;
+                        resultContainer.style.color = '#e74c3c';
+                    }
+                };
+                
+                hintButton.onclick = function() {
+                    resultContainer.textContent = '힌트: ' + exercise.hint;
+                    resultContainer.style.color = '#6C5CE7';
+                    resultContainer.style.display = 'block';
+                };
+                
+                exerciseItem.appendChild(questionNumber);
+                exerciseItem.appendChild(originalSentence);
+                exerciseItem.appendChild(inputContainer);
+                exerciseItem.appendChild(buttonContainer);
+                exerciseItem.appendChild(resultContainer);
+                
+                exerciseList.appendChild(exerciseItem);
+            });
+            
+            container.appendChild(instruction);
+            container.appendChild(exerciseList);
+            
+            return container;
+        }
+        
+        // 상황별 대화 연습 생성
+        function createDialogueExercise() {
+            const container = document.createElement('div');
+            
+            const instruction = document.createElement('p');
+            instruction.textContent = '다음 상황에 맞게 적절한 높임 표현을 선택하세요.';
+            instruction.style.marginBottom = '20px';
+            instruction.style.fontWeight = 'bold';
+            
+            const scenarios = [
+                {
+                    situation: '학교에서 선생님께 질문할 때',
+                    options: [
+                        { text: '선생님, 이거 어떻게 하는 거예요?', correct: true },
+                        { text: '선생님, 이거 어떻게 하는 거야?', correct: false },
+                        { text: '선생님이 이거 어떻게 하는지 알려줘.', correct: false }
+                    ],
+                    explanation: '선생님께는 상대높임 \'-어요/아요\'를 사용해야 합니다.'
+                },
+                {
+                    situation: '할머니에 대해 친구에게 이야기할 때',
+                    options: [
+                        { text: '우리 할머니가 맛있는 음식을 해 주셨어.', correct: true },
+                        { text: '우리 할머니가 맛있는 음식을 해 줬어.', correct: false },
+                        { text: '우리 할머니께서 맛있는 음식을 해 주시었습니다.', correct: false }
+                    ],
+                    explanation: '할머니는 주체 높임의 대상이므로 \'-시-\'를 사용합니다. 친구에게는 상대높임을 사용할 필요가 없습니다.'
+                },
+                {
+                    situation: '부모님께 선생님에 대해 이야기할 때',
+                    options: [
+                        { text: '선생님이 숙제를 내셨어요.', correct: true },
+                        { text: '선생님이 숙제를 냈어.', correct: false },
+                        { text: '선생님께서 숙제를 내셨습니다.', correct: false }
+                    ],
+                    explanation: '선생님은 주체 높임의 대상이므로 \'-시-\'를 사용하고, 부모님은 상대 높임의 대상이므로 \'-어요/아요\'를 사용합니다.'
+                }
+            ];
+            
+            scenarios.forEach((scenario, index) => {
+                const scenarioContainer = document.createElement('div');
+                scenarioContainer.style.marginBottom = '30px';
+                scenarioContainer.style.padding = '20px';
+                scenarioContainer.style.backgroundColor = '#f5f5f5';
+                scenarioContainer.style.borderRadius = '8px';
+                
+                const situationTitle = document.createElement('h3');
+                situationTitle.textContent = '상황 ' + (index + 1) + ': ' + scenario.situation;
+                situationTitle.style.marginBottom = '15px';
+                situationTitle.style.color = '#333';
+                
+                const optionsContainer = document.createElement('div');
+                optionsContainer.style.display = 'flex';
+                optionsContainer.style.flexDirection = 'column';
+                optionsContainer.style.gap = '10px';
+                optionsContainer.style.marginBottom = '15px';
+                
+                scenario.options.forEach((option, optIndex) => {
+                    const optionItem = document.createElement('div');
+                    optionItem.style.display = 'flex';
+                    optionItem.style.alignItems = 'center';
+                    optionItem.style.cursor = 'pointer';
+                    
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = 'scenario-' + index;
+                    radio.id = 'scenario-' + index + '-option-' + optIndex;
+                    radio.style.marginRight = '10px';
+                    radio.dataset.correct = option.correct;
+                    
+                    const label = document.createElement('label');
+                    label.htmlFor = 'scenario-' + index + '-option-' + optIndex;
+                    label.textContent = option.text;
+                    label.style.cursor = 'pointer';
+                    
+                    optionItem.appendChild(radio);
+                    optionItem.appendChild(label);
+                    optionsContainer.appendChild(optionItem);
+                });
+                
+                const checkButton = document.createElement('button');
+                checkButton.textContent = '확인하기';
+                checkButton.style.padding = '8px 16px';
+                checkButton.style.backgroundColor = '#6C5CE7';
+                checkButton.style.color = 'white';
+                checkButton.style.border = 'none';
+                checkButton.style.borderRadius = '4px';
+                checkButton.style.cursor = 'pointer';
+                checkButton.style.marginBottom = '15px';
+                
+                const resultContainer = document.createElement('div');
+                resultContainer.style.display = 'none';
+                resultContainer.style.padding = '10px';
+                resultContainer.style.borderRadius = '4px';
+                resultContainer.style.marginTop = '10px';
+                
+                checkButton.onclick = function() {
+                    const selectedOption = optionsContainer.querySelector('input[name="scenario-' + index + '"]:checked');
+                    
+                    if (!selectedOption) {
+                        alert('옵션을 선택해주세요.');
+                        return;
+                    }
+                    
+                    const isCorrect = selectedOption.dataset.correct === 'true';
+                    
+                    resultContainer.style.display = 'block';
+                    
+                    if (isCorrect) {
+                        resultContainer.textContent = '정답입니다! ' + scenario.explanation;
+                        resultContainer.style.backgroundColor = '#d4edda';
+                        resultContainer.style.color = '#155724';
+                    } else {
+                        resultContainer.textContent = '다시 생각해보세요. ' + scenario.explanation;
+                        resultContainer.style.backgroundColor = '#f8d7da';
+                        resultContainer.style.color = '#721c24';
+                    }
+                };
+                
+                scenarioContainer.appendChild(situationTitle);
+                scenarioContainer.appendChild(optionsContainer);
+                scenarioContainer.appendChild(checkButton);
+                scenarioContainer.appendChild(resultContainer);
+                
+                container.appendChild(scenarioContainer);
+            });
+            
+            return container;
+        }
     </script>
     
     
@@ -474,6 +832,6 @@
     <!-- 푸터 영역 -->
     <footer></footer>
     
-    <script src="../../js/siteManager.js"></script>
+    <script src="../../../js/siteManager.js"></script>
 </body>
 </html> 

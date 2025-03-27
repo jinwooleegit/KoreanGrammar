@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>낱말 확장하기 | 문법놀이터</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
     <!-- Font Awesome 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -305,6 +305,13 @@
             }
         }
     </style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="../../js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="../../css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body
     
@@ -317,8 +324,8 @@
         <h1>낱말 확장하기</h1>
         <p>어근과 접사, 합성어 등을 활용하여 낱말을 확장하는 다양한 방법을 배워봅시다.</p>
         <div class="breadcrumb">
-            <a href="index.html">홈</a> &gt;
-            <a href="topics.html">주제별 학습</a> &gt;
+            <a href="../index.html">홈</a> &gt;
+            <a href="index.html">주제별 학습</a> &gt;
             <span>낱말 확장하기</span>
         </div>
     </div>
@@ -508,10 +515,575 @@
             const exerciseButtons = document.querySelectorAll('.exercise-button');
             exerciseButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
+                    // 버튼 텍스트에 따라 다른 연습 활동 실행
+                    const exerciseTitle = this.parentElement.querySelector('h3').textContent;
+                    openExerciseModal(exerciseTitle);
                 });
             });
         });
+
+        // 연습 모달 열기 함수
+        function openExerciseModal(exerciseType) {
+            // 이미 모달이 있으면 제거
+            const existingModal = document.querySelector('.exercise-modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // 모달 컨테이너 생성
+            const modal = document.createElement('div');
+            modal.className = 'exercise-modal';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '1000';
+            
+            // 모달 내용 생성
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            modalContent.style.backgroundColor = 'white';
+            modalContent.style.borderRadius = '12px';
+            modalContent.style.padding = '30px';
+            modalContent.style.width = '80%';
+            modalContent.style.maxWidth = '600px';
+            modalContent.style.maxHeight = '80vh';
+            modalContent.style.overflow = 'auto';
+            modalContent.style.position = 'relative';
+            
+            // 닫기 버튼
+            const closeButton = document.createElement('button');
+            closeButton.innerHTML = '&times;';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '15px';
+            closeButton.style.right = '15px';
+            closeButton.style.border = 'none';
+            closeButton.style.background = 'none';
+            closeButton.style.fontSize = '24px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.color = '#FF7675';
+            closeButton.onclick = () => modal.remove();
+            
+            // 모달 제목
+            const modalTitle = document.createElement('h2');
+            modalTitle.textContent = exerciseType;
+            modalTitle.style.color = '#FF7675';
+            modalTitle.style.marginBottom = '20px';
+            
+            // 모달에 요소 추가
+            modalContent.appendChild(closeButton);
+            modalContent.appendChild(modalTitle);
+            
+            // 연습 유형에 따라 다른 내용 추가
+            let exerciseContent;
+            
+            switch (exerciseType) {
+                case '접사 찾기':
+                    exerciseContent = createPrefixSuffixExercise();
+                    break;
+                case '새 낱말 만들기':
+                    exerciseContent = createNewWordExercise();
+                    break;
+                case '합성어 분리하기':
+                    exerciseContent = createCompoundWordExercise();
+                    break;
+                case '문장 만들기':
+                    exerciseContent = createSentenceMakingExercise();
+                    break;
+                default:
+                    exerciseContent = document.createElement('p');
+                    exerciseContent.textContent = '준비 중인 연습입니다.';
+            }
+            
+            modalContent.appendChild(exerciseContent);
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+        }
+        
+        // 접사 찾기 연습 생성
+        function createPrefixSuffixExercise() {
+            const container = document.createElement('div');
+            
+            const instruction = document.createElement('p');
+            instruction.textContent = '다음 단어들에서 접사를 찾아 밑줄을 그어보세요. 접두사인지 접미사인지도 구분해 보세요.';
+            instruction.style.marginBottom = '20px';
+            
+            const wordsContainer = document.createElement('div');
+            wordsContainer.style.display = 'grid';
+            wordsContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))';
+            wordsContainer.style.gap = '15px';
+            wordsContainer.style.marginBottom = '30px';
+            
+            const words = [
+                { word: '높이', prefix: '', suffix: '이' },
+                { word: '헛소문', prefix: '헛', suffix: '' },
+                { word: '맨손', prefix: '맨', suffix: '' },
+                { word: '글쓴이', prefix: '', suffix: '이' },
+                { word: '새색시', prefix: '새', suffix: '' },
+                { word: '풋사랑', prefix: '풋', suffix: '' },
+                { word: '날짐승', prefix: '', suffix: '' },
+                { word: '솜씨꾼', prefix: '', suffix: '꾼' }
+            ];
+            
+            words.forEach(wordObj => {
+                const wordItem = document.createElement('div');
+                wordItem.className = 'word-exercise-item';
+                wordItem.style.padding = '10px';
+                wordItem.style.borderRadius = '8px';
+                wordItem.style.backgroundColor = '#f0f0f0';
+                wordItem.style.textAlign = 'center';
+                wordItem.style.cursor = 'pointer';
+                wordItem.textContent = wordObj.word;
+                wordItem.dataset.prefix = wordObj.prefix;
+                wordItem.dataset.suffix = wordObj.suffix;
+                
+                wordItem.onclick = function() {
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        this.style.backgroundColor = '#f0f0f0';
+                        this.style.color = 'black';
+                    } else {
+                        // 단어 분석 표시
+                        this.classList.add('selected');
+                        this.style.backgroundColor = '#FFF5F5';
+                        this.style.border = '2px solid #FF7675';
+                        
+                        // 힌트 표시
+                        const hint = document.createElement('div');
+                        hint.className = 'hint';
+                        hint.style.marginTop = '8px';
+                        hint.style.fontSize = '14px';
+                        hint.style.color = '#FF7675';
+                        
+                        let hintText = '분석: ';
+                        if (wordObj.prefix) {
+                            hintText += `<span style="text-decoration:underline;">${wordObj.prefix}</span>(접두사) + `;
+                        }
+                        
+                        // 어근 부분 추출
+                        let stem = wordObj.word;
+                        if (wordObj.prefix) stem = stem.replace(wordObj.prefix, '');
+                        if (wordObj.suffix) stem = stem.replace(wordObj.suffix, '');
+                        
+                        hintText += `${stem}(어근)`;
+                        
+                        if (wordObj.suffix) {
+                            hintText += ` + <span style="text-decoration:underline;">${wordObj.suffix}</span>(접미사)`;
+                        }
+                        
+                        hint.innerHTML = hintText;
+                        this.appendChild(hint);
+                    }
+                };
+                
+                wordsContainer.appendChild(wordItem);
+            });
+            
+            const infoBox = document.createElement('div');
+            infoBox.style.backgroundColor = '#f8f8f8';
+            infoBox.style.padding = '15px';
+            infoBox.style.borderRadius = '8px';
+            infoBox.style.marginTop = '20px';
+            
+            const infoTitle = document.createElement('h4');
+            infoTitle.textContent = '학습 팁';
+            infoTitle.style.marginBottom = '10px';
+            infoTitle.style.color = '#333';
+            
+            const infoText = document.createElement('p');
+            infoText.innerHTML = '접두사는 <strong>어근 앞</strong>에 붙고, 접미사는 <strong>어근 뒤</strong>에 붙습니다. 단어를 분석할 때 접사가 있는지, 있다면 어떤 종류인지 파악하는 것이 중요합니다. 접사는 독립적으로 쓰이지 않지만, 어근에 새로운 의미를 더해줍니다.';
+            infoText.style.fontSize = '14px';
+            infoText.style.lineHeight = '1.5';
+            
+            infoBox.appendChild(infoTitle);
+            infoBox.appendChild(infoText);
+            
+            container.appendChild(instruction);
+            container.appendChild(wordsContainer);
+            container.appendChild(infoBox);
+            
+            return container;
+        }
+        
+        // 새 낱말 만들기 연습 생성
+        function createNewWordExercise() {
+            const container = document.createElement('div');
+            
+            const instruction = document.createElement('p');
+            instruction.textContent = '주어진 어근과 접사를 조합하여 새로운 낱말을 만들어 보세요.';
+            instruction.style.marginBottom = '20px';
+            
+            // 접두사 목록
+            const prefixContainer = document.createElement('div');
+            prefixContainer.style.marginBottom = '20px';
+            
+            const prefixTitle = document.createElement('h4');
+            prefixTitle.textContent = '접두사';
+            prefixTitle.style.marginBottom = '10px';
+            
+            const prefixList = document.createElement('div');
+            prefixList.style.display = 'flex';
+            prefixList.style.flexWrap = 'wrap';
+            prefixList.style.gap = '10px';
+            
+            const prefixes = ['맨', '헛', '새', '풋', '덧', '휘', '무'];
+            
+            prefixes.forEach(prefix => {
+                const prefixItem = document.createElement('div');
+                prefixItem.className = 'affix-item';
+                prefixItem.textContent = prefix;
+                prefixItem.style.padding = '6px 12px';
+                prefixItem.style.backgroundColor = '#e1f5fe';
+                prefixItem.style.borderRadius = '20px';
+                prefixItem.style.cursor = 'pointer';
+                prefixItem.onclick = function() {
+                    document.getElementById('word-builder-input').value += this.textContent;
+                };
+                
+                prefixList.appendChild(prefixItem);
+            });
+            
+            prefixContainer.appendChild(prefixTitle);
+            prefixContainer.appendChild(prefixList);
+            
+            // 어근 목록
+            const stemContainer = document.createElement('div');
+            stemContainer.style.marginBottom = '20px';
+            
+            const stemTitle = document.createElement('h4');
+            stemTitle.textContent = '어근';
+            stemTitle.style.marginBottom = '10px';
+            
+            const stemList = document.createElement('div');
+            stemList.style.display = 'flex';
+            stemList.style.flexWrap = 'wrap';
+            stemList.style.gap = '10px';
+            
+            const stems = ['빛', '말', '숲', '발', '손', '밥', '잠', '눈', '길'];
+            
+            stems.forEach(stem => {
+                const stemItem = document.createElement('div');
+                stemItem.className = 'stem-item';
+                stemItem.textContent = stem;
+                stemItem.style.padding = '6px 12px';
+                stemItem.style.backgroundColor = '#f3e5f5';
+                stemItem.style.borderRadius = '20px';
+                stemItem.style.cursor = 'pointer';
+                stemItem.onclick = function() {
+                    document.getElementById('word-builder-input').value += this.textContent;
+                };
+                
+                stemList.appendChild(stemItem);
+            });
+            
+            stemContainer.appendChild(stemTitle);
+            stemContainer.appendChild(stemList);
+            
+            // 접미사 목록
+            const suffixContainer = document.createElement('div');
+            suffixContainer.style.marginBottom = '20px';
+            
+            const suffixTitle = document.createElement('h4');
+            suffixTitle.textContent = '접미사';
+            suffixTitle.style.marginBottom = '10px';
+            
+            const suffixList = document.createElement('div');
+            suffixList.style.display = 'flex';
+            suffixList.style.flexWrap = 'wrap';
+            suffixList.style.gap = '10px';
+            
+            const suffixes = ['이', '음', '기', '개', '쟁이', '꾼', '쇠', '장이'];
+            
+            suffixes.forEach(suffix => {
+                const suffixItem = document.createElement('div');
+                suffixItem.className = 'affix-item';
+                suffixItem.textContent = suffix;
+                suffixItem.style.padding = '6px 12px';
+                suffixItem.style.backgroundColor = '#e8f5e9';
+                suffixItem.style.borderRadius = '20px';
+                suffixItem.style.cursor = 'pointer';
+                suffixItem.onclick = function() {
+                    document.getElementById('word-builder-input').value += this.textContent;
+                };
+                
+                suffixList.appendChild(suffixItem);
+            });
+            
+            suffixContainer.appendChild(suffixTitle);
+            suffixContainer.appendChild(suffixList);
+            
+            // 입력 영역
+            const inputContainer = document.createElement('div');
+            inputContainer.style.marginTop = '30px';
+            
+            const inputLabel = document.createElement('label');
+            inputLabel.htmlFor = 'word-builder-input';
+            inputLabel.textContent = '만들어진 낱말:';
+            inputLabel.style.display = 'block';
+            inputLabel.style.marginBottom = '10px';
+            
+            const inputField = document.createElement('input');
+            inputField.type = 'text';
+            inputField.id = 'word-builder-input';
+            inputField.style.width = '100%';
+            inputField.style.padding = '10px';
+            inputField.style.fontSize = '16px';
+            inputField.style.borderRadius = '6px';
+            inputField.style.border = '1px solid #ddd';
+            
+            const clearButton = document.createElement('button');
+            clearButton.textContent = '지우기';
+            clearButton.style.marginTop = '10px';
+            clearButton.style.padding = '8px 16px';
+            clearButton.style.backgroundColor = '#FF7675';
+            clearButton.style.color = 'white';
+            clearButton.style.border = 'none';
+            clearButton.style.borderRadius = '6px';
+            clearButton.style.cursor = 'pointer';
+            clearButton.onclick = function() {
+                document.getElementById('word-builder-input').value = '';
+            };
+            
+            inputContainer.appendChild(inputLabel);
+            inputContainer.appendChild(inputField);
+            inputContainer.appendChild(clearButton);
+            
+            container.appendChild(instruction);
+            container.appendChild(prefixContainer);
+            container.appendChild(stemContainer);
+            container.appendChild(suffixContainer);
+            container.appendChild(inputContainer);
+            
+            return container;
+        }
+        
+        // 합성어 분리하기 연습 생성
+        function createCompoundWordExercise() {
+            const container = document.createElement('div');
+            
+            const instruction = document.createElement('p');
+            instruction.textContent = '다음 합성어들이 어떤 낱말들로 이루어졌는지 분석해 보세요.';
+            instruction.style.marginBottom = '20px';
+            
+            const compoundWordsContainer = document.createElement('div');
+            compoundWordsContainer.style.display = 'grid';
+            compoundWordsContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(250px, 1fr))';
+            compoundWordsContainer.style.gap = '15px';
+            compoundWordsContainer.style.marginBottom = '30px';
+            
+            const compoundWords = [
+                { word: '눈사람', parts: ['눈', '사람'] },
+                { word: '밤하늘', parts: ['밤', '하늘'] },
+                { word: '산나물', parts: ['산', '나물'] },
+                { word: '손가락', parts: ['손', '가락'] },
+                { word: '책가방', parts: ['책', '가방'] },
+                { word: '빛나다', parts: ['빛', '나다'] },
+                { word: '돌아가다', parts: ['돌다', '가다'] },
+                { word: '맵짜다', parts: ['맵다', '짜다'] }
+            ];
+            
+            compoundWords.forEach(wordObj => {
+                const wordItem = document.createElement('div');
+                wordItem.className = 'compound-word-item';
+                wordItem.style.padding = '15px';
+                wordItem.style.borderRadius = '8px';
+                wordItem.style.backgroundColor = '#f0f0f0';
+                wordItem.style.cursor = 'pointer';
+                
+                const wordText = document.createElement('h3');
+                wordText.textContent = wordObj.word;
+                wordText.style.marginBottom = '10px';
+                wordText.style.color = '#333';
+                
+                wordItem.appendChild(wordText);
+                
+                wordItem.onclick = function() {
+                    if (this.classList.contains('analyzed')) {
+                        // 이미 분석된 상태면 원래대로 돌아가기
+                        const analysisDiv = this.querySelector('.analysis');
+                        if (analysisDiv) {
+                            analysisDiv.remove();
+                        }
+                        this.style.backgroundColor = '#f0f0f0';
+                        this.classList.remove('analyzed');
+                    } else {
+                        // 분석 결과 표시
+                        this.classList.add('analyzed');
+                        this.style.backgroundColor = '#FFF5F5';
+                        
+                        const analysis = document.createElement('div');
+                        analysis.className = 'analysis';
+                        
+                        const partsDiv = document.createElement('div');
+                        partsDiv.style.display = 'flex';
+                        partsDiv.style.alignItems = 'center';
+                        partsDiv.style.marginBottom = '10px';
+                        
+                        wordObj.parts.forEach((part, index) => {
+                            const partSpan = document.createElement('span');
+                            partSpan.textContent = part;
+                            partSpan.style.padding = '4px 8px';
+                            partSpan.style.backgroundColor = '#FF7675';
+                            partSpan.style.color = 'white';
+                            partSpan.style.borderRadius = '4px';
+                            
+                            partsDiv.appendChild(partSpan);
+                            
+                            if (index < wordObj.parts.length - 1) {
+                                const plus = document.createElement('span');
+                                plus.textContent = '+';
+                                plus.style.margin = '0 10px';
+                                plus.style.color = '#666';
+                                partsDiv.appendChild(plus);
+                            }
+                        });
+                        
+                        analysis.appendChild(partsDiv);
+                        
+                        this.appendChild(analysis);
+                    }
+                };
+                
+                compoundWordsContainer.appendChild(wordItem);
+            });
+            
+            container.appendChild(instruction);
+            container.appendChild(compoundWordsContainer);
+            
+            return container;
+        }
+        
+        // 문장 만들기 연습 생성
+        function createSentenceMakingExercise() {
+            const container = document.createElement('div');
+            
+            const instruction = document.createElement('p');
+            instruction.textContent = '다음 파생어나 합성어를 활용하여 문장을 만들어 보세요.';
+            instruction.style.marginBottom = '20px';
+            
+            const wordList = document.createElement('div');
+            wordList.style.display = 'flex';
+            wordList.style.flexWrap = 'wrap';
+            wordList.style.gap = '10px';
+            wordList.style.marginBottom = '20px';
+            
+            const words = [
+                '높이', '날짐승', '맨손', '눈사람', '빛나다', '책가방', 
+                '솜씨꾼', '돌아가다', '풋사랑', '맵짜다'
+            ];
+            
+            words.forEach(word => {
+                const wordItem = document.createElement('div');
+                wordItem.className = 'sentence-word-item';
+                wordItem.textContent = word;
+                wordItem.style.padding = '6px 12px';
+                wordItem.style.backgroundColor = '#FFF5F5';
+                wordItem.style.borderRadius = '20px';
+                wordItem.style.cursor = 'pointer';
+                
+                wordItem.onclick = function() {
+                    const textarea = document.getElementById('sentence-input');
+                    textarea.value += this.textContent + ' ';
+                    textarea.focus();
+                };
+                
+                wordList.appendChild(wordItem);
+            });
+            
+            const textareaContainer = document.createElement('div');
+            
+            const textareaLabel = document.createElement('label');
+            textareaLabel.htmlFor = 'sentence-input';
+            textareaLabel.textContent = '문장을 작성해 보세요:';
+            textareaLabel.style.display = 'block';
+            textareaLabel.style.marginBottom = '10px';
+            
+            const textarea = document.createElement('textarea');
+            textarea.id = 'sentence-input';
+            textarea.rows = 5;
+            textarea.style.width = '100%';
+            textarea.style.padding = '10px';
+            textarea.style.borderRadius = '6px';
+            textarea.style.border = '1px solid #ddd';
+            textarea.style.resize = 'vertical';
+            
+            const buttonContainer = document.createElement('div');
+            buttonContainer.style.display = 'flex';
+            buttonContainer.style.gap = '10px';
+            buttonContainer.style.marginTop = '15px';
+            
+            const clearButton = document.createElement('button');
+            clearButton.textContent = '지우기';
+            clearButton.style.padding = '8px 16px';
+            clearButton.style.backgroundColor = '#FF7675';
+            clearButton.style.color = 'white';
+            clearButton.style.border = 'none';
+            clearButton.style.borderRadius = '6px';
+            clearButton.style.cursor = 'pointer';
+            clearButton.onclick = function() {
+                document.getElementById('sentence-input').value = '';
+            };
+            
+            const saveButton = document.createElement('button');
+            saveButton.textContent = '저장하기';
+            saveButton.style.padding = '8px 16px';
+            saveButton.style.backgroundColor = '#FF7675';
+            saveButton.style.color = 'white';
+            saveButton.style.border = 'none';
+            saveButton.style.borderRadius = '6px';
+            saveButton.style.cursor = 'pointer';
+            saveButton.onclick = function() {
+                const sentence = document.getElementById('sentence-input').value.trim();
+                if (sentence) {
+                    // 저장된 문장 표시
+                    const savedSentencesContainer = document.getElementById('saved-sentences');
+                    if (!savedSentencesContainer) {
+                        return;
+                    }
+                    
+                    const sentenceItem = document.createElement('div');
+                    sentenceItem.style.padding = '10px';
+                    sentenceItem.style.backgroundColor = '#f8f8f8';
+                    sentenceItem.style.borderRadius = '6px';
+                    sentenceItem.style.marginBottom = '10px';
+                    sentenceItem.textContent = sentence;
+                    
+                    savedSentencesContainer.appendChild(sentenceItem);
+                    
+                    // 입력창 비우기
+                    document.getElementById('sentence-input').value = '';
+                }
+            };
+            
+            buttonContainer.appendChild(clearButton);
+            buttonContainer.appendChild(saveButton);
+            
+            textareaContainer.appendChild(textareaLabel);
+            textareaContainer.appendChild(textarea);
+            textareaContainer.appendChild(buttonContainer);
+            
+            const savedSentencesContainer = document.createElement('div');
+            savedSentencesContainer.id = 'saved-sentences';
+            savedSentencesContainer.style.marginTop = '30px';
+            
+            const savedSentencesTitle = document.createElement('h4');
+            savedSentencesTitle.textContent = '내가 만든 문장들';
+            savedSentencesTitle.style.marginBottom = '15px';
+            
+            savedSentencesContainer.appendChild(savedSentencesTitle);
+            
+            container.appendChild(instruction);
+            container.appendChild(wordList);
+            container.appendChild(textareaContainer);
+            container.appendChild(savedSentencesContainer);
+            
+            return container;
+        }
     </script>
     
     

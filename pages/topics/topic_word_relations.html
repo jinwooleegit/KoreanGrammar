@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>낱말의 의미 관계 | 문법놀이터</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
     <!-- Font Awesome 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -304,6 +304,13 @@
             }
         }
     </style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="../../js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="../../css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body
     
@@ -316,8 +323,8 @@
         <h1>낱말의 의미 관계</h1>
         <p>비슷한 말(유의어)과 반의어, 상위어와 하위어 등 낱말 간의 의미 관계를 배웁니다.</p>
         <div class="breadcrumb">
-            <a href="index.html">홈</a> &gt;
-            <a href="topics.html">주제별 학습</a> &gt;
+            <a href="../../index.html">홈</a> &gt;
+            <a href="index.html">주제별 학습</a> &gt;
             <span>낱말의 의미 관계</span>
         </div>
     </div>
@@ -564,7 +571,7 @@
                     </div>
                     <h3>낱말 관계 짝 맞추기</h3>
                     <p>여러 낱말 카드 중에서 유의 관계, 반의 관계에 있는 낱말들을 짝지어 보는 게임입니다.</p>
-                    <button class="activity-button">게임 시작하기</button>
+                    <button class="activity-button" data-activity="matching">게임 시작하기</button>
                 </div>
 
                 <div class="activity-card">
@@ -573,7 +580,7 @@
                     </div>
                     <h3>낱말 관계 나무 만들기</h3>
                     <p>주어진 상위어에 맞는 하위어를 찾아 낱말 관계 나무를 완성해 보세요.</p>
-                    <button class="activity-button">활동 시작하기</button>
+                    <button class="activity-button" data-activity="tree">활동 시작하기</button>
                 </div>
 
                 <div class="activity-card">
@@ -582,7 +589,91 @@
                     </div>
                     <h3>문장 바꿔 쓰기</h3>
                     <p>주어진 문장의 낱말을 유의어나 상위어, 하위어로 바꿔서 다양한 표현을 연습해 보세요.</p>
-                    <button class="activity-button">연습 시작하기</button>
+                    <button class="activity-button" data-activity="rewrite">연습 시작하기</button>
+                </div>
+            </div>
+            
+            <!-- 활동 컨테이너 추가 -->
+            <div id="activity-container" style="display: none; margin-top: 30px; background-color: #FFF5F5; border-radius: 10px; padding: 20px; border: 1px solid #FFCDCD;">
+                <!-- 닫기 버튼 -->
+                <div style="text-align: right; margin-bottom: 10px;">
+                    <button id="close-activity" style="background: none; border: none; cursor: pointer; font-size: 20px; color: #FF7675;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- 낱말 관계 짝 맞추기 활동 -->
+                <div id="matching-activity" style="display: none;">
+                    <h3 style="color: #FF7675; margin-bottom: 20px;">낱말 관계 짝 맞추기</h3>
+                    <p>아래의 낱말 카드 중에서 서로 관계가 있는 낱말들을 짝지어 보세요.</p>
+                    
+                    <div style="display: flex; justify-content: space-between; margin: 20px 0;">
+                        <div>
+                            <p><strong>남은 시간:</strong> <span id="matching-timer">60</span>초</p>
+                        </div>
+                        <div>
+                            <p><strong>점수:</strong> <span id="matching-score">0</span>점</p>
+                        </div>
+                    </div>
+                    
+                    <div id="matching-board" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0;">
+                        <!-- 카드는 JavaScript로 동적 생성됩니다 -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button id="matching-start" class="activity-button">게임 시작하기</button>
+                        <button id="matching-restart" class="activity-button" style="display: none;">다시 시작하기</button>
+                    </div>
+                </div>
+                
+                <!-- 낱말 관계 나무 만들기 활동 -->
+                <div id="tree-activity" style="display: none;">
+                    <h3 style="color: #FF7675; margin-bottom: 20px;">낱말 관계 나무 만들기</h3>
+                    <p>다음 상위어에 맞는 하위어를 선택해서 낱말 관계 나무를 완성해 보세요.</p>
+                    
+                    <div style="background-color: white; border-radius: 8px; padding: 20px; margin: 20px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <div id="tree-parent" style="background-color: #FF7675; color: white; padding: 10px 20px; border-radius: 6px; display: inline-block; font-weight: bold; font-size: 18px;">동물</div>
+                        </div>
+                        
+                        <div id="tree-children" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px;">
+                            <!-- 여기에 하위어 선택지들이 표시됩니다 -->
+                        </div>
+                        
+                        <div id="tree-selected" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; min-height: 50px; background-color: #f9f9f9; padding: 15px; border-radius: 6px; border: 1px dashed #ddd;">
+                            <div style="width: 100%; text-align: center; color: #999;">선택한 하위어가 여기에 표시됩니다</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button id="tree-check" class="activity-button">확인하기</button>
+                        <button id="tree-next" class="activity-button" style="margin-left: 10px; background-color: #4CAF50;">다음 문제</button>
+                    </div>
+                    
+                    <div id="tree-feedback" style="margin-top: 15px; padding: 10px; border-radius: 4px; display: none;"></div>
+                </div>
+                
+                <!-- 문장 바꿔 쓰기 활동 -->
+                <div id="rewrite-activity" style="display: none;">
+                    <h3 style="color: #FF7675; margin-bottom: 20px;">문장 바꿔 쓰기</h3>
+                    <p>다음 문장의 밑줄 친 낱말을 유의어, 상위어, 또는 하위어로 바꿔서 문장을 다시 작성해 보세요.</p>
+                    
+                    <div style="background-color: white; border-radius: 8px; padding: 20px; margin: 20px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+                        <p><strong>원래 문장:</strong></p>
+                        <p id="original-sentence" style="font-size: 16px; margin: 10px 0; line-height: 1.6;">나는 <span style="text-decoration: underline; font-weight: bold; color: #FF7675;">자동차</span>를 타고 학교에 갔다.</p>
+                        
+                        <p style="margin-top: 20px;"><strong>바꿀 낱말 관계:</strong> <span id="relation-type">유의어</span></p>
+                        
+                        <p style="margin-top: 20px;"><strong>바꿔 쓴 문장:</strong></p>
+                        <textarea id="rewritten-sentence" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; min-height: 80px;" placeholder="여기에 바꿔 쓴 문장을 입력하세요."></textarea>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button id="rewrite-check" class="activity-button">확인하기</button>
+                        <button id="rewrite-next" class="activity-button" style="margin-left: 10px; background-color: #4CAF50;">다음 문제</button>
+                    </div>
+                    
+                    <div id="rewrite-feedback" style="margin-top: 15px; padding: 10px; border-radius: 4px; display: none;"></div>
                 </div>
             </div>
         </section>
@@ -601,20 +692,427 @@
                 }, 100 * index);
             });
             
+            // 활동 관련 변수
+            const activityContainer = document.getElementById('activity-container');
+            const closeButton = document.getElementById('close-activity');
+            const matchingActivity = document.getElementById('matching-activity');
+            const treeActivity = document.getElementById('tree-activity');
+            const rewriteActivity = document.getElementById('rewrite-activity');
+            
             // 학습 활동 버튼 이벤트
             const activityButtons = document.querySelectorAll('.activity-button');
             activityButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
-                });
+                const activityType = button.getAttribute('data-activity');
+                if (activityType) {
+                    button.addEventListener('click', function() {
+                        // 모든 활동 숨기기
+                        matchingActivity.style.display = 'none';
+                        treeActivity.style.display = 'none';
+                        rewriteActivity.style.display = 'none';
+                        
+                        // 선택한 활동 표시
+                        activityContainer.style.display = 'block';
+                        
+                        if (activityType === 'matching') {
+                            matchingActivity.style.display = 'block';
+                            initMatchingGame();
+                        } else if (activityType === 'tree') {
+                            treeActivity.style.display = 'block';
+                            initTreeActivity();
+                        } else if (activityType === 'rewrite') {
+                            rewriteActivity.style.display = 'block';
+                            initRewriteActivity();
+                        }
+                    });
+                }
             });
+            
+            // 활동 닫기 버튼
+            closeButton.addEventListener('click', function() {
+                activityContainer.style.display = 'none';
+            });
+            
+            // 낱말 관계 짝 맞추기 게임 초기화
+            function initMatchingGame() {
+                const matchingBoard = document.getElementById('matching-board');
+                const matchingTimer = document.getElementById('matching-timer');
+                const matchingScore = document.getElementById('matching-score');
+                const startButton = document.getElementById('matching-start');
+                const restartButton = document.getElementById('matching-restart');
+                
+                const wordPairs = [
+                    { word: '기쁘다', match: '즐겁다', type: '유의어' },
+                    { word: '즐겁다', match: '기쁘다', type: '유의어' },
+                    { word: '크다', match: '작다', type: '반의어' },
+                    { word: '작다', match: '크다', type: '반의어' },
+                    { word: '과일', match: '사과', type: '상하관계' },
+                    { word: '사과', match: '과일', type: '상하관계' },
+                    { word: '자동차', match: '바퀴', type: '부분-전체' },
+                    { word: '바퀴', match: '자동차', type: '부분-전체' }
+                ];
+                
+                let cards = [];
+                let flippedCards = [];
+                let matchedPairs = 0;
+                let score = 0;
+                let timer = 60;
+                let gameInterval;
+                
+                // 게임 시작 버튼
+                startButton.addEventListener('click', function() {
+                    startGame();
+                    startButton.style.display = 'none';
+                    restartButton.style.display = 'inline-block';
+                });
+                
+                // 다시 시작 버튼
+                restartButton.addEventListener('click', function() {
+                    resetGame();
+                    startGame();
+                });
+                
+                function startGame() {
+                    // 타이머 시작
+                    clearInterval(gameInterval);
+                    timer = 60;
+                    matchingTimer.textContent = timer;
+                    gameInterval = setInterval(function() {
+                        timer--;
+                        matchingTimer.textContent = timer;
+                        if (timer <= 0) {
+                            clearInterval(gameInterval);
+                            alert('시간이 종료되었습니다!');
+                        }
+                    }, 1000);
+                    
+                    // 카드 생성 및 섞기
+                    cards = shuffleArray([...wordPairs]);
+                    renderCards();
+                }
+                
+                function resetGame() {
+                    clearInterval(gameInterval);
+                    matchingBoard.innerHTML = '';
+                    flippedCards = [];
+                    matchedPairs = 0;
+                    score = 0;
+                    matchingScore.textContent = score;
+                }
+                
+                function renderCards() {
+                    matchingBoard.innerHTML = '';
+                    cards.forEach((card, index) => {
+                        const cardElement = document.createElement('div');
+                        cardElement.className = 'card';
+                        cardElement.dataset.index = index;
+                        cardElement.dataset.word = card.word;
+                        cardElement.dataset.match = card.match;
+                        cardElement.dataset.type = card.type;
+                        cardElement.style.backgroundColor = '#FF7675';
+                        cardElement.style.color = 'white';
+                        cardElement.style.padding = '20px 10px';
+                        cardElement.style.borderRadius = '8px';
+                        cardElement.style.textAlign = 'center';
+                        cardElement.style.cursor = 'pointer';
+                        cardElement.style.transition = 'all 0.3s ease';
+                        cardElement.style.transform = 'rotateY(180deg)';
+                        cardElement.innerHTML = '?';
+                        
+                        cardElement.addEventListener('click', function() {
+                            flipCard(this);
+                        });
+                        
+                        matchingBoard.appendChild(cardElement);
+                    });
+                }
+                
+                function flipCard(card) {
+                    if (flippedCards.length < 2 && !flippedCards.includes(card) && card.innerHTML === '?') {
+                        card.innerHTML = card.dataset.word;
+                        card.style.backgroundColor = 'white';
+                        card.style.color = '#333';
+                        card.style.transform = 'rotateY(0deg)';
+                        flippedCards.push(card);
+                        
+                        if (flippedCards.length === 2) {
+                            setTimeout(checkMatch, 1000);
+                        }
+                    }
+                }
+                
+                function checkMatch() {
+                    const card1 = flippedCards[0];
+                    const card2 = flippedCards[1];
+                    
+                    if (card1.dataset.match === card2.dataset.word && card1.dataset.word === card2.dataset.match) {
+                        // 일치하는 경우
+                        card1.style.backgroundColor = '#4CAF50';
+                        card2.style.backgroundColor = '#4CAF50';
+                        card1.style.color = 'white';
+                        card2.style.color = 'white';
+                        card1.style.cursor = 'default';
+                        card2.style.cursor = 'default';
+                        
+                        flippedCards = [];
+                        matchedPairs++;
+                        score += 10;
+                        matchingScore.textContent = score;
+                        
+                        if (matchedPairs === wordPairs.length / 2) {
+                            clearInterval(gameInterval);
+                            setTimeout(() => {
+                                alert(`축하합니다! 모든 짝을 찾았습니다. 최종 점수: ${score}점`);
+                            }, 500);
+                        }
+                    } else {
+                        // 불일치하는 경우
+                        card1.innerHTML = '?';
+                        card2.innerHTML = '?';
+                        card1.style.backgroundColor = '#FF7675';
+                        card2.style.backgroundColor = '#FF7675';
+                        card1.style.color = 'white';
+                        card2.style.color = 'white';
+                        card1.style.transform = 'rotateY(180deg)';
+                        card2.style.transform = 'rotateY(180deg)';
+                        flippedCards = [];
+                    }
+                }
+                
+                function shuffleArray(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                }
+            }
+            
+            // 낱말 관계 나무 만들기 활동 초기화
+            function initTreeActivity() {
+                const treeProblems = [
+                    {
+                        parent: '동물',
+                        correctChildren: ['강아지', '고양이', '토끼', '사자'],
+                        options: ['강아지', '고양이', '토끼', '사자', '사과', '바나나', '책상', '연필']
+                    },
+                    {
+                        parent: '과일',
+                        correctChildren: ['사과', '바나나', '딸기', '포도'],
+                        options: ['사과', '바나나', '딸기', '포도', '소파', '의자', '강아지', '고양이']
+                    },
+                    {
+                        parent: '가구',
+                        correctChildren: ['책상', '의자', '침대', '소파'],
+                        options: ['책상', '의자', '침대', '소파', '빨강', '파랑', '사과', '바나나']
+                    }
+                ];
+                
+                let currentProblemIndex = 0;
+                const treeParent = document.getElementById('tree-parent');
+                const treeChildren = document.getElementById('tree-children');
+                const treeSelected = document.getElementById('tree-selected');
+                const treeCheckButton = document.getElementById('tree-check');
+                const treeNextButton = document.getElementById('tree-next');
+                const treeFeedback = document.getElementById('tree-feedback');
+                
+                // 문제 설정
+                function setTreeProblem(index) {
+                    const problem = treeProblems[index];
+                    treeParent.textContent = problem.parent;
+                    
+                    // 선택지 표시
+                    treeChildren.innerHTML = '';
+                    const shuffledOptions = shuffleArray([...problem.options]);
+                    shuffledOptions.forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.className = 'tree-option';
+                        optionElement.textContent = option;
+                        optionElement.style.backgroundColor = '#FFF5F5';
+                        optionElement.style.border = '1px solid #FFCDCD';
+                        optionElement.style.borderRadius = '6px';
+                        optionElement.style.padding = '8px 12px';
+                        optionElement.style.cursor = 'pointer';
+                        
+                        optionElement.addEventListener('click', function() {
+                            toggleTreeOption(this);
+                        });
+                        
+                        treeChildren.appendChild(optionElement);
+                    });
+                    
+                    // 선택 영역 초기화
+                    treeSelected.innerHTML = '<div style="width: 100%; text-align: center; color: #999;">선택한 하위어가 여기에 표시됩니다</div>';
+                    treeFeedback.style.display = 'none';
+                }
+                
+                // 옵션 토글
+                function toggleTreeOption(option) {
+                    const isInOptions = option.parentElement === treeChildren;
+                    
+                    if (isInOptions) {
+                        // 선택지에서 선택 영역으로 이동
+                        if (treeSelected.querySelector('div[style*="color: #999;"]')) {
+                            treeSelected.innerHTML = '';
+                        }
+                        option.style.backgroundColor = '#FF7675';
+                        option.style.color = 'white';
+                        treeSelected.appendChild(option);
+                    } else {
+                        // 선택 영역에서 선택지로 이동
+                        option.style.backgroundColor = '#FFF5F5';
+                        option.style.color = '#333';
+                        treeChildren.appendChild(option);
+                        
+                        if (treeSelected.children.length === 0) {
+                            treeSelected.innerHTML = '<div style="width: 100%; text-align: center; color: #999;">선택한 하위어가 여기에 표시됩니다</div>';
+                        }
+                    }
+                }
+                
+                // 정답 확인
+                treeCheckButton.addEventListener('click', function() {
+                    const problem = treeProblems[currentProblemIndex];
+                    const selectedOptions = Array.from(treeSelected.children)
+                        .filter(child => !child.style.color || child.style.color !== 'rgb(153, 153, 153)')
+                        .map(child => child.textContent);
+                    
+                    if (selectedOptions.length === 0) {
+                        treeFeedback.textContent = '하위어를 하나 이상 선택해주세요.';
+                        treeFeedback.style.backgroundColor = '#FFEBEE';
+                        treeFeedback.style.color = '#D32F2F';
+                        treeFeedback.style.display = 'block';
+                        return;
+                    }
+                    
+                    // 모든 선택한 옵션이 정답인지 확인
+                    const allCorrect = selectedOptions.every(option => problem.correctChildren.includes(option));
+                    // 모든 정답을 선택했는지 확인
+                    const allSelected = problem.correctChildren.every(correct => selectedOptions.includes(correct));
+                    
+                    if (allCorrect && allSelected) {
+                        treeFeedback.textContent = '정답입니다! 모든 하위어를 올바르게 선택했습니다.';
+                        treeFeedback.style.backgroundColor = '#E8F5E9';
+                        treeFeedback.style.color = '#388E3C';
+                    } else if (allCorrect) {
+                        treeFeedback.textContent = '선택한 것은 모두 맞지만, 아직 더 선택할 하위어가 있습니다.';
+                        treeFeedback.style.backgroundColor = '#FFF3E0';
+                        treeFeedback.style.color = '#E65100';
+                    } else {
+                        treeFeedback.textContent = '틀렸습니다. 다시 확인해보세요.';
+                        treeFeedback.style.backgroundColor = '#FFEBEE';
+                        treeFeedback.style.color = '#D32F2F';
+                    }
+                    
+                    treeFeedback.style.display = 'block';
+                });
+                
+                // 다음 문제
+                treeNextButton.addEventListener('click', function() {
+                    currentProblemIndex = (currentProblemIndex + 1) % treeProblems.length;
+                    setTreeProblem(currentProblemIndex);
+                });
+                
+                // 첫 문제 설정
+                setTreeProblem(currentProblemIndex);
+                
+                function shuffleArray(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                }
+            }
+            
+            // 문장 바꿔 쓰기 활동 초기화
+            function initRewriteActivity() {
+                const rewriteProblems = [
+                    {
+                        sentence: '나는 <span style="text-decoration: underline; font-weight: bold; color: #FF7675;">자동차</span>를 타고 학교에 갔다.',
+                        word: '자동차',
+                        relationType: '유의어',
+                        possibleAnswers: ['차량', '차', '승용차']
+                    },
+                    {
+                        sentence: '그녀는 <span style="text-decoration: underline; font-weight: bold; color: #FF7675;">기쁘게</span> 웃었다.',
+                        word: '기쁘게',
+                        relationType: '유의어',
+                        possibleAnswers: ['즐겁게', '행복하게', '흐뭇하게']
+                    },
+                    {
+                        sentence: '이 <span style="text-decoration: underline; font-weight: bold; color: #FF7675;">바지</span>는 새 것이다.',
+                        word: '바지',
+                        relationType: '상위어',
+                        possibleAnswers: ['옷', '의류', '의복']
+                    },
+                    {
+                        sentence: '나는 <span style="text-decoration: underline; font-weight: bold; color: #FF7675;">과일</span>을 좋아한다.',
+                        word: '과일',
+                        relationType: '하위어',
+                        possibleAnswers: ['사과', '바나나', '딸기', '포도']
+                    }
+                ];
+                
+                let currentProblemIndex = 0;
+                const originalSentence = document.getElementById('original-sentence');
+                const relationType = document.getElementById('relation-type');
+                const rewrittenSentence = document.getElementById('rewritten-sentence');
+                const rewriteCheckButton = document.getElementById('rewrite-check');
+                const rewriteNextButton = document.getElementById('rewrite-next');
+                const rewriteFeedback = document.getElementById('rewrite-feedback');
+                
+                // 문제 설정
+                function setRewriteProblem(index) {
+                    const problem = rewriteProblems[index];
+                    originalSentence.innerHTML = problem.sentence;
+                    relationType.textContent = problem.relationType;
+                    rewrittenSentence.value = '';
+                    rewriteFeedback.style.display = 'none';
+                }
+                
+                // 정답 확인
+                rewriteCheckButton.addEventListener('click', function() {
+                    const problem = rewriteProblems[currentProblemIndex];
+                    const userAnswer = rewrittenSentence.value.trim();
+                    
+                    if (userAnswer === '') {
+                        rewriteFeedback.textContent = '바꿔 쓴 문장을 입력해주세요.';
+                        rewriteFeedback.style.backgroundColor = '#FFEBEE';
+                        rewriteFeedback.style.color = '#D32F2F';
+                        rewriteFeedback.style.display = 'block';
+                        return;
+                    }
+                    
+                    // 가능한 답변 중 하나가 포함되어 있는지 확인
+                    const containsAnswer = problem.possibleAnswers.some(answer => userAnswer.includes(answer));
+                    
+                    if (containsAnswer) {
+                        rewriteFeedback.textContent = '잘했습니다! 적절한 낱말을 사용해 문장을 바꿔 썼습니다.';
+                        rewriteFeedback.style.backgroundColor = '#E8F5E9';
+                        rewriteFeedback.style.color = '#388E3C';
+                    } else {
+                        rewriteFeedback.textContent = `다시 한번 생각해 보세요. ${problem.word}의 ${problem.relationType}를 사용해야 합니다.`;
+                        rewriteFeedback.style.backgroundColor = '#FFEBEE';
+                        rewriteFeedback.style.color = '#D32F2F';
+                    }
+                    
+                    rewriteFeedback.style.display = 'block';
+                });
+                
+                // 다음 문제
+                rewriteNextButton.addEventListener('click', function() {
+                    currentProblemIndex = (currentProblemIndex + 1) % rewriteProblems.length;
+                    setRewriteProblem(currentProblemIndex);
+                });
+                
+                // 첫 문제 설정
+                setRewriteProblem(currentProblemIndex);
+            }
         });
     </script>
     
     
-    
-    
-    
+
     <!-- 푸터 영역 -->
     <footer></footer>
     
