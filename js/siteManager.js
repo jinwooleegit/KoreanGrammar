@@ -1,6 +1,7 @@
 /**
  * 사이트 매니저 - 메뉴 및 푸터 관리 시스템
  * 모든 페이지에 일관된 헤더와 푸터를 적용하고 관리하는 통합 시스템
+ * 버전: 1.1.0 (캐시 방지)
  */
 
 class SiteManager {
@@ -10,8 +11,12 @@ class SiteManager {
             { id: 'grade', title: '학년별 학습', url: '/pages/grade-learning/index.html', pattern: /grade-learning/ },
             { id: 'topics', title: '학습 주제별', url: '/pages/topics/index.html', pattern: /topics/ },
             { id: 'activities', title: '학습 활동', url: '/pages/activities/index.html', pattern: /activities/ },
+            { id: 'progress', title: '나의 학습 진도', url: '/pages/progress/index.html', pattern: /progress/ },
             { id: 'sitemap', title: '사이트맵', url: '/sitemap.html', pattern: /sitemap\.html/ }
         ];
+        
+        // 캐시 방지 (v1.1.0)
+        console.log('SiteManager 초기화: 버전 1.1.0');
         
         // 현재 페이지 경로 분석
         this.currentPath = window.location.pathname;

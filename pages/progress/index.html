@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>학습 진도 관리 - 문법놀이터</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="progress-styles.css">
+    <link rel="stylesheet" href="/assets/css/progress-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- 구형 브라우저 지원을 위한 폴리필 -->
@@ -19,9 +19,6 @@
 <body>
     <!-- 헤더 영역 -->
     <header></header>
-    
-    <!-- 헤더 영역 -->
-    
 
     <!-- 메인 콘텐츠 영역 -->
     <main>
@@ -45,7 +42,7 @@
             <div class="guide-content" id="guide-content">
                 <div class="guide-card">
                     <div class="guide-icon">
-                        <div class="placeholder-img small-icon"></div>
+                        <div class="small-icon"><i class="fas fa-chart-line"></i></div>
                     </div>
                     <div class="guide-text">
                         <h3>진도 확인하기</h3>
@@ -55,7 +52,7 @@
                 
                 <div class="guide-card">
                     <div class="guide-icon">
-                        <div class="placeholder-img small-icon"></div>
+                        <div class="small-icon"><i class="fas fa-laptop"></i></div>
                     </div>
                     <div class="guide-text">
                         <h3>다른 컴퓨터에서도 볼 수 있어요</h3>
@@ -65,7 +62,7 @@
                 
                 <div class="guide-card">
                     <div class="guide-icon">
-                        <div class="placeholder-img small-icon"></div>
+                        <div class="small-icon"><i class="fas fa-save"></i></div>
                     </div>
                     <div class="guide-text">
                         <h3>학습 기록이 자동으로 저장돼요</h3>
@@ -75,7 +72,7 @@
                 
                 <div class="guide-card">
                     <div class="guide-icon">
-                        <div class="placeholder-img small-icon"></div>
+                        <div class="small-icon"><i class="fas fa-redo"></i></div>
                     </div>
                     <div class="guide-text">
                         <h3>학습 이어하기</h3>
@@ -91,8 +88,7 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon completed-icon">
-                        <!-- 플레이스홀더 아이콘 -->
-                        <div class="placeholder-img small-icon"></div>
+                        <i class="fas fa-check-circle fa-2x"></i>
                     </div>
                     <div class="stat-content">
                         <h3>학습 완료</h3>
@@ -103,8 +99,7 @@
                 
                 <div class="stat-card">
                     <div class="stat-icon streak-icon">
-                        <!-- 플레이스홀더 아이콘 -->
-                        <div class="placeholder-img small-icon"></div>
+                        <i class="fas fa-fire-alt fa-2x"></i>
                     </div>
                     <div class="stat-content">
                         <h3>연속 학습일</h3>
@@ -115,8 +110,7 @@
                 
                 <div class="stat-card">
                     <div class="stat-icon time-icon">
-                        <!-- 플레이스홀더 아이콘 -->
-                        <div class="placeholder-img small-icon"></div>
+                        <i class="fas fa-clock fa-2x"></i>
                     </div>
                     <div class="stat-content">
                         <h3>총 학습 시간</h3>
@@ -127,8 +121,7 @@
                 
                 <div class="stat-card">
                     <div class="stat-icon score-icon">
-                        <!-- 플레이스홀더 아이콘 -->
-                        <div class="placeholder-img small-icon"></div>
+                        <i class="fas fa-star fa-2x"></i>
                     </div>
                     <div class="stat-content">
                         <h3>평균 점수</h3>
@@ -155,8 +148,9 @@
                 <div class="progress-chart">
                     <h3>전체 진도율</h3>
                     <div class="chart-container">
-                        <!-- 차트 이미지 플레이스홀더 -->
-                        <div class="placeholder-img chart-img"></div>
+                        <div class="chart-img">
+                            <i class="fas fa-chart-pie fa-4x" style="color: #4A89DC; display: flex; height: 100%; justify-content: center; align-items: center;"></i>
+                        </div>
                     </div>
                     <div class="progress-bar-container">
                         <div class="progress-bar-label">
@@ -175,7 +169,7 @@
                         <!-- 여기에 동적으로 학습 주제가 추가됩니다 -->
                         <div class="empty-state">
                             <p>아직 학습한 내용이 없습니다.</p>
-                            <a href="../../index.html" class="start-btn">학습 시작하기</a>
+                            <a href="/pages/grade-learning/grade1/" class="start-btn">학습 시작하기</a>
                         </div>
                     </div>
                 </div>
@@ -228,20 +222,11 @@
     </main>
 
     <!-- 푸터 영역 -->
-    
-
-    <script src="progress.js"></script>
-    
-    
-    
-    
-    
-    <!-- 푸터 영역 -->
     <footer></footer>
-    
-    <script src="/js/siteManager.js"></script>
 
+    <!-- 스크립트 -->
     <script src="/assets/js/scripts.js"></script>
     <script src="/js/siteManager.js"></script>
+    <script src="/pages/progress/progress.js"></script>
 </body>
 </html> 
