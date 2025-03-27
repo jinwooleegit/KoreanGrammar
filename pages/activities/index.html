@@ -28,114 +28,33 @@
             margin: 0 auto;
         }
 
-        .filter-section {
-            background-color: #f9f9f9;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .filter-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        .filter-label {
-            font-weight: bold;
-            color: #333;
-            margin-right: 5px;
-            width: 100%;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .filter-button {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            padding: 6px 12px;
-            font-size: 14px;
-            color: #555;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-button:hover, .filter-button.active {
-            background-color: #FF9800;
-            color: white;
-            border-color: #FF9800;
-        }
-        
-        .filter-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            width: 100%;
-        }
-        
-        .filter-reset {
-            background-color: #f1f1f1;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            padding: 6px 12px;
-            font-size: 14px;
-            color: #555;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .filter-reset:hover {
-            background-color: #e0e0e0;
-        }
-        
-        .search-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            width: 100%;
-        }
-        
-        .search-input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-        
-        .search-button {
-            background-color: #FF9800;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;
-            margin-left: 8px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .search-button:hover {
-            background-color: #F57C00;
-        }
-
         .main-content {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
+        }
+        
+        .main-content h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .section-intro {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .activities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
+            margin-bottom: 40px;
         }
 
         .activity-card {
@@ -143,11 +62,15 @@
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .activity-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         .activity-image {
@@ -163,6 +86,9 @@
 
         .activity-content {
             padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .activity-tags {
@@ -211,6 +137,7 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            flex-grow: 1;
         }
 
         .activity-stats {
@@ -233,6 +160,8 @@
             cursor: pointer;
             width: 100%;
             transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
         }
 
         .activity-button:hover {
@@ -255,36 +184,50 @@
         .type-conversation .activity-image {
             border-color: #9C27B0;
         }
-
-        /* 페이지네이션 */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
-            gap: 8px;
+        
+        /* 준비 중인 활동 카드 스타일 */
+        .coming-soon .activity-image {
+            border-color: #9E9E9E;
+            opacity: 0.7;
         }
-
-        .page-button {
-            width: 36px;
-            height: 36px;
-            border: 1px solid #ddd;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
+        
+        .coming-soon .activity-content {
+            opacity: 0.8;
+        }
+        
+        .coming-soon-label {
+            background-color: #f1f1f1;
+            color: #757575;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
             font-weight: 500;
-            cursor: pointer;
         }
-
-        .page-button.active {
+        
+        /* 맨 위로 버튼 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+        }
+        
+        #backToTopBtn {
+            width: 44px;
+            height: 44px;
             background-color: #FF9800;
             color: white;
-            border-color: #FF9800;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
         }
-
-        .page-button:hover:not(.active) {
-            background-color: #f0f0f0;
+        
+        #backToTopBtn:hover {
+            background-color: #F57C00;
         }
     
         /* 반응형 설정 */
@@ -293,36 +236,38 @@
                 padding: 0 15px;
             }
             
-            .topic-card, .activity-card, .exercise-card {
-                width: 100%;
-            }
-            
-            .filter-container {
-                flex-direction: column;
-            }
-            
-            .filter-group {
-                width: 100%;
+            .activities-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
         }
         
         @media (max-width: 480px) {
-            h1 {
+            .activities-header h1 {
                 font-size: 24px;
             }
             
-            p {
+            .activities-header p, .section-intro {
                 font-size: 14px;
+            }
+            
+            .main-content h2 {
+                font-size: 22px;
             }
             
             .activities-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
             }
         }
         
         /* 애니메이션 */
         .fade-in {
             animation: fadeIn 0.5s ease-in-out forwards;
+            opacity: 0;
         }
         
         @keyframes fadeIn {
@@ -347,46 +292,10 @@
         <p>다양한 게임과 퀴즈로 문법을 재미있게 배워보세요. 각 활동은 학년과 주제에 맞게 구성되어 있습니다.</p>
     </div>
 
-    <section class="filter-section">
-        <div class="filter-container">
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="활동 검색..." aria-label="활동 검색">
-                <button class="search-button" aria-label="검색"><i class="fas fa-search"></i></button>
-            </div>
-            
-            <div class="filter-label">활동 유형:</div>
-            <div class="filter-group" role="group" aria-label="활동 유형 필터">
-                <button class="filter-button active" aria-pressed="true">전체</button>
-                <button class="filter-button" aria-pressed="false">게임</button>
-                <button class="filter-button" aria-pressed="false">퀴즈</button>
-                <button class="filter-button" aria-pressed="false">글쓰기</button>
-                <button class="filter-button" aria-pressed="false">대화</button>
-            </div>
-
-            <div class="filter-label">학년:</div>
-            <div class="filter-group" role="group" aria-label="학년 필터">
-                <button class="filter-button active" aria-pressed="true">전체</button>
-                <button class="filter-button" aria-pressed="false">1-2학년</button>
-                <button class="filter-button" aria-pressed="false">3-4학년</button>
-                <button class="filter-button" aria-pressed="false">5-6학년</button>
-            </div>
-
-            <div class="filter-label">학습 주제:</div>
-            <div class="filter-group" role="group" aria-label="학습 주제 필터">
-                <button class="filter-button active" aria-pressed="true">전체</button>
-                <button class="filter-button" aria-pressed="false">낱말</button>
-                <button class="filter-button" aria-pressed="false">문장</button>
-                <button class="filter-button" aria-pressed="false">문법</button>
-                <button class="filter-button" aria-pressed="false">표현</button>
-            </div>
-            
-            <div class="filter-actions">
-                <button class="filter-reset" id="reset-filters"><i class="fas fa-undo"></i> 필터 초기화</button>
-            </div>
-        </div>
-    </section>
-
     <main class="main-content">
+        <h2>모든 학습 활동</h2>
+        <p class="section-intro">아래에서 모든 학습 활동을 확인하고 관심 있는 활동을 선택해보세요. 각 활동은 학년, 유형, 주제별로 태그가 표시되어 있습니다.</p>
+        
         <div class="activities-grid">
             <!-- 낱말 카드 매칭 게임 -->
             <div class="activity-card type-game fade-in">
@@ -579,15 +488,27 @@
                     <a href="proverb_puzzle.html" class="activity-button">활동 시작하기</a>
                 </div>
             </div>
+            
+            <!-- 더 많은 활동은 추후 업데이트 -->
+            <div class="activity-card coming-soon">
+                <div class="activity-image">
+                    <i class="fas fa-clock fa-3x"></i>
+                </div>
+                <div class="activity-content">
+                    <h3 class="activity-title">더 많은 활동이 준비 중입니다</h3>
+                    <p class="activity-description">
+                        매주 새로운 학습 활동이 추가됩니다. 정기적으로 방문하셔서 
+                        새롭게 추가된 재미있는 학습 활동을 확인해 보세요!
+                    </p>
+                    <div class="activity-meta">
+                        <span class="coming-soon-label">곧 공개됩니다</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="pagination" role="navigation" aria-label="페이지 네비게이션">
-            <button class="page-button active" aria-label="1페이지" aria-current="page">1</button>
-            <button class="page-button" aria-label="2페이지">2</button>
-            <button class="page-button" aria-label="3페이지">3</button>
-            <button class="page-button" aria-label="4페이지">4</button>
-            <button class="page-button" aria-label="중간 페이지">...</button>
-            <button class="page-button" aria-label="마지막 페이지">8</button>
+        <div class="back-to-top">
+            <button id="backToTopBtn" aria-label="맨 위로 이동"><i class="fas fa-arrow-up"></i></button>
         </div>
     </main>
 
@@ -596,177 +517,30 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 필터 버튼에 이벤트 리스너 추가
-            const filterButtons = document.querySelectorAll('.filter-button');
+            // 모든 활동 카드에 애니메이션 효과 추가
+            const activityCards = document.querySelectorAll('.activity-card');
             
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // 같은 그룹 내의 다른 버튼에서 active 클래스 제거
-                    const parent = this.parentElement;
-                    parent.querySelectorAll('.filter-button').forEach(btn => {
-                        btn.classList.remove('active');
-                        btn.setAttribute('aria-pressed', 'false');
-                    });
-                    
-                    // 현재 버튼에 active 클래스 추가
-                    this.classList.add('active');
-                    this.setAttribute('aria-pressed', 'true');
-                    
-                    // 필터링 기능 구현
-                    applyFilters();
-                });
+            activityCards.forEach((card, index) => {
+                // 카드 순서에 따라 조금씩 지연시켜 애니메이션 적용
+                setTimeout(() => {
+                    card.classList.add('fade-in');
+                }, index * 100);
             });
             
-            // 페이지네이션 버튼에 이벤트 리스너 추가
-            const pageButtons = document.querySelectorAll('.page-button');
+            // 맨 위로 스크롤 버튼
+            const backToTopBtn = document.getElementById('backToTopBtn');
             
-            pageButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    pageButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        btn.removeAttribute('aria-current');
-                    });
-                    
-                    this.classList.add('active');
-                    this.setAttribute('aria-current', 'page');
-                    
-                    // 페이지 변경 기능 구현
-                    if (this.textContent !== '...') {
-                        // 여기서는 간단히 스크롤만 상단으로 올림
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                });
-            });
-            
-            // 필터 초기화 버튼
-            const resetButton = document.getElementById('reset-filters');
-            resetButton.addEventListener('click', function() {
-                // 모든 필터를 첫 번째 옵션(전체)로 리셋
-                document.querySelectorAll('.filter-group').forEach(group => {
-                    const buttons = group.querySelectorAll('.filter-button');
-                    buttons.forEach((btn, index) => {
-                        btn.classList.remove('active');
-                        btn.setAttribute('aria-pressed', 'false');
-                        if (index === 0) {
-                            btn.classList.add('active');
-                            btn.setAttribute('aria-pressed', 'true');
-                        }
-                    });
-                });
-                
-                // 검색어 초기화
-                document.querySelector('.search-input').value = '';
-                
-                // 필터 적용
-                applyFilters();
-            });
-            
-            // 검색 기능
-            const searchButton = document.querySelector('.search-button');
-            const searchInput = document.querySelector('.search-input');
-            
-            searchButton.addEventListener('click', function() {
-                applyFilters();
-            });
-            
-            searchInput.addEventListener('keyup', function(event) {
-                if (event.key === 'Enter') {
-                    applyFilters();
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.style.display = 'block';
+                } else {
+                    backToTopBtn.style.display = 'none';
                 }
             });
-
-            // 필터링 함수
-            function applyFilters() {
-                // 현재 활성화된 필터 값들 가져오기
-                const activeFilters = {};
-                
-                // 각 필터 그룹에서 활성화된 버튼의 텍스트 가져오기
-                document.querySelectorAll('.filter-group').forEach((group, index) => {
-                    const activeButton = group.querySelector('.filter-button.active');
-                    if (activeButton) {
-                        // 필터 라벨에 따라 필터 타입 설정
-                        const filterLabel = group.previousElementSibling.textContent.trim().replace(':', '');
-                        activeFilters[filterLabel] = activeButton.textContent;
-                    }
-                });
-                
-                // 검색어 가져오기
-                const searchTerm = searchInput.value.toLowerCase().trim();
-                
-                // 모든 활동 카드 선택
-                const activityCards = document.querySelectorAll('.activity-card');
-                
-                // 각 카드에 대해 필터링 적용
-                activityCards.forEach(card => {
-                    let shouldShow = true;
-                    
-                    // 활동 유형 필터링
-                    if (activeFilters['활동 유형'] && activeFilters['활동 유형'] !== '전체') {
-                        const typeTag = card.querySelector('.tag-type');
-                        if (!typeTag || typeTag.textContent !== activeFilters['활동 유형']) {
-                            shouldShow = false;
-                        }
-                    }
-                    
-                    // 학년 필터링
-                    if (shouldShow && activeFilters['학년'] && activeFilters['학년'] !== '전체') {
-                        const gradeTag = card.querySelector('.tag-grade');
-                        if (!gradeTag || !gradeTag.textContent.includes(activeFilters['학년'].replace('학년', ''))) {
-                            shouldShow = false;
-                        }
-                    }
-                    
-                    // 학습 주제 필터링
-                    if (shouldShow && activeFilters['학습 주제'] && activeFilters['학습 주제'] !== '전체') {
-                        const topicTag = card.querySelector('.tag-topic');
-                        if (!topicTag || topicTag.textContent !== activeFilters['학습 주제']) {
-                            shouldShow = false;
-                        }
-                    }
-                    
-                    // 검색어 필터링
-                    if (shouldShow && searchTerm !== '') {
-                        const title = card.querySelector('.activity-title').textContent.toLowerCase();
-                        const description = card.querySelector('.activity-description').textContent.toLowerCase();
-                        if (!title.includes(searchTerm) && !description.includes(searchTerm)) {
-                            shouldShow = false;
-                        }
-                    }
-                    
-                    // 필터링 결과에 따라 카드 표시/숨김
-                    card.style.display = shouldShow ? 'block' : 'none';
-                    
-                    // 애니메이션 효과 추가
-                    if (shouldShow) {
-                        card.classList.remove('fade-in');
-                        void card.offsetWidth; // 리플로우 강제로 발생시켜 애니메이션 재시작
-                        card.classList.add('fade-in');
-                    }
-                });
-                
-                // 필터링 결과가 없을 때 메시지 표시
-                const visibleCards = document.querySelectorAll('.activity-card[style="display: block"]');
-                let noResultsMsg = document.getElementById('no-results-message');
-                
-                if (visibleCards.length === 0) {
-                    // 결과 없음 메시지가 없으면 생성
-                    if (!noResultsMsg) {
-                        const message = document.createElement('div');
-                        message.id = 'no-results-message';
-                        message.style.textAlign = 'center';
-                        message.style.padding = '30px';
-                        message.style.color = '#666';
-                        message.style.width = '100%';
-                        message.innerHTML = '검색 결과가 없습니다. 다른 필터를 선택하거나 검색어를 변경해 보세요.';
-                        
-                        const activitiesGrid = document.querySelector('.activities-grid');
-                        activitiesGrid.appendChild(message);
-                    }
-                } else if (noResultsMsg) {
-                    // 결과가 있는데 메시지가 있으면 제거
-                    noResultsMsg.remove();
-                }
-            }
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         });
     </script>
     
