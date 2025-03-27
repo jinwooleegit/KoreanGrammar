@@ -13,6 +13,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 카드 및 버튼 호버 효과
     initHoverEffects();
+
+    // 위로 가기 버튼 기능
+    // 위로 가기 버튼 요소 생성
+    const scrollToTopBtn = document.createElement('div');
+    scrollToTopBtn.className = 'scroll-to-top';
+    scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    document.body.appendChild(scrollToTopBtn);
+    
+    // 스크롤 이벤트 리스너
+    window.addEventListener('scroll', function() {
+        // 현재 스크롤 위치가 100px 이상이면 버튼 표시
+        if (window.pageYOffset > 100) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+    
+    // 버튼 클릭 이벤트
+    scrollToTopBtn.addEventListener('click', function() {
+        // 부드러운 스크롤로 페이지 상단으로 이동
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 });
 
 // 플레이스홀더 초기화 함수

@@ -10,7 +10,8 @@ class SiteManager {
             { id: 'home', title: '홈', url: 'index.html', pattern: /index\.html$|^\/$/ },
             { id: 'grade', title: '학년별 학습', url: 'grade-learning/index.html', pattern: /grade-learning/ },
             { id: 'topics', title: '학습 주제별', url: 'topics/index.html', pattern: /topics/ },
-            { id: 'activities', title: '학습 활동', url: 'activities/index.html', pattern: /activities/ }
+            { id: 'activities', title: '학습 활동', url: 'activities/index.html', pattern: /activities/ },
+            { id: 'sitemap', title: '사이트맵', url: 'sitemap.html', pattern: /sitemap\.html/ }
         ];
         
         // 현재 페이지 경로 분석
@@ -76,6 +77,7 @@ class SiteManager {
         document.addEventListener('DOMContentLoaded', () => {
             this.loadHeader();
             this.loadFooter();
+            this.addBackToTopButton();
         });
     }
     
@@ -148,6 +150,34 @@ class SiteManager {
                 }
             }
         }
+    }
+    
+    /**
+     * Back to Top 버튼 추가
+     */
+    addBackToTopButton() {
+        // Back to Top 버튼 생성
+        const backToTopButton = document.createElement('div');
+        backToTopButton.className = 'back-to-top';
+        backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        document.body.appendChild(backToTopButton);
+        
+        // 스크롤 이벤트 리스너 추가
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) { // 300px 이상 스크롤 시 버튼 표시
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        // 클릭 이벤트 리스너 추가
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // 부드러운 스크롤 효과
+            });
+        });
     }
     
     /**

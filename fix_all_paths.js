@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const glob = require('glob');
 
 // 모든 HTML 파일 찾기
 function findAllHtmlFiles(dir, fileList = []) {
@@ -230,22 +231,196 @@ function processFile(filePath) {
 }
 
 // 메인 함수
-function main() {
-    const rootDir = '.';
-    const htmlFiles = findAllHtmlFiles(rootDir);
+async function fixAllPaths() {
+    console.log('전체 파일 경로 수정 시작...');
     
-    console.log(`처리할 HTML 파일 ${htmlFiles.length}개를 찾았습니다.`);
-    
-    let updatedCount = 0;
-    
-    htmlFiles.forEach(filePath => {
-        if (processFile(filePath)) {
-            updatedCount++;
-        }
+    // 모든 HTML 파일 찾기
+    const htmlFiles = glob.sync('**/*.html', {
+        ignore: ['node_modules/**', '.git/**'],
+        cwd: __dirname
     });
     
-    console.log(`모든 파일이 처리되었습니다. ${updatedCount}/${htmlFiles.length} 파일이 업데이트되었습니다.`);
+    console.log(`총 ${htmlFiles.length}개의 HTML 파일을 찾았습니다.`);
+    
+    let totalFixed = 0;
+    let filesModified = 0;
+    
+    // 각 HTML 파일 처리
+    for (const file of htmlFiles) {
+        const filePath = path.join(__dirname, file);
+        let content = fs.readFileSync(filePath, 'utf8');
+        let modified = false;
+        let fixCount = 0;
+        
+        // 상대 경로 확인 기준 디렉토리 (파일이 있는 디렉토리)
+        const fileDir = path.dirname(file);
+        const depthFromRoot = fileDir.split(path.sep).length - 1;
+        const relativePrefix = depthFromRoot > 0 ? '../'.repeat(depthFromRoot) : './';
+        
+        // 1. 잘못된 CSS 경로 수정
+        const cssPatterns = [
+            // 잘못된 상대 경로 패턴들
+            { pattern: /(?:\.\.\/)+assets\/css\/styles\.css/g, replacement: '/assets/css/styles.css' },
+            { pattern: /(?:\.\.\/)*pages\/assets\/css\/styles\.css/g, replacement: '/assets/css/styles.css' },
+            { pattern: /(?:\.\.\/)*assets\/css\/styles\.css/g, replacement: '/assets/css/styles.css' }
+        ];
+        
+        for (const { pattern, replacement } of cssPatterns) {
+            if (pattern.test(content)) {
+                const originalContent = content;
+                content = content.replace(pattern, replacement);
+                if (originalContent !== content) {
+                    fixCount++;
+                    modified = true;
+                }
+            }
+        }
+        
+        // 2. 잘못된 JavaScript 경로 수정
+        const jsPatterns = [
+            // siteManager.js 경로 수정
+            { pattern: /(?:\.\.\/)+js\/siteManager\.js/g, replacement: '/js/siteManager.js' },
+            { pattern: /(?:\.\.\/)*pages\/js\/siteManager\.js/g, replacement: '/js/siteManager.js' },
+            // scripts.js 경로 수정
+            { pattern: /(?:\.\.\/)+assets\/js\/scripts\.js/g, replacement: '/assets/js/scripts.js' },
+            { pattern: /(?:\.\.\/)*pages\/assets\/js\/scripts\.js/g, replacement: '/assets/js/scripts.js' }
+        ];
+        
+        for (const { pattern, replacement } of jsPatterns) {
+            if (pattern.test(content)) {
+                const originalContent = content;
+                content = content.replace(pattern, replacement);
+                if (originalContent !== content) {
+                    fixCount++;
+                    modified = true;
+                }
+            }
+        }
+        
+        // 3. 내부 링크 수정
+        // index.html이 아닌 디렉토리로 끝나는 링크를 찾아 index.html 명시
+        const linkPattern = /<a\s+(?:[^>]*?\s+)?href=["']([^"']*\/)["'][^>]*>(.*?)<\/a>/g;
+        let match;
+        
+        while ((match = linkPattern.exec(content)) !== null) {
+            const linkHref = match[1];
+            const linkText = match[2];
+            
+            // 외부 링크는 건너뛰기 (http, https로 시작하는 링크)
+            if (linkHref.startsWith('http://') || linkHref.startsWith('https://')) {
+                continue;
+            }
+            
+            // 디렉토리로 끝나는 내부 링크인 경우 index.html 추가
+            if (linkHref.endsWith('/') && !linkHref.endsWith('index.html')) {
+                const newHref = `${linkHref}index.html`;
+                const newLink = `<a href="${newHref}">${linkText}</a>`;
+                const originalLink = match[0];
+                
+                // 링크 교체
+                content = content.replace(originalLink, newLink);
+                fixCount++;
+                modified = true;
+            }
+        }
+        
+        // 4. 이미지 경로 수정
+        const imgPatterns = [
+            { pattern: /(?:\.\.\/)+assets\/images\//g, replacement: '/assets/images/' },
+            { pattern: /(?:\.\.\/)*pages\/assets\/images\//g, replacement: '/assets/images/' }
+        ];
+        
+        for (const { pattern, replacement } of imgPatterns) {
+            if (pattern.test(content)) {
+                const originalContent = content;
+                content = content.replace(pattern, replacement);
+                if (originalContent !== content) {
+                    fixCount++;
+                    modified = true;
+                }
+            }
+        }
+        
+        // 5. 파비콘 경로 수정
+        if (content.includes('<link rel="icon"') || content.includes('<link rel="shortcut icon"')) {
+            const faviconPatterns = [
+                { pattern: /<link rel="icon" href="[^"]*favicon\.ico"/, replacement: '<link rel="icon" href="/favicon.ico"' },
+                { pattern: /<link rel="shortcut icon" href="[^"]*favicon\.ico"/, replacement: '<link rel="shortcut icon" href="/favicon.ico"' }
+            ];
+            
+            for (const { pattern, replacement } of faviconPatterns) {
+                if (pattern.test(content)) {
+                    const originalContent = content;
+                    content = content.replace(pattern, replacement);
+                    if (originalContent !== content) {
+                        fixCount++;
+                        modified = true;
+                    }
+                }
+            }
+        }
+        
+        // 변경사항이 있으면 파일 저장
+        if (modified) {
+            fs.writeFileSync(filePath, content, 'utf8');
+            console.log(`${file}: ${fixCount}개 경로 수정됨`);
+            totalFixed += fixCount;
+            filesModified++;
+        }
+    }
+    
+    console.log(`\n총 결과: ${filesModified}개 파일에서 ${totalFixed}개 경로가 수정되었습니다.`);
+    console.log('전체 파일 경로 수정 완료!');
 }
 
-// 스크립트 실행
-main(); 
+// glob 모듈 확인 및 설치
+function ensureGlobModule() {
+    try {
+        require.resolve('glob');
+        return Promise.resolve();
+    } catch (e) {
+        console.log('glob 모듈을 설치합니다...');
+        return new Promise((resolve, reject) => {
+            const { exec } = require('child_process');
+            exec('npm install glob', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`glob 모듈 설치 실패: ${error.message}`);
+                    reject(error);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`glob 모듈 설치 중 경고: ${stderr}`);
+                }
+                console.log(`glob 모듈 설치 완료: ${stdout}`);
+                resolve();
+            });
+        });
+    }
+}
+
+// 루트에 favicon.ico 복사
+function copyFaviconToRoot() {
+    const faviconSource = path.join(__dirname, 'assets', 'images', 'favicon.ico');
+    const faviconDest = path.join(__dirname, 'favicon.ico');
+    
+    if (fs.existsSync(faviconSource) && !fs.existsSync(faviconDest)) {
+        console.log('루트 디렉토리에 favicon.ico 복사...');
+        try {
+            fs.copyFileSync(faviconSource, faviconDest);
+            console.log('favicon.ico를 루트 디렉토리에 복사했습니다.');
+        } catch (error) {
+            console.error('파비콘 복사 중 오류:', error);
+        }
+    }
+}
+
+// 실행
+(async function run() {
+    try {
+        await ensureGlobModule();
+        copyFaviconToRoot();
+        await fixAllPaths();
+    } catch (error) {
+        console.error('오류 발생:', error);
+    }
+})(); 
