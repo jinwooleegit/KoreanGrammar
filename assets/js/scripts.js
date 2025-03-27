@@ -86,9 +86,13 @@ function registerButtonListeners() {
     const startButtons = document.querySelectorAll('.start-btn');
     startButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const contentTitle = this.closest('.content-card').querySelector('h3').textContent;
-            alert(`"${contentTitle}" 학습을 시작합니다!`);
+            // 링크 이동 방지 코드 제거
+            // e.preventDefault();
+            // const contentTitle = this.closest('.content-card').querySelector('h3').textContent;
+            // alert(`"${contentTitle}" 학습을 시작합니다!`);
+            
+            // 버튼에 있는 링크로 이동하도록 유지
+            // (기본 동작을 막지 않음)
         });
     });
 }
