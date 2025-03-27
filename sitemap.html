@@ -20,537 +20,330 @@
             font-family: 'Noto Sans KR', Arial, sans-serif;
             padding: 0;
             margin: 0;
-        }
-        .sitemap-container {
-            width: 1200px;
-            height: 1500px;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            position: relative;
-            padding: 20px;
-            margin: 50px auto;
-        }
-        .main-node {
-            position: absolute;
-            left: 50%;
-            top: 60px;
-            transform: translateX(-50%);
-            width: 220px;
-            height: 60px;
-            background-color: #4A89DC;
-            color: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 2;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .main-node:hover {
-            background-color: #3A79CC;
-        }
-        .section-node {
-            position: absolute;
-            width: 200px;
-            height: 60px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 2;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .section-node:hover {
-            opacity: 0.9;
-        }
-        .grade {
-            background-color: #FECA57;
-            left: 300px;
-            top: 180px;
-        }
-        .topics {
-            background-color: #FF6B6B;
-            left: 700px;
-            top: 180px;
-        }
-        .activities {
-            background-color: #1DD1A1;
-            left: 300px;
-            top: 580px;
-        }
-        .progress {
-            background-color: #54a0ff;
-            left: 700px;
-            top: 580px;
-        }
-        
-        .sub-node {
-            position: absolute;
-            width: 160px;
-            height: 40px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-            z-index: 2;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .sub-node:hover {
-            opacity: 0.9;
-        }
-        
-        /* 학년별 학습 노드 */
-        .grade1 { background-color: #FECA57; top: 280px; left: 80px; }
-        .grade2 { background-color: #FECA57; top: 280px; left: 300px; }
-        .grade3 { background-color: #FECA57; top: 280px; left: 520px; }
-        .grade4 { background-color: #FECA57; top: 340px; left: 80px; }
-        .grade5 { background-color: #FECA57; top: 340px; left: 300px; }
-        .grade6 { background-color: #FECA57; top: 340px; left: 520px; }
-        
-        /* 토픽별 노드 */
-        .parts { background-color: #FF6B6B; top: 280px; left: 700px; }
-        .sentence { background-color: #FF6B6B; top: 280px; left: 900px; }
-        .particles { background-color: #FF6B6B; top: 340px; left: 700px; }
-        .honorifics { background-color: #FF6B6B; top: 340px; left: 900px; }
-        .complex { background-color: #FF6B6B; top: 400px; left: 700px; }
-        .connecting { background-color: #FF6B6B; top: 400px; left: 900px; }
-        .effective { background-color: #FF6B6B; top: 460px; left: 700px; }
-        .figurative { background-color: #FF6B6B; top: 460px; left: 900px; }
-        .idioms { background-color: #FF6B6B; top: 520px; left: 700px; }
-        .persuasive { background-color: #FF6B6B; top: 520px; left: 900px; }
-        .pronunciation { background-color: #FF6B6B; top: 580px; left: 900px; }
-        .punctuation { background-color: #FF6B6B; top: 640px; left: 900px; }
-        .sentence-elem { background-color: #FF6B6B; top: 640px; left: 700px; }
-        .tense { background-color: #FF6B6B; top: 700px; left: 700px; }
-        .word-extension { background-color: #FF6B6B; top: 700px; left: 900px; }
-        .word-relations { background-color: #FF6B6B; top: 760px; left: 700px; }
-        
-        /* 학습 활동 노드 */
-        .word-matching { background-color: #1DD1A1; top: 670px; left: 80px; }
-        .sentence-quiz { background-color: #1DD1A1; top: 670px; left: 300px; }
-        .sentence-correction { background-color: #1DD1A1; top: 670px; left: 520px; }
-        .proverb { background-color: #1DD1A1; top: 730px; left: 80px; }
-        .speech-game { background-color: #1DD1A1; top: 730px; left: 300px; }
-        .idiom-story { background-color: #1DD1A1; top: 730px; left: 520px; }
-        .converter { background-color: #1DD1A1; top: 790px; left: 80px; }
-        .figurative-exp { background-color: #1DD1A1; top: 790px; left: 300px; }
-        
-        /* 진행 상황 노드 */
-        .progress-main { background-color: #54a0ff; top: 670px; left: 700px; }
-        
-        /* 세부 페이지 노드 */
-        .detail-node {
-            position: absolute;
-            width: 130px;
-            height: 30px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .detail-node:hover {
-            opacity: 0.9;
-        }
-        
-        /* 학년별 세부 페이지 노드 - 1학년 */
-        .grade1-words { background-color: #f7d794; top: 400px; left: 30px; }
-        .grade1-words-detail { background-color: #f7d794; top: 440px; left: 30px; }
-        .grade1-sentences { background-color: #f7d794; top: 480px; left: 30px; }
-        .grade1-sounds { background-color: #f7d794; top: 520px; left: 30px; }
-        .grade1-writing { background-color: #f7d794; top: 560px; left: 30px; }
-        
-        /* 학년별 세부 페이지 노드 - 2학년 */
-        .grade2-sentences { background-color: #f7d794; top: 400px; left: 250px; }
-        .grade2-sentence-types { background-color: #f7d794; top: 440px; left: 250px; }
-        
-        /* 학년별 세부 페이지 노드 - 3학년 */
-        .grade3-parts { background-color: #f7d794; top: 400px; left: 470px; }
-        .grade3-components { background-color: #f7d794; top: 440px; left: 470px; }
-        
-        /* 학년별 세부 페이지 노드 - 4학년 */
-        .grade4-tense { background-color: #f7d794; top: 400px; left: 30px; }
-        
-        /* 학년별 세부 페이지 노드 - 5학년 */
-        .grade5-figurative { background-color: #f7d794; top: 400px; left: 250px; }
-        .grade5-idioms { background-color: #f7d794; top: 440px; left: 250px; }
-        .grade5-structure { background-color: #f7d794; top: 480px; left: 250px; }
-        
-        /* 학년별 세부 페이지 노드 - 6학년 */
-        .grade6-expression { background-color: #f7d794; top: 400px; left: 470px; }
-        .grade6-honorifics { background-color: #f7d794; top: 440px; left: 470px; }
-        .grade6-grammar { background-color: #f7d794; top: 480px; left: 470px; }
-        
-        /* 연결선 */
-        .line {
-            position: absolute;
-            background-color: #ddd;
-            z-index: 1;
-        }
-        
-        /* 메인에서 섹션으로 연결 */
-        .v-line {
-            width: 2px;
-            height: 60px;
-            left: 50%;
-            top: 120px;
-        }
-        
-        /* 수평 라인 - 메인에서 각 섹션 */
-        .h-line {
-            height: 2px;
-            width: 600px;
-            left: 300px;
-            top: 180px;
-        }
-        
-        /* 수평 라인 - 활동 섹션 */
-        .h-line-activities {
-            height: 2px;
-            width: 600px;
-            left: 300px;
-            top: 580px;
-        }
-        
-        /* 라벨 */
-        .section-label {
-            position: absolute;
-            font-size: 22px;
-            font-weight: bold;
             color: #333;
         }
         
-        .label-grade {
-            top: 150px;
-            left: 300px;
+        .sitemap-header {
+            background: linear-gradient(135deg, #4A89DC 0%, #5D9CEC 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
         }
         
-        .label-topics {
-            top: 150px;
-            left: 700px;
+        .sitemap-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
         }
         
-        .label-activities {
-            top: 550px;
-            left: 300px;
+        .sitemap-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .label-progress {
-            top: 550px;
-            left: 700px;
+        .sitemap-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
         }
         
-        /* 연결선 수직 - 섹션에서 서브 노드 */
-        .v-line-grade {
-            width: 2px;
-            height: 100px;
-            left: 300px;
-            top: 180px;
+        .sitemap-section {
+            margin-bottom: 40px;
         }
         
-        .v-line-topics {
-            width: 2px;
-            height: 100px;
-            left: 700px;
-            top: 180px;
+        .sitemap-section h2 {
+            font-size: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4A89DC;
+            margin-bottom: 20px;
         }
         
-        .v-line-activities {
-            width: 2px;
-            height: 90px;
-            left: 300px;
-            top: 580px;
+        .sitemap-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
         }
         
-        .v-line-progress {
-            width: 2px;
-            height: 90px;
-            left: 700px;
-            top: 580px;
-        }
-        
-        /* 연결선 수평 - 섹션에서 서브 노드로 */
-        .h-line-grade {
-            height: 2px;
-            width: 440px;
-            left: 80px;
-            top: 280px;
-        }
-        
-        .h-line-grade-b {
-            height: 2px;
-            width: 440px;
-            left: 80px;
-            top: 340px;
-        }
-        
-        .h-line-topics {
-            height: 2px;
-            width: 200px;
-            left: 700px;
-            top: 280px;
-        }
-        
-        .h-line-activities {
-            height: 2px;
-            width: 440px;
-            left: 80px;
-            top: 670px;
-        }
-        
-        /* 세부 페이지 연결선 */
-        .v-line-detail-1 {
-            width: 2px;
-            height: 60px;
-            left: 80px;
-            top: 340px;
-        }
-        
-        .v-line-detail-2 {
-            width: 2px;
-            height: 60px;
-            left: 300px;
-            top: 340px;
-        }
-        
-        .v-line-detail-3 {
-            width: 2px;
-            height: 60px;
-            left: 520px;
-            top: 340px;
-        }
-        
-        .coordinates {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: #999;
-        }
-        
-        /* 링크 스타일 */
-        a {
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* 노드 설명 툴팁 */
-        .tooltip {
+        .sitemap-item {
+            margin-bottom: 8px;
             position: relative;
         }
         
-        .tooltip:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            white-space: nowrap;
-            z-index: 10;
-            margin-bottom: 5px;
-        }
-    
-        /* 반응형 설정 */
-        @media (max-width: 1200px) {
-            .sitemap-container {
-                width: 95%;
-                height: auto;
-                padding: 20px;
-                overflow-x: auto;
-            }
-            
-            .sitemap-inner {
-                width: 1200px;
-                height: 1500px;
-                position: relative;
-            }
+        .sitemap-link {
+            display: block;
+            padding: 12px 15px;
+            background-color: #f5f8fd;
+            border-radius: 6px;
+            color: #4A89DC;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-left: 4px solid #4A89DC;
         }
         
+        .sitemap-link:hover {
+            background-color: #e8f0fc;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sitemap-link i {
+            margin-right: 8px;
+            width: 18px;
+            text-align: center;
+        }
+        
+        /* 학년별 학습 */
+        .grade-section .sitemap-link {
+            border-left-color: #FECA57;
+            color: #444;
+        }
+        
+        .grade-section .sitemap-link i {
+            color: #FECA57;
+        }
+        
+        /* 학습 주제별 */
+        .topics-section .sitemap-link {
+            border-left-color: #FF6B6B;
+            color: #444;
+        }
+        
+        .topics-section .sitemap-link i {
+            color: #FF6B6B;
+        }
+        
+        /* 학습 활동 */
+        .activities-section .sitemap-link {
+            border-left-color: #1DD1A1;
+            color: #444;
+        }
+        
+        .activities-section .sitemap-link i {
+            color: #1DD1A1;
+        }
+        
+        /* 진행 상황 */
+        .progress-section .sitemap-link {
+            border-left-color: #54a0ff;
+            color: #444;
+        }
+        
+        .progress-section .sitemap-link i {
+            color: #54a0ff;
+        }
+        
+        .back-to-home {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 12px 20px;
+            background-color: #4A89DC;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .back-to-home:hover {
+            background-color: #3A79CC;
+        }
+        
+        .back-to-home i {
+            margin-right: 8px;
+        }
+        
+        /* 반응형 설정 */
         @media (max-width: 768px) {
-            .main-content {
-                padding: 0 15px;
+            .sitemap-list {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 10px;
             }
             
-            .topic-card, .activity-card, .exercise-card {
-                width: 100%;
+            .sitemap-header h1 {
+                font-size: 28px;
+            }
+            
+            .sitemap-section h2 {
+                font-size: 22px;
             }
         }
         
         @media (max-width: 480px) {
-            h1 {
+            .sitemap-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .sitemap-header h1 {
                 font-size: 24px;
             }
             
-            p {
-                font-size: 14px;
+            .sitemap-section h2 {
+                font-size: 20px;
             }
         }
-        /* 추가 스타일 */
-        .sitemap-title {
-            text-align: center;
-            margin: 20px 0;
-            color: #333;
-        }
-        .back-to-home {
-            display: inline-block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #4A89DC;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .back-to-home:hover {
-            background-color: #3A79CC;
-        }
-        .back-container {
-            text-align: center;
-        }
-        </style>
+    </style>
 </head>
 <body>
     <!-- 헤더 영역 -->
     <header></header>
 
+    <div class="sitemap-header">
+        <h1>문법놀이터 - 전체 사이트맵</h1>
+        <p>각 항목을 클릭하면 해당 페이지로 이동합니다.</p>
+    </div>
+
     <div class="sitemap-container">
-        <div class="sitemap-inner">
-            <!-- 페이지 제목 -->
-            <h1 style="text-align: center; margin-top: 0; color: #333; font-size: 24px;">문법놀이터 - 전체 사이트맵</h1>
-            <p style="text-align: center; margin-top: 5px; color: #666; margin-bottom: 20px;">각 항목을 클릭하면 해당 페이지로 이동합니다.</p>
-            
-            <!-- 메인 노드 -->
-            <a href="index.html" class="main-node">문법놀이터</a>
-            
-            <!-- 메인 연결선 -->
-            <div class="line v-line"></div>
-            <div class="line h-line"></div>
-            
-            <!-- 섹션 노드 -->
-            <a href="pages/grade-learning/index.html" class="section-node grade">학년별 학습</a>
-            <a href="pages/topics/index.html" class="section-node topics">학습 주제별</a>
-            <a href="pages/activities/index.html" class="section-node activities">학습 활동</a>
-            <a href="pages/progress/index.html" class="section-node progress">진행 상황</a>
-            
-            <!-- 섹션 연결선 -->
-            <div class="line v-line-grade"></div>
-            <div class="line h-line-grade"></div>
-            <div class="line v-line-topics"></div>
-            <div class="line h-line-topics"></div>
-            <div class="line v-line-activities"></div>
-            <div class="line h-line-activities"></div>
-            <div class="line v-line-progress"></div>
-            <div class="line h-line-progress"></div>
-            
-            <!-- 학년별 학습 서브노드 -->
-            <a href="pages/grade-learning/grade1/index.html" class="sub-node grade1">1학년</a>
-            <a href="pages/grade-learning/grade2/index.html" class="sub-node grade2">2학년</a>
-            <a href="pages/grade-learning/grade3/index.html" class="sub-node grade3">3학년</a>
-            <a href="pages/grade-learning/grade4/index.html" class="sub-node grade4">4학년</a>
-            <a href="pages/grade-learning/grade5/index.html" class="sub-node grade5">5학년</a>
-            <a href="pages/grade-learning/grade6/index.html" class="sub-node grade6">6학년</a>
-            
-            <!-- 학습 주제별 서브노드 -->
-            <a href="pages/topics/topic_parts_of_speech.html" class="sub-node parts">품사 알아보기</a>
-            <a href="pages/topics/topic_sentence_types.html" class="sub-node sentence">문장의 종류</a>
-            <a href="pages/topics/topic_particles.html" class="sub-node particles">조사 배우기</a>
-            <a href="pages/topics/topic_honorifics.html" class="sub-node honorifics">높임법</a>
-            <a href="pages/topics/topic_complex_sentences.html" class="sub-node complex">복잡한 문장 구조</a>
-            <a href="pages/topics/topic_connecting_sentences.html" class="sub-node connecting">문장 연결하기</a>
-            <a href="pages/topics/topic_effective_writing.html" class="sub-node effective">효과적인 글쓰기</a>
-            <a href="pages/topics/topic_figurative_language.html" class="sub-node figurative">비유적 표현</a>
-            <a href="pages/topics/topic_idioms.html" class="sub-node idioms">관용 표현과 속담</a>
-            <a href="pages/topics/topic_persuasive_expression.html" class="sub-node persuasive">설득하는 표현</a>
-            <a href="pages/topics/topic_pronunciation.html" class="sub-node pronunciation">발음</a>
-            <a href="pages/topics/topic_punctuation.html" class="sub-node punctuation">문장 부호</a>
-            <a href="pages/topics/topic_sentence_elements.html" class="sub-node sentence-elem">문장 성분</a>
-            <a href="pages/topics/topic_tense.html" class="sub-node tense">시제</a>
-            <a href="pages/topics/topic_word_extension.html" class="sub-node word-extension">단어 확장</a>
-            <a href="pages/topics/topic_word_relations.html" class="sub-node word-relations">단어 관계</a>
-            
-            <!-- 학습 활동 서브노드 -->
-            <a href="pages/activities/word_matching_game.html" class="sub-node word-matching">낱말 카드 매칭 게임</a>
-            <a href="pages/activities/sentence_type_quiz.html" class="sub-node sentence-quiz">문장 종류 맞추기</a>
-            <a href="pages/activities/sentence_correction.html" class="sub-node sentence-correction">문장 바로잡기</a>
-            <a href="pages/activities/proverb_puzzle.html" class="sub-node proverb">속담 퍼즐 맞추기</a>
-            <a href="pages/activities/parts_of_speech_game.html" class="sub-node speech-game">품사 찾기 게임</a>
-            <a href="pages/activities/idiom_storytelling.html" class="sub-node idiom-story">속담 이야기 만들기</a>
-            <a href="pages/activities/honorific_converter.html" class="sub-node converter">높임말 변환기</a>
-            <a href="pages/activities/figurative_expressions.html" class="sub-node figurative-exp">비유적 표현 놀이</a>
-            
-            <!-- 진행 상황 서브노드 -->
-            <a href="pages/progress/index.html" class="sub-node progress-main">학습 진행 상황</a>
-            
-            <!-- 세부 페이지 노드 -->
-            <!-- 1학년 -->
-            <a href="pages/grade-learning/grade1/grade1_words.html" class="detail-node grade1-words">글자와 소리 관계</a>
-            <a href="pages/grade-learning/grade1/grade1_words_detail.html" class="detail-node grade1-words-detail">낱말 세부 학습</a>
-            <a href="pages/grade-learning/grade1/grade1_sentences.html" class="detail-node grade1-sentences">1학년 문장 배우기</a>
-            <a href="pages/grade-learning/grade1/grade1_sounds.html" class="detail-node grade1-sounds">소리와 발음</a>
-            <a href="pages/grade-learning/grade1/grade1_writing.html" class="detail-node grade1-writing">쓰기 기초</a>
-            
-            <!-- 2학년 -->
-            <a href="pages/grade-learning/grade2/grade2_sentences.html" class="detail-node grade2-sentences">기본 문장 구조</a>
-            <a href="pages/grade-learning/grade2/grade2_sentence_types.html" class="detail-node grade2-sentence-types">2학년 문장 종류</a>
-            
-            <!-- 3학년 -->
-            <a href="pages/grade-learning/grade3/grade3_parts_of_speech.html" class="detail-node grade3-parts">품사 알아보기</a>
-            <a href="pages/grade-learning/grade3/grade3_sentence_components.html" class="detail-node grade3-components">문장 성분</a>
-            
-            <!-- 4학년 -->
-            <a href="pages/grade-learning/grade4/grade4_tense.html" class="detail-node grade4-tense">시간 표현</a>
-            
-            <!-- 5학년 -->
-            <a href="pages/grade-learning/grade5/grade5_figurative.html" class="detail-node grade5-figurative">비유적 표현</a>
-            <a href="pages/grade-learning/grade5/grade5_idioms.html" class="detail-node grade5-idioms">관용 표현</a>
-            <a href="pages/grade-learning/grade5/grade5_sentence_structure.html" class="detail-node grade5-structure">문장 구조</a>
-            
-            <!-- 6학년 -->
-            <a href="pages/grade-learning/grade6/grade6_expression.html" class="detail-node grade6-expression">다양한 표현</a>
-            <a href="pages/grade-learning/grade6/grade6_honorifics.html" class="detail-node grade6-honorifics">높임 표현</a>
-            <a href="pages/grade-learning/grade6/grade6_korean_grammar.html" class="detail-node grade6-grammar">고급 문법</a>
-            
-            <!-- 연결선 -->
-            <div class="line v-line-detail-1"></div>
-            <div class="line v-line-detail-2"></div>
-            <div class="line v-line-detail-3"></div>
-            <div class="line h-line-grade"></div>
-            <div class="line h-line-grade-b"></div>
-            <div class="line h-line-topics"></div>
-            <div class="line h-line-activities"></div>
-            
-            <div class="coordinates">1200x1500px</div>
+        <!-- 메인 페이지 -->
+        <div class="sitemap-section main-section">
+            <h2>메인 페이지</h2>
+            <ul class="sitemap-list">
+                <li class="sitemap-item">
+                    <a href="index.html" class="sitemap-link"><i class="fas fa-home"></i> 문법놀이터 홈</a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 학년별 학습 -->
+        <div class="sitemap-section grade-section">
+            <h2>학년별 학습</h2>
+            <ul class="sitemap-list">
+                <li class="sitemap-item">
+                    <a href="pages/grade-learning/index.html" class="sitemap-link"><i class="fas fa-th-list"></i> 학년별 학습 메인</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/grade-learning/grade1/index.html" class="sitemap-link"><i class="fas fa-child"></i> 1학년</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/grade-learning/grade2/index.html" class="sitemap-link"><i class="fas fa-child"></i> 2학년</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/grade-learning/grade3/index.html" class="sitemap-link"><i class="fas fa-child"></i> 3학년</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/grade-learning/grade4/index.html" class="sitemap-link"><i class="fas fa-child"></i> 4학년</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/grade-learning/grade5/index.html" class="sitemap-link"><i class="fas fa-child"></i> 5학년</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/grade-learning/grade6/index.html" class="sitemap-link"><i class="fas fa-child"></i> 6학년</a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 학습 주제별 -->
+        <div class="sitemap-section topics-section">
+            <h2>학습 주제별</h2>
+            <ul class="sitemap-list">
+                <li class="sitemap-item">
+                    <a href="pages/topics/index.html" class="sitemap-link"><i class="fas fa-book"></i> 학습 주제별 메인</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_parts_of_speech.html" class="sitemap-link"><i class="fas fa-font"></i> 품사 알아보기</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_sentence_types.html" class="sitemap-link"><i class="fas fa-align-left"></i> 문장의 종류</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_particles.html" class="sitemap-link"><i class="fas fa-ellipsis-h"></i> 조사 배우기</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_honorifics.html" class="sitemap-link"><i class="fas fa-user-tie"></i> 높임법</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_complex_sentences.html" class="sitemap-link"><i class="fas fa-project-diagram"></i> 복잡한 문장 구조</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_connecting_sentences.html" class="sitemap-link"><i class="fas fa-link"></i> 문장 연결하기</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_effective_writing.html" class="sitemap-link"><i class="fas fa-pencil-alt"></i> 효과적인 글쓰기</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_figurative_language.html" class="sitemap-link"><i class="fas fa-mountain"></i> 비유적 표현</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_idioms.html" class="sitemap-link"><i class="fas fa-comment-dots"></i> 관용 표현과 속담</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_persuasive_expression.html" class="sitemap-link"><i class="fas fa-bullhorn"></i> 설득하는 표현</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_pronunciation.html" class="sitemap-link"><i class="fas fa-volume-up"></i> 발음</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_punctuation.html" class="sitemap-link"><i class="fas fa-quote-right"></i> 문장 부호</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_sentence_elements.html" class="sitemap-link"><i class="fas fa-puzzle-piece"></i> 문장 성분</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_tense.html" class="sitemap-link"><i class="fas fa-clock"></i> 시제</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_word_extension.html" class="sitemap-link"><i class="fas fa-expand"></i> 단어 확장</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/topics/topic_word_relations.html" class="sitemap-link"><i class="fas fa-exchange-alt"></i> 단어 관계</a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 학습 활동 -->
+        <div class="sitemap-section activities-section">
+            <h2>학습 활동</h2>
+            <ul class="sitemap-list">
+                <li class="sitemap-item">
+                    <a href="pages/activities/index.html" class="sitemap-link"><i class="fas fa-gamepad"></i> 학습 활동 메인</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/activities/word_matching_game.html" class="sitemap-link"><i class="fas fa-th"></i> 낱말 카드 매칭 게임</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/activities/sentence_type_quiz.html" class="sitemap-link"><i class="fas fa-question-circle"></i> 문장 종류 맞추기</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/activities/sentence_correction.html" class="sitemap-link"><i class="fas fa-check-square"></i> 문장 바로잡기</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/activities/proverb_puzzle.html" class="sitemap-link"><i class="fas fa-puzzle-piece"></i> 속담 퍼즐 맞추기</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/activities/parts_of_speech_game.html" class="sitemap-link"><i class="fas fa-search"></i> 품사 찾기 게임</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/activities/idiom_storytelling.html" class="sitemap-link"><i class="fas fa-book-open"></i> 속담 이야기 만들기</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/activities/honorific_converter.html" class="sitemap-link"><i class="fas fa-exchange-alt"></i> 높임말 변환기</a>
+                </li>
+                <li class="sitemap-item">
+                    <a href="pages/activities/figurative_expressions.html" class="sitemap-link"><i class="fas fa-paint-brush"></i> 비유적 표현 놀이</a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- 진행 상황 -->
+        <div class="sitemap-section progress-section">
+            <h2>진행 상황</h2>
+            <ul class="sitemap-list">
+                <li class="sitemap-item">
+                    <a href="pages/progress/index.html" class="sitemap-link"><i class="fas fa-chart-line"></i> 학습 진행 상황</a>
+                </li>
+            </ul>
         </div>
     </div>
+    
+    <a href="index.html" class="back-to-home"><i class="fas fa-arrow-left"></i> 메인으로 돌아가기</a>
 
     <!-- 푸터 영역 -->
     <footer></footer>
