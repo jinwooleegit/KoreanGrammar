@@ -82,19 +82,14 @@ function registerButtonListeners() {
         });
     }
 
-    // 학습 시작 버튼들
-    const startButtons = document.querySelectorAll('.start-btn');
-    startButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            // 링크 이동 방지 코드 제거
-            // e.preventDefault();
-            // const contentTitle = this.closest('.content-card').querySelector('h3').textContent;
-            // alert(`"${contentTitle}" 학습을 시작합니다!`);
-            
-            // 버튼에 있는 링크로 이동하도록 유지
-            // (기본 동작을 막지 않음)
-        });
-    });
+    // 학습 시작 버튼들 - 기본 동작을 방해하지 않도록 이벤트 리스너 제거
+    // 링크가 기본적으로 작동하도록 합니다.
+    // const startButtons = document.querySelectorAll('.start-btn');
+    // startButtons.forEach(button => {
+    //     button.addEventListener('click', function(e) {
+    //         // 기본 링크 동작이 작동하도록 합니다
+    //     });
+    // });
 }
 
 // 검색 기능 초기화
