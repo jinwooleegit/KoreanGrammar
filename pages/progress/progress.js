@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
             topicsContainer.innerHTML = `
                 <div class="empty-state">
                     <p>아직 학습한 내용이 없습니다.</p>
-                    <a href="../../grade-learning/grade${grade}/" class="start-btn">학습 시작하기</a>
+                    <a href="../../pages/grade-learning/grade${grade}/" class="start-btn">학습 시작하기</a>
                 </div>
             `;
         }
@@ -332,8 +332,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     completed: 7,
                     total: 10,
                     topics: [
-                        { title: '낱말 알아보기', completed: 5, total: 5, continueUrl: '../../grade-learning/grade1/grade1_words.html' },
-                        { title: '문장 알아보기', completed: 2, total: 5, continueUrl: '../../grade-learning/grade1/grade1_sentences.html' }
+                        { title: '낱말 알아보기', completed: 5, total: 5, continueUrl: '../../pages/grade-learning/grade1/grade1_words.html' },
+                        { title: '문장 알아보기', completed: 2, total: 5, continueUrl: '../../pages/grade-learning/grade1/grade1_sentences.html' }
                     ]
                 },
                 '2': { completed: 4, total: 10, topics: [] },
