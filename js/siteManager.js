@@ -1,7 +1,7 @@
 /**
  * 사이트 매니저 - 메뉴 및 푸터 관리 시스템
  * 모든 페이지에 일관된 헤더와 푸터를 적용하고 관리하는 통합 시스템
- * 버전: 1.3.0 (경로 문제 해결 및 리소스 자동 로드)
+ * 버전: 1.4.0 (모바일 메뉴 개선 및 햄버거 메뉴 추가)
  */
 
 class SiteManager {
@@ -15,13 +15,16 @@ class SiteManager {
             { id: 'sitemap', title: '사이트맵', url: '/sitemap.html', pattern: /sitemap\.html/ }
         ];
         
-        // 캐시 방지 (v1.3.0)
-        console.log('SiteManager 초기화: 버전 1.3.0');
+        // 캐시 방지 (v1.4.0)
+        console.log('SiteManager 초기화: 버전 1.4.0');
         
         // 현재 페이지 경로 분석
         this.currentPath = window.location.pathname;
         this.pathDepth = this.calculatePathDepth();
         this.basePath = this.getBasePath();
+        
+        // 모바일 메뉴 상태
+        this.isMobileMenuOpen = false;
         
         // 초기화
         this.init();
@@ -85,6 +88,8 @@ class SiteManager {
             this.loadFooter();
             this.addBackToTopButton();
             this.ensureResourcesLoaded();
+            this.setupMobileMenu();
+            this.handleWindowResize();
         });
     }
     
@@ -129,17 +134,156 @@ class SiteManager {
                 <div class="logo">
                     <a href="${logoHref}">문법놀이터</a>
                 </div>
+                <div class="mobile-menu-toggle" aria-label="메뉴 토글" role="button" tabindex="0">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="nav-search-wrapper">
+                    <nav class="desktop-nav">
+                        <ul>${menuHTML}</ul>
+                    </nav>
+                    <div class="search-container">
+                        <input type="text" placeholder="검색어를 입력하세요..." aria-label="검색">
+                        <button aria-label="검색">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-menu">
                 <nav>
                     <ul>${menuHTML}</ul>
                 </nav>
                 <div class="search-container">
-                    <input type="text" placeholder="검색어를 입력하세요...">
-                    <button>
+                    <input type="text" placeholder="검색어를 입력하세요..." aria-label="모바일 검색">
+                    <button aria-label="검색">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
+                <div class="mobile-menu-footer">
+                    <p>초등 국어 문법을 재미있게 배워요!</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="유튜브"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="인스타그램"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="카카오톡"><i class="fas fa-comment"></i></a>
+                        <a href="mailto:milgae@naver.com" aria-label="이메일"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
             </div>
         </div>`;
+    }
+    
+    /**
+     * 모바일 메뉴 설정
+     */
+    setupMobileMenu() {
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!mobileMenuToggle || !mobileMenu) return;
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            this.toggleMobileMenu();
+        });
+        
+        // 키보드 접근성을 위한 키보드 이벤트 처리
+        mobileMenuToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.toggleMobileMenu();
+            }
+        });
+        
+        // 모바일 메뉴 내부의 링크 클릭 시 메뉴 닫기
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (this.isMobileMenuOpen) {
+                    this.toggleMobileMenu();
+                }
+            });
+        });
+        
+        // 검색 기능 설정
+        this.setupSearch();
+    }
+    
+    /**
+     * 검색 기능 설정
+     */
+    setupSearch() {
+        const searchContainers = document.querySelectorAll('.search-container');
+        
+        searchContainers.forEach(container => {
+            const searchInput = container.querySelector('input');
+            const searchButton = container.querySelector('button');
+            
+            if (!searchInput || !searchButton) return;
+            
+            // 검색 버튼 클릭 이벤트
+            searchButton.addEventListener('click', () => {
+                this.performSearch(searchInput.value);
+            });
+            
+            // 엔터 키 이벤트
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    this.performSearch(searchInput.value);
+                }
+            });
+        });
+    }
+    
+    /**
+     * 검색 실행
+     */
+    performSearch(query) {
+        if (!query || query.trim() === '') return;
+        
+        // 검색어 공백 제거 및 인코딩
+        const trimmedQuery = query.trim();
+        const encodedQuery = encodeURIComponent(trimmedQuery);
+        
+        // 검색 결과 페이지로 이동 (상대 경로 적용)
+        const searchResultsUrl = `${this.basePath}search.html?q=${encodedQuery}`;
+        window.location.href = searchResultsUrl;
+        
+        console.log(`검색어: ${trimmedQuery}`);
+    }
+    
+    /**
+     * 모바일 메뉴 토글
+     */
+    toggleMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        
+        if (!mobileMenu || !mobileMenuToggle) return;
+        
+        this.isMobileMenuOpen = !this.isMobileMenuOpen;
+        
+        if (this.isMobileMenuOpen) {
+            mobileMenu.classList.add('open');
+            mobileMenuToggle.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 스크롤 방지
+        } else {
+            mobileMenu.classList.remove('open');
+            mobileMenuToggle.classList.remove('active');
+            document.body.style.overflow = ''; // 스크롤 복원
+        }
+    }
+    
+    /**
+     * 창 크기 변경 처리
+     */
+    handleWindowResize() {
+        window.addEventListener('resize', () => {
+            // 화면이 모바일 크기가 아닐 때 모바일 메뉴가 열려있다면 닫기
+            if (window.innerWidth > 768 && this.isMobileMenuOpen) {
+                this.toggleMobileMenu();
+            }
+        });
     }
     
     /**
@@ -154,12 +298,14 @@ class SiteManager {
         // 현재 경로와 일치하는 메뉴 아이템 찾기
         for (const item of this.menuItems) {
             if (item.pattern && item.pattern.test(this.currentPath)) {
-                const menuItem = document.getElementById(`${item.id}-nav`);
-                if (menuItem) {
-                    menuItem.classList.add('active');
-                    console.log(`활성화된 메뉴: ${item.title}`);
-                    break;
-                }
+                const menuItems = document.querySelectorAll(`#${item.id}-nav`);
+                menuItems.forEach(menuItem => {
+                    if (menuItem) {
+                        menuItem.classList.add('active');
+                        console.log(`활성화된 메뉴: ${item.title}`);
+                    }
+                });
+                break;
             }
         }
     }

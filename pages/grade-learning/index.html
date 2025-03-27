@@ -134,22 +134,88 @@
     
         /* 반응형 설정 */
         @media (max-width: 768px) {
-            .main-content {
-                padding: 0 15px;
+            .grade-selection {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
             
-            .topic-card, .activity-card, .exercise-card {
-                width: 100%;
+            .grade-card {
+                padding: 20px 15px;
+            }
+            
+            .grade-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            
+            .grade-title {
+                font-size: 18px;
+                margin-bottom: 5px;
+            }
+            
+            .grade-description {
+                display: none; /* 모바일에서 설명 숨김 */
+            }
+            
+            .grade-topics {
+                margin-bottom: 10px;
+                padding-left: 10px;
+            }
+            
+            .grade-topics li {
+                margin-bottom: 3px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .page-description p {
+                display: none; /* 모바일에서 페이지 설명 숨김 */
             }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 24px;
+            .grade-selection {
+                grid-template-columns: 1fr; /* 모바일에서 한 열로 표시 */
+                max-width: 280px;
+                margin: 20px auto;
             }
             
-            p {
-                font-size: 14px;
+            .grade-card {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                text-align: left;
+                padding: 15px;
+            }
+            
+            .grade-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+                margin: 0 15px 0 0;
+            }
+            
+            .grade-title {
+                flex: 1;
+                margin: 0;
+            }
+            
+            .grade-topics {
+                display: none; /* 작은 화면에서 주제 목록 숨김 */
+            }
+            
+            .grade-button {
+                width: 100%;
+                margin-top: 12px;
+                padding: 10px;
+            }
+            
+            .page-description h1 {
+                font-size: 22px;
+                margin-bottom: 5px;
             }
         }</style>
     <!-- 구형 브라우저 지원을 위한 폴리필 -->

@@ -75,13 +75,36 @@
 
         .activity-image {
             height: 160px;
-            background-color: #f0f0f0;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            color: #999;
-            border-bottom: 3px solid;
+            overflow: hidden;
+            color: white;
+            border-bottom: none;
+        }
+
+        .activity-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        .activity-image i {
+            position: relative;
+            z-index: 2;
+            font-size: 48px;
+            transition: transform 0.3s ease;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .activity-card:hover .activity-image i {
+            transform: scale(1.2) rotate(5deg);
         }
 
         .activity-content {
@@ -169,26 +192,26 @@
         }
 
         /* 활동 타입별 색상 */
-        .type-game .activity-image {
-            border-color: #FF9800;
+        .type-game .activity-image::before {
+            background: linear-gradient(135deg, #FF9800 0%, #FFEB3B 100%);
         }
 
-        .type-quiz .activity-image {
-            border-color: #2196F3;
+        .type-quiz .activity-image::before {
+            background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
         }
 
-        .type-writing .activity-image {
-            border-color: #4CAF50;
+        .type-writing .activity-image::before {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
         }
 
-        .type-conversation .activity-image {
-            border-color: #9C27B0;
+        .type-conversation .activity-image::before {
+            background: linear-gradient(135deg, #9C27B0 0%, #E040FB 100%);
         }
         
         /* 준비 중인 활동 카드 스타일 */
-        .coming-soon .activity-image {
-            border-color: #9E9E9E;
-            opacity: 0.7;
+        .coming-soon .activity-image::before {
+            background: linear-gradient(135deg, #9E9E9E 0%, #CFD8DC 100%);
+            opacity: 0.5;
         }
         
         .coming-soon .activity-content {
@@ -274,6 +297,33 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* 이미지 아이콘 애니메이션 */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .activity-image .icon-overlay {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .activity-card:hover .activity-image .icon-overlay {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.4);
+        }
     </style>
     <!-- 구형 브라우저 지원을 위한 폴리필 -->
     <script src="../../js/polyfills.js"></script>
@@ -300,7 +350,10 @@
             <!-- 낱말 카드 매칭 게임 -->
             <div class="activity-card type-game fade-in">
                 <div class="activity-image" aria-label="낱말 카드 매칭 게임">
-                    <i class="fas fa-gamepad fa-3x"></i>
+                    <i class="fas fa-gamepad"></i>
+                    <div class="icon-overlay">
+                        <i class="fas fa-dice-d6"></i>
+                    </div>
                 </div>
                 <div class="activity-content">
                     <div class="activity-tags">
@@ -324,7 +377,10 @@
             <!-- 문장 종류 맞추기 -->
             <div class="activity-card type-quiz">
                 <div class="activity-image">
-                    <i class="fas fa-question-circle fa-3x"></i>
+                    <i class="fas fa-question-circle"></i>
+                    <div class="icon-overlay">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
                 </div>
                 <div class="activity-content">
                     <div class="activity-tags">
@@ -348,7 +404,10 @@
             <!-- 품사 찾기 게임 -->
             <div class="activity-card type-game">
                 <div class="activity-image">
-                    <i class="fas fa-search fa-3x"></i>
+                    <i class="fas fa-search"></i>
+                    <div class="icon-overlay">
+                        <i class="fas fa-chess"></i>
+                    </div>
                 </div>
                 <div class="activity-content">
                     <div class="activity-tags">
@@ -372,7 +431,10 @@
             <!-- 비유적 표현 만들기 -->
             <div class="activity-card type-writing">
                 <div class="activity-image">
-                    <i class="fas fa-magic fa-3x"></i>
+                    <i class="fas fa-magic"></i>
+                    <div class="icon-overlay">
+                        <i class="fas fa-feather-alt"></i>
+                    </div>
                 </div>
                 <div class="activity-content">
                     <div class="activity-tags">
@@ -396,7 +458,10 @@
             <!-- 높임말 변환하기 -->
             <div class="activity-card type-quiz">
                 <div class="activity-image">
-                    <i class="fas fa-user-tie fa-3x"></i>
+                    <i class="fas fa-user-tie"></i>
+                    <div class="icon-overlay">
+                        <i class="fas fa-crown"></i>
+                    </div>
                 </div>
                 <div class="activity-content">
                     <div class="activity-tags">
@@ -420,7 +485,10 @@
             <!-- 관용 표현 스토리텔링 -->
             <div class="activity-card type-writing">
                 <div class="activity-image">
-                    <i class="fas fa-feather-alt fa-3x"></i>
+                    <i class="fas fa-feather-alt"></i>
+                    <div class="icon-overlay">
+                        <i class="fas fa-book-open"></i>
+                    </div>
                 </div>
                 <div class="activity-content">
                     <div class="activity-tags">
@@ -444,7 +512,10 @@
             <!-- 문장 고치기 -->
             <div class="activity-card type-quiz">
                 <div class="activity-image">
-                    <i class="fas fa-edit fa-3x"></i>
+                    <i class="fas fa-edit"></i>
+                    <div class="icon-overlay">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
                 </div>
                 <div class="activity-content">
                     <div class="activity-tags">
@@ -468,7 +539,10 @@
             <!-- 속담 퍼즐 -->
             <div class="activity-card type-game">
                 <div class="activity-image">
-                    <i class="fas fa-puzzle-piece fa-3x"></i>
+                    <i class="fas fa-puzzle-piece"></i>
+                    <div class="icon-overlay">
+                        <i class="fas fa-brain"></i>
+                    </div>
                 </div>
                 <div class="activity-content">
                     <div class="activity-tags">
@@ -492,7 +566,10 @@
             <!-- 더 많은 활동은 추후 업데이트 -->
             <div class="activity-card coming-soon">
                 <div class="activity-image">
-                    <i class="fas fa-clock fa-3x"></i>
+                    <i class="fas fa-clock"></i>
+                    <div class="icon-overlay">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
                 </div>
                 <div class="activity-content">
                     <h3 class="activity-title">더 많은 활동이 준비 중입니다</h3>

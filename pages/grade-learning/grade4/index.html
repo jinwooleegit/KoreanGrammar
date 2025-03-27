@@ -146,6 +146,23 @@
             .topic-card, .activity-card, .exercise-card {
                 width: 100%;
             }
+            
+            .lesson-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .lesson-card-description {
+                display: none; /* 모바일에서 설명 숨김 */
+            }
+            
+            .lesson-card-footer {
+                border-top: none;
+                padding-top: 5px;
+            }
+            
+            .grade-header p {
+                display: none; /* 모바일에서 헤더 설명 숨김 */
+            }
         }
         
         @media (max-width: 480px) {
@@ -156,7 +173,21 @@
             p {
                 font-size: 14px;
             }
-        }</style>
+            
+            .lesson-card-header {
+                padding: 12px 15px;
+                font-size: 16px;
+            }
+            
+            .lesson-card-header i {
+                font-size: 20px;
+            }
+            
+            .content-section h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
     <!-- 구형 브라우저 지원을 위한 폴리필 -->
     <script src="../../../js/polyfills.js"></script>
     <!-- IE 호환성을 위한 CSS -->

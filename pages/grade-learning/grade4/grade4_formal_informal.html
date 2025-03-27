@@ -3,107 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>격식체와 비격식체 | 4학년 | 문법놀이터</title>
+    <title>높임말과 친구말 | 4학년 | 문법놀이터</title>
     <link rel="stylesheet" href="../../../assets/css/styles.css">
-    <link rel="stylesheet" href="../../../assets/css/grade_styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 4학년 전용 스타일 */
+        :root {
+            --grade4-color: #26547C;
+            --grade4-light: #e6f0ff;
+            --friend-color: #ff9966;
+            --respect-color: #4b7bec;
+        }
+        
+        /* 페이지 특정 스타일 */
+        .grade-header {
+            background: linear-gradient(135deg, var(--grade4-color) 0%, #5A8DB8 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .grade-header h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .grade-header p {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .content-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .content-section h2 {
+            color: var(--grade4-color);
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--grade4-color);
+            padding-bottom: 8px;
+        }
+        
+        .info-box {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .info-box h3 {
+            color: var(--grade4-color);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .respect-box {
+            border-left: 4px solid var(--respect-color);
+        }
+        
+        .friend-box {
+            border-left: 4px solid var(--friend-color);
+        }
+        
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
         }
+        
         .comparison-table th, .comparison-table td {
             border: 1px solid #ddd;
             padding: 12px;
             text-align: center;
         }
+        
         .comparison-table th {
-            background-color: #f0f7ff;
+            background-color: var(--grade4-color);
+            color: white;
             font-weight: bold;
         }
+        
         .comparison-table tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        .comparison-table .formal {
-            color: #3366cc;
+        
+        .comparison-table .respect {
+            color: var(--respect-color);
+            font-weight: bold;
         }
-        .comparison-table .informal {
-            color: #cc6633;
+        
+        .comparison-table .friend {
+            color: var(--friend-color);
+            font-weight: bold;
         }
+        
         .situation-box {
             background-color: #f5f5f5;
             border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-            border-left: 4px solid #4CAF50;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
+        
+        .respect-situation {
+            border-left: 4px solid var(--respect-color);
+        }
+        
+        .friend-situation {
+            border-left: 4px solid var(--friend-color);
+        }
+        
         .exercise-container {
             background-color: #fff8e1;
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 25px;
             margin-top: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
+        
         .exercise-item {
-            margin-bottom: 15px;
-            padding: 10px;
+            background-color: white;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
             border: 1px solid #e0e0e0;
-            border-radius: 5px;
         }
+        
         .answer-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-top: 15px;
         }
+        
         .answer-button {
-            padding: 8px 15px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            transition: background-color 0.2s, transform 0.2s;
         }
-        .formal-button {
-            background-color: #e6f0ff;
-            color: #3366cc;
+        
+        .answer-button:hover {
+            transform: translateY(-2px);
         }
-        .informal-button {
-            background-color: #fff0e6;
-            color: #cc6633;
+        
+        .respect-button {
+            background-color: var(--respect-color);
+            color: white;
         }
+        
+        .friend-button {
+            background-color: var(--friend-color);
+            color: white;
+        }
+        
         .feedback {
-            margin-top: 10px;
-            padding: 8px;
-            border-radius: 4px;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
             display: none;
+            font-size: 15px;
         }
+        
         .correct {
             background-color: #e7f6e7;
             color: #2e7d32;
+            border: 1px solid #a5d6a7;
         }
+        
         .incorrect {
             background-color: #fdeded;
             color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .nav-button {
+            padding: 10px 20px;
+            background-color: var(--grade4-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-button:hover {
+            background-color: #1c3e5e;
         }
     
         /* 반응형 설정 */
         @media (max-width: 768px) {
-            .main-content {
+            .content-section {
                 padding: 0 15px;
             }
             
-            .topic-card, .activity-card, .exercise-card {
-                width: 100%;
+            .answer-buttons {
+                flex-direction: column;
+                gap: 10px;
             }
         }
         
         @media (max-width: 480px) {
-            h1 {
+            .grade-header h1 {
                 font-size: 24px;
             }
             
             p {
                 font-size: 14px;
             }
-        }</style>
+        }
+    </style>
     <!-- 구형 브라우저 지원을 위한 폴리필 -->
     <script src="../../../js/polyfills.js"></script>
     <!-- IE 호환성을 위한 CSS -->
@@ -113,144 +238,144 @@
     <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="container">
-        <header class="lesson-header">
-            <h1>격식체와 비격식체</h1>
-            <p>상황에 맞게 말하고 쓰는 방법을 배워봅시다.</p>
-        </header>
+    <!-- 헤더 영역 -->
+    <header></header>
+    
+    <div class="grade-header">
+        <h1>높임말과 친구말</h1>
+        <p>상황에 맞게 말하는 방법을 배워봅시다</p>
+    </div>
 
-        <section class="content-section">
-            <h2>격식체와 비격식체란?</h2>
-            <p>우리가 대화할 때는 누구와 대화하는지, 어떤 상황인지에 따라 말하는 방식이 달라집니다.</p>
+    <div class="content-section">
+        <h2>높임말과 친구말이란?</h2>
+        <p>우리가 대화할 때는 누구와 이야기하는지, 어떤 상황인지에 따라 말하는 방식이 달라집니다.</p>
 
-            <div class="info-box">
-                <h3>격식체</h3>
-                <p>공식적인 상황이나 처음 만난 사람, 윗사람에게 사용하는 말투입니다.</p>
-                <p>예: "안녕하십니까?", "식사 하셨습니까?", "이것은 책입니다."</p>
-            </div>
+        <div class="info-box respect-box">
+            <h3><i class="fas fa-user-tie"></i> 높임말 (격식체)</h3>
+            <p>선생님, 처음 만난 어른, 공식적인 자리에서 사용하는 말투예요.</p>
+            <p><strong>예:</strong> "안녕하세요?", "식사 하셨나요?", "이것은 책입니다."</p>
+        </div>
 
-            <div class="info-box">
-                <h3>비격식체</h3>
-                <p>친구, 가족처럼 친한 사람들 사이에 사용하는 편안한 말투입니다.</p>
-                <p>예: "안녕?", "밥 먹었어?", "이건 책이야."</p>
-            </div>
-        </section>
+        <div class="info-box friend-box">
+            <h3><i class="fas fa-user-friends"></i> 친구말 (비격식체)</h3>
+            <p>친구, 가족처럼 친한 사람들 사이에 사용하는 편안한 말투예요.</p>
+            <p><strong>예:</strong> "안녕?", "밥 먹었어?", "이건 책이야."</p>
+        </div>
 
-        <section class="content-section">
-            <h2>격식체와 비격식체 비교</h2>
-            
-            <table class="comparison-table">
-                <tr>
-                    <th>상황</th>
-                    <th>격식체</th>
-                    <th>비격식체</th>
-                </tr>
-                <tr>
-                    <td>인사하기</td>
-                    <td class="formal">안녕하십니까?</td>
-                    <td class="informal">안녕?</td>
-                </tr>
-                <tr>
-                    <td>질문하기</td>
-                    <td class="formal">몇 시입니까?</td>
-                    <td class="informal">몇 시야?</td>
-                </tr>
-                <tr>
-                    <td>대답하기</td>
-                    <td class="formal">네, 그렇습니다.</td>
-                    <td class="informal">응, 맞아.</td>
-                </tr>
-                <tr>
-                    <td>부탁하기</td>
-                    <td class="formal">도와주시겠습니까?</td>
-                    <td class="informal">도와줄래?</td>
-                </tr>
-            </table>
-        </section>
+        <h2>높임말과 친구말 비교</h2>
+        
+        <table class="comparison-table">
+            <tr>
+                <th>상황</th>
+                <th>높임말</th>
+                <th>친구말</th>
+            </tr>
+            <tr>
+                <td>인사하기</td>
+                <td class="respect">안녕하세요?</td>
+                <td class="friend">안녕?</td>
+            </tr>
+            <tr>
+                <td>질문하기</td>
+                <td class="respect">몇 시입니까?</td>
+                <td class="friend">몇 시야?</td>
+            </tr>
+            <tr>
+                <td>대답하기</td>
+                <td class="respect">네, 그렇습니다.</td>
+                <td class="friend">응, 맞아.</td>
+            </tr>
+            <tr>
+                <td>부탁하기</td>
+                <td class="respect">도와주시겠어요?</td>
+                <td class="friend">도와줄래?</td>
+            </tr>
+        </table>
 
-        <section class="content-section">
-            <h2>상황에 맞는 말하기</h2>
-            
-            <div class="situation-box">
-                <h3>격식체를 사용하는 상황</h3>
-                <ul>
-                    <li>학교에서 선생님과 대화할 때</li>
-                    <li>처음 만난 어른에게 말할 때</li>
-                    <li>발표를 할 때</li>
-                    <li>공식적인 편지나 글을 쓸 때</li>
-                </ul>
-            </div>
+        <h2>상황에 맞게 말하기</h2>
+        
+        <div class="situation-box respect-situation">
+            <h3><i class="fas fa-chalkboard-teacher"></i> 높임말을 사용하는 상황</h3>
+            <ul>
+                <li>학교에서 선생님과 대화할 때</li>
+                <li>처음 만난 어른에게 말할 때</li>
+                <li>발표를 할 때</li>
+                <li>공식적인 편지나 글을 쓸 때</li>
+            </ul>
+        </div>
 
-            <div class="situation-box">
-                <h3>비격식체를 사용하는 상황</h3>
-                <ul>
-                    <li>친구들과 놀 때</li>
-                    <li>가족과 대화할 때</li>
-                    <li>친한 사람과 문자를 주고받을 때</li>
-                    <li>일기를 쓸 때</li>
-                </ul>
-            </div>
-        </section>
+        <div class="situation-box friend-situation">
+            <h3><i class="fas fa-user-friends"></i> 친구말을 사용하는 상황</h3>
+            <ul>
+                <li>친구들과 놀 때</li>
+                <li>가족과 대화할 때</li>
+                <li>친한 사람과 문자를 주고받을 때</li>
+                <li>일기를 쓸 때</li>
+            </ul>
+        </div>
 
-        <section class="exercise-container">
-            <h2>연습해 봅시다</h2>
-            <p>다음 상황에서 격식체와 비격식체 중 어떤 것을 사용하는 것이 적절한지 골라보세요.</p>
+        <div class="exercise-container">
+            <h2><i class="fas fa-pencil-alt"></i> 연습해 봅시다</h2>
+            <p>다음 상황에서 높임말과 친구말 중 어떤 것을 사용하는 것이 좋을지 골라보세요.</p>
 
             <div class="exercise-item" id="exercise1">
-                <p>학교 교장 선생님을 만났을 때: "안녕하세요, 좋은 아침입니다."</p>
+                <p><strong>학교 교장 선생님을 만났을 때:</strong> "안녕하세요, 좋은 아침입니다."</p>
                 <div class="answer-buttons">
-                    <button class="answer-button formal-button" onclick="checkAnswer('exercise1', 'formal')">격식체</button>
-                    <button class="answer-button informal-button" onclick="checkAnswer('exercise1', 'informal')">비격식체</button>
+                    <button class="answer-button respect-button" onclick="checkAnswer('exercise1', 'respect')">높임말 사용하기</button>
+                    <button class="answer-button friend-button" onclick="checkAnswer('exercise1', 'friend')">친구말 사용하기</button>
                 </div>
-                <div class="feedback" id="feedback-exercise1-correct">
-                    정답입니다! 교장 선생님께는 격식체를 사용하는 것이 예의에 맞습니다.
+                <div class="feedback correct" id="feedback-exercise1-correct">
+                    <i class="fas fa-check-circle"></i> 정답입니다! 교장 선생님께는 높임말을 사용하는 것이 예의에 맞습니다.
                 </div>
-                <div class="feedback" id="feedback-exercise1-incorrect">
-                    다시 생각해보세요. 교장 선생님은 존경해야 할 분이므로 격식체를 사용해야 합니다.
+                <div class="feedback incorrect" id="feedback-exercise1-incorrect">
+                    <i class="fas fa-times-circle"></i> 다시 생각해보세요. 교장 선생님은 존경해야 할 분이므로 높임말을 사용해야 합니다.
                 </div>
             </div>
 
             <div class="exercise-item" id="exercise2">
-                <p>오랜만에 만난 친구에게: "야, 오랜만이야! 잘 지냈어?"</p>
+                <p><strong>오랜만에 만난 친구에게:</strong> "야, 오랜만이야! 잘 지냈어?"</p>
                 <div class="answer-buttons">
-                    <button class="answer-button formal-button" onclick="checkAnswer('exercise2', 'informal')">격식체</button>
-                    <button class="answer-button informal-button" onclick="checkAnswer('exercise2', 'informal')">비격식체</button>
+                    <button class="answer-button respect-button" onclick="checkAnswer('exercise2', 'friend')">높임말 사용하기</button>
+                    <button class="answer-button friend-button" onclick="checkAnswer('exercise2', 'friend')">친구말 사용하기</button>
                 </div>
-                <div class="feedback" id="feedback-exercise2-correct">
-                    정답입니다! 친한 친구에게는 편안한 비격식체를 사용하는 것이 자연스럽습니다.
+                <div class="feedback correct" id="feedback-exercise2-correct">
+                    <i class="fas fa-check-circle"></i> 정답입니다! 친한 친구에게는 편안한 친구말을 사용하는 것이 자연스럽습니다.
                 </div>
-                <div class="feedback" id="feedback-exercise2-incorrect">
-                    다시 생각해보세요. 친구 사이에는 보통 비격식체를 사용합니다.
+                <div class="feedback incorrect" id="feedback-exercise2-incorrect">
+                    <i class="fas fa-times-circle"></i> 다시 생각해보세요. 친구 사이에는 보통 친구말을 사용합니다.
                 </div>
             </div>
 
             <div class="exercise-item" id="exercise3">
-                <p>학교 신문에 글을 쓸 때: "우리 학교 축제는 매우 성공적이었습니다."</p>
+                <p><strong>학교 신문에 글을 쓸 때:</strong> "우리 학교 축제는 매우 성공적이었습니다."</p>
                 <div class="answer-buttons">
-                    <button class="answer-button formal-button" onclick="checkAnswer('exercise3', 'formal')">격식체</button>
-                    <button class="answer-button informal-button" onclick="checkAnswer('exercise3', 'informal')">비격식체</button>
+                    <button class="answer-button respect-button" onclick="checkAnswer('exercise3', 'respect')">높임말 사용하기</button>
+                    <button class="answer-button friend-button" onclick="checkAnswer('exercise3', 'friend')">친구말 사용하기</button>
                 </div>
-                <div class="feedback" id="feedback-exercise3-correct">
-                    정답입니다! 학교 신문과 같은 공식적인 글에는 격식체를 사용합니다.
+                <div class="feedback correct" id="feedback-exercise3-correct">
+                    <i class="fas fa-check-circle"></i> 정답입니다! 학교 신문과 같은 공식적인 글에는 높임말을 사용합니다.
                 </div>
-                <div class="feedback" id="feedback-exercise3-incorrect">
-                    다시 생각해보세요. 공식 문서나 신문 기사에는 격식체를 사용하는 것이 적절합니다.
+                <div class="feedback incorrect" id="feedback-exercise3-incorrect">
+                    <i class="fas fa-times-circle"></i> 다시 생각해보세요. 공식 문서나 신문 기사에는 높임말을 사용하는 것이 적절합니다.
                 </div>
             </div>
-        </section>
+        </div>
 
         <div class="navigation-buttons">
-            <a href="grade4_tense.html" class="nav-button">이전 학습</a>
-            <a href="grade4_complex_sentences.html" class="nav-button">다음 학습</a>
+            <a href="grade4_tense.html" class="nav-button"><i class="fas fa-arrow-left"></i> 이전 학습</a>
+            <a href="grade4_complex_sentences.html" class="nav-button">다음 학습 <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
+
+    <!-- 푸터 영역 -->
+    <footer></footer>
 
     <script>
         function checkAnswer(exerciseId, selectedAnswer) {
             const correctAnswers = {
-                'exercise1': 'formal',
-                'exercise2': 'informal',
-                'exercise3': 'formal'
+                'exercise1': 'respect',
+                'exercise2': 'friend',
+                'exercise3': 'respect'
             };
 
             const correctFeedback = document.getElementById(`feedback-${exerciseId}-correct`);
@@ -265,15 +390,12 @@
             }
         }
 
-        // 페이지 로드 시 이전에 저장된 답변 불러오기
+        // 페이지 로드 시 실행
         window.onload = function() {
-            console.log("격식체와 비격식체 페이지가 로드되었습니다.");
+            console.log("높임말과 친구말 페이지가 로드되었습니다.");
         };
     </script>
     
-    <!-- 푸터 영역 -->
-    <footer></footer>
-
     <!-- 스크립트 -->
     <script src="../../../js/siteManager.js"></script>
     <script src="../../../assets/js/scripts.js"></script>

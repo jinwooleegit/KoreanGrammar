@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 결과 | 문법놀이터</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Font Awesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 검색 페이지 스타일 */
+        .search-header {
+            background: linear-gradient(135deg, #4B7BEC 0%, #3867D6 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .search-header h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .search-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            background-color: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .search-form input {
+            flex: 1;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-form button {
+            background-color: #4B7BEC;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-form button:hover {
+            background-color: #3867D6;
+        }
+
+        .search-content {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .search-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-count {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .search-count strong {
+            color: #4B7BEC;
+            font-weight: bold;
+        }
+
+        .search-filters {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            border: 1px solid #ddd;
+            background: #f8f8f8;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background-color: #4B7BEC;
+            color: white;
+            border-color: #4B7BEC;
+        }
+
+        .filter-btn:hover:not(.active) {
+            background-color: #f0f0f0;
+        }
+
+        .search-categories {
+            margin-bottom: 30px;
+        }
+
+        .category {
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+
+        .category-title i {
+            margin-right: 10px;
+            color: #4B7BEC;
+        }
+
+        .result-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .result-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .result-card-header {
+            padding: 12px 15px;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .lessons .result-card-header {
+            background-color: #4B7BEC;
+        }
+
+        .activities .result-card-header {
+            background-color: #FF9800;
+        }
+
+        .topics .result-card-header {
+            background-color: #4CAF50;
+        }
+
+        .result-card-content {
+            padding: 15px;
+        }
+
+        .result-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .result-card-title mark {
+            background-color: rgba(255, 235, 59, 0.5);
+            padding: 0 3px;
+            border-radius: 3px;
+        }
+
+        .result-card-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .result-card-description mark {
+            background-color: rgba(255, 235, 59, 0.5);
+            padding: 0 3px;
+            border-radius: 3px;
+        }
+
+        .result-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .result-card-tags {
+            display: flex;
+            gap: 5px;
+        }
+
+        .result-card-tags span {
+            background-color: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+
+        .result-card-link {
+            display: block;
+            padding: 10px 15px;
+            text-align: center;
+            background-color: #f8f8f8;
+            color: #4B7BEC;
+            text-decoration: none;
+            font-weight: 500;
+            border-top: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .result-card-link:hover {
+            background-color: #f0f0f0;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .no-results i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        .no-results h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .no-results p {
+            margin-bottom: 20px;
+        }
+
+        .suggestions {
+            text-align: left;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .suggestions h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .suggestions ul {
+            padding-left: 20px;
+        }
+
+        .suggestions li {
+            margin-bottom: 5px;
+        }
+
+        /* 페이지네이션 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 5px;
+        }
+
+        .pagination button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination button.active {
+            background-color: #4B7BEC;
+            color: white;
+            border-color: #4B7BEC;
+        }
+
+        .pagination button:hover:not(.active) {
+            background-color: #f0f0f0;
+        }
+
+        /* 스켈레톤 로딩 효과 */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton-card {
+            height: 200px;
+        }
+
+        /* 반응형 설정 */
+        @media (max-width: 768px) {
+            .search-header {
+                padding: 30px 15px;
+            }
+
+            .search-form {
+                width: 100%;
+            }
+
+            .search-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .search-filters {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+
+            .result-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .pagination button {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- 헤더 영역 -->
+    <header></header>
+
+    <div class="search-header">
+        <h1>검색 결과</h1>
+        <form class="search-form" id="searchForm">
+            <input type="text" id="searchInput" placeholder="검색어를 입력하세요" aria-label="검색어 입력">
+            <button type="submit" aria-label="검색"><i class="fas fa-search"></i> 검색</button>
+        </form>
+    </div>
+
+    <main class="search-content">
+        <div class="search-info">
+            <div class="search-count">
+                "<strong id="searchKeyword">검색어</strong>"에 대한 검색 결과: <strong id="resultCount">0</strong>개
+            </div>
+            <div class="search-filters">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="lessons">학습 내용</button>
+                <button class="filter-btn" data-filter="activities">학습 활동</button>
+                <button class="filter-btn" data-filter="topics">주제별 학습</button>
+            </div>
+        </div>
+
+        <div id="searchResults" class="search-categories">
+            <!-- 결과가 여기에 동적으로 로드됩니다 -->
+            <div class="skeleton-loading">
+                <div class="category">
+                    <h2 class="category-title skeleton" style="width: 150px; height: 24px;"></h2>
+                    <div class="result-cards">
+                        <div class="skeleton skeleton-card"></div>
+                        <div class="skeleton skeleton-card"></div>
+                        <div class="skeleton skeleton-card"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination" id="pagination">
+            <!-- 페이지네이션 버튼이 여기에 동적으로 생성됩니다 -->
+        </div>
+    </main>
+
+    <!-- 푸터 영역 -->
+    <footer></footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL에서 검색 쿼리 파라미터 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            
+            // 검색어 표시
+            const searchKeywordElement = document.getElementById('searchKeyword');
+            const searchInputElement = document.getElementById('searchInput');
+            
+            if (query) {
+                // 디코딩된 검색어 표시
+                const decodedQuery = decodeURIComponent(query);
+                searchKeywordElement.textContent = decodedQuery;
+                searchInputElement.value = decodedQuery;
+                
+                // 검색 수행
+                performSearch(decodedQuery);
+            } else {
+                // 검색어가 없는 경우 빈 상태 표시
+                showNoResults('검색어를 입력해주세요');
+            }
+            
+            // 검색 폼 제출 이벤트
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const newQuery = searchInputElement.value.trim();
+                
+                if (newQuery) {
+                    window.location.href = `search.html?q=${encodeURIComponent(newQuery)}`;
+                }
+            });
+            
+            // 필터 버튼 이벤트
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 활성 상태 토글
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 필터 적용
+                    const filter = this.getAttribute('data-filter');
+                    applyFilter(filter);
+                });
+            });
+        });
+        
+        // 검색 수행 함수
+        function performSearch(query) {
+            // 로딩 상태 표시
+            document.getElementById('searchResults').innerHTML = `
+                <div class="skeleton-loading">
+                    <div class="category">
+                        <h2 class="category-title skeleton" style="width: 150px; height: 24px;"></h2>
+                        <div class="result-cards">
+                            <div class="skeleton skeleton-card"></div>
+                            <div class="skeleton skeleton-card"></div>
+                            <div class="skeleton skeleton-card"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 실제 환경에서는 서버에 API 요청을 보내 검색 결과를 가져옵니다.
+            // 이 예제에서는 가상의 검색 결과를 사용합니다.
+            setTimeout(() => {
+                // 검색어에 기반한 가상 결과 생성
+                const mockResults = generateMockResults(query);
+                displayResults(mockResults);
+            }, 1000); // 로딩 효과를 위한 지연
+        }
+        
+        // 가상 검색 결과 생성 함수
+        function generateMockResults(query) {
+            const lowercaseQuery = query.toLowerCase();
+            
+            // 디버깅 - 검색어 확인
+            console.log('검색어:', query);
+            console.log('소문자 변환 검색어:', lowercaseQuery);
+            
+            // 가상의 학습 내용 결과
+            const lessonResults = [
+                {
+                    title: "문장의 기본 구조",
+                    description: "주어, 서술어, 목적어 등 문장의 기본 구조를 배우는 학습 내용입니다.",
+                    category: "lessons",
+                    subcategory: "4학년 문법",
+                    tags: ["문법", "문장"],
+                    url: "pages/grade-learning/grade4/grade4_complex_sentences.html"
+                },
+                {
+                    title: "높임말과 예절",
+                    description: "상황에 맞는 높임말 사용법과 언어 예절을 배웁니다.",
+                    category: "lessons",
+                    subcategory: "5학년 문법",
+                    tags: ["문법", "높임말"],
+                    url: "pages/grade-learning/grade5/grade5_honorifics.html"
+                },
+                {
+                    title: "관용 표현 이해하기",
+                    description: "우리말의 다양한 관용 표현과 속담의 의미를 배웁니다.",
+                    category: "lessons",
+                    subcategory: "6학년 문법",
+                    tags: ["표현", "문화", "문법"],
+                    url: "pages/grade-learning/grade6/grade6_idioms.html"
+                },
+                {
+                    title: "품사의 이해",
+                    description: "명사, 동사, 형용사 등 다양한 품사의 개념과 특징을 배웁니다.",
+                    category: "lessons",
+                    subcategory: "3학년 문법",
+                    tags: ["문법", "품사"],
+                    url: "pages/grade-learning/grade3/grade3_parts_of_speech.html"
+                },
+                {
+                    title: "품사의 종류와 활용",
+                    description: "품사의 다양한 종류와 문장에서의 활용법을 학습합니다.",
+                    category: "lessons",
+                    subcategory: "4학년 문법",
+                    tags: ["문법", "품사"],
+                    url: "pages/grade-learning/grade4/grade4_parts_of_speech_advanced.html"
+                },
+                {
+                    title: "국어 문법의 기초",
+                    description: "우리말의 기본 문법 구조와 특징에 대해 배웁니다.",
+                    category: "lessons",
+                    subcategory: "3학년 문법",
+                    tags: ["문법", "기초"],
+                    url: "pages/grade-learning/grade3/grade3_basic_grammar.html"
+                },
+                {
+                    title: "문법 요소의 이해",
+                    description: "조사, 어미 등 다양한 문법 요소의 기능과 사용법을 학습합니다.",
+                    category: "lessons",
+                    subcategory: "5학년 문법",
+                    tags: ["문법", "요소"],
+                    url: "pages/grade-learning/grade5/grade5_grammar_elements.html"
+                },
+                {
+                    title: "높임법의 종류와 사용법",
+                    description: "주체, 객체, 상대 높임법 등 다양한 높임 표현 방법을 배웁니다.",
+                    category: "lessons",
+                    subcategory: "5학년 문법",
+                    tags: ["문법", "높임말", "존댓말"],
+                    url: "pages/grade-learning/grade5/grade5_honorific_types.html"
+                },
+                {
+                    title: "높임말과 상황별 표현",
+                    description: "다양한 상황에서 적절한 높임말 표현을 학습합니다.",
+                    category: "lessons",
+                    subcategory: "6학년 문법",
+                    tags: ["문법", "높임말", "예절"],
+                    url: "pages/grade-learning/grade6/grade6_honorific_expressions.html"
+                },
+                {
+                    title: "친구말과 높임말",
+                    description: "상황과 대상에 따른 친구말과 높임말의 적절한 사용법을 배웁니다.",
+                    category: "lessons",
+                    subcategory: "4학년 문법",
+                    tags: ["문법", "친구말", "높임말"],
+                    url: "pages/grade-learning/grade4/grade4_formal_informal.html"
+                },
+                {
+                    title: "일상 대화에서의 친구말",
+                    description: "친구들과의 대화에서 사용하는 적절한 친구말 표현을 학습합니다.",
+                    category: "lessons",
+                    subcategory: "3학년 문법",
+                    tags: ["문법", "친구말", "대화"],
+                    url: "pages/grade-learning/grade3/grade3_casual_speech.html"
+                }
+            ];
+            
+            // 가상의 활동 결과
+            const activityResults = [
+                {
+                    title: "문장 종류 맞추기 퀴즈",
+                    description: "다양한 문장을 보고 평서문, 의문문, 명령문, 청유문, 감탄문 중 어떤 문장인지 맞춰보세요.",
+                    category: "activities",
+                    subcategory: "퀴즈",
+                    tags: ["2-4학년", "문장", "문법"],
+                    url: "pages/activities/sentence_type_quiz.html"
+                },
+                {
+                    title: "관용 표현 스토리텔링",
+                    description: "주어진 관용 표현을 활용하여 짧은 이야기를 만들어 보는 창작 활동입니다.",
+                    category: "activities",
+                    subcategory: "글쓰기",
+                    tags: ["5-6학년", "표현", "문법"],
+                    url: "pages/activities/idiom_storytelling.html"
+                },
+                {
+                    title: "속담 퍼즐",
+                    description: "속담의 앞부분과 뒷부분을 올바르게 매칭하는 퍼즐 게임입니다.",
+                    category: "activities",
+                    subcategory: "게임",
+                    tags: ["3-5학년", "표현", "문법"],
+                    url: "pages/activities/proverb_puzzle.html"
+                },
+                {
+                    title: "품사 찾기 게임",
+                    description: "문장 속에서 다양한 품사를 찾아내는 재미있는 게임입니다.",
+                    category: "activities",
+                    subcategory: "게임",
+                    tags: ["3-4학년", "품사", "문법"],
+                    url: "pages/activities/parts_of_speech_game.html"
+                },
+                {
+                    title: "품사 카드 매칭 게임",
+                    description: "단어 카드와 해당 품사를 올바르게 매칭하는 카드 게임입니다.",
+                    category: "activities",
+                    subcategory: "게임",
+                    tags: ["3-5학년", "품사", "문법"],
+                    url: "pages/activities/parts_of_speech_cards.html"
+                },
+                {
+                    title: "문법 요소 찾기",
+                    description: "문장에서 다양한 문법 요소를 찾고 그 역할을 이해하는 학습 활동입니다.",
+                    category: "activities",
+                    subcategory: "퀴즈",
+                    tags: ["4-6학년", "문법", "요소"],
+                    url: "pages/activities/grammar_elements_quiz.html"
+                },
+                {
+                    title: "문법 규칙 퀴즈",
+                    description: "다양한 문법 규칙을 배우고 적용하는 퀴즈 활동입니다.",
+                    category: "activities",
+                    subcategory: "퀴즈",
+                    tags: ["3-6학년", "문법", "규칙"],
+                    url: "pages/activities/grammar_rules_quiz.html"
+                },
+                {
+                    title: "높임말 상황극",
+                    description: "다양한 상황에서 적절한 높임말을 사용하는 역할극 활동입니다.",
+                    category: "activities",
+                    subcategory: "역할극",
+                    tags: ["5-6학년", "높임말", "예절"],
+                    url: "pages/activities/honorific_roleplay.html"
+                },
+                {
+                    title: "높임말과 친구말 변환하기",
+                    description: "주어진 문장을 상황에 맞게 높임말과 친구말로 변환하는 연습을 합니다.",
+                    category: "activities",
+                    subcategory: "퀴즈",
+                    tags: ["4-6학년", "친구말", "높임말"],
+                    url: "pages/activities/formal_informal_conversion.html"
+                },
+                {
+                    title: "높임말 퀴즈 챌린지",
+                    description: "다양한 상황에서 올바른 높임말 표현을 선택하는 퀴즈입니다.",
+                    category: "activities",
+                    subcategory: "퀴즈",
+                    tags: ["5-6학년", "높임말", "존댓말"],
+                    url: "pages/activities/honorific_quiz.html"
+                },
+                {
+                    title: "친구말로 역할극 하기",
+                    description: "다양한 상황에서 친구와 대화하는 역할극을 통해 친구말을 적절히 사용하는 연습을 합니다.",
+                    category: "activities",
+                    subcategory: "역할극",
+                    tags: ["3-5학년", "친구말", "대화"],
+                    url: "pages/activities/casual_speech_roleplay.html"
+                }
+            ];
+            
+            // 가상의 주제별 결과
+            const topicResults = [
+                {
+                    title: "문장의 종류",
+                    description: "평서문, 의문문, 명령문, 청유문, 감탄문 등 다양한 문장의 종류와 특징을 배웁니다.",
+                    category: "topics",
+                    subcategory: "문법",
+                    tags: ["3학년", "4학년"],
+                    url: "pages/topics/sentence_types.html"
+                },
+                {
+                    title: "높임 표현",
+                    description: "주체, 객체, 상대 높임법 등 다양한 높임 표현 방법을 배웁니다.",
+                    category: "topics",
+                    subcategory: "문화",
+                    tags: ["4학년", "5학년", "문법"],
+                    url: "pages/topics/honorific_expressions.html"
+                },
+                {
+                    title: "품사의 세계",
+                    description: "9품사의 개념과 특징, 예시를 통해 품사의 세계를 탐험합니다.",
+                    category: "topics",
+                    subcategory: "문법",
+                    tags: ["3학년", "4학년"],
+                    url: "pages/topics/parts_of_speech.html"
+                },
+                {
+                    title: "품사 심화 학습",
+                    description: "품사의 변화와 문장에서의 역할, 다양한 활용법을 심층적으로 배웁니다.",
+                    category: "topics",
+                    subcategory: "문법",
+                    tags: ["5학년", "6학년"],
+                    url: "pages/topics/advanced_parts_of_speech.html"
+                },
+                {
+                    title: "기초 문법",
+                    description: "국어 문법의 기본 개념과 원리를 이해하고 적용하는 방법을 배웁니다.",
+                    category: "topics",
+                    subcategory: "문법",
+                    tags: ["전 학년", "문법", "기초"],
+                    url: "pages/topics/basic_grammar.html"
+                },
+                {
+                    title: "문법 요소와 기능",
+                    description: "조사, 어미, 접사 등 다양한 문법 요소의 기능과 역할을 배웁니다.",
+                    category: "topics",
+                    subcategory: "문법",
+                    tags: ["4학년", "5학년", "6학년"],
+                    url: "pages/topics/grammar_elements.html"
+                },
+                {
+                    title: "국어 문법의 특징",
+                    description: "우리말 문법의 고유한 특징과 다른 언어와의 차이점을 배웁니다.",
+                    category: "topics",
+                    subcategory: "문법",
+                    tags: ["6학년", "문법", "특징"],
+                    url: "pages/topics/korean_grammar_features.html"
+                },
+                {
+                    title: "높임말의 이해와 활용",
+                    description: "한국어 높임법의 체계와 다양한 상황에서의 활용법을 배웁니다.",
+                    category: "topics",
+                    subcategory: "문화",
+                    tags: ["5학년", "6학년", "높임말"],
+                    url: "pages/topics/understanding_honorifics.html"
+                },
+                {
+                    title: "높임말과 한국 문화",
+                    description: "높임말이 반영하는 한국의 사회적 관계와 문화적 가치를 배웁니다.",
+                    category: "topics",
+                    subcategory: "문화",
+                    tags: ["6학년", "높임말", "문화"],
+                    url: "pages/topics/honorifics_korean_culture.html"
+                },
+                {
+                    title: "언어 예절과 표현",
+                    description: "상황과 대상에 따른 적절한 언어 표현과 예절을 배웁니다.",
+                    category: "topics",
+                    subcategory: "문화",
+                    tags: ["전 학년", "친구말", "높임말"],
+                    url: "pages/topics/speech_etiquette.html"
+                },
+                {
+                    title: "친구말의 특징과 사용법",
+                    description: "친구말의 어미, 표현 방식과 적절한 사용 상황을 배웁니다.",
+                    category: "topics",
+                    subcategory: "문법",
+                    tags: ["3-4학년", "친구말", "표현"],
+                    url: "pages/topics/casual_speech_features.html"
+                }
+            ];
+            
+            // 유사 검색어 지원 - 검색어에 따른 관련 검색어 매핑
+            const relatedTerms = {
+                '문법': ['문장', '품사', '조사', '어미', '접사', '국어'],
+                '품사': ['명사', '동사', '형용사', '부사', '조사', '문법'],
+                '문장': ['주어', '서술어', '목적어', '문법', '평서문', '의문문'],
+                '높임말': ['존댓말', '높임', '높임법', '존경', '예절'],
+                '친구말': ['반말', '친밀어', '비격식체', '일상어', '친근어']
+            };
+            
+            // 디버깅 - 매핑 확인
+            console.log('검색어가 relatedTerms에 있는지 확인:', Object.keys(relatedTerms).some(k => lowercaseQuery.includes(k)));
+            
+            // 검색어 분리 및 확장
+            let searchTerms = [lowercaseQuery]; // 기본 검색어
+            
+            // 검색어가 2글자 이상이면 각 글자도 검색에 포함
+            if (lowercaseQuery.length > 1) {
+                // 단어 분리 (띄어쓰기 기준)
+                const words = lowercaseQuery.split(/\s+/);
+                if (words.length > 1) {
+                    searchTerms = [...searchTerms, ...words];
+                }
+            }
+            
+            // 관련 검색어 추가 (정확한 키워드 매칭으로 변경)
+            let foundRelatedTerms = false;
+            for (const [term, related] of Object.entries(relatedTerms)) {
+                // 검색어가 정확히 일치하거나 포함되는 경우만 관련 검색어 추가
+                if (term === lowercaseQuery || lowercaseQuery.includes(term)) {
+                    searchTerms = [...searchTerms, ...related];
+                    console.log(`'${term}' 관련 검색어 추가:`, related);
+                    foundRelatedTerms = true;
+                    // break 제거: 여러 키워드와 일치할 경우 모두 추가
+                }
+            }
+            
+            // 문법 관련 키워드 직접 추가 (안전장치)
+            if (lowercaseQuery === '문법' || lowercaseQuery.includes('문법')) {
+                const additionalTerms = ['문법', '국어문법', '문장', '품사', '조사'];
+                searchTerms = [...searchTerms, ...additionalTerms];
+                console.log('문법 관련 검색어 직접 추가:', additionalTerms);
+            }
+            
+            // 중복 제거
+            searchTerms = [...new Set(searchTerms)];
+            console.log('최종 검색어 목록:', searchTerms);
+            
+            // 검색어와 일치하는 결과만 필터링 (확장된 검색 로직)
+            const filteredLessonResults = lessonResults.filter(result => {
+                // 모든 필드를 결합하여 검색
+                const allText = [
+                    result.title.toLowerCase(),
+                    result.description.toLowerCase(),
+                    result.subcategory.toLowerCase(),
+                    ...result.tags.map(tag => tag.toLowerCase())
+                ].join(' ');
+                
+                // 검색어 중 하나라도 포함되어 있으면 일치
+                return searchTerms.some(term => allText.includes(term));
+            });
+            
+            const filteredActivityResults = activityResults.filter(result => {
+                const allText = [
+                    result.title.toLowerCase(),
+                    result.description.toLowerCase(),
+                    result.subcategory.toLowerCase(),
+                    ...result.tags.map(tag => tag.toLowerCase())
+                ].join(' ');
+                
+                return searchTerms.some(term => allText.includes(term));
+            });
+            
+            const filteredTopicResults = topicResults.filter(result => {
+                const allText = [
+                    result.title.toLowerCase(),
+                    result.description.toLowerCase(),
+                    result.subcategory.toLowerCase(),
+                    ...result.tags.map(tag => tag.toLowerCase())
+                ].join(' ');
+                
+                return searchTerms.some(term => allText.includes(term));
+            });
+            
+            // 검색 결과 카운트 디버깅
+            console.log('검색 결과 수(학습 내용):', filteredLessonResults.length);
+            console.log('검색 결과 수(학습 활동):', filteredActivityResults.length);
+            console.log('검색 결과 수(주제별 학습):', filteredTopicResults.length);
+            
+            // 검색 결과 정렬 - 정확도 기준 (원래 검색어와 일치하는 것이 상위에 표시)
+            const sortByRelevance = (results) => {
+                return results.sort((a, b) => {
+                    // 제목에 검색어가 포함된 경우 우선순위 높음
+                    const titleIncludesA = a.title.toLowerCase().includes(lowercaseQuery);
+                    const titleIncludesB = b.title.toLowerCase().includes(lowercaseQuery);
+                    
+                    if (titleIncludesA && !titleIncludesB) return -1;
+                    if (!titleIncludesA && titleIncludesB) return 1;
+                    
+                    // 태그에 검색어가 포함된 경우 다음 우선순위
+                    const tagIncludesA = a.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery));
+                    const tagIncludesB = b.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery));
+                    
+                    if (tagIncludesA && !tagIncludesB) return -1;
+                    if (!tagIncludesA && tagIncludesB) return 1;
+                    
+                    return 0;
+                });
+            };
+            
+            // 검색 결과에 검색어 하이라이트 추가 및 정렬
+            const processedResults = {
+                lessons: sortByRelevance(filteredLessonResults).map(result => addHighlight(result, searchTerms)),
+                activities: sortByRelevance(filteredActivityResults).map(result => addHighlight(result, searchTerms)),
+                topics: sortByRelevance(filteredTopicResults).map(result => addHighlight(result, searchTerms))
+            };
+            
+            return processedResults;
+        }
+        
+        // 검색어 하이라이트 추가 함수
+        function addHighlight(result, searchTerms) {
+            let highlightedTitle = result.title;
+            let highlightedDescription = result.description;
+            
+            // 모든 검색어에 대해 하이라이트 적용
+            searchTerms.forEach(term => {
+                if (term.length > 1) { // 너무 짧은 검색어는 건너뜀
+                    const regex = new RegExp(term, 'gi');
+                    highlightedTitle = highlightedTitle.replace(regex, match => `<mark>${match}</mark>`);
+                    highlightedDescription = highlightedDescription.replace(regex, match => `<mark>${match}</mark>`);
+                }
+            });
+            
+            return {
+                ...result,
+                title: highlightedTitle,
+                description: highlightedDescription
+            };
+        }
+        
+        // 검색 결과 표시 함수
+        function displayResults(results) {
+            const searchResultsElement = document.getElementById('searchResults');
+            const resultCountElement = document.getElementById('resultCount');
+            
+            // 전체 결과 수 계산
+            const totalResults = Object.values(results).reduce((total, categoryResults) => total + categoryResults.length, 0);
+            resultCountElement.textContent = totalResults;
+            
+            // 결과가 없는 경우
+            if (totalResults === 0) {
+                showNoResults('검색 결과가 없습니다');
+                return;
+            }
+            
+            // 필터 초기화
+            window.currentFilter = 'all';
+            
+            // 페이지네이션을 위해 결과 저장 (전역 변수)
+            window.searchResultsData = results;
+            
+            // 첫 페이지 표시
+            displayPage(1, results);
+            
+            // 페이지네이션 설정 (9개 이상의 결과가 있을 경우)
+            if (totalResults > 9) {
+                setupPagination(Math.ceil(totalResults / 9), 1);
+            } else {
+                document.getElementById('pagination').innerHTML = '';
+            }
+            
+            // 필터 버튼 이벤트 다시 연결
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                // 이전 이벤트 리스너 제거를 위해 복제 후 교체
+                const newButton = button.cloneNode(true);
+                button.parentNode.replaceChild(newButton, button);
+                
+                newButton.addEventListener('click', function() {
+                    // 활성 상태 토글
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 필터 적용
+                    const filter = this.getAttribute('data-filter');
+                    applyFilter(filter);
+                    
+                    // 필터 변경 시 첫 페이지로 이동
+                    displayPage(1, window.searchResultsData);
+                });
+            });
+        }
+        
+        // 특정 페이지의 결과 표시 함수
+        function displayPage(pageNumber, results) {
+            const searchResultsElement = document.getElementById('searchResults');
+            const itemsPerPage = 9; // 페이지당 항목 수 (3개 카테고리 * 3개 항목)
+            
+            // 모든 결과를 하나의 배열로 통합
+            const allResults = [
+                ...results.lessons.map(item => ({ ...item, category: 'lessons' })),
+                ...results.activities.map(item => ({ ...item, category: 'activities' })),
+                ...results.topics.map(item => ({ ...item, category: 'topics' }))
+            ];
+            
+            // 현재 필터 가져오기
+            const currentFilter = window.currentFilter || 'all';
+            
+            // 필터링된 결과
+            let filteredResults = allResults;
+            if (currentFilter !== 'all') {
+                filteredResults = allResults.filter(item => item.category === currentFilter);
+            }
+            
+            // 전체 페이지 수 업데이트
+            const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
+            
+            // 페이지네이션 업데이트 (필터링에 따라 페이지 수가 변경될 수 있음)
+            if (filteredResults.length > 9) {
+                setupPagination(totalPages, pageNumber);
+            } else {
+                document.getElementById('pagination').innerHTML = '';
+            }
+            
+            // 페이지에 표시할 항목 계산
+            const startIndex = (pageNumber - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, filteredResults.length);
+            const pageItems = filteredResults.slice(startIndex, endIndex);
+            
+            // 카테고리별로 결과 분류
+            const pageResults = {
+                lessons: pageItems.filter(item => item.category === 'lessons'),
+                activities: pageItems.filter(item => item.category === 'activities'),
+                topics: pageItems.filter(item => item.category === 'topics')
+            };
+            
+            // 결과 표시 HTML 생성
+            let resultsHTML = '';
+            
+            // 학습 내용 결과
+            if (pageResults.lessons.length > 0) {
+                resultsHTML += `
+                    <div class="category lessons" data-category="lessons">
+                        <h2 class="category-title"><i class="fas fa-book"></i> 학습 내용</h2>
+                        <div class="result-cards">
+                            ${pageResults.lessons.map(item => createResultCard(item)).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // 활동 결과
+            if (pageResults.activities.length > 0) {
+                resultsHTML += `
+                    <div class="category activities" data-category="activities">
+                        <h2 class="category-title"><i class="fas fa-gamepad"></i> 학습 활동</h2>
+                        <div class="result-cards">
+                            ${pageResults.activities.map(item => createResultCard(item)).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // 주제별 결과
+            if (pageResults.topics.length > 0) {
+                resultsHTML += `
+                    <div class="category topics" data-category="topics">
+                        <h2 class="category-title"><i class="fas fa-sitemap"></i> 주제별 학습</h2>
+                        <div class="result-cards">
+                            ${pageResults.topics.map(item => createResultCard(item)).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // 결과 페이지 표시
+            searchResultsElement.innerHTML = resultsHTML;
+            
+            // 페이지 번호 표시 업데이트
+            updateActivePage(pageNumber);
+            
+            // 활성 필터 유지
+            const activeFilter = window.currentFilter || 'all';
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-filter') === activeFilter);
+            });
+            
+            // 필터 다시 적용 (필터링된 카테고리만 표시)
+            if (activeFilter !== 'all') {
+                const categories = document.querySelectorAll('.category');
+                categories.forEach(category => {
+                    if (category.getAttribute('data-category') === activeFilter) {
+                        category.style.display = 'block';
+                    } else {
+                        category.style.display = 'none';
+                    }
+                });
+            }
+        }
+        
+        // 검색 결과 카드 생성 함수
+        function createResultCard(item) {
+            return `
+                <div class="result-card">
+                    <div class="result-card-header">
+                        <span>${item.subcategory}</span>
+                        <i class="${getCategoryIcon(item.category)}"></i>
+                    </div>
+                    <div class="result-card-content">
+                        <h3 class="result-card-title">${item.title}</h3>
+                        <p class="result-card-description">${item.description}</p>
+                        <div class="result-card-meta">
+                            <div class="result-card-tags">
+                                ${item.tags.map(tag => `<span>${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <a href="${item.url}" class="result-card-link">자세히 보기 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            `;
+        }
+        
+        // 카테고리별 아이콘 가져오기
+        function getCategoryIcon(category) {
+            switch(category) {
+                case 'lessons': return 'fas fa-book';
+                case 'activities': return 'fas fa-gamepad';
+                case 'topics': return 'fas fa-sitemap';
+                default: return 'fas fa-file';
+            }
+        }
+        
+        // 검색 결과 없음 표시
+        function showNoResults(message) {
+            const searchResultsElement = document.getElementById('searchResults');
+            
+            searchResultsElement.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <h3>${message}</h3>
+                    <p>다른 검색어를 입력하거나 아래 제안을 확인해보세요.</p>
+                    
+                    <div class="suggestions">
+                        <h4>검색 제안</h4>
+                        <ul>
+                            <li>다른 단어나 표현으로 검색해보세요.</li>
+                            <li>철자가 정확한지 확인해보세요.</li>
+                            <li>더 일반적인 검색어를 사용해보세요.</li>
+                            <li>다양한 주제별 학습에서 직접 찾아보세요.</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            // 결과 개수 0으로 설정
+            document.getElementById('resultCount').textContent = '0';
+        }
+        
+        // 필터 적용 함수
+        function applyFilter(filter) {
+            const categories = document.querySelectorAll('.category');
+            
+            if (filter === 'all') {
+                // 모든 카테고리 표시
+                categories.forEach(category => {
+                    category.style.display = 'block';
+                });
+            } else {
+                // 선택된 카테고리만 표시
+                categories.forEach(category => {
+                    if (category.getAttribute('data-category') === filter) {
+                        category.style.display = 'block';
+                    } else {
+                        category.style.display = 'none';
+                    }
+                });
+            }
+            
+            // 필터링된 결과 저장 (필터 설정 기억)
+            window.currentFilter = filter;
+        }
+        
+        // 페이지네이션 설정
+        function setupPagination(totalPages, currentPage = 1) {
+            const paginationElement = document.getElementById('pagination');
+            let paginationHTML = '';
+            
+            // 이전 버튼
+            paginationHTML += `<button aria-label="이전 페이지" class="prev-btn" ${currentPage <= 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
+            
+            // 페이지 번호 버튼
+            for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+                paginationHTML += `<button class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+            }
+            
+            // 다음 버튼
+            paginationHTML += `<button aria-label="다음 페이지" class="next-btn" ${currentPage >= totalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
+            
+            paginationElement.innerHTML = paginationHTML;
+            
+            // 페이지네이션 버튼 이벤트
+            const pageButtons = paginationElement.querySelectorAll('button[data-page]');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const pageNumber = parseInt(this.getAttribute('data-page'));
+                    
+                    // 페이지 결과 표시
+                    displayPage(pageNumber, window.searchResultsData);
+                });
+            });
+            
+            // 이전 버튼 이벤트
+            const prevButton = paginationElement.querySelector('.prev-btn');
+            if (prevButton) {
+                prevButton.addEventListener('click', function() {
+                    if (this.hasAttribute('disabled')) return;
+                    
+                    const activePage = parseInt(paginationElement.querySelector('button.active').getAttribute('data-page'));
+                    if (activePage > 1) {
+                        displayPage(activePage - 1, window.searchResultsData);
+                    }
+                });
+            }
+            
+            // 다음 버튼 이벤트
+            const nextButton = paginationElement.querySelector('.next-btn');
+            if (nextButton) {
+                nextButton.addEventListener('click', function() {
+                    if (this.hasAttribute('disabled')) return;
+                    
+                    const activePage = parseInt(paginationElement.querySelector('button.active').getAttribute('data-page'));
+                    if (activePage < totalPages) {
+                        displayPage(activePage + 1, window.searchResultsData);
+                    }
+                });
+            }
+        }
+        
+        // 활성 페이지 업데이트
+        function updateActivePage(pageNumber) {
+            const paginationElement = document.getElementById('pagination');
+            if (!paginationElement) return;
+            
+            // 모든 페이지 버튼에서 활성 클래스 제거
+            const pageButtons = paginationElement.querySelectorAll('button[data-page]');
+            pageButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // 현재 페이지 버튼 활성화
+            const currentButton = paginationElement.querySelector(`button[data-page="${pageNumber}"]`);
+            if (currentButton) {
+                currentButton.classList.add('active');
+            }
+            
+            // 이전/다음 버튼 상태 업데이트
+            const prevButton = paginationElement.querySelector('.prev-btn');
+            const nextButton = paginationElement.querySelector('.next-btn');
+            
+            if (prevButton) {
+                if (pageNumber <= 1) {
+                    prevButton.setAttribute('disabled', '');
+                } else {
+                    prevButton.removeAttribute('disabled');
+                }
+            }
+            
+            if (nextButton) {
+                const totalPages = pageButtons.length;
+                if (pageNumber >= totalPages) {
+                    nextButton.setAttribute('disabled', '');
+                } else {
+                    nextButton.removeAttribute('disabled');
+                }
+            }
+        }
+    </script>
+</body>
+</html> 
