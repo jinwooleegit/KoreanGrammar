@@ -61,9 +61,9 @@ class SiteManager {
             basePath += '../';
         }
         
-        // 'pages/' 디렉토리가 포함된 경로인 경우 추가
-        if (this.currentPath.includes('/pages/')) {
-            basePath += 'pages/';
+        // sitemap.html 페이지 처리
+        if (this.currentPath.includes('sitemap.html')) {
+            return '/';
         }
         
         console.log("기본 경로:", basePath);
@@ -99,17 +99,33 @@ class SiteManager {
      * 헤더 HTML 생성
      */
     generateHeader(basePath) {
+        // basePath가 빈 문자열일 경우 루트 경로로 설정
+        const finalBasePath = basePath || '/';
+        
         const menuHTML = this.menuItems.map(item => {
             // 경로 설정
-            const url = item.url.startsWith('http') ? 
-                        item.url : 
-                        basePath + item.url.replace(/^\//, '');
+            let url;
+            if (item.url.startsWith('http')) {
+                url = item.url; 
+            } else if (item.url === 'index.html' && finalBasePath === '/') {
+                url = '/';
+            } else if (item.id === 'grade') {
+                url = finalBasePath === '/' ? '/pages/grade-learning/index.html' : finalBasePath + 'grade-learning/index.html';
+            } else if (item.id === 'topics') {
+                url = finalBasePath === '/' ? '/pages/topics/index.html' : finalBasePath + 'topics/index.html';
+            } else if (item.id === 'activities') {
+                url = finalBasePath === '/' ? '/pages/activities/index.html' : finalBasePath + 'activities/index.html';
+            } else if (item.id === 'sitemap') {
+                url = finalBasePath === '/' ? '/sitemap.html' : finalBasePath + 'sitemap.html';
+            } else {
+                url = finalBasePath + item.url.replace(/^\//, '');
+            }
             
             return `<li id="${item.id}-nav"><a href="${url}">${item.title}</a></li>`;
         }).join('');
         
-        // 홈 링크도 basePath 적용
-        const homeLink = basePath + 'index.html';
+        // 홈 링크
+        const homeLink = finalBasePath === '/' ? '/' : finalBasePath + 'index.html';
         
         return `
         <div class="site-header">

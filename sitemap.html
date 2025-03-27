@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>문법놀이터 사이트맵</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 구형 브라우저 지원을 위한 폴리필 -->
+    <script src="/js/polyfills.js"></script>
+    <!-- IE 호환성을 위한 CSS -->
+    <link rel="stylesheet" href="/css/ie-compatibility.css">
+    <!-- 파비콘 -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <style>
         body {
             background-color: #f8f9fa;
             font-family: 'Noto Sans KR', Arial, sans-serif;
-            padding: 20px;
+            padding: 0;
+            margin: 0;
         }
         .sitemap-container {
             width: 1000px;
@@ -18,7 +29,7 @@
             border-radius: 10px;
             position: relative;
             padding: 20px;
-            margin: 0 auto;
+            margin: 50px auto;
         }
         .main-node {
             position: absolute;
@@ -447,211 +458,112 @@
             }
         }
         </style>
-    <!-- 구형 브라우저 지원을 위한 폴리필 -->
-    <script src="../../js/polyfills.js"></script>
-    <!-- IE 호환성을 위한 CSS -->
-    <link rel="stylesheet" href="../../css/ie-compatibility.css">
-    <!-- 파비콘 -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1 class="sitemap-title">문법놀이터 사이트맵</h1>
-    <div class="back-container">
-        <a href="index.html" class="back-to-home">홈으로 돌아가기</a>
-    </div>
+    <!-- 헤더 영역 -->
+    <header></header>
+
     <div class="sitemap-container">
         <!-- 메인 노드 -->
-        <div class="main-node">
-            <a href="../../index.html">메인 홈페이지</a>
-        </div>
-
-        <!-- 주요 연결선 -->
+        <a href="/index.html" class="main-node">문법놀이터</a>
+        
+        <!-- 메인 연결선 -->
         <div class="line v-line"></div>
         <div class="line h-line"></div>
-        <div class="line h-line-activities"></div>
         
-        <!-- 섹션 라벨 -->
-        <div class="section-label label-grade">학년별 학습</div>
-        <div class="section-label label-topics">학습 주제별</div>
-        <div class="section-label label-activities">학습 활동</div>
-        <div class="section-label label-progress">진행 상황</div>
+        <!-- 섹션 노드 -->
+        <a href="/pages/grade-learning/index.html" class="section-node grade">학년별 학습</a>
+        <a href="/pages/topics/index.html" class="section-node topics">학습 주제별</a>
+        <a href="/pages/activities/index.html" class="section-node activities">학습 활동</a>
+        <a href="/pages/progress/index.html" class="section-node progress">진행 상황</a>
         
-        <!-- 주요 섹션 노드 -->
-        <div class="section-node grade">
-            <a href="../../pages/grade-learning/index.html">학년별 학습</a>
-        </div>
-        <div class="section-node topics">
-            <a href="../../pages/topics/index.html">학습 주제별</a>
-        </div>
-        <div class="section-node activities">
-            <a href="../../pages/activities/index.html">학습 활동</a>
-        </div>
-        <div class="section-node progress">
-            <a href="../../pages/progress/index.html">진행 상황</a>
-        </div>
-        
-        <!-- 연결선 - 섹션에서 서브 노드 -->
+        <!-- 섹션 연결선 -->
         <div class="line v-line-grade"></div>
+        <div class="line h-line-grade"></div>
         <div class="line v-line-topics"></div>
+        <div class="line h-line-topics"></div>
         <div class="line v-line-activities"></div>
+        <div class="line h-line-activities"></div>
         <div class="line v-line-progress"></div>
+        <div class="line h-line-progress"></div>
         
+        <!-- 학년별 학습 서브노드 -->
+        <a href="/pages/grade-learning/grade1/index.html" class="sub-node grade1">1학년</a>
+        <a href="/pages/grade-learning/grade2/index.html" class="sub-node grade2">2학년</a>
+        <a href="/pages/grade-learning/grade3/index.html" class="sub-node grade3">3학년</a>
+        <a href="/pages/grade-learning/grade4/index.html" class="sub-node grade4">4학년</a>
+        <a href="/pages/grade-learning/grade5/index.html" class="sub-node grade5">5학년</a>
+        <a href="/pages/grade-learning/grade6/index.html" class="sub-node grade6">6학년</a>
+        
+        <!-- 학습 주제별 서브노드 -->
+        <a href="/pages/topics/topic_parts_of_speech.html" class="sub-node parts">품사 알아보기</a>
+        <a href="/pages/topics/topic_sentence_types.html" class="sub-node sentence">문장의 종류</a>
+        <a href="/pages/topics/topic_particles.html" class="sub-node particles">조사 배우기</a>
+        <a href="/pages/topics/topic_honorifics.html" class="sub-node honorifics">높임법</a>
+        <a href="/pages/topics/topic_complex_sentences.html" class="sub-node complex">복잡한 문장 구조</a>
+        <a href="/pages/topics/topic_connecting_sentences.html" class="sub-node connecting">문장 연결하기</a>
+        <a href="/pages/topics/topic_effective_writing.html" class="sub-node effective">효과적인 글쓰기</a>
+        <a href="/pages/topics/topic_figurative_language.html" class="sub-node figurative">비유적 표현</a>
+        <a href="/pages/topics/topic_idioms.html" class="sub-node idioms">관용 표현과 속담</a>
+        <a href="/pages/topics/topic_persuasive_expression.html" class="sub-node persuasive">설득하는 표현</a>
+        <a href="/pages/topics/topic_pronunciation.html" class="sub-node pronunciation">발음</a>
+        <a href="/pages/topics/topic_punctuation.html" class="sub-node punctuation">문장 부호</a>
+        <a href="/pages/topics/topic_sentence_elements.html" class="sub-node sentence-elem">문장 성분</a>
+        <a href="/pages/topics/topic_tense.html" class="sub-node tense">시제</a>
+        <a href="/pages/topics/topic_word_extension.html" class="sub-node word-extension">단어 확장</a>
+        <a href="/pages/topics/topic_word_relations.html" class="sub-node word-relations">단어 관계</a>
+        
+        <!-- 학습 활동 서브노드 -->
+        <a href="/pages/activities/word_matching_game.html" class="sub-node word-matching">낱말 카드 매칭 게임</a>
+        <a href="/pages/activities/sentence_type_quiz.html" class="sub-node sentence-quiz">문장 종류 맞추기</a>
+        <a href="/pages/activities/sentence_correction.html" class="sub-node sentence-correction">문장 바로잡기</a>
+        <a href="/pages/activities/proverb_puzzle.html" class="sub-node proverb">속담 퍼즐 맞추기</a>
+        <a href="/pages/activities/parts_of_speech_game.html" class="sub-node speech-game">품사 찾기 게임</a>
+        <a href="/pages/activities/idiom_storytelling.html" class="sub-node idiom-story">속담 이야기 만들기</a>
+        <a href="/pages/activities/honorific_converter.html" class="sub-node converter">높임말 변환기</a>
+        <a href="/pages/activities/figurative_expressions.html" class="sub-node figurative-exp">비유적 표현 놀이</a>
+        
+        <!-- 진행 상황 서브노드 -->
+        <a href="/pages/progress/index.html" class="sub-node progress-main">학습 진행 상황</a>
+        
+        <!-- 세부 페이지 노드 -->
+        <!-- 1학년 -->
+        <a href="/pages/grade-learning/grade1/grade1_words.html" class="detail-node grade1-words">글자와 소리 관계</a>
+        <a href="/pages/grade-learning/grade1/grade1_words_detail.html" class="detail-node grade1-words-detail">낱말 세부 학습</a>
+        <a href="/pages/grade-learning/grade1/grade1_sentences.html" class="detail-node grade1-sentences">1학년 문장 배우기</a>
+        <a href="/pages/grade-learning/grade1/grade1_sounds.html" class="detail-node grade1-sounds">소리와 발음</a>
+        <a href="/pages/grade-learning/grade1/grade1_writing.html" class="detail-node grade1-writing">쓰기 기초</a>
+        
+        <!-- 2학년 -->
+        <a href="/pages/grade-learning/grade2/grade2_sentences.html" class="detail-node grade2-sentences">기본 문장 구조</a>
+        <a href="/pages/grade-learning/grade2/grade2_sentence_types.html" class="detail-node grade2-sentence-types">2학년 문장 종류</a>
+        
+        <!-- 3학년 -->
+        <a href="/pages/grade-learning/grade3/grade3_parts_of_speech.html" class="detail-node grade3-parts">품사 알아보기</a>
+        <a href="/pages/grade-learning/grade3/grade3_sentence_components.html" class="detail-node grade3-components">문장 성분</a>
+        
+        <!-- 4학년 -->
+        <a href="/pages/grade-learning/grade4/grade4_tense.html" class="detail-node grade4-tense">시간 표현</a>
+        
+        <!-- 5학년 -->
+        <a href="/pages/grade-learning/grade5/grade5_figurative.html" class="detail-node grade5-figurative">비유적 표현</a>
+        <a href="/pages/grade-learning/grade5/grade5_idioms.html" class="detail-node grade5-idioms">관용 표현</a>
+        <a href="/pages/grade-learning/grade5/grade5_sentence_structure.html" class="detail-node grade5-structure">문장 구조</a>
+        
+        <!-- 6학년 -->
+        <a href="/pages/grade-learning/grade6/grade6_expression.html" class="detail-node grade6-expression">다양한 표현</a>
+        <a href="/pages/grade-learning/grade6/grade6_honorifics.html" class="detail-node grade6-honorifics">높임 표현</a>
+        <a href="/pages/grade-learning/grade6/grade6_korean_grammar.html" class="detail-node grade6-grammar">고급 문법</a>
+        
+        <!-- 연결선 -->
+        <div class="line v-line-grade1"></div>
+        <div class="line v-line-grade2"></div>
+        <div class="line v-line-grade3"></div>
         <div class="line h-line-grade"></div>
         <div class="line h-line-grade-b"></div>
         <div class="line h-line-topics"></div>
         <div class="line h-line-activities"></div>
-        
-        <!-- 서브 노드 - 학년별 -->
-        <div class="sub-node grade1">
-            <a href="../../pages/grade-learning/grade1.html">1학년</a>
-        </div>
-        <div class="sub-node grade2">
-            <a href="../../pages/grade-learning/grade2.html">2학년</a>
-        </div>
-        <div class="sub-node grade3">
-            <a href="../../pages/grade-learning/grade3.html">3학년</a>
-        </div>
-        <div class="sub-node grade4">
-            <a href="../../pages/grade-learning/grade4.html">4학년</a>
-        </div>
-        <div class="sub-node grade5">
-            <a href="../../pages/grade-learning/grade5.html">5학년</a>
-        </div>
-        <div class="sub-node grade6">
-            <a href="../../pages/grade-learning/grade6.html">6학년</a>
-        </div>
-        
-        <!-- 서브 노드 - 토픽별 -->
-        <div class="sub-node parts">
-            <a href="../../pages/topics/topic_parts_of_speech.html">품사 알아보기</a>
-        </div>
-        <div class="sub-node sentence">
-            <a href="../../pages/topics/topic_sentence_types.html">문장의 종류</a>
-        </div>
-        <div class="sub-node particles">
-            <a href="../../pages/topics/topic_particles.html">조사 배우기</a>
-        </div>
-        <div class="sub-node honorifics">
-            <a href="../../pages/topics/topic_honorifics.html">높임법</a>
-        </div>
-        <div class="sub-node complex">
-            <a href="../../pages/topics/topic_complex_sentences.html">복잡한 문장 구조</a>
-        </div>
-        <div class="sub-node connecting">
-            <a href="../../pages/topics/topic_connecting_sentences.html">문장 연결하기</a>
-        </div>
-        <div class="sub-node effective">
-            <a href="../../pages/topics/topic_effective_writing.html">효과적인 글쓰기</a>
-        </div>
-        <div class="sub-node figurative">
-            <a href="../../pages/topics/topic_figurative_language.html">비유적 표현</a>
-        </div>
-        <div class="sub-node idioms">
-            <a href="../../pages/topics/topic_idioms.html">관용 표현과 속담</a>
-        </div>
-        <div class="sub-node persuasive">
-            <a href="../../pages/topics/topic_persuasive_expression.html">설득하는 표현</a>
-        </div>
-        <div class="sub-node pronunciation">
-            <a href="../../pages/topics/topic_pronunciation.html">발음</a>
-        </div>
-        <div class="sub-node punctuation">
-            <a href="../../pages/topics/topic_punctuation.html">문장 부호</a>
-        </div>
-        <div class="sub-node sentence-elem">
-            <a href="../../pages/topics/topic_sentence_elements.html">문장 성분</a>
-        </div>
-        <div class="sub-node tense">
-            <a href="../../pages/topics/topic_tense.html">시제</a>
-        </div>
-        <div class="sub-node word-extension">
-            <a href="../../pages/topics/topic_word_extension.html">단어 확장</a>
-        </div>
-        <div class="sub-node word-relations">
-            <a href="../../pages/topics/topic_word_relations.html">단어 관계</a>
-        </div>
-        
-        <!-- 서브 노드 - 학습 활동 -->
-        <div class="sub-node word-matching">
-            <a href="../../pages/activities/word_matching_game.html">낱말 카드 매칭 게임</a>
-        </div>
-        <div class="sub-node sentence-quiz">
-            <a href="../../pages/activities/sentence_type_quiz.html">문장 종류 맞추기</a>
-        </div>
-        <div class="sub-node sentence-correction">
-            <a href="../../pages/activities/sentence_correction.html">문장 바로잡기</a>
-        </div>
-        <div class="sub-node proverb">
-            <a href="../../pages/activities/proverb_puzzle.html">속담 퍼즐 맞추기</a>
-        </div>
-        <div class="sub-node speech-game">
-            <a href="../../pages/activities/parts_of_speech_game.html">품사 찾기 게임</a>
-        </div>
-        <div class="sub-node idiom-story">
-            <a href="../../pages/activities/idiom_storytelling.html">속담 이야기 만들기</a>
-        </div>
-        <div class="sub-node converter">
-            <a href="../../pages/activities/honorific_converter.html">높임말 변환기</a>
-        </div>
-        <div class="sub-node figurative-exp">
-            <a href="../../pages/activities/figurative_expressions.html">비유적 표현 놀이</a>
-        </div>
-        
-        <!-- 서브 노드 - 진행 상황 -->
-        <div class="sub-node progress-main">
-            <a href="../../pages/progress/index.html">학습 진행 상황</a>
-        </div>
-        
-        <!-- 세부 페이지 노드 - 학년별 학습 -->
-        <div class="detail-node grade1-words">
-            <a href="../../pages/grade-learning/grade1/grade1_sounds.html">글자와 소리 관계</a>
-        </div>
-        <div class="detail-node grade1-words-detail">
-            <a href="../../pages/grade-learning/grade1/grade1_composition.html">작문 학습하기</a>
-        </div>
-        <div class="detail-node grade1-sentences">
-            <a href="../../pages/grade-learning/grade1/grade1_sentences.html">문장 알아보기</a>
-        </div>
-        <div class="detail-node grade1-sounds">
-            <a href="../../pages/grade-learning/grade1/grade1_vocab.html">어휘력 키우기</a>
-        </div>
-        <div class="detail-node grade1-writing">
-            <a href="../../pages/grade-learning/grade1/grade1_grammar.html">기초 문법</a>
-        </div>
-        <div class="detail-node grade2-sentences">
-            <a href="../../pages/grade-learning/grade2/grade2_sentences.html">기본 문장 구조</a>
-        </div>
-        <div class="detail-node grade2-sentence-types">
-            <a href="../../pages/grade-learning/grade2/grade2_sentence_types.html">문장 종류</a>
-        </div>
-        <div class="detail-node grade3-parts">
-            <a href="../../pages/grade-learning/grade3/grade3_parts_of_speech.html">품사 알아보기</a>
-        </div>
-        <div class="detail-node grade3-components">
-            <a href="../../pages/grade-learning/grade3/grade3_sentence_components.html">문장 성분</a>
-        </div>
-        <div class="detail-node grade4-tense">
-            <a href="../../pages/grade-learning/grade4/grade4_tense.html">시간 표현</a>
-        </div>
-        <div class="detail-node grade5-figurative">
-            <a href="../../pages/grade-learning/grade5/grade5_figurative.html">비유적 표현</a>
-        </div>
-        <div class="detail-node grade5-idioms">
-            <a href="../../pages/grade-learning/grade5/grade5_idioms.html">관용 표현</a>
-        </div>
-        <div class="detail-node grade5-structure">
-            <a href="../../pages/grade-learning/grade5/grade5_sentence_structure.html">문장 구조</a>
-        </div>
-        <div class="detail-node grade6-expression">
-            <a href="../../pages/grade-learning/grade6/grade6_expression.html">다양한 표현</a>
-        </div>
-        <div class="detail-node grade6-honorifics">
-            <a href="../../pages/grade-learning/grade6/grade6_honorifics.html">높임 표현</a>
-        </div>
-        <div class="detail-node grade6-grammar">
-            <a href="../../pages/grade-learning/grade6/grade6_korean_grammar.html">고급 문법</a>
-        </div>
+        <div class="line v-line-detail"></div>
         
         <div class="coordinates">1000x1200px</div>
         
@@ -659,9 +571,11 @@
         <h1 style="text-align: center; margin-top: -20px; color: #333; font-size: 24px;">문법놀이터 - 전체 사이트맵</h1>
         <p style="text-align: center; margin-top: 5px; color: #666;">각 항목을 클릭하면 해당 페이지로 이동합니다.</p>
     </div>
+
+    <!-- 푸터 영역 -->
+    <footer></footer>
+    
+    <script src="/assets/js/scripts.js"></script>
     <script src="/js/siteManager.js"></script>
-    <div class="back-container">
-        <a href="index.html" class="back-to-home">홈으로 돌아가기</a>
-    </div>
 </body>
 </html> 
