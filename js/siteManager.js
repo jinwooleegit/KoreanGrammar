@@ -1,7 +1,7 @@
 /**
  * 사이트 매니저 - 메뉴 및 푸터 관리 시스템
  * 모든 페이지에 일관된 헤더와 푸터를 적용하고 관리하는 통합 시스템
- * 버전: 1.1.0 (캐시 방지)
+ * 버전: 1.3.0 (경로 문제 해결 및 리소스 자동 로드)
  */
 
 class SiteManager {
@@ -15,12 +15,13 @@ class SiteManager {
             { id: 'sitemap', title: '사이트맵', url: '/sitemap.html', pattern: /sitemap\.html/ }
         ];
         
-        // 캐시 방지 (v1.1.0)
-        console.log('SiteManager 초기화: 버전 1.1.0');
+        // 캐시 방지 (v1.3.0)
+        console.log('SiteManager 초기화: 버전 1.3.0');
         
         // 현재 페이지 경로 분석
         this.currentPath = window.location.pathname;
         this.pathDepth = this.calculatePathDepth();
+        this.basePath = this.getBasePath();
         
         // 초기화
         this.init();
@@ -33,20 +34,16 @@ class SiteManager {
         const path = this.currentPath;
         console.log("현재 경로:", path);
         
-        // '/pages/' 디렉토리가 경로에 포함되어 있는지 확인
-        const inPagesDir = path.includes('/pages/');
+        // 경로를 /로 분할하고 빈 문자열 제거
+        const pathParts = path.split('/').filter(Boolean);
         
-        // 서브디렉토리 깊이 계산
-        let depth = 0;
+        // 디렉토리 깊이 계산
+        let depth = pathParts.length;
         
-        if (inPagesDir) {
-            const pathParts = path.split('/').filter(Boolean);
-            const pagesIndex = pathParts.indexOf('pages');
-            
-            if (pagesIndex !== -1) {
-                // pages 디렉토리를 기준으로 깊이 계산
-                depth = pathParts.length - pagesIndex - 1;
-            }
+        // 파일명이 포함된 경우 하나 빼기
+        if (path.endsWith('.html') || path.includes('.html?') || 
+            path.endsWith('/') === false && pathParts.length > 0) {
+            depth--;
         }
         
         console.log("계산된 경로 깊이:", depth);
@@ -65,9 +62,14 @@ class SiteManager {
             basePath += '../';
         }
         
-        // sitemap.html 페이지 처리
+        // 루트 경로일 경우 처리
+        if (depth === 0 || this.currentPath === '/' || this.currentPath === '/index.html') {
+            basePath = '/';
+        }
+        
+        // 특정 페이지 처리
         if (this.currentPath.includes('sitemap.html')) {
-            return '/';
+            basePath = '/';
         }
         
         console.log("기본 경로:", basePath);
@@ -82,6 +84,7 @@ class SiteManager {
             this.loadHeader();
             this.loadFooter();
             this.addBackToTopButton();
+            this.ensureResourcesLoaded();
         });
     }
     
@@ -103,15 +106,28 @@ class SiteManager {
      * 헤더 HTML 생성
      */
     generateHeader(basePath) {
+        // 루트 기준으로 URL을 상대 경로로 변환
         const menuHTML = this.menuItems.map(item => {
-            return `<li id="${item.id}-nav"><a href="${item.url}">${item.title}</a></li>`;
+            // 안전하게 URL 경로 정규화
+            let href = item.url;
+            
+            // 상대 경로가 필요한 경우 처리
+            if (href.startsWith('/')) {
+                href = href.substring(1); // 슬래시 제거
+                href = basePath === '/' ? `/${href}` : `${basePath}${href}`;
+            }
+            
+            return `<li id="${item.id}-nav"><a href="${href}">${item.title}</a></li>`;
         }).join('');
+        
+        // 로고 링크도 상대 경로로 조정
+        const logoHref = basePath === '/' ? '/' : `${basePath}index.html`;
         
         return `
         <div class="site-header">
             <div class="header-container">
                 <div class="logo">
-                    <a href="/">문법놀이터</a>
+                    <a href="${logoHref}">문법놀이터</a>
                 </div>
                 <nav>
                     <ul>${menuHTML}</ul>
@@ -196,6 +212,63 @@ class SiteManager {
                 <p>&copy; 2025 <a href="mailto:milgae@naver.com">이진우</a> All rights reserved.</p>
             </div>
         </div>`;
+    }
+    
+    /**
+     * 필요한 리소스가 올바르게 로드되었는지 확인
+     */
+    ensureResourcesLoaded() {
+        // 이미 로드된 스크립트와 스타일시트 확인
+        const loadedScripts = Array.from(document.querySelectorAll('script')).map(script => script.src);
+        const loadedStyles = Array.from(document.querySelectorAll('link[rel="stylesheet"]')).map(link => link.href);
+        
+        // 필요한 스크립트와 스타일시트 목록
+        const essentialScripts = [
+            { path: 'assets/js/scripts.js', loaded: false },
+            { path: 'js/siteManager.js', loaded: false }
+        ];
+        
+        const essentialStyles = [
+            { path: 'assets/css/styles.css', loaded: false }
+        ];
+        
+        // 이미 로드된 리소스 확인
+        loadedScripts.forEach(src => {
+            essentialScripts.forEach(script => {
+                if (src.includes(script.path)) {
+                    script.loaded = true;
+                }
+            });
+        });
+        
+        loadedStyles.forEach(href => {
+            essentialStyles.forEach(style => {
+                if (href.includes(style.path)) {
+                    style.loaded = true;
+                }
+            });
+        });
+        
+        // 누락된 스크립트 로드
+        essentialScripts.forEach(script => {
+            if (!script.loaded) {
+                console.log(`리소스 자동 로드: ${script.path}`);
+                const scriptEl = document.createElement('script');
+                scriptEl.src = this.basePath === '/' ? `/${script.path}` : `${this.basePath}${script.path}`;
+                document.body.appendChild(scriptEl);
+            }
+        });
+        
+        // 누락된 스타일시트 로드
+        essentialStyles.forEach(style => {
+            if (!style.loaded) {
+                console.log(`리소스 자동 로드: ${style.path}`);
+                const linkEl = document.createElement('link');
+                linkEl.rel = 'stylesheet';
+                linkEl.href = this.basePath === '/' ? `/${style.path}` : `${this.basePath}${style.path}`;
+                document.head.appendChild(linkEl);
+            }
+        });
     }
 }
 
