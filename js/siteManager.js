@@ -8,11 +8,11 @@ class SiteManager {
     constructor() {
         // 메뉴 아이템 구성 (여기서 메뉴를 쉽게 추가/수정할 수 있음)
         this.menuItems = [
-            { id: 'grade', title: '학년별 학습', url: '/pages/grade-learning/index.html', pattern: /grade-learning/ },
-            { id: 'topics', title: '학습 주제별', url: '/pages/topics/index.html', pattern: /topics/ },
-            { id: 'activities', title: '학습 활동', url: '/pages/activities/index.html', pattern: /activities/ },
-            { id: 'progress', title: '나의 학습 진도', url: '/pages/progress/index.html', pattern: /progress/ },
-            { id: 'sitemap', title: '사이트맵', url: '/sitemap.html', pattern: /sitemap\.html/ }
+            { id: 'grade', title: '학년별 학습', url: '/KoreanGrammar/pages/grade-learning/index.html', pattern: /grade-learning/ },
+            { id: 'topics', title: '학습 주제별', url: '/KoreanGrammar/pages/topics/index.html', pattern: /topics/ },
+            { id: 'activities', title: '학습 활동', url: '/KoreanGrammar/pages/activities/index.html', pattern: /activities/ },
+            { id: 'progress', title: '나의 학습 진도', url: '/KoreanGrammar/pages/progress/index.html', pattern: /progress/ },
+            { id: 'sitemap', title: '사이트맵', url: '/KoreanGrammar/sitemap.html', pattern: /sitemap\.html/ }
         ];
         
         // 캐시 방지 (v1.4.0)
@@ -66,13 +66,14 @@ class SiteManager {
         }
         
         // 루트 경로일 경우 처리
-        if (depth === 0 || this.currentPath === '/' || this.currentPath === '/index.html') {
-            basePath = '/';
+        if (depth === 0 || this.currentPath === '/' || this.currentPath === '/index.html' || 
+            this.currentPath === '/KoreanGrammar/' || this.currentPath === '/KoreanGrammar/index.html') {
+            basePath = '/KoreanGrammar/';
         }
         
         // 특정 페이지 처리
         if (this.currentPath.includes('sitemap.html')) {
-            basePath = '/';
+            basePath = '/KoreanGrammar/';
         }
         
         console.log("기본 경로:", basePath);
@@ -116,7 +117,12 @@ class SiteManager {
             // 안전하게 URL 경로 정규화
             let href = item.url;
             
-            // 상대 경로가 필요한 경우 처리
+            // GitHub Pages 호스팅 경로 처리
+            if (window.location.hostname === 'jinwooleegit.github.io') {
+                return `<li id="${item.id}-nav"><a href="${href}">${item.title}</a></li>`;
+            }
+            
+            // 로컬 개발 환경용 상대 경로 처리
             if (href.startsWith('/')) {
                 href = href.substring(1); // 슬래시 제거
                 href = basePath === '/' ? `/${href}` : `${basePath}${href}`;
@@ -126,7 +132,12 @@ class SiteManager {
         }).join('');
         
         // 로고 링크도 상대 경로로 조정
-        const logoHref = basePath === '/' ? '/' : `${basePath}index.html`;
+        let logoHref;
+        if (window.location.hostname === 'jinwooleegit.github.io') {
+            logoHref = '/KoreanGrammar/';
+        } else {
+            logoHref = basePath === '/' ? '/' : `${basePath}index.html`;
+        }
         
         return `
         <div class="site-header">

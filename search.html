@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>검색 결과 | 문법놀이터</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/KoreanGrammar/assets/css/styles.css">
     <!-- Font Awesome 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- 구형 브라우저 지원을 위한 폴리필 -->
-    <script src="js/polyfills.js"></script>
+    <script src="/KoreanGrammar/js/polyfills.js"></script>
     <!-- IE 호환성을 위한 CSS -->
-    <link rel="stylesheet" href="css/ie-compatibility.css">
+    <link rel="stylesheet" href="/KoreanGrammar/css/ie-compatibility.css">
     <!-- 파비콘 -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/KoreanGrammar/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/KoreanGrammar/favicon.ico" type="image/x-icon">
     <style>
         /* 검색 페이지 스타일 */
         .search-header {
@@ -410,7 +410,7 @@
     <footer></footer>
 
     <!-- 사이트 매니저 스크립트 -->
-    <script src="js/siteManager.js"></script>
+    <script src="/KoreanGrammar/js/siteManager.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -446,7 +446,12 @@
                 const newQuery = searchInputElement.value.trim();
                 
                 if (newQuery) {
-                    window.location.href = `search.html?q=${encodeURIComponent(newQuery)}`;
+                    // GitHub Pages인 경우와 로컬 개발 환경 구분
+                    if (window.location.hostname === 'jinwooleegit.github.io') {
+                        window.location.href = `/KoreanGrammar/search.html?q=${encodeURIComponent(newQuery)}`;
+                    } else {
+                        window.location.href = `search.html?q=${encodeURIComponent(newQuery)}`;
+                    }
                 }
             });
             
@@ -506,7 +511,7 @@
                     category: "lessons",
                     subcategory: "4학년 문법",
                     tags: ["문법", "문장"],
-                    url: "pages/grade-learning/grade4/grade4_complex_sentences.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade4/grade4_complex_sentences.html"
                 },
                 {
                     title: "높임말과 예절",
@@ -514,7 +519,7 @@
                     category: "lessons",
                     subcategory: "5학년 문법",
                     tags: ["문법", "높임말"],
-                    url: "pages/grade-learning/grade5/grade5_honorifics.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade5/grade5_honorifics.html"
                 },
                 {
                     title: "관용 표현 이해하기",
@@ -522,7 +527,7 @@
                     category: "lessons",
                     subcategory: "6학년 문법",
                     tags: ["표현", "문화", "문법"],
-                    url: "pages/grade-learning/grade6/grade6_idioms.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade6/grade6_idioms.html"
                 },
                 {
                     title: "품사의 이해",
@@ -530,7 +535,7 @@
                     category: "lessons",
                     subcategory: "3학년 문법",
                     tags: ["문법", "품사"],
-                    url: "pages/grade-learning/grade3/grade3_parts_of_speech.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade3/grade3_parts_of_speech.html"
                 },
                 {
                     title: "품사의 종류와 활용",
@@ -538,7 +543,7 @@
                     category: "lessons",
                     subcategory: "4학년 문법",
                     tags: ["문법", "품사"],
-                    url: "pages/grade-learning/grade4/grade4_parts_of_speech_advanced.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade4/grade4_parts_of_speech_advanced.html"
                 },
                 {
                     title: "국어 문법의 기초",
@@ -546,7 +551,7 @@
                     category: "lessons",
                     subcategory: "3학년 문법",
                     tags: ["문법", "기초"],
-                    url: "pages/grade-learning/grade3/grade3_basic_grammar.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade3/grade3_basic_grammar.html"
                 },
                 {
                     title: "문법 요소의 이해",
@@ -554,7 +559,7 @@
                     category: "lessons",
                     subcategory: "5학년 문법",
                     tags: ["문법", "요소"],
-                    url: "pages/grade-learning/grade5/grade5_grammar_elements.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade5/grade5_grammar_elements.html"
                 },
                 {
                     title: "높임법의 종류와 사용법",
@@ -562,7 +567,7 @@
                     category: "lessons",
                     subcategory: "5학년 문법",
                     tags: ["문법", "높임말", "존댓말"],
-                    url: "pages/grade-learning/grade5/grade5_honorific_types.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade5/grade5_honorific_types.html"
                 },
                 {
                     title: "높임말과 상황별 표현",
@@ -570,7 +575,7 @@
                     category: "lessons",
                     subcategory: "6학년 문법",
                     tags: ["문법", "높임말", "예절"],
-                    url: "pages/grade-learning/grade6/grade6_honorific_expressions.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade6/grade6_honorific_expressions.html"
                 },
                 {
                     title: "친구말과 높임말",
@@ -578,7 +583,7 @@
                     category: "lessons",
                     subcategory: "4학년 문법",
                     tags: ["문법", "친구말", "높임말"],
-                    url: "pages/grade-learning/grade4/grade4_formal_informal.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade4/grade4_formal_informal.html"
                 },
                 {
                     title: "일상 대화에서의 친구말",
@@ -586,7 +591,7 @@
                     category: "lessons",
                     subcategory: "3학년 문법",
                     tags: ["문법", "친구말", "대화"],
-                    url: "pages/grade-learning/grade3/grade3_casual_speech.html"
+                    url: "/KoreanGrammar/pages/grade-learning/grade3/grade3_casual_speech.html"
                 }
             ];
             
@@ -598,7 +603,7 @@
                     category: "activities",
                     subcategory: "퀴즈",
                     tags: ["2-4학년", "문장", "문법"],
-                    url: "pages/activities/sentence_type_quiz.html"
+                    url: "/KoreanGrammar/pages/activities/sentence_type_quiz.html"
                 },
                 {
                     title: "관용 표현 스토리텔링",
@@ -606,7 +611,7 @@
                     category: "activities",
                     subcategory: "글쓰기",
                     tags: ["5-6학년", "표현", "문법"],
-                    url: "pages/activities/idiom_storytelling.html"
+                    url: "/KoreanGrammar/pages/activities/idiom_storytelling.html"
                 },
                 {
                     title: "속담 퍼즐",
@@ -614,7 +619,7 @@
                     category: "activities",
                     subcategory: "게임",
                     tags: ["3-5학년", "표현", "문법"],
-                    url: "pages/activities/proverb_puzzle.html"
+                    url: "/KoreanGrammar/pages/activities/proverb_puzzle.html"
                 },
                 {
                     title: "품사 찾기 게임",
@@ -622,7 +627,7 @@
                     category: "activities",
                     subcategory: "게임",
                     tags: ["3-4학년", "품사", "문법"],
-                    url: "pages/activities/parts_of_speech_game.html"
+                    url: "/KoreanGrammar/pages/activities/parts_of_speech_game.html"
                 },
                 {
                     title: "품사 카드 매칭 게임",
@@ -630,7 +635,7 @@
                     category: "activities",
                     subcategory: "게임",
                     tags: ["3-5학년", "품사", "문법"],
-                    url: "pages/activities/parts_of_speech_cards.html"
+                    url: "/KoreanGrammar/pages/activities/parts_of_speech_cards.html"
                 },
                 {
                     title: "문법 요소 찾기",
@@ -638,7 +643,7 @@
                     category: "activities",
                     subcategory: "퀴즈",
                     tags: ["4-6학년", "문법", "요소"],
-                    url: "pages/activities/grammar_elements_quiz.html"
+                    url: "/KoreanGrammar/pages/activities/grammar_elements_quiz.html"
                 },
                 {
                     title: "문법 규칙 퀴즈",
@@ -646,7 +651,7 @@
                     category: "activities",
                     subcategory: "퀴즈",
                     tags: ["3-6학년", "문법", "규칙"],
-                    url: "pages/activities/grammar_rules_quiz.html"
+                    url: "/KoreanGrammar/pages/activities/grammar_rules_quiz.html"
                 },
                 {
                     title: "높임말 상황극",
@@ -654,7 +659,7 @@
                     category: "activities",
                     subcategory: "역할극",
                     tags: ["5-6학년", "높임말", "예절"],
-                    url: "pages/activities/honorific_roleplay.html"
+                    url: "/KoreanGrammar/pages/activities/honorific_roleplay.html"
                 },
                 {
                     title: "높임말과 친구말 변환하기",
@@ -662,7 +667,7 @@
                     category: "activities",
                     subcategory: "퀴즈",
                     tags: ["4-6학년", "친구말", "높임말"],
-                    url: "pages/activities/formal_informal_conversion.html"
+                    url: "/KoreanGrammar/pages/activities/formal_informal_conversion.html"
                 },
                 {
                     title: "높임말 퀴즈 챌린지",
@@ -670,7 +675,7 @@
                     category: "activities",
                     subcategory: "퀴즈",
                     tags: ["5-6학년", "높임말", "존댓말"],
-                    url: "pages/activities/honorific_quiz.html"
+                    url: "/KoreanGrammar/pages/activities/honorific_quiz.html"
                 },
                 {
                     title: "친구말로 역할극 하기",
@@ -678,7 +683,7 @@
                     category: "activities",
                     subcategory: "역할극",
                     tags: ["3-5학년", "친구말", "대화"],
-                    url: "pages/activities/casual_speech_roleplay.html"
+                    url: "/KoreanGrammar/pages/activities/casual_speech_roleplay.html"
                 }
             ];
             
@@ -690,7 +695,7 @@
                     category: "topics",
                     subcategory: "문법",
                     tags: ["3학년", "4학년"],
-                    url: "pages/topics/sentence_types.html"
+                    url: "/KoreanGrammar/pages/topics/sentence_types.html"
                 },
                 {
                     title: "높임 표현",
@@ -698,7 +703,7 @@
                     category: "topics",
                     subcategory: "문화",
                     tags: ["4학년", "5학년", "문법"],
-                    url: "pages/topics/honorific_expressions.html"
+                    url: "/KoreanGrammar/pages/topics/honorific_expressions.html"
                 },
                 {
                     title: "품사의 세계",
@@ -706,7 +711,7 @@
                     category: "topics",
                     subcategory: "문법",
                     tags: ["3학년", "4학년"],
-                    url: "pages/topics/parts_of_speech.html"
+                    url: "/KoreanGrammar/pages/topics/parts_of_speech.html"
                 },
                 {
                     title: "품사 심화 학습",
@@ -714,7 +719,7 @@
                     category: "topics",
                     subcategory: "문법",
                     tags: ["5학년", "6학년"],
-                    url: "pages/topics/advanced_parts_of_speech.html"
+                    url: "/KoreanGrammar/pages/topics/advanced_parts_of_speech.html"
                 },
                 {
                     title: "기초 문법",
@@ -722,7 +727,7 @@
                     category: "topics",
                     subcategory: "문법",
                     tags: ["전 학년", "문법", "기초"],
-                    url: "pages/topics/basic_grammar.html"
+                    url: "/KoreanGrammar/pages/topics/basic_grammar.html"
                 },
                 {
                     title: "문법 요소와 기능",
@@ -730,7 +735,7 @@
                     category: "topics",
                     subcategory: "문법",
                     tags: ["4학년", "5학년", "6학년"],
-                    url: "pages/topics/grammar_elements.html"
+                    url: "/KoreanGrammar/pages/topics/grammar_elements.html"
                 },
                 {
                     title: "국어 문법의 특징",
@@ -738,7 +743,7 @@
                     category: "topics",
                     subcategory: "문법",
                     tags: ["6학년", "문법", "특징"],
-                    url: "pages/topics/korean_grammar_features.html"
+                    url: "/KoreanGrammar/pages/topics/korean_grammar_features.html"
                 },
                 {
                     title: "높임말의 이해와 활용",
@@ -746,7 +751,7 @@
                     category: "topics",
                     subcategory: "문화",
                     tags: ["5학년", "6학년", "높임말"],
-                    url: "pages/topics/understanding_honorifics.html"
+                    url: "/KoreanGrammar/pages/topics/understanding_honorifics.html"
                 },
                 {
                     title: "높임말과 한국 문화",
@@ -754,7 +759,7 @@
                     category: "topics",
                     subcategory: "문화",
                     tags: ["6학년", "높임말", "문화"],
-                    url: "pages/topics/honorifics_korean_culture.html"
+                    url: "/KoreanGrammar/pages/topics/honorifics_korean_culture.html"
                 },
                 {
                     title: "언어 예절과 표현",
@@ -762,7 +767,7 @@
                     category: "topics",
                     subcategory: "문화",
                     tags: ["전 학년", "친구말", "높임말"],
-                    url: "pages/topics/speech_etiquette.html"
+                    url: "/KoreanGrammar/pages/topics/speech_etiquette.html"
                 },
                 {
                     title: "친구말의 특징과 사용법",
@@ -770,7 +775,7 @@
                     category: "topics",
                     subcategory: "문법",
                     tags: ["3-4학년", "친구말", "표현"],
-                    url: "pages/topics/casual_speech_features.html"
+                    url: "/KoreanGrammar/pages/topics/casual_speech_features.html"
                 }
             ];
             
