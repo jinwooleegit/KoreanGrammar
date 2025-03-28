@@ -1,5 +1,13 @@
 /* 초등 국어 문법 놀이터 - 스타일시트 */
 
+/* 한글 최적화 폰트 변수 */
+:root {
+    --primary-font: 'Noto Sans KR', sans-serif;
+    --secondary-font: 'Nanum Gothic', sans-serif;
+    --display-font: 'Nanum Square', sans-serif;
+    --reading-font: 'Spoqa Han Sans', sans-serif;
+}
+
 /* 기본 스타일 및 초기화 */
 * {
     margin: 0;
@@ -8,10 +16,38 @@
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: var(--primary-font);
     color: #2C3E50;
     background-color: #F8F9FA;
     line-height: 1.5;
+    font-style: normal;
+}
+
+/* 모든 요소에 대해 이탤릭 스타일 제거 */
+*, *::before, *::after {
+    font-style: normal !important;
+}
+
+/* 글꼴 클래스 - 사용자 선택용 */
+.font-noto {
+    font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+.font-nanum {
+    font-family: 'Nanum Gothic', sans-serif !important;
+}
+
+.font-square {
+    font-family: 'Nanum Square', sans-serif !important;
+}
+
+.font-spoqa {
+    font-family: 'Spoqa Han Sans', sans-serif !important;
+}
+
+/* 제목에 대한 특별 폰트 설정 */
+h1, h2, h3 {
+    font-family: var(--display-font);
 }
 
 a {
@@ -30,6 +66,12 @@ button, input {
 img {
     max-width: 100%;
     height: auto;
+}
+
+/* 이탤릭 스타일을 사용할 수 있는 em, i 태그에 대한 처리 */
+em, i {
+    font-style: normal;
+    font-weight: bold;
 }
 
 /* 컨테이너 및 공통 레이아웃 */
