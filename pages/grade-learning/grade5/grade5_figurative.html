@@ -538,7 +538,7 @@
                     </div>
                     <h3>시 쓰기</h3>
                     <p>다양한 비유적 표현을 활용하여 짧은 시를 작성해보는 활동입니다.</p>
-                    <button class="activity-button">활동 시작하기</button>
+                    <button class="activity-button" data-activity="parts-of-speech-game">활동 시작하기</button>
                 </div>
 
                 <div class="activity-card">
@@ -547,7 +547,7 @@
                     </div>
                     <h3>비유법 바꾸기</h3>
                     <p>주어진 문장을 다른 비유법으로 바꿔보는 활동입니다.</p>
-                    <button class="activity-button">활동 시작하기</button>
+                    <button class="activity-button" data-activity="sentence-component-game">활동 시작하기</button>
                 </div>
 
                 <div class="activity-card">
@@ -556,7 +556,7 @@
                     </div>
                     <h3>비유적 표현 찾기</h3>
                     <p>동화나 시 속에서 비유적 표현을 찾고 분류해보는 활동입니다.</p>
-                    <button class="activity-button">활동 시작하기</button>
+                    <button class="activity-button" data-activity="parts-of-speech-game">활동 시작하기</button>
                 </div>
             </div>
         </section>
@@ -575,14 +575,6 @@
                     card.style.transform = 'translateY(0)';
                 }, 100 * index);
             });
-            
-            // 학습 활동 버튼 이벤트
-            const activityButtons = document.querySelectorAll('.activity-button');
-            activityButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
-                });
-            });
         });
     </script>
     
@@ -595,5 +587,6 @@
     
     <script src="/KoreanGrammar/assets/js/scripts.js"></script>
     <script src="/KoreanGrammar/js/siteManager.js"></script>
+    <script src="/KoreanGrammar/js/activityHandler.js"></script>
 </body>
 </html> 

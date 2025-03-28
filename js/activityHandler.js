@@ -1113,7 +1113,10 @@ const activityHandlers = {
                 resultsEl.className = 'results-feedback answer-incorrect';
             }
         });
-    }
+    },
+    
+    // 오디오 재생 기능
+    'audio-play': handleAudioPlay
 };
 
 // 활동 핸들러 초기화
@@ -1164,4 +1167,100 @@ function getTenseLabel(tense) {
         case 'future': return '미래';
         default: return '';
     }
+}
+
+/**
+ * 오디오 재생 핸들러 함수
+ */
+function handleAudioPlay() {
+    // 오디오 파일 경로 기본값
+    const audioPath = '/KoreanGrammar/assets/audio/';
+    
+    // 버튼이 클릭된 문맥에서 발음 텍스트를 추출
+    const button = event.currentTarget;
+    const examplePair = button.closest('.example-pair') || button.closest('td');
+    
+    if (!examplePair) {
+        showAudioMessage("오디오 파일을 찾을 수 없습니다.");
+        return;
+    }
+    
+    // 텍스트 추출 ([] 대괄호 안의 발음 부분 추출)
+    const text = examplePair.textContent.trim();
+    const pronunciationMatch = text.match(/\[(.*?)\]/);
+    
+    if (!pronunciationMatch) {
+        showAudioMessage("발음 정보를 찾을 수 없습니다.");
+        return;
+    }
+    
+    const pronunciation = pronunciationMatch[1].trim();
+    
+    // 오디오 파일명 생성 (공백과 특수문자 제거)
+    const audioFileName = pronunciation.replace(/[\s\[\]]/g, '') + '.mp3';
+    const audioUrl = audioPath + audioFileName;
+    
+    // 실제 오디오 파일이 없으므로 메시지 표시
+    // 나중에 실제 오디오 파일이 생기면 아래 코드 활성화
+    /*
+    const audio = new Audio(audioUrl);
+    audio.onloadeddata = function() {
+        audio.play();
+    };
+    audio.onerror = function() {
+        showAudioMessage(`'${pronunciation}' 발음의 오디오 파일이 준비 중입니다.`);
+    };
+    */
+    
+    // 임시: 오디오 재생 메시지 표시
+    showAudioMessage(`'${pronunciation}' 발음을 재생합니다.`);
+    
+    // 버튼에 재생 효과 추가
+    button.classList.add('playing');
+    setTimeout(() => {
+        button.classList.remove('playing');
+    }, 2000);
+}
+
+/**
+ * 오디오 메시지 표시 함수
+ */
+function showAudioMessage(message) {
+    // 기존 메시지가 있으면 제거
+    const existingMessage = document.querySelector('.audio-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    
+    // 새 메시지 생성
+    const messageElement = document.createElement('div');
+    messageElement.className = 'audio-message';
+    messageElement.innerHTML = `
+        <div class="audio-message-content">
+            <i class="fas fa-volume-up"></i>
+            ${message}
+        </div>
+    `;
+    
+    // 스타일 추가
+    messageElement.style.position = 'fixed';
+    messageElement.style.bottom = '20px';
+    messageElement.style.right = '20px';
+    messageElement.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    messageElement.style.color = 'white';
+    messageElement.style.padding = '10px 15px';
+    messageElement.style.borderRadius = '5px';
+    messageElement.style.zIndex = '1000';
+    messageElement.style.transition = 'opacity 0.3s ease';
+    
+    // 문서에 추가
+    document.body.appendChild(messageElement);
+    
+    // 3초 후 사라짐
+    setTimeout(() => {
+        messageElement.style.opacity = '0';
+        setTimeout(() => {
+            messageElement.remove();
+        }, 300);
+    }, 3000);
 } 

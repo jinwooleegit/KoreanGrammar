@@ -523,7 +523,7 @@
                     </div>
                     <h3>문장 성분 색칠하기</h3>
                     <p>주어진 문장에서 각 성분을 찾아 색깔별로 색칠하는 활동입니다.</p>
-                    <button class="activity-button">활동 시작하기</button>
+                    <button class="activity-button" data-activity="sentence-component-game">활동 시작하기</button>
                 </div>
                 
                 <div class="activity-card">
@@ -532,7 +532,7 @@
                     </div>
                     <h3>문장 만들기 놀이</h3>
                     <p>주어, 서술어, 목적어 카드를 조합하여 다양한 문장을 만드는 활동입니다.</p>
-                    <button class="activity-button">활동 시작하기</button>
+                    <button class="activity-button" data-activity="sentence-component-game">활동 시작하기</button>
                 </div>
                 
                 <div class="activity-card">
@@ -541,7 +541,7 @@
                     </div>
                     <h3>문장 성분 퀴즈</h3>
                     <p>다양한 문장을 보고 문장 성분을 구분하는 퀴즈 게임입니다.</p>
-                    <button class="activity-button">활동 시작하기</button>
+                    <button class="activity-button" data-activity="sentence-component-game">활동 시작하기</button>
                 </div>
                 
                 <div class="activity-card">
@@ -550,13 +550,11 @@
                     </div>
                     <h3>성분 확장하기</h3>
                     <p>기본 문장에 다양한 성분을 추가하여 더 풍부한 문장을 만드는 활동입니다.</p>
-                    <button class="activity-button">활동 시작하기</button>
+                    <button class="activity-button" data-activity="sentence-component-game">활동 시작하기</button>
                 </div>
             </div>
         </section>
     </main>
-
-    
 
     <script>
         function toggleAnswer(id) {
@@ -577,25 +575,14 @@
                     card.style.transform = 'translateY(0)';
                 }, 100 * index);
             });
-            
-            // 학습 활동 버튼 이벤트
-            const activityButtons = document.querySelectorAll('.activity-button');
-            activityButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
-                });
-            });
         });
     </script>
-    
-    
-    
-    
     
     <!-- 푸터 영역 -->
     <footer></footer>
     
     <script src="/KoreanGrammar/assets/js/scripts.js"></script>
     <script src="/KoreanGrammar/js/siteManager.js"></script>
+    <script src="/KoreanGrammar/js/activityHandler.js"></script>
 </body>
 </html> 

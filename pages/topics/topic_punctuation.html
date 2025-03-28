@@ -428,7 +428,7 @@
                     </div>
                     <h3>문장 부호 넣기</h3>
                     <p>문장 부호가 없는 글에 알맞은 문장 부호를 넣어보는 활동입니다.</p>
-                    <button class="btn">활동 시작하기</button>
+                    <button class="btn activity-button" data-activity="sentence-component-game">활동 시작하기</button>
                 </div>
                 
                 <div class="activity-card">
@@ -437,7 +437,7 @@
                     </div>
                     <h3>문장 부호 바꾸기</h3>
                     <p>문장 부호에 따라 달라지는 문장의 의미를 알아보는 활동입니다.</p>
-                    <button class="btn">활동 시작하기</button>
+                    <button class="btn activity-button" data-activity="sentence-component-game">활동 시작하기</button>
                 </div>
                 
                 <div class="activity-card">
@@ -446,7 +446,7 @@
                     </div>
                     <h3>대화문 만들기</h3>
                     <p>인용 부호와 다양한 문장 부호를 사용해 대화문을 만들어봅니다.</p>
-                    <button class="btn">활동 시작하기</button>
+                    <button class="btn activity-button" data-activity="sentence-component-game">활동 시작하기</button>
                 </div>
                 
                 <div class="activity-card">
@@ -455,13 +455,11 @@
                     </div>
                     <h3>문장 부호 빙고</h3>
                     <p>문장 부호를 사용한 빙고 게임으로 재미있게 학습합니다.</p>
-                    <button class="btn">활동 시작하기</button>
+                    <button class="btn activity-button" data-activity="parts-of-speech-game">활동 시작하기</button>
                 </div>
             </div>
         </section>
     </main>
-
-    
 
     <script>
         function toggleAnswer(id) {
@@ -474,27 +472,31 @@
         }
         
         document.addEventListener('DOMContentLoaded', function() {
-            // 활동 버튼 이벤트
-            const activityButtons = document.querySelectorAll('.btn');
-            activityButtons.forEach(button => {
+            // 정답 버튼 이벤트
+            const answerButtons = document.querySelectorAll('.btn[onclick]');
+            answerButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // 정답 버튼이 아닌 경우에만 알림 표시
-                    if (!this.getAttribute('onclick') || !this.getAttribute('onclick').includes('toggleAnswer')) {
-                        alert('이 기능은 현재 개발 중입니다. 곧 사용하실 수 있습니다.');
-                    }
+                    const id = this.getAttribute('onclick').replace('toggleAnswer(\'', '').replace('\')', '');
+                    toggleAnswer(id);
                 });
+            });
+
+            // 페이지 로딩 애니메이션
+            const cards = document.querySelectorAll('.punctuation-card, .activity-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
             });
         });
     </script>
-    
-    
-    
-    
     
     <!-- 푸터 영역 -->
     <footer></footer>
     
     <script src="/KoreanGrammar/assets/js/scripts.js"></script>
     <script src="/KoreanGrammar/js/siteManager.js"></script>
+    <script src="/KoreanGrammar/js/activityHandler.js"></script>
 </body>
 </html> 

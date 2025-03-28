@@ -91,6 +91,8 @@ class SiteManager {
             this.ensureResourcesLoaded();
             this.setupMobileMenu();
             this.handleWindowResize();
+            this.updateActivityButtons();
+            this.ensureRequiredScripts();
         });
     }
     
@@ -426,6 +428,78 @@ class SiteManager {
                 document.head.appendChild(linkEl);
             }
         });
+    }
+
+    /**
+     * 개발 중인 활동 버튼 업데이트
+     * 모든 활동 버튼에 data-activity 속성을 추가하고 alert 메시지를 제거하는 함수
+     */
+    updateActivityButtons() {
+        // 모든 활동 버튼 찾기
+        const activityButtons = document.querySelectorAll('.activity-button, .exercise-button, .btn:not([onclick])');
+        
+        // 각 버튼에 적절한 핸들러 추가
+        activityButtons.forEach(button => {
+            // 이미 data-activity 속성이 있는 경우 무시
+            if (button.hasAttribute('data-activity')) return;
+            
+            // 버튼 텍스트나 부모 엘리먼트의 제목을 기반으로 활동 유형 판단
+            const buttonText = button.textContent.trim().toLowerCase();
+            const parentTitle = button.closest('div')?.querySelector('h3, h4')?.textContent.trim().toLowerCase() || '';
+            
+            let activityType = 'parts-of-speech-game'; // 기본값
+            
+            // 활동 유형 판단
+            if (
+                parentTitle.includes('문장') || 
+                parentTitle.includes('성분') || 
+                buttonText.includes('문장') ||
+                parentTitle.includes('바꾸기') ||
+                buttonText.includes('고치기')
+            ) {
+                activityType = 'sentence-component-game';
+            } else if (
+                parentTitle.includes('시제') || 
+                buttonText.includes('시제') ||
+                parentTitle.includes('과거') ||
+                parentTitle.includes('현재') ||
+                parentTitle.includes('미래')
+            ) {
+                activityType = 'tense-conversion';
+            } else if (
+                parentTitle.includes('매칭') || 
+                buttonText.includes('매칭') ||
+                parentTitle.includes('짝') ||
+                buttonText.includes('짝')
+            ) {
+                activityType = 'word-matching-game';
+            }
+            
+            // data-activity 속성 추가
+            button.setAttribute('data-activity', activityType);
+            
+            // click 이벤트 리스너가 있으면서 alert를 사용하는 경우 제거
+            const oldClone = button.cloneNode(true);
+            const newElem = button.cloneNode(false);
+            newElem.innerHTML = oldClone.innerHTML;
+            
+            // 원래 버튼을 새 버튼으로 교체
+            if (button.parentNode) {
+                button.parentNode.replaceChild(newElem, button);
+            }
+        });
+    }
+
+    /**
+     * 페이지에 필요한 스크립트 추가
+     */
+    ensureRequiredScripts() {
+        // activityHandler.js 스크립트가 없으면 추가
+        if (!document.querySelector('script[src*="activityHandler.js"]')) {
+            const activityScript = document.createElement('script');
+            activityScript.src = '/KoreanGrammar/js/activityHandler.js';
+            document.body.appendChild(activityScript);
+        }
     }
 }
 
