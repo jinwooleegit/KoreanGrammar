@@ -504,6 +504,267 @@ const activityHandlers = {
                 }, 500);
             }
         }
+    },
+    
+    // 품사 분류 게임
+    'parts-of-speech-game': function() {
+        const wordsList = [
+            { word: "학교", type: "명사", meaning: "교육을 받는 곳" },
+            { word: "가다", type: "동사", meaning: "한 곳에서 다른 곳으로 움직이다" },
+            { word: "예쁜", type: "형용사", meaning: "보기에 좋은" },
+            { word: "책", type: "명사", meaning: "여러 장의 종이를 묶어 글이나 그림을 인쇄한 것" },
+            { word: "빨리", type: "부사", meaning: "속도가 빠르게" },
+            { word: "읽다", type: "동사", meaning: "글을 보고 내용을 이해하다" },
+            { word: "그리고", type: "접속사", meaning: "앞의 말에 뒤의 말을 이어 주는 말" },
+            { word: "작은", type: "형용사", meaning: "크기가 보통보다 적은" },
+            { word: "아이", type: "명사", meaning: "어린 사람" },
+            { word: "웃다", type: "동사", meaning: "기쁨이나 즐거움을 표현하다" },
+            { word: "아주", type: "부사", meaning: "정도가 매우" },
+            { word: "슬픈", type: "형용사", meaning: "마음이 아프고 괴로운" },
+            { word: "하지만", type: "접속사", meaning: "앞의 내용과 뒤의 내용이 상반됨을 나타내는 말" },
+            { word: "친구", type: "명사", meaning: "가깝게 사귀는 사람" },
+            { word: "천천히", type: "부사", meaning: "느린 속도로" }
+        ];
+        
+        // 랜덤으로 10개 단어 선택
+        const randomWords = [...wordsList].sort(() => 0.5 - Math.random()).slice(0, 10);
+        
+        // 활동 컨텐츠 생성
+        const activityContent = document.createElement('div');
+        
+        // 설명 추가
+        const instructionEl = document.createElement('p');
+        instructionEl.innerHTML = "다음 낱말들을 올바른 품사로 분류해보세요. 각 낱말을 드래그하여 해당 품사 영역에 놓으면 됩니다.";
+        activityContent.appendChild(instructionEl);
+        
+        // 단어 영역 생성
+        const wordsEl = document.createElement('div');
+        wordsEl.className = 'words-container';
+        wordsEl.style.display = 'flex';
+        wordsEl.style.flexWrap = 'wrap';
+        wordsEl.style.gap = '10px';
+        wordsEl.style.marginBottom = '20px';
+        wordsEl.style.padding = '15px';
+        wordsEl.style.backgroundColor = '#f5f5f5';
+        wordsEl.style.borderRadius = '8px';
+        
+        randomWords.forEach(word => {
+            const wordEl = document.createElement('div');
+            wordEl.className = 'word-item';
+            wordEl.textContent = word.word;
+            wordEl.dataset.word = word.word;
+            wordEl.dataset.type = word.type;
+            wordEl.dataset.meaning = word.meaning;
+            wordEl.style.padding = '8px 15px';
+            wordEl.style.backgroundColor = '#e3f2fd';
+            wordEl.style.borderRadius = '20px';
+            wordEl.style.cursor = 'move';
+            wordEl.style.display = 'inline-block';
+            wordEl.style.userSelect = 'none';
+            wordEl.draggable = true;
+            
+            wordEl.addEventListener('dragstart', function(e) {
+                e.dataTransfer.setData('text/plain', word.word);
+                this.style.opacity = '0.5';
+            });
+            
+            wordEl.addEventListener('dragend', function() {
+                this.style.opacity = '1';
+            });
+            
+            wordsEl.appendChild(wordEl);
+        });
+        
+        activityContent.appendChild(wordsEl);
+        
+        // 결과 표시 영역
+        const resultEl = document.createElement('div');
+        resultEl.className = 'result-area';
+        resultEl.style.marginTop = '20px';
+        resultEl.style.display = 'none';
+        resultEl.style.padding = '15px';
+        resultEl.style.borderRadius = '8px';
+        activityContent.appendChild(resultEl);
+        
+        // 품사 드롭 영역
+        const dropAreasEl = document.createElement('div');
+        dropAreasEl.className = 'pos-drop-areas';
+        dropAreasEl.style.display = 'grid';
+        dropAreasEl.style.gridTemplateColumns = 'repeat(auto-fit, minmax(200px, 1fr))';
+        dropAreasEl.style.gap = '15px';
+        
+        const posTypes = {
+            '명사': { color: '#C8E6C9', description: '사람, 장소, 사물, 개념 등의 이름을 나타내는 말' },
+            '동사': { color: '#BBDEFB', description: '움직임이나 행동을 표현하는 말' },
+            '형용사': { color: '#FFECB3', description: '사물의 성질이나 상태를 나타내는 말' },
+            '부사': { color: '#E1BEE7', description: '주로 동사, 형용사, 다른 부사를 꾸며주는 말' },
+            '접속사': { color: '#FFCCBC', description: '단어, 구, 절, 문장 등을 연결하는 말' }
+        };
+        
+        // 품사별 드롭 영역 생성
+        Object.keys(posTypes).forEach(type => {
+            const dropAreaEl = document.createElement('div');
+            dropAreaEl.className = `drop-area ${type}-area`;
+            dropAreaEl.dataset.type = type;
+            dropAreaEl.innerHTML = `<h3>${type}</h3><p class="type-desc">${posTypes[type].description}</p><div class="dropped-words"></div>`;
+            dropAreaEl.style.padding = '15px';
+            dropAreaEl.style.backgroundColor = posTypes[type].color + '40'; // 40% 투명도
+            dropAreaEl.style.borderRadius = '8px';
+            dropAreaEl.style.border = `2px dashed ${posTypes[type].color}`;
+            dropAreaEl.style.minHeight = '150px';
+            
+            // 드롭 영역 스타일
+            const typeTitle = dropAreaEl.querySelector('h3');
+            typeTitle.style.margin = '0 0 5px 0';
+            typeTitle.style.color = '#333';
+            
+            const typeDesc = dropAreaEl.querySelector('.type-desc');
+            typeDesc.style.fontSize = '13px';
+            typeDesc.style.color = '#666';
+            typeDesc.style.marginBottom = '10px';
+            
+            const droppedWordsEl = dropAreaEl.querySelector('.dropped-words');
+            droppedWordsEl.style.minHeight = '100px';
+            
+            // 드래그 앤 드롭 이벤트
+            dropAreaEl.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = posTypes[type].color + '70'; // 70% 투명도
+            });
+            
+            dropAreaEl.addEventListener('dragleave', function() {
+                this.style.backgroundColor = posTypes[type].color + '40'; // 40% 투명도
+            });
+            
+            dropAreaEl.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = posTypes[type].color + '40'; // 40% 투명도
+                
+                const word = e.dataTransfer.getData('text/plain');
+                const wordEl = document.querySelector(`.word-item[data-word="${word}"]`);
+                
+                if (wordEl) {
+                    // 이미 다른 영역에 있는 경우 제거
+                    const alreadyDropped = document.querySelector(`.dropped-word[data-word="${word}"]`);
+                    if (alreadyDropped) {
+                        alreadyDropped.remove();
+                    }
+                    
+                    // 새 영역에 추가
+                    const droppedWordEl = document.createElement('div');
+                    droppedWordEl.className = 'dropped-word';
+                    droppedWordEl.dataset.word = word;
+                    droppedWordEl.dataset.type = wordEl.dataset.type;
+                    droppedWordEl.textContent = word;
+                    droppedWordEl.style.display = 'inline-block';
+                    droppedWordEl.style.padding = '6px 12px';
+                    droppedWordEl.style.margin = '5px';
+                    droppedWordEl.style.backgroundColor = posTypes[type].color;
+                    droppedWordEl.style.borderRadius = '15px';
+                    droppedWordEl.style.cursor = 'pointer';
+                    
+                    // 드롭된 단어 클릭 시 다시 원래 위치로
+                    droppedWordEl.addEventListener('click', function() {
+                        this.remove();
+                        wordEl.style.display = 'inline-block';
+                    });
+                    
+                    droppedWordsEl.appendChild(droppedWordEl);
+                    wordEl.style.display = 'none';
+                    
+                    // 모든 단어가 배치되었는지 확인
+                    checkAllWordsPlaced();
+                }
+            });
+            
+            dropAreasEl.appendChild(dropAreaEl);
+        });
+        
+        activityContent.appendChild(dropAreasEl);
+        
+        // 정답 확인 버튼
+        const checkButton = document.createElement('button');
+        checkButton.textContent = '정답 확인하기';
+        checkButton.style.marginTop = '20px';
+        checkButton.style.padding = '10px 20px';
+        checkButton.style.backgroundColor = '#4285F4';
+        checkButton.style.color = 'white';
+        checkButton.style.border = 'none';
+        checkButton.style.borderRadius = '5px';
+        checkButton.style.cursor = 'pointer';
+        checkButton.style.display = 'block';
+        checkButton.style.margin = '20px auto';
+        
+        checkButton.addEventListener('click', function() {
+            const droppedWords = document.querySelectorAll('.dropped-word');
+            let correctCount = 0;
+            
+            droppedWords.forEach(word => {
+                const wordText = word.dataset.word;
+                const correctType = word.dataset.type;
+                const droppedArea = word.closest('.drop-area');
+                const droppedType = droppedArea.dataset.type;
+                
+                if (correctType === droppedType) {
+                    word.style.backgroundColor = '#81C784'; // 초록색으로 변경
+                    word.style.color = 'white';
+                    correctCount++;
+                } else {
+                    word.style.backgroundColor = '#E57373'; // 빨간색으로 변경
+                    word.style.color = 'white';
+                    
+                    // 툴팁으로 정답 표시
+                    const tooltip = document.createElement('span');
+                    tooltip.textContent = `정답: ${correctType}`;
+                    tooltip.style.position = 'absolute';
+                    tooltip.style.backgroundColor = '#333';
+                    tooltip.style.color = 'white';
+                    tooltip.style.padding = '5px';
+                    tooltip.style.borderRadius = '3px';
+                    tooltip.style.fontSize = '12px';
+                    tooltip.style.zIndex = '100';
+                    tooltip.style.marginTop = '-25px';
+                    tooltip.style.marginLeft = '10px';
+                    tooltip.className = 'tooltip';
+                    
+                    word.appendChild(tooltip);
+                    word.style.position = 'relative';
+                }
+            });
+            
+            // 결과 표시
+            resultEl.style.display = 'block';
+            if (correctCount === droppedWords.length && droppedWords.length === randomWords.length) {
+                resultEl.textContent = `축하합니다! ${correctCount}개 모두 정확하게 맞추셨습니다!`;
+                resultEl.style.backgroundColor = '#E8F5E9';
+                resultEl.style.color = '#388E3C';
+            } else {
+                resultEl.textContent = `${droppedWords.length}개 중 ${correctCount}개 맞았습니다. 틀린 답은 빨간색으로 표시됩니다.`;
+                resultEl.style.backgroundColor = '#FFEBEE';
+                resultEl.style.color = '#D32F2F';
+            }
+        });
+        
+        activityContent.appendChild(checkButton);
+        
+        // 모달 표시
+        createModal("품사 분류 게임", activityContent, '#4CAF50');
+        
+        // 모든 단어가 배치되었는지 확인하는 함수
+        function checkAllWordsPlaced() {
+            const visibleWords = document.querySelectorAll('.word-item[style*="display: inline-block"]');
+            if (visibleWords.length === 0) {
+                checkButton.disabled = false;
+                checkButton.style.opacity = '1';
+            } else {
+                checkButton.disabled = true;
+                checkButton.style.opacity = '0.5';
+            }
+        }
+        
+        // 초기 버튼 상태 설정
+        checkButton.disabled = true;
+        checkButton.style.opacity = '0.5';
     }
 };
 
@@ -530,6 +791,8 @@ function initActivityHandlers() {
                         activityHandlers['tense-conversion']();
                     } else if (activityText.includes('카드') || activityText.includes('매칭')) {
                         activityHandlers['word-matching-game']();
+                    } else if (activityText.includes('품사')) {
+                        activityHandlers['parts-of-speech-game']();
                     } else {
                         // 활동 유형을 알 수 없는 경우 기본 모달
                         createModal("학습 활동", `<p>${activityText} 활동을 시작합니다.</p><p>이 활동은 학습자의 문법 실력 향상에 도움이 되는 상호작용형 콘텐츠입니다.</p>`);
