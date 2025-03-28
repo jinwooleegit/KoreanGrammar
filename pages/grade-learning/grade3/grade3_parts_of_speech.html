@@ -394,7 +394,7 @@
                         <p class="activity-description">
                             주어진 낱말이 어떤 품사인지 분류하는 게임입니다.
                         </p>
-                        <button class="activity-button">게임 시작</button>
+                        <button class="activity-button" data-activity="parts-of-speech-game">게임 시작</button>
                     </div>
                 </div>
                 
@@ -409,7 +409,7 @@
                         <p class="activity-description">
                             짧은 글을 읽고 명사, 동사, 형용사를 찾아보는 활동입니다.
                         </p>
-                        <button class="activity-button">활동 시작</button>
+                        <button class="activity-button" data-activity="parts-of-speech-game">활동 시작</button>
                     </div>
                 </div>
                 
@@ -424,7 +424,7 @@
                         <p class="activity-description">
                             주어진 품사를 사용하여 문장을 만드는 퀴즈입니다.
                         </p>
-                        <button class="activity-button">퀴즈 시작</button>
+                        <button class="activity-button" data-activity="parts-of-speech-game">퀴즈 시작</button>
                     </div>
                 </div>
             </div>
@@ -493,15 +493,6 @@
                     card.style.transform = 'translateY(0)';
                 }, 100 * index);
             });
-            
-            // 학습 활동 버튼에 이벤트 리스너 추가
-            const activityButtons = document.querySelectorAll('.activity-button');
-            
-            activityButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    alert('준비 중인 기능입니다. 곧 서비스될 예정입니다.');
-                });
-            });
         });
     </script>
     
@@ -514,5 +505,6 @@
     
     <script src="/KoreanGrammar/assets/js/scripts.js"></script>
     <script src="/KoreanGrammar/js/siteManager.js"></script>
+    <script src="/KoreanGrammar/js/activityHandler.js"></script>
 </body>
 </html> 
