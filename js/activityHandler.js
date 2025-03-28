@@ -765,6 +765,354 @@ const activityHandlers = {
         // 초기 버튼 상태 설정
         checkButton.disabled = true;
         checkButton.style.opacity = '0.5';
+    },
+    
+    // 시제 변환 활동
+    'tense-conversion': function() {
+        // 예시 문장 데이터 (현재형 기준)
+        const sentences = [
+            { 
+                present: "나는 책을 읽는다.", 
+                past: "나는 책을 읽었다.", 
+                future: "나는 책을 읽을 것이다." 
+            },
+            { 
+                present: "학생들이 운동장에서 논다.", 
+                past: "학생들이 운동장에서 놀았다.", 
+                future: "학생들이 운동장에서 놀 것이다." 
+            },
+            { 
+                present: "그는 음악을 듣는다.", 
+                past: "그는 음악을 들었다.", 
+                future: "그는 음악을 들을 것이다." 
+            },
+            { 
+                present: "비가 내린다.", 
+                past: "비가 내렸다.", 
+                future: "비가 내릴 것이다." 
+            },
+            { 
+                present: "우리는 학교에 간다.", 
+                past: "우리는 학교에 갔다.", 
+                future: "우리는 학교에 갈 것이다." 
+            },
+            { 
+                present: "엄마가 저녁을 준비한다.", 
+                past: "엄마가 저녁을 준비했다.", 
+                future: "엄마가 저녁을 준비할 것이다." 
+            },
+            { 
+                present: "친구와 함께 영화를 본다.", 
+                past: "친구와 함께 영화를 보았다.", 
+                future: "친구와 함께 영화를 볼 것이다." 
+            },
+            { 
+                present: "그녀는 피아노를 친다.", 
+                past: "그녀는 피아노를 쳤다.", 
+                future: "그녀는 피아노를 칠 것이다." 
+            }
+        ];
+
+        // 5개의 문장을 무작위로 선택
+        let selectedSentences = [];
+        const indices = new Set();
+        while (indices.size < 5) {
+            indices.add(Math.floor(Math.random() * sentences.length));
+        }
+        
+        indices.forEach(index => {
+            selectedSentences.push(sentences[index]);
+        });
+
+        // 시제 변환 활동 UI 생성
+        let activityContent = `
+            <div class="tense-conversion-container">
+                <div class="instructions">
+                    <p>각 문장의 시제를 변환해보세요. 현재, 과거, 미래 시제로 바꾸어 입력하세요.</p>
+                </div>
+                <div class="tense-exercises">
+        `;
+
+        // 각 연습 문제 생성
+        selectedSentences.forEach((sentence, index) => {
+            // 무작위로 기준 시제 선택 (과거, 현재, 미래 중 하나)
+            const tenses = ['past', 'present', 'future'];
+            const startTense = tenses[Math.floor(Math.random() * 3)];
+            
+            activityContent += `
+                <div class="tense-exercise-item" data-index="${index}">
+                    <div class="source-sentence">
+                        <span class="tense-label ${startTense}-tense-label">${getTenseLabel(startTense)}</span>
+                        <span class="sentence">${sentence[startTense]}</span>
+                    </div>
+                    <div class="conversion-inputs">
+            `;
+            
+            // 나머지 두 시제에 대한 입력 필드 생성
+            tenses.filter(t => t !== startTense).forEach(tense => {
+                activityContent += `
+                    <div class="tense-input-group">
+                        <label class="tense-label ${tense}-tense-label">${getTenseLabel(tense)}</label>
+                        <input type="text" class="tense-input" data-tense="${tense}" placeholder="${getTenseLabel(tense)}로 바꾸어 쓰세요">
+                        <div class="feedback-icon"></div>
+                    </div>
+                `;
+            });
+            
+            activityContent += `
+                    </div>
+                    <div class="check-answer-btn-container">
+                        <button class="check-answer-btn">정답 확인</button>
+                    </div>
+                    <div class="answer-feedback"></div>
+                </div>
+            `;
+        });
+        
+        activityContent += `
+                </div>
+                <div class="results-container">
+                    <button class="check-all-answers-btn">모든 답 확인하기</button>
+                    <div class="results-feedback"></div>
+                </div>
+            </div>
+        `;
+
+        const tenseConversionStyles = `
+            <style>
+                .tense-conversion-container {
+                    font-family: 'Noto Sans KR', sans-serif;
+                    max-width: 800px;
+                    margin: 0 auto;
+                }
+                
+                .instructions {
+                    background-color: #f5f5f5;
+                    border-radius: 8px;
+                    padding: 15px;
+                    margin-bottom: 20px;
+                    border-left: 4px solid #FF9800;
+                }
+                
+                .tense-exercise-item {
+                    background-color: white;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    padding: 20px;
+                    margin-bottom: 20px;
+                }
+                
+                .source-sentence {
+                    font-size: 18px;
+                    margin-bottom: 15px;
+                    padding: 10px;
+                    background-color: #f9f9f9;
+                    border-radius: 6px;
+                }
+                
+                .tense-label {
+                    display: inline-block;
+                    padding: 3px 8px;
+                    border-radius: 4px;
+                    color: white;
+                    font-weight: bold;
+                    font-size: 14px;
+                    margin-right: 10px;
+                }
+                
+                .past-tense-label {
+                    background-color: #9C27B0;
+                }
+                
+                .present-tense-label {
+                    background-color: #FF9800;
+                }
+                
+                .future-tense-label {
+                    background-color: #03A9F4;
+                }
+                
+                .conversion-inputs {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                    margin-bottom: 15px;
+                }
+                
+                .tense-input-group {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+                
+                .tense-input {
+                    flex: 1;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    font-size: 16px;
+                }
+                
+                .feedback-icon {
+                    width: 24px;
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+                .check-answer-btn, .check-all-answers-btn {
+                    background-color: #FF9800;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    padding: 8px 16px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                
+                .check-answer-btn:hover, .check-all-answers-btn:hover {
+                    background-color: #F57C00;
+                }
+                
+                .answer-feedback {
+                    margin-top: 10px;
+                    padding: 10px;
+                    border-radius: 6px;
+                    display: none;
+                }
+                
+                .results-container {
+                    margin-top: 30px;
+                    text-align: center;
+                }
+                
+                .results-feedback {
+                    margin-top: 20px;
+                    padding: 15px;
+                    border-radius: 8px;
+                    font-size: 18px;
+                    text-align: center;
+                    display: none;
+                }
+                
+                .correct {
+                    color: #4CAF50;
+                }
+                
+                .incorrect {
+                    color: #F44336;
+                }
+                
+                .answer-correct {
+                    background-color: rgba(76, 175, 80, 0.1);
+                    border-left: 4px solid #4CAF50;
+                }
+                
+                .answer-incorrect {
+                    background-color: rgba(244, 67, 54, 0.1);
+                    border-left: 4px solid #F44336;
+                }
+                
+                .check-all-answers-btn {
+                    margin-top: 20px;
+                }
+            </style>
+        `;
+
+        // 모달 열기
+        createModal('시제 변환 연습', activityContent + tenseConversionStyles);
+
+        // 이벤트 리스너 등록
+        document.querySelectorAll('.check-answer-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const exerciseItem = this.closest('.tense-exercise-item');
+                const index = parseInt(exerciseItem.dataset.index);
+                const sentence = selectedSentences[index];
+                const inputs = exerciseItem.querySelectorAll('.tense-input');
+                let allCorrect = true;
+
+                inputs.forEach(input => {
+                    const tense = input.dataset.tense;
+                    const userAnswer = input.value.trim();
+                    const correctAnswer = sentence[tense];
+                    const feedbackIcon = input.nextElementSibling;
+                    
+                    // 정확히 일치하는지 확인
+                    if (userAnswer === correctAnswer) {
+                        feedbackIcon.innerHTML = '<i class="fas fa-check-circle" style="color: #4CAF50;"></i>';
+                        input.style.borderColor = '#4CAF50';
+                    } else {
+                        feedbackIcon.innerHTML = '<i class="fas fa-times-circle" style="color: #F44336;"></i>';
+                        input.style.borderColor = '#F44336';
+                        allCorrect = false;
+                    }
+                });
+
+                // 피드백 표시
+                const feedbackEl = exerciseItem.querySelector('.answer-feedback');
+                feedbackEl.style.display = 'block';
+                if (allCorrect) {
+                    feedbackEl.textContent = '정답입니다! 시제 변환을 정확히 했습니다.';
+                    feedbackEl.className = 'answer-feedback answer-correct';
+                } else {
+                    feedbackEl.textContent = '오답이 있습니다. 다시 한번 확인해 보세요.';
+                    feedbackEl.className = 'answer-feedback answer-incorrect';
+                }
+            });
+        });
+
+        // 모든 답 확인 버튼
+        document.querySelector('.check-all-answers-btn').addEventListener('click', function() {
+            const exerciseItems = document.querySelectorAll('.tense-exercise-item');
+            let correctCount = 0;
+            let totalQuestions = 0;
+
+            exerciseItems.forEach(item => {
+                const inputs = item.querySelectorAll('.tense-input');
+                inputs.forEach(input => {
+                    totalQuestions++;
+                    const tense = input.dataset.tense;
+                    const index = parseInt(item.dataset.index);
+                    const userAnswer = input.value.trim();
+                    const correctAnswer = selectedSentences[index][tense];
+                    
+                    if (userAnswer === correctAnswer) {
+                        correctCount++;
+                    }
+                });
+                
+                // 정답 보여주기
+                const checkBtn = item.querySelector('.check-answer-btn');
+                if (checkBtn) {
+                    checkBtn.click();
+                }
+            });
+
+            // 전체 결과 표시
+            const resultsEl = document.querySelector('.results-feedback');
+            resultsEl.style.display = 'block';
+            
+            if (correctCount === totalQuestions) {
+                resultsEl.innerHTML = `
+                    <div class="correct">
+                        <i class="fas fa-trophy"></i> 축하합니다! 모든 문제를 맞혔습니다!<br>
+                        정답률: ${correctCount}/${totalQuestions} (100%)
+                    </div>
+                `;
+                resultsEl.className = 'results-feedback answer-correct';
+            } else {
+                const percentage = Math.round((correctCount / totalQuestions) * 100);
+                resultsEl.innerHTML = `
+                    <div class="incorrect">
+                        <i class="fas fa-info-circle"></i> 총 ${totalQuestions}개 중 ${correctCount}개를 맞혔습니다.<br>
+                        정답률: ${correctCount}/${totalQuestions} (${percentage}%)
+                    </div>
+                `;
+                resultsEl.className = 'results-feedback answer-incorrect';
+            }
+        });
     }
 };
 
@@ -804,4 +1152,16 @@ function initActivityHandlers() {
 }
 
 // 페이지 로드 시 핸들러 초기화
-initActivityHandlers(); 
+initActivityHandlers();
+
+/**
+ * 시제 라벨 반환 함수
+ */
+function getTenseLabel(tense) {
+    switch(tense) {
+        case 'past': return '과거';
+        case 'present': return '현재';
+        case 'future': return '미래';
+        default: return '';
+    }
+} 
